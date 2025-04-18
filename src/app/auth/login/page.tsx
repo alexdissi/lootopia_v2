@@ -7,6 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function LoginPage() {
-  console.log("AuthForm rendu");
   return <LoginForm />;
 }

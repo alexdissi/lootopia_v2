@@ -5,15 +5,13 @@ export async function middleware(request: NextRequest) {
 	const cookies = getSessionCookie(request);
   const pathname = request.nextUrl.pathname;
 
-  // On laisse passer les routes publiques
-  const publicPaths = ["/auth/login", "/auth/register"];
+  const publicPaths = ["/auth/login", "/auth/register", "/auth/forgot-password", "/auth/reset-password"];
   const isPublic = publicPaths.some((path) => pathname.startsWith(path));
 
   if (isPublic) {
     return NextResponse.next();
   }
 
-  // Si pas de session et route protégée, on redirige
   if (!cookies) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
@@ -22,5 +20,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/auth/:path*"], // Intercepte dashboard et auth
+  matcher: ["/dashboard/:path*", "/auth/:path*"],
 };
