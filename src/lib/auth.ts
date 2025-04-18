@@ -3,14 +3,24 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import prisma from "./db";
 import { resend } from "./resend";
 import { nextCookies } from "better-auth/next-js";
+import { twoFactor } from "better-auth/plugins"
 
 export const auth = betterAuth({
     database: prismaAdapter(prisma, {
         provider: "postgresql",
     }),
+    appName: "Lootopia",
     emailAndPassword: {  
         enabled: true,
-        requireEmailVerification: true
+        requireEmailVerification: true,
+        sendResetPassword: async ({user, url, token}, request) => {
+            await resend.emails.send({
+              from: "Acme <onboarding@figenn.com>", 
+              to: user.email,
+              subject: "Reset your password",
+              text: `Click the link to reset your password: ${url}`,
+            });
+          },
     },
     emailVerification: {
         sendOnSignUp: true,
@@ -42,5 +52,5 @@ export const auth = betterAuth({
         window: 10, 
         max: 100,
     },
-    plugins: [nextCookies()],
+    plugins: [nextCookies(), twoFactor()],
 });
