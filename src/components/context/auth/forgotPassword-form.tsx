@@ -55,39 +55,39 @@ export default function ForgotPasswordForm() {
   };
 
   return (
-    <div className="grow flex items-center justify-center p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-3xl font-bold text-center text-gray-800">
-            Forgot Password
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="Enter your email"
-                        {...field}
-                        autoComplete="email"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button disabled={isPending}>Send Reset Link</Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
+    <div className="w-full max-w-md mx-auto space-y-6">
+      <div className="text-center space-y-2">
+        <h1 className="text-3xl font-bold">Forgot Password</h1>
+        <p className="text-muted-foreground">
+          Entrer votre adresse email pour recevoir un lien de réinitialisation
+          de mot de passe.
+        </p>
+      </div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    {...field}
+                    autoComplete="email"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button disabled={isPending} className="w-full">
+            Send Reset Link
+          </Button>
+        </form>
+      </Form>
     </div>
   );
 }

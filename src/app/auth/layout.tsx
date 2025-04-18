@@ -1,19 +1,31 @@
-import type { ReactNode } from "react";
-import type { Metadata } from "next";
+import { Suspense } from "react";
 
-export const metadata: Metadata = {
-  title: "Authentification",
-  description: "Connexion et inscription à l'application",
-};
+import { LoaderPage } from "@/components/ui/loader";
+import LiquidChrome from "@/components/ui/liquid";
 
-interface AuthLayoutProps {
-  children: ReactNode;
-}
-
-export default function AuthLayout({ children }: AuthLayoutProps) {
+export default function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#1a1f2e] p-4">
-      {children}
-    </div>
+    <Suspense fallback={<LoaderPage />}>
+      <section>
+        <div className="grid min-h-svh lg:grid-cols-2">
+          <div className="bg-muted relative hidden lg:block">
+            <LiquidChrome
+              baseColor={[
+                0.5058823529411764, 0.5450980392156862, 0.9764705882352941,
+              ]}
+              speed={0.1}
+              amplitude={0.6}
+            />
+          </div>
+          <div className="flex items-center justify-center min-h-screen px-4">
+            {children}
+          </div>
+        </div>
+      </section>
+    </Suspense>
   );
 }
