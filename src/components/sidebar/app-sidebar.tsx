@@ -6,6 +6,7 @@ import {
   BarChartIcon,
   CameraIcon,
   ClipboardListIcon,
+  Coins,
   DatabaseIcon,
   FileCodeIcon,
   FileIcon,
@@ -38,28 +39,13 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: LayoutDashboardIcon,
     },
     {
-      title: "Lifecycle",
-      url: "#",
-      icon: ListIcon,
-    },
-    {
-      title: "Analytics",
-      url: "#",
-      icon: BarChartIcon,
-    },
-    {
-      title: "Projects",
-      url: "#",
-      icon: FolderIcon,
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: UsersIcon,
+      title: "Payments",
+      url: "/dashboard/payment",
+      icon: Coins,
     },
   ],
   navClouds: [
@@ -148,6 +134,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: session } = authClient.useSession();
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
