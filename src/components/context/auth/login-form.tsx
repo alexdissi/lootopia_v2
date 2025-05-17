@@ -50,9 +50,6 @@ export function LoginForm() {
           callbackURL: "/dashboard",
         },
         {
-          onRequest: () => {
-            toast.loading("Connexion en cours...");
-          },
           onSuccess: () => {
             toast.success("Connexion réussie");
             router.push("/dashboard");

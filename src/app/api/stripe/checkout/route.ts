@@ -5,18 +5,21 @@ import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 
 export async function POST(req: NextRequest) {
-  const { priceId } = await req.json()
+  const { priceId, currencyAmount } = await req.json()
   const session = await auth.api.getSession({ headers: await headers() })
 
   const userEmail = session?.user.email
   if (!userEmail) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+  if (!currencyAmount || isNaN(Number(currencyAmount))) {
+    return NextResponse.json({ error: 'Invalid currency amount' }, { status: 400 })
+  }
 
   let user = await prisma.user.findUnique({
     where: { email: userEmail },
   })
 
   if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 })
-
   if (!user.stripeCustomerId) {
     const customer = await stripe.customers.create({
       email: user.email,
@@ -36,11 +39,12 @@ export async function POST(req: NextRequest) {
     customer: user.stripeCustomerId ?? undefined,
     payment_method_types: ['card', 'revolut_pay'],
     line_items: [{ price: priceId, quantity: 1 }],
-    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success`,
-    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment`,
+    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`,
+    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/payment`,
     metadata: {
       userId: user.id ?? '',
       email: user.email ?? undefined,
+      currencyAmount: currencyAmount.toString(),
     },
   })
 

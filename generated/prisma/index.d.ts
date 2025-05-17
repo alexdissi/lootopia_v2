@@ -33,6 +33,114 @@ export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
  * 
  */
 export type Verification = $Result.DefaultSelection<Prisma.$VerificationPayload>
+/**
+ * Model TreasureHunt
+ * 
+ */
+export type TreasureHunt = $Result.DefaultSelection<Prisma.$TreasureHuntPayload>
+/**
+ * Model Participation
+ * 
+ */
+export type Participation = $Result.DefaultSelection<Prisma.$ParticipationPayload>
+/**
+ * Model Artefact
+ * 
+ */
+export type Artefact = $Result.DefaultSelection<Prisma.$ArtefactPayload>
+/**
+ * Model HuntStep
+ * 
+ */
+export type HuntStep = $Result.DefaultSelection<Prisma.$HuntStepPayload>
+/**
+ * Model Reward
+ * 
+ */
+export type Reward = $Result.DefaultSelection<Prisma.$RewardPayload>
+/**
+ * Model VirtualCurrency
+ * 
+ */
+export type VirtualCurrency = $Result.DefaultSelection<Prisma.$VirtualCurrencyPayload>
+/**
+ * Model TransactionHistory
+ * 
+ */
+export type TransactionHistory = $Result.DefaultSelection<Prisma.$TransactionHistoryPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const HuntStatus: {
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type HuntStatus = (typeof HuntStatus)[keyof typeof HuntStatus]
+
+
+export const ParticipationStatus: {
+  ONGOING: 'ONGOING',
+  COMPLETED: 'COMPLETED',
+  ABANDONED: 'ABANDONED'
+};
+
+export type ParticipationStatus = (typeof ParticipationStatus)[keyof typeof ParticipationStatus]
+
+
+export const ArtefactRarity: {
+  COMMON: 'COMMON',
+  RARE: 'RARE',
+  EPIC: 'EPIC',
+  LEGENDARY: 'LEGENDARY'
+};
+
+export type ArtefactRarity = (typeof ArtefactRarity)[keyof typeof ArtefactRarity]
+
+
+export const RewardType: {
+  VIRTUAL_CURRENCY: 'VIRTUAL_CURRENCY',
+  ARTEFACT: 'ARTEFACT',
+  DISCOUNT: 'DISCOUNT',
+  PHYSICAL_ITEM: 'PHYSICAL_ITEM'
+};
+
+export type RewardType = (typeof RewardType)[keyof typeof RewardType]
+
+
+export const TransactionType: {
+  EARNED: 'EARNED',
+  SPENT: 'SPENT',
+  BOUGHT: 'BOUGHT'
+};
+
+export type TransactionType = (typeof TransactionType)[keyof typeof TransactionType]
+
+}
+
+export type HuntStatus = $Enums.HuntStatus
+
+export const HuntStatus: typeof $Enums.HuntStatus
+
+export type ParticipationStatus = $Enums.ParticipationStatus
+
+export const ParticipationStatus: typeof $Enums.ParticipationStatus
+
+export type ArtefactRarity = $Enums.ArtefactRarity
+
+export const ArtefactRarity: typeof $Enums.ArtefactRarity
+
+export type RewardType = $Enums.RewardType
+
+export const RewardType: typeof $Enums.RewardType
+
+export type TransactionType = $Enums.TransactionType
+
+export const TransactionType: typeof $Enums.TransactionType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -198,6 +306,76 @@ export class PrismaClient<
     * ```
     */
   get verification(): Prisma.VerificationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.treasureHunt`: Exposes CRUD operations for the **TreasureHunt** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TreasureHunts
+    * const treasureHunts = await prisma.treasureHunt.findMany()
+    * ```
+    */
+  get treasureHunt(): Prisma.TreasureHuntDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.participation`: Exposes CRUD operations for the **Participation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Participations
+    * const participations = await prisma.participation.findMany()
+    * ```
+    */
+  get participation(): Prisma.ParticipationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.artefact`: Exposes CRUD operations for the **Artefact** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Artefacts
+    * const artefacts = await prisma.artefact.findMany()
+    * ```
+    */
+  get artefact(): Prisma.ArtefactDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.huntStep`: Exposes CRUD operations for the **HuntStep** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more HuntSteps
+    * const huntSteps = await prisma.huntStep.findMany()
+    * ```
+    */
+  get huntStep(): Prisma.HuntStepDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.reward`: Exposes CRUD operations for the **Reward** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Rewards
+    * const rewards = await prisma.reward.findMany()
+    * ```
+    */
+  get reward(): Prisma.RewardDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.virtualCurrency`: Exposes CRUD operations for the **VirtualCurrency** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more VirtualCurrencies
+    * const virtualCurrencies = await prisma.virtualCurrency.findMany()
+    * ```
+    */
+  get virtualCurrency(): Prisma.VirtualCurrencyDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.transactionHistory`: Exposes CRUD operations for the **TransactionHistory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TransactionHistories
+    * const transactionHistories = await prisma.transactionHistory.findMany()
+    * ```
+    */
+  get transactionHistory(): Prisma.TransactionHistoryDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -641,7 +819,14 @@ export namespace Prisma {
     User: 'User',
     Session: 'Session',
     Account: 'Account',
-    Verification: 'Verification'
+    Verification: 'Verification',
+    TreasureHunt: 'TreasureHunt',
+    Participation: 'Participation',
+    Artefact: 'Artefact',
+    HuntStep: 'HuntStep',
+    Reward: 'Reward',
+    VirtualCurrency: 'VirtualCurrency',
+    TransactionHistory: 'TransactionHistory'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -660,7 +845,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification"
+      modelProps: "user" | "session" | "account" | "verification" | "treasureHunt" | "participation" | "artefact" | "huntStep" | "reward" | "virtualCurrency" | "transactionHistory"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -960,6 +1145,524 @@ export namespace Prisma {
           }
         }
       }
+      TreasureHunt: {
+        payload: Prisma.$TreasureHuntPayload<ExtArgs>
+        fields: Prisma.TreasureHuntFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TreasureHuntFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreasureHuntPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TreasureHuntFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreasureHuntPayload>
+          }
+          findFirst: {
+            args: Prisma.TreasureHuntFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreasureHuntPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TreasureHuntFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreasureHuntPayload>
+          }
+          findMany: {
+            args: Prisma.TreasureHuntFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreasureHuntPayload>[]
+          }
+          create: {
+            args: Prisma.TreasureHuntCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreasureHuntPayload>
+          }
+          createMany: {
+            args: Prisma.TreasureHuntCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TreasureHuntCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreasureHuntPayload>[]
+          }
+          delete: {
+            args: Prisma.TreasureHuntDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreasureHuntPayload>
+          }
+          update: {
+            args: Prisma.TreasureHuntUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreasureHuntPayload>
+          }
+          deleteMany: {
+            args: Prisma.TreasureHuntDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TreasureHuntUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TreasureHuntUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreasureHuntPayload>[]
+          }
+          upsert: {
+            args: Prisma.TreasureHuntUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreasureHuntPayload>
+          }
+          aggregate: {
+            args: Prisma.TreasureHuntAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTreasureHunt>
+          }
+          groupBy: {
+            args: Prisma.TreasureHuntGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TreasureHuntGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TreasureHuntCountArgs<ExtArgs>
+            result: $Utils.Optional<TreasureHuntCountAggregateOutputType> | number
+          }
+        }
+      }
+      Participation: {
+        payload: Prisma.$ParticipationPayload<ExtArgs>
+        fields: Prisma.ParticipationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ParticipationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticipationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ParticipationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticipationPayload>
+          }
+          findFirst: {
+            args: Prisma.ParticipationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticipationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ParticipationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticipationPayload>
+          }
+          findMany: {
+            args: Prisma.ParticipationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticipationPayload>[]
+          }
+          create: {
+            args: Prisma.ParticipationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticipationPayload>
+          }
+          createMany: {
+            args: Prisma.ParticipationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ParticipationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticipationPayload>[]
+          }
+          delete: {
+            args: Prisma.ParticipationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticipationPayload>
+          }
+          update: {
+            args: Prisma.ParticipationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticipationPayload>
+          }
+          deleteMany: {
+            args: Prisma.ParticipationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ParticipationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ParticipationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticipationPayload>[]
+          }
+          upsert: {
+            args: Prisma.ParticipationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticipationPayload>
+          }
+          aggregate: {
+            args: Prisma.ParticipationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateParticipation>
+          }
+          groupBy: {
+            args: Prisma.ParticipationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ParticipationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ParticipationCountArgs<ExtArgs>
+            result: $Utils.Optional<ParticipationCountAggregateOutputType> | number
+          }
+        }
+      }
+      Artefact: {
+        payload: Prisma.$ArtefactPayload<ExtArgs>
+        fields: Prisma.ArtefactFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ArtefactFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArtefactPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ArtefactFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArtefactPayload>
+          }
+          findFirst: {
+            args: Prisma.ArtefactFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArtefactPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ArtefactFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArtefactPayload>
+          }
+          findMany: {
+            args: Prisma.ArtefactFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArtefactPayload>[]
+          }
+          create: {
+            args: Prisma.ArtefactCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArtefactPayload>
+          }
+          createMany: {
+            args: Prisma.ArtefactCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ArtefactCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArtefactPayload>[]
+          }
+          delete: {
+            args: Prisma.ArtefactDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArtefactPayload>
+          }
+          update: {
+            args: Prisma.ArtefactUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArtefactPayload>
+          }
+          deleteMany: {
+            args: Prisma.ArtefactDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ArtefactUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ArtefactUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArtefactPayload>[]
+          }
+          upsert: {
+            args: Prisma.ArtefactUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArtefactPayload>
+          }
+          aggregate: {
+            args: Prisma.ArtefactAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateArtefact>
+          }
+          groupBy: {
+            args: Prisma.ArtefactGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ArtefactGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ArtefactCountArgs<ExtArgs>
+            result: $Utils.Optional<ArtefactCountAggregateOutputType> | number
+          }
+        }
+      }
+      HuntStep: {
+        payload: Prisma.$HuntStepPayload<ExtArgs>
+        fields: Prisma.HuntStepFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.HuntStepFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HuntStepPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.HuntStepFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HuntStepPayload>
+          }
+          findFirst: {
+            args: Prisma.HuntStepFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HuntStepPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.HuntStepFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HuntStepPayload>
+          }
+          findMany: {
+            args: Prisma.HuntStepFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HuntStepPayload>[]
+          }
+          create: {
+            args: Prisma.HuntStepCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HuntStepPayload>
+          }
+          createMany: {
+            args: Prisma.HuntStepCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.HuntStepCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HuntStepPayload>[]
+          }
+          delete: {
+            args: Prisma.HuntStepDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HuntStepPayload>
+          }
+          update: {
+            args: Prisma.HuntStepUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HuntStepPayload>
+          }
+          deleteMany: {
+            args: Prisma.HuntStepDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.HuntStepUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.HuntStepUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HuntStepPayload>[]
+          }
+          upsert: {
+            args: Prisma.HuntStepUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HuntStepPayload>
+          }
+          aggregate: {
+            args: Prisma.HuntStepAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHuntStep>
+          }
+          groupBy: {
+            args: Prisma.HuntStepGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HuntStepGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.HuntStepCountArgs<ExtArgs>
+            result: $Utils.Optional<HuntStepCountAggregateOutputType> | number
+          }
+        }
+      }
+      Reward: {
+        payload: Prisma.$RewardPayload<ExtArgs>
+        fields: Prisma.RewardFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RewardFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RewardPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RewardFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RewardPayload>
+          }
+          findFirst: {
+            args: Prisma.RewardFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RewardPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RewardFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RewardPayload>
+          }
+          findMany: {
+            args: Prisma.RewardFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RewardPayload>[]
+          }
+          create: {
+            args: Prisma.RewardCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RewardPayload>
+          }
+          createMany: {
+            args: Prisma.RewardCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RewardCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RewardPayload>[]
+          }
+          delete: {
+            args: Prisma.RewardDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RewardPayload>
+          }
+          update: {
+            args: Prisma.RewardUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RewardPayload>
+          }
+          deleteMany: {
+            args: Prisma.RewardDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RewardUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RewardUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RewardPayload>[]
+          }
+          upsert: {
+            args: Prisma.RewardUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RewardPayload>
+          }
+          aggregate: {
+            args: Prisma.RewardAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReward>
+          }
+          groupBy: {
+            args: Prisma.RewardGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RewardGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RewardCountArgs<ExtArgs>
+            result: $Utils.Optional<RewardCountAggregateOutputType> | number
+          }
+        }
+      }
+      VirtualCurrency: {
+        payload: Prisma.$VirtualCurrencyPayload<ExtArgs>
+        fields: Prisma.VirtualCurrencyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VirtualCurrencyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualCurrencyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VirtualCurrencyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualCurrencyPayload>
+          }
+          findFirst: {
+            args: Prisma.VirtualCurrencyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualCurrencyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VirtualCurrencyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualCurrencyPayload>
+          }
+          findMany: {
+            args: Prisma.VirtualCurrencyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualCurrencyPayload>[]
+          }
+          create: {
+            args: Prisma.VirtualCurrencyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualCurrencyPayload>
+          }
+          createMany: {
+            args: Prisma.VirtualCurrencyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.VirtualCurrencyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualCurrencyPayload>[]
+          }
+          delete: {
+            args: Prisma.VirtualCurrencyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualCurrencyPayload>
+          }
+          update: {
+            args: Prisma.VirtualCurrencyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualCurrencyPayload>
+          }
+          deleteMany: {
+            args: Prisma.VirtualCurrencyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VirtualCurrencyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VirtualCurrencyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualCurrencyPayload>[]
+          }
+          upsert: {
+            args: Prisma.VirtualCurrencyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualCurrencyPayload>
+          }
+          aggregate: {
+            args: Prisma.VirtualCurrencyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVirtualCurrency>
+          }
+          groupBy: {
+            args: Prisma.VirtualCurrencyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VirtualCurrencyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VirtualCurrencyCountArgs<ExtArgs>
+            result: $Utils.Optional<VirtualCurrencyCountAggregateOutputType> | number
+          }
+        }
+      }
+      TransactionHistory: {
+        payload: Prisma.$TransactionHistoryPayload<ExtArgs>
+        fields: Prisma.TransactionHistoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TransactionHistoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransactionHistoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TransactionHistoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>
+          }
+          findFirst: {
+            args: Prisma.TransactionHistoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransactionHistoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TransactionHistoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>
+          }
+          findMany: {
+            args: Prisma.TransactionHistoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>[]
+          }
+          create: {
+            args: Prisma.TransactionHistoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>
+          }
+          createMany: {
+            args: Prisma.TransactionHistoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TransactionHistoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>[]
+          }
+          delete: {
+            args: Prisma.TransactionHistoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>
+          }
+          update: {
+            args: Prisma.TransactionHistoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.TransactionHistoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TransactionHistoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TransactionHistoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.TransactionHistoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransactionHistoryPayload>
+          }
+          aggregate: {
+            args: Prisma.TransactionHistoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTransactionHistory>
+          }
+          groupBy: {
+            args: Prisma.TransactionHistoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TransactionHistoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TransactionHistoryCountArgs<ExtArgs>
+            result: $Utils.Optional<TransactionHistoryCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1048,6 +1751,13 @@ export namespace Prisma {
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
+    treasureHunt?: TreasureHuntOmit
+    participation?: ParticipationOmit
+    artefact?: ArtefactOmit
+    huntStep?: HuntStepOmit
+    reward?: RewardOmit
+    virtualCurrency?: VirtualCurrencyOmit
+    transactionHistory?: TransactionHistoryOmit
   }
 
   /* Types for Logging */
@@ -1144,11 +1854,21 @@ export namespace Prisma {
   export type UserCountOutputType = {
     sessions: number
     accounts: number
+    participations: number
+    createdChasses: number
+    collectedArtefacts: number
+    virtualCurrency: number
+    transactionHistory: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+    participations?: boolean | UserCountOutputTypeCountParticipationsArgs
+    createdChasses?: boolean | UserCountOutputTypeCountCreatedChassesArgs
+    collectedArtefacts?: boolean | UserCountOutputTypeCountCollectedArtefactsArgs
+    virtualCurrency?: boolean | UserCountOutputTypeCountVirtualCurrencyArgs
+    transactionHistory?: boolean | UserCountOutputTypeCountTransactionHistoryArgs
   }
 
   // Custom InputTypes
@@ -1174,6 +1894,130 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AccountWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountParticipationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ParticipationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedChassesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TreasureHuntWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCollectedArtefactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ArtefactWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountVirtualCurrencyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VirtualCurrencyWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountTransactionHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TransactionHistoryWhereInput
+  }
+
+
+  /**
+   * Count Type TreasureHuntCountOutputType
+   */
+
+  export type TreasureHuntCountOutputType = {
+    participants: number
+    steps: number
+    rewards: number
+    artefacts: number
+  }
+
+  export type TreasureHuntCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    participants?: boolean | TreasureHuntCountOutputTypeCountParticipantsArgs
+    steps?: boolean | TreasureHuntCountOutputTypeCountStepsArgs
+    rewards?: boolean | TreasureHuntCountOutputTypeCountRewardsArgs
+    artefacts?: boolean | TreasureHuntCountOutputTypeCountArtefactsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TreasureHuntCountOutputType without action
+   */
+  export type TreasureHuntCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHuntCountOutputType
+     */
+    select?: TreasureHuntCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TreasureHuntCountOutputType without action
+   */
+  export type TreasureHuntCountOutputTypeCountParticipantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ParticipationWhereInput
+  }
+
+  /**
+   * TreasureHuntCountOutputType without action
+   */
+  export type TreasureHuntCountOutputTypeCountStepsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HuntStepWhereInput
+  }
+
+  /**
+   * TreasureHuntCountOutputType without action
+   */
+  export type TreasureHuntCountOutputTypeCountRewardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RewardWhereInput
+  }
+
+  /**
+   * TreasureHuntCountOutputType without action
+   */
+  export type TreasureHuntCountOutputTypeCountArtefactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ArtefactWhereInput
+  }
+
+
+  /**
+   * Count Type VirtualCurrencyCountOutputType
+   */
+
+  export type VirtualCurrencyCountOutputType = {
+    transactionHistory: number
+  }
+
+  export type VirtualCurrencyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transactionHistory?: boolean | VirtualCurrencyCountOutputTypeCountTransactionHistoryArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * VirtualCurrencyCountOutputType without action
+   */
+  export type VirtualCurrencyCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualCurrencyCountOutputType
+     */
+    select?: VirtualCurrencyCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * VirtualCurrencyCountOutputType without action
+   */
+  export type VirtualCurrencyCountOutputTypeCountTransactionHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TransactionHistoryWhereInput
   }
 
 
@@ -1371,6 +2215,11 @@ export namespace Prisma {
     updatedAt?: boolean
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    participations?: boolean | User$participationsArgs<ExtArgs>
+    createdChasses?: boolean | User$createdChassesArgs<ExtArgs>
+    collectedArtefacts?: boolean | User$collectedArtefactsArgs<ExtArgs>
+    virtualCurrency?: boolean | User$virtualCurrencyArgs<ExtArgs>
+    transactionHistory?: boolean | User$transactionHistoryArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1411,6 +2260,11 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    participations?: boolean | User$participationsArgs<ExtArgs>
+    createdChasses?: boolean | User$createdChassesArgs<ExtArgs>
+    collectedArtefacts?: boolean | User$collectedArtefactsArgs<ExtArgs>
+    virtualCurrency?: boolean | User$virtualCurrencyArgs<ExtArgs>
+    transactionHistory?: boolean | User$transactionHistoryArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1421,6 +2275,11 @@ export namespace Prisma {
     objects: {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
+      participations: Prisma.$ParticipationPayload<ExtArgs>[]
+      createdChasses: Prisma.$TreasureHuntPayload<ExtArgs>[]
+      collectedArtefacts: Prisma.$ArtefactPayload<ExtArgs>[]
+      virtualCurrency: Prisma.$VirtualCurrencyPayload<ExtArgs>[]
+      transactionHistory: Prisma.$TransactionHistoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1827,6 +2686,11 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    participations<T extends User$participationsArgs<ExtArgs> = {}>(args?: Subset<T, User$participationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParticipationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdChasses<T extends User$createdChassesArgs<ExtArgs> = {}>(args?: Subset<T, User$createdChassesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    collectedArtefacts<T extends User$collectedArtefactsArgs<ExtArgs> = {}>(args?: Subset<T, User$collectedArtefactsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    virtualCurrency<T extends User$virtualCurrencyArgs<ExtArgs> = {}>(args?: Subset<T, User$virtualCurrencyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VirtualCurrencyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    transactionHistory<T extends User$transactionHistoryArgs<ExtArgs> = {}>(args?: Subset<T, User$transactionHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2297,6 +3161,126 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
+  }
+
+  /**
+   * User.participations
+   */
+  export type User$participationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Participation
+     */
+    select?: ParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Participation
+     */
+    omit?: ParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticipationInclude<ExtArgs> | null
+    where?: ParticipationWhereInput
+    orderBy?: ParticipationOrderByWithRelationInput | ParticipationOrderByWithRelationInput[]
+    cursor?: ParticipationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ParticipationScalarFieldEnum | ParticipationScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdChasses
+   */
+  export type User$createdChassesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHunt
+     */
+    select?: TreasureHuntSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TreasureHunt
+     */
+    omit?: TreasureHuntOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreasureHuntInclude<ExtArgs> | null
+    where?: TreasureHuntWhereInput
+    orderBy?: TreasureHuntOrderByWithRelationInput | TreasureHuntOrderByWithRelationInput[]
+    cursor?: TreasureHuntWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TreasureHuntScalarFieldEnum | TreasureHuntScalarFieldEnum[]
+  }
+
+  /**
+   * User.collectedArtefacts
+   */
+  export type User$collectedArtefactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artefact
+     */
+    select?: ArtefactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artefact
+     */
+    omit?: ArtefactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtefactInclude<ExtArgs> | null
+    where?: ArtefactWhereInput
+    orderBy?: ArtefactOrderByWithRelationInput | ArtefactOrderByWithRelationInput[]
+    cursor?: ArtefactWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ArtefactScalarFieldEnum | ArtefactScalarFieldEnum[]
+  }
+
+  /**
+   * User.virtualCurrency
+   */
+  export type User$virtualCurrencyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualCurrency
+     */
+    select?: VirtualCurrencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualCurrency
+     */
+    omit?: VirtualCurrencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualCurrencyInclude<ExtArgs> | null
+    where?: VirtualCurrencyWhereInput
+    orderBy?: VirtualCurrencyOrderByWithRelationInput | VirtualCurrencyOrderByWithRelationInput[]
+    cursor?: VirtualCurrencyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VirtualCurrencyScalarFieldEnum | VirtualCurrencyScalarFieldEnum[]
+  }
+
+  /**
+   * User.transactionHistory
+   */
+  export type User$transactionHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransactionHistory
+     */
+    select?: TransactionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransactionHistory
+     */
+    omit?: TransactionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransactionHistoryInclude<ExtArgs> | null
+    where?: TransactionHistoryWhereInput
+    orderBy?: TransactionHistoryOrderByWithRelationInput | TransactionHistoryOrderByWithRelationInput[]
+    cursor?: TransactionHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TransactionHistoryScalarFieldEnum | TransactionHistoryScalarFieldEnum[]
   }
 
   /**
@@ -5586,6 +6570,7891 @@ export namespace Prisma {
 
 
   /**
+   * Model TreasureHunt
+   */
+
+  export type AggregateTreasureHunt = {
+    _count: TreasureHuntCountAggregateOutputType | null
+    _min: TreasureHuntMinAggregateOutputType | null
+    _max: TreasureHuntMaxAggregateOutputType | null
+  }
+
+  export type TreasureHuntMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    createdById: string | null
+    startDate: Date | null
+    endDate: Date | null
+    location: string | null
+    status: $Enums.HuntStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TreasureHuntMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    createdById: string | null
+    startDate: Date | null
+    endDate: Date | null
+    location: string | null
+    status: $Enums.HuntStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TreasureHuntCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    createdById: number
+    startDate: number
+    endDate: number
+    location: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TreasureHuntMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    createdById?: true
+    startDate?: true
+    endDate?: true
+    location?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TreasureHuntMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    createdById?: true
+    startDate?: true
+    endDate?: true
+    location?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TreasureHuntCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    createdById?: true
+    startDate?: true
+    endDate?: true
+    location?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TreasureHuntAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TreasureHunt to aggregate.
+     */
+    where?: TreasureHuntWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TreasureHunts to fetch.
+     */
+    orderBy?: TreasureHuntOrderByWithRelationInput | TreasureHuntOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TreasureHuntWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TreasureHunts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TreasureHunts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TreasureHunts
+    **/
+    _count?: true | TreasureHuntCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TreasureHuntMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TreasureHuntMaxAggregateInputType
+  }
+
+  export type GetTreasureHuntAggregateType<T extends TreasureHuntAggregateArgs> = {
+        [P in keyof T & keyof AggregateTreasureHunt]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTreasureHunt[P]>
+      : GetScalarType<T[P], AggregateTreasureHunt[P]>
+  }
+
+
+
+
+  export type TreasureHuntGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TreasureHuntWhereInput
+    orderBy?: TreasureHuntOrderByWithAggregationInput | TreasureHuntOrderByWithAggregationInput[]
+    by: TreasureHuntScalarFieldEnum[] | TreasureHuntScalarFieldEnum
+    having?: TreasureHuntScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TreasureHuntCountAggregateInputType | true
+    _min?: TreasureHuntMinAggregateInputType
+    _max?: TreasureHuntMaxAggregateInputType
+  }
+
+  export type TreasureHuntGroupByOutputType = {
+    id: string
+    title: string
+    description: string | null
+    createdById: string
+    startDate: Date | null
+    endDate: Date | null
+    location: string | null
+    status: $Enums.HuntStatus
+    createdAt: Date
+    updatedAt: Date
+    _count: TreasureHuntCountAggregateOutputType | null
+    _min: TreasureHuntMinAggregateOutputType | null
+    _max: TreasureHuntMaxAggregateOutputType | null
+  }
+
+  type GetTreasureHuntGroupByPayload<T extends TreasureHuntGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TreasureHuntGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TreasureHuntGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TreasureHuntGroupByOutputType[P]>
+            : GetScalarType<T[P], TreasureHuntGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TreasureHuntSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    createdById?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    location?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    participants?: boolean | TreasureHunt$participantsArgs<ExtArgs>
+    steps?: boolean | TreasureHunt$stepsArgs<ExtArgs>
+    rewards?: boolean | TreasureHunt$rewardsArgs<ExtArgs>
+    artefacts?: boolean | TreasureHunt$artefactsArgs<ExtArgs>
+    _count?: boolean | TreasureHuntCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["treasureHunt"]>
+
+  export type TreasureHuntSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    createdById?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    location?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["treasureHunt"]>
+
+  export type TreasureHuntSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    createdById?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    location?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["treasureHunt"]>
+
+  export type TreasureHuntSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    createdById?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    location?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TreasureHuntOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "createdById" | "startDate" | "endDate" | "location" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["treasureHunt"]>
+  export type TreasureHuntInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    participants?: boolean | TreasureHunt$participantsArgs<ExtArgs>
+    steps?: boolean | TreasureHunt$stepsArgs<ExtArgs>
+    rewards?: boolean | TreasureHunt$rewardsArgs<ExtArgs>
+    artefacts?: boolean | TreasureHunt$artefactsArgs<ExtArgs>
+    _count?: boolean | TreasureHuntCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TreasureHuntIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type TreasureHuntIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $TreasureHuntPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TreasureHunt"
+    objects: {
+      createdBy: Prisma.$UserPayload<ExtArgs>
+      participants: Prisma.$ParticipationPayload<ExtArgs>[]
+      steps: Prisma.$HuntStepPayload<ExtArgs>[]
+      rewards: Prisma.$RewardPayload<ExtArgs>[]
+      artefacts: Prisma.$ArtefactPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string | null
+      createdById: string
+      startDate: Date | null
+      endDate: Date | null
+      location: string | null
+      status: $Enums.HuntStatus
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["treasureHunt"]>
+    composites: {}
+  }
+
+  type TreasureHuntGetPayload<S extends boolean | null | undefined | TreasureHuntDefaultArgs> = $Result.GetResult<Prisma.$TreasureHuntPayload, S>
+
+  type TreasureHuntCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TreasureHuntFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TreasureHuntCountAggregateInputType | true
+    }
+
+  export interface TreasureHuntDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TreasureHunt'], meta: { name: 'TreasureHunt' } }
+    /**
+     * Find zero or one TreasureHunt that matches the filter.
+     * @param {TreasureHuntFindUniqueArgs} args - Arguments to find a TreasureHunt
+     * @example
+     * // Get one TreasureHunt
+     * const treasureHunt = await prisma.treasureHunt.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TreasureHuntFindUniqueArgs>(args: SelectSubset<T, TreasureHuntFindUniqueArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TreasureHunt that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TreasureHuntFindUniqueOrThrowArgs} args - Arguments to find a TreasureHunt
+     * @example
+     * // Get one TreasureHunt
+     * const treasureHunt = await prisma.treasureHunt.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TreasureHuntFindUniqueOrThrowArgs>(args: SelectSubset<T, TreasureHuntFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TreasureHunt that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TreasureHuntFindFirstArgs} args - Arguments to find a TreasureHunt
+     * @example
+     * // Get one TreasureHunt
+     * const treasureHunt = await prisma.treasureHunt.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TreasureHuntFindFirstArgs>(args?: SelectSubset<T, TreasureHuntFindFirstArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TreasureHunt that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TreasureHuntFindFirstOrThrowArgs} args - Arguments to find a TreasureHunt
+     * @example
+     * // Get one TreasureHunt
+     * const treasureHunt = await prisma.treasureHunt.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TreasureHuntFindFirstOrThrowArgs>(args?: SelectSubset<T, TreasureHuntFindFirstOrThrowArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TreasureHunts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TreasureHuntFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TreasureHunts
+     * const treasureHunts = await prisma.treasureHunt.findMany()
+     * 
+     * // Get first 10 TreasureHunts
+     * const treasureHunts = await prisma.treasureHunt.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const treasureHuntWithIdOnly = await prisma.treasureHunt.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TreasureHuntFindManyArgs>(args?: SelectSubset<T, TreasureHuntFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TreasureHunt.
+     * @param {TreasureHuntCreateArgs} args - Arguments to create a TreasureHunt.
+     * @example
+     * // Create one TreasureHunt
+     * const TreasureHunt = await prisma.treasureHunt.create({
+     *   data: {
+     *     // ... data to create a TreasureHunt
+     *   }
+     * })
+     * 
+     */
+    create<T extends TreasureHuntCreateArgs>(args: SelectSubset<T, TreasureHuntCreateArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TreasureHunts.
+     * @param {TreasureHuntCreateManyArgs} args - Arguments to create many TreasureHunts.
+     * @example
+     * // Create many TreasureHunts
+     * const treasureHunt = await prisma.treasureHunt.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TreasureHuntCreateManyArgs>(args?: SelectSubset<T, TreasureHuntCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TreasureHunts and returns the data saved in the database.
+     * @param {TreasureHuntCreateManyAndReturnArgs} args - Arguments to create many TreasureHunts.
+     * @example
+     * // Create many TreasureHunts
+     * const treasureHunt = await prisma.treasureHunt.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TreasureHunts and only return the `id`
+     * const treasureHuntWithIdOnly = await prisma.treasureHunt.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TreasureHuntCreateManyAndReturnArgs>(args?: SelectSubset<T, TreasureHuntCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TreasureHunt.
+     * @param {TreasureHuntDeleteArgs} args - Arguments to delete one TreasureHunt.
+     * @example
+     * // Delete one TreasureHunt
+     * const TreasureHunt = await prisma.treasureHunt.delete({
+     *   where: {
+     *     // ... filter to delete one TreasureHunt
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TreasureHuntDeleteArgs>(args: SelectSubset<T, TreasureHuntDeleteArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TreasureHunt.
+     * @param {TreasureHuntUpdateArgs} args - Arguments to update one TreasureHunt.
+     * @example
+     * // Update one TreasureHunt
+     * const treasureHunt = await prisma.treasureHunt.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TreasureHuntUpdateArgs>(args: SelectSubset<T, TreasureHuntUpdateArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TreasureHunts.
+     * @param {TreasureHuntDeleteManyArgs} args - Arguments to filter TreasureHunts to delete.
+     * @example
+     * // Delete a few TreasureHunts
+     * const { count } = await prisma.treasureHunt.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TreasureHuntDeleteManyArgs>(args?: SelectSubset<T, TreasureHuntDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TreasureHunts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TreasureHuntUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TreasureHunts
+     * const treasureHunt = await prisma.treasureHunt.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TreasureHuntUpdateManyArgs>(args: SelectSubset<T, TreasureHuntUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TreasureHunts and returns the data updated in the database.
+     * @param {TreasureHuntUpdateManyAndReturnArgs} args - Arguments to update many TreasureHunts.
+     * @example
+     * // Update many TreasureHunts
+     * const treasureHunt = await prisma.treasureHunt.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TreasureHunts and only return the `id`
+     * const treasureHuntWithIdOnly = await prisma.treasureHunt.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TreasureHuntUpdateManyAndReturnArgs>(args: SelectSubset<T, TreasureHuntUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TreasureHunt.
+     * @param {TreasureHuntUpsertArgs} args - Arguments to update or create a TreasureHunt.
+     * @example
+     * // Update or create a TreasureHunt
+     * const treasureHunt = await prisma.treasureHunt.upsert({
+     *   create: {
+     *     // ... data to create a TreasureHunt
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TreasureHunt we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TreasureHuntUpsertArgs>(args: SelectSubset<T, TreasureHuntUpsertArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TreasureHunts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TreasureHuntCountArgs} args - Arguments to filter TreasureHunts to count.
+     * @example
+     * // Count the number of TreasureHunts
+     * const count = await prisma.treasureHunt.count({
+     *   where: {
+     *     // ... the filter for the TreasureHunts we want to count
+     *   }
+     * })
+    **/
+    count<T extends TreasureHuntCountArgs>(
+      args?: Subset<T, TreasureHuntCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TreasureHuntCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TreasureHunt.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TreasureHuntAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TreasureHuntAggregateArgs>(args: Subset<T, TreasureHuntAggregateArgs>): Prisma.PrismaPromise<GetTreasureHuntAggregateType<T>>
+
+    /**
+     * Group by TreasureHunt.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TreasureHuntGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TreasureHuntGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TreasureHuntGroupByArgs['orderBy'] }
+        : { orderBy?: TreasureHuntGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TreasureHuntGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTreasureHuntGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TreasureHunt model
+   */
+  readonly fields: TreasureHuntFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TreasureHunt.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TreasureHuntClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    participants<T extends TreasureHunt$participantsArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHunt$participantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParticipationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    steps<T extends TreasureHunt$stepsArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHunt$stepsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HuntStepPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    rewards<T extends TreasureHunt$rewardsArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHunt$rewardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RewardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    artefacts<T extends TreasureHunt$artefactsArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHunt$artefactsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TreasureHunt model
+   */
+  interface TreasureHuntFieldRefs {
+    readonly id: FieldRef<"TreasureHunt", 'String'>
+    readonly title: FieldRef<"TreasureHunt", 'String'>
+    readonly description: FieldRef<"TreasureHunt", 'String'>
+    readonly createdById: FieldRef<"TreasureHunt", 'String'>
+    readonly startDate: FieldRef<"TreasureHunt", 'DateTime'>
+    readonly endDate: FieldRef<"TreasureHunt", 'DateTime'>
+    readonly location: FieldRef<"TreasureHunt", 'String'>
+    readonly status: FieldRef<"TreasureHunt", 'HuntStatus'>
+    readonly createdAt: FieldRef<"TreasureHunt", 'DateTime'>
+    readonly updatedAt: FieldRef<"TreasureHunt", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TreasureHunt findUnique
+   */
+  export type TreasureHuntFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHunt
+     */
+    select?: TreasureHuntSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TreasureHunt
+     */
+    omit?: TreasureHuntOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreasureHuntInclude<ExtArgs> | null
+    /**
+     * Filter, which TreasureHunt to fetch.
+     */
+    where: TreasureHuntWhereUniqueInput
+  }
+
+  /**
+   * TreasureHunt findUniqueOrThrow
+   */
+  export type TreasureHuntFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHunt
+     */
+    select?: TreasureHuntSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TreasureHunt
+     */
+    omit?: TreasureHuntOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreasureHuntInclude<ExtArgs> | null
+    /**
+     * Filter, which TreasureHunt to fetch.
+     */
+    where: TreasureHuntWhereUniqueInput
+  }
+
+  /**
+   * TreasureHunt findFirst
+   */
+  export type TreasureHuntFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHunt
+     */
+    select?: TreasureHuntSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TreasureHunt
+     */
+    omit?: TreasureHuntOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreasureHuntInclude<ExtArgs> | null
+    /**
+     * Filter, which TreasureHunt to fetch.
+     */
+    where?: TreasureHuntWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TreasureHunts to fetch.
+     */
+    orderBy?: TreasureHuntOrderByWithRelationInput | TreasureHuntOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TreasureHunts.
+     */
+    cursor?: TreasureHuntWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TreasureHunts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TreasureHunts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TreasureHunts.
+     */
+    distinct?: TreasureHuntScalarFieldEnum | TreasureHuntScalarFieldEnum[]
+  }
+
+  /**
+   * TreasureHunt findFirstOrThrow
+   */
+  export type TreasureHuntFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHunt
+     */
+    select?: TreasureHuntSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TreasureHunt
+     */
+    omit?: TreasureHuntOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreasureHuntInclude<ExtArgs> | null
+    /**
+     * Filter, which TreasureHunt to fetch.
+     */
+    where?: TreasureHuntWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TreasureHunts to fetch.
+     */
+    orderBy?: TreasureHuntOrderByWithRelationInput | TreasureHuntOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TreasureHunts.
+     */
+    cursor?: TreasureHuntWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TreasureHunts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TreasureHunts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TreasureHunts.
+     */
+    distinct?: TreasureHuntScalarFieldEnum | TreasureHuntScalarFieldEnum[]
+  }
+
+  /**
+   * TreasureHunt findMany
+   */
+  export type TreasureHuntFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHunt
+     */
+    select?: TreasureHuntSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TreasureHunt
+     */
+    omit?: TreasureHuntOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreasureHuntInclude<ExtArgs> | null
+    /**
+     * Filter, which TreasureHunts to fetch.
+     */
+    where?: TreasureHuntWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TreasureHunts to fetch.
+     */
+    orderBy?: TreasureHuntOrderByWithRelationInput | TreasureHuntOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TreasureHunts.
+     */
+    cursor?: TreasureHuntWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TreasureHunts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TreasureHunts.
+     */
+    skip?: number
+    distinct?: TreasureHuntScalarFieldEnum | TreasureHuntScalarFieldEnum[]
+  }
+
+  /**
+   * TreasureHunt create
+   */
+  export type TreasureHuntCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHunt
+     */
+    select?: TreasureHuntSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TreasureHunt
+     */
+    omit?: TreasureHuntOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreasureHuntInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TreasureHunt.
+     */
+    data: XOR<TreasureHuntCreateInput, TreasureHuntUncheckedCreateInput>
+  }
+
+  /**
+   * TreasureHunt createMany
+   */
+  export type TreasureHuntCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TreasureHunts.
+     */
+    data: TreasureHuntCreateManyInput | TreasureHuntCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TreasureHunt createManyAndReturn
+   */
+  export type TreasureHuntCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHunt
+     */
+    select?: TreasureHuntSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TreasureHunt
+     */
+    omit?: TreasureHuntOmit<ExtArgs> | null
+    /**
+     * The data used to create many TreasureHunts.
+     */
+    data: TreasureHuntCreateManyInput | TreasureHuntCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreasureHuntIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TreasureHunt update
+   */
+  export type TreasureHuntUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHunt
+     */
+    select?: TreasureHuntSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TreasureHunt
+     */
+    omit?: TreasureHuntOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreasureHuntInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TreasureHunt.
+     */
+    data: XOR<TreasureHuntUpdateInput, TreasureHuntUncheckedUpdateInput>
+    /**
+     * Choose, which TreasureHunt to update.
+     */
+    where: TreasureHuntWhereUniqueInput
+  }
+
+  /**
+   * TreasureHunt updateMany
+   */
+  export type TreasureHuntUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TreasureHunts.
+     */
+    data: XOR<TreasureHuntUpdateManyMutationInput, TreasureHuntUncheckedUpdateManyInput>
+    /**
+     * Filter which TreasureHunts to update
+     */
+    where?: TreasureHuntWhereInput
+    /**
+     * Limit how many TreasureHunts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TreasureHunt updateManyAndReturn
+   */
+  export type TreasureHuntUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHunt
+     */
+    select?: TreasureHuntSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TreasureHunt
+     */
+    omit?: TreasureHuntOmit<ExtArgs> | null
+    /**
+     * The data used to update TreasureHunts.
+     */
+    data: XOR<TreasureHuntUpdateManyMutationInput, TreasureHuntUncheckedUpdateManyInput>
+    /**
+     * Filter which TreasureHunts to update
+     */
+    where?: TreasureHuntWhereInput
+    /**
+     * Limit how many TreasureHunts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreasureHuntIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TreasureHunt upsert
+   */
+  export type TreasureHuntUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHunt
+     */
+    select?: TreasureHuntSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TreasureHunt
+     */
+    omit?: TreasureHuntOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreasureHuntInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TreasureHunt to update in case it exists.
+     */
+    where: TreasureHuntWhereUniqueInput
+    /**
+     * In case the TreasureHunt found by the `where` argument doesn't exist, create a new TreasureHunt with this data.
+     */
+    create: XOR<TreasureHuntCreateInput, TreasureHuntUncheckedCreateInput>
+    /**
+     * In case the TreasureHunt was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TreasureHuntUpdateInput, TreasureHuntUncheckedUpdateInput>
+  }
+
+  /**
+   * TreasureHunt delete
+   */
+  export type TreasureHuntDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHunt
+     */
+    select?: TreasureHuntSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TreasureHunt
+     */
+    omit?: TreasureHuntOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreasureHuntInclude<ExtArgs> | null
+    /**
+     * Filter which TreasureHunt to delete.
+     */
+    where: TreasureHuntWhereUniqueInput
+  }
+
+  /**
+   * TreasureHunt deleteMany
+   */
+  export type TreasureHuntDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TreasureHunts to delete
+     */
+    where?: TreasureHuntWhereInput
+    /**
+     * Limit how many TreasureHunts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TreasureHunt.participants
+   */
+  export type TreasureHunt$participantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Participation
+     */
+    select?: ParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Participation
+     */
+    omit?: ParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticipationInclude<ExtArgs> | null
+    where?: ParticipationWhereInput
+    orderBy?: ParticipationOrderByWithRelationInput | ParticipationOrderByWithRelationInput[]
+    cursor?: ParticipationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ParticipationScalarFieldEnum | ParticipationScalarFieldEnum[]
+  }
+
+  /**
+   * TreasureHunt.steps
+   */
+  export type TreasureHunt$stepsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HuntStep
+     */
+    select?: HuntStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HuntStep
+     */
+    omit?: HuntStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HuntStepInclude<ExtArgs> | null
+    where?: HuntStepWhereInput
+    orderBy?: HuntStepOrderByWithRelationInput | HuntStepOrderByWithRelationInput[]
+    cursor?: HuntStepWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HuntStepScalarFieldEnum | HuntStepScalarFieldEnum[]
+  }
+
+  /**
+   * TreasureHunt.rewards
+   */
+  export type TreasureHunt$rewardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reward
+     */
+    select?: RewardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reward
+     */
+    omit?: RewardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RewardInclude<ExtArgs> | null
+    where?: RewardWhereInput
+    orderBy?: RewardOrderByWithRelationInput | RewardOrderByWithRelationInput[]
+    cursor?: RewardWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RewardScalarFieldEnum | RewardScalarFieldEnum[]
+  }
+
+  /**
+   * TreasureHunt.artefacts
+   */
+  export type TreasureHunt$artefactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artefact
+     */
+    select?: ArtefactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artefact
+     */
+    omit?: ArtefactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtefactInclude<ExtArgs> | null
+    where?: ArtefactWhereInput
+    orderBy?: ArtefactOrderByWithRelationInput | ArtefactOrderByWithRelationInput[]
+    cursor?: ArtefactWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ArtefactScalarFieldEnum | ArtefactScalarFieldEnum[]
+  }
+
+  /**
+   * TreasureHunt without action
+   */
+  export type TreasureHuntDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHunt
+     */
+    select?: TreasureHuntSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TreasureHunt
+     */
+    omit?: TreasureHuntOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreasureHuntInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Participation
+   */
+
+  export type AggregateParticipation = {
+    _count: ParticipationCountAggregateOutputType | null
+    _min: ParticipationMinAggregateOutputType | null
+    _max: ParticipationMaxAggregateOutputType | null
+  }
+
+  export type ParticipationMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    huntId: string | null
+    status: $Enums.ParticipationStatus | null
+    joinDate: Date | null
+  }
+
+  export type ParticipationMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    huntId: string | null
+    status: $Enums.ParticipationStatus | null
+    joinDate: Date | null
+  }
+
+  export type ParticipationCountAggregateOutputType = {
+    id: number
+    userId: number
+    huntId: number
+    status: number
+    joinDate: number
+    _all: number
+  }
+
+
+  export type ParticipationMinAggregateInputType = {
+    id?: true
+    userId?: true
+    huntId?: true
+    status?: true
+    joinDate?: true
+  }
+
+  export type ParticipationMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    huntId?: true
+    status?: true
+    joinDate?: true
+  }
+
+  export type ParticipationCountAggregateInputType = {
+    id?: true
+    userId?: true
+    huntId?: true
+    status?: true
+    joinDate?: true
+    _all?: true
+  }
+
+  export type ParticipationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Participation to aggregate.
+     */
+    where?: ParticipationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Participations to fetch.
+     */
+    orderBy?: ParticipationOrderByWithRelationInput | ParticipationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ParticipationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Participations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Participations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Participations
+    **/
+    _count?: true | ParticipationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ParticipationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ParticipationMaxAggregateInputType
+  }
+
+  export type GetParticipationAggregateType<T extends ParticipationAggregateArgs> = {
+        [P in keyof T & keyof AggregateParticipation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateParticipation[P]>
+      : GetScalarType<T[P], AggregateParticipation[P]>
+  }
+
+
+
+
+  export type ParticipationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ParticipationWhereInput
+    orderBy?: ParticipationOrderByWithAggregationInput | ParticipationOrderByWithAggregationInput[]
+    by: ParticipationScalarFieldEnum[] | ParticipationScalarFieldEnum
+    having?: ParticipationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ParticipationCountAggregateInputType | true
+    _min?: ParticipationMinAggregateInputType
+    _max?: ParticipationMaxAggregateInputType
+  }
+
+  export type ParticipationGroupByOutputType = {
+    id: string
+    userId: string
+    huntId: string
+    status: $Enums.ParticipationStatus
+    joinDate: Date
+    _count: ParticipationCountAggregateOutputType | null
+    _min: ParticipationMinAggregateOutputType | null
+    _max: ParticipationMaxAggregateOutputType | null
+  }
+
+  type GetParticipationGroupByPayload<T extends ParticipationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ParticipationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ParticipationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ParticipationGroupByOutputType[P]>
+            : GetScalarType<T[P], ParticipationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ParticipationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    huntId?: boolean
+    status?: boolean
+    joinDate?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["participation"]>
+
+  export type ParticipationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    huntId?: boolean
+    status?: boolean
+    joinDate?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["participation"]>
+
+  export type ParticipationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    huntId?: boolean
+    status?: boolean
+    joinDate?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["participation"]>
+
+  export type ParticipationSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    huntId?: boolean
+    status?: boolean
+    joinDate?: boolean
+  }
+
+  export type ParticipationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "huntId" | "status" | "joinDate", ExtArgs["result"]["participation"]>
+  export type ParticipationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+  export type ParticipationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+  export type ParticipationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+
+  export type $ParticipationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Participation"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      treasureHunt: Prisma.$TreasureHuntPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      huntId: string
+      status: $Enums.ParticipationStatus
+      joinDate: Date
+    }, ExtArgs["result"]["participation"]>
+    composites: {}
+  }
+
+  type ParticipationGetPayload<S extends boolean | null | undefined | ParticipationDefaultArgs> = $Result.GetResult<Prisma.$ParticipationPayload, S>
+
+  type ParticipationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ParticipationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ParticipationCountAggregateInputType | true
+    }
+
+  export interface ParticipationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Participation'], meta: { name: 'Participation' } }
+    /**
+     * Find zero or one Participation that matches the filter.
+     * @param {ParticipationFindUniqueArgs} args - Arguments to find a Participation
+     * @example
+     * // Get one Participation
+     * const participation = await prisma.participation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ParticipationFindUniqueArgs>(args: SelectSubset<T, ParticipationFindUniqueArgs<ExtArgs>>): Prisma__ParticipationClient<$Result.GetResult<Prisma.$ParticipationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Participation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ParticipationFindUniqueOrThrowArgs} args - Arguments to find a Participation
+     * @example
+     * // Get one Participation
+     * const participation = await prisma.participation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ParticipationFindUniqueOrThrowArgs>(args: SelectSubset<T, ParticipationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ParticipationClient<$Result.GetResult<Prisma.$ParticipationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Participation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParticipationFindFirstArgs} args - Arguments to find a Participation
+     * @example
+     * // Get one Participation
+     * const participation = await prisma.participation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ParticipationFindFirstArgs>(args?: SelectSubset<T, ParticipationFindFirstArgs<ExtArgs>>): Prisma__ParticipationClient<$Result.GetResult<Prisma.$ParticipationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Participation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParticipationFindFirstOrThrowArgs} args - Arguments to find a Participation
+     * @example
+     * // Get one Participation
+     * const participation = await prisma.participation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ParticipationFindFirstOrThrowArgs>(args?: SelectSubset<T, ParticipationFindFirstOrThrowArgs<ExtArgs>>): Prisma__ParticipationClient<$Result.GetResult<Prisma.$ParticipationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Participations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParticipationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Participations
+     * const participations = await prisma.participation.findMany()
+     * 
+     * // Get first 10 Participations
+     * const participations = await prisma.participation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const participationWithIdOnly = await prisma.participation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ParticipationFindManyArgs>(args?: SelectSubset<T, ParticipationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParticipationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Participation.
+     * @param {ParticipationCreateArgs} args - Arguments to create a Participation.
+     * @example
+     * // Create one Participation
+     * const Participation = await prisma.participation.create({
+     *   data: {
+     *     // ... data to create a Participation
+     *   }
+     * })
+     * 
+     */
+    create<T extends ParticipationCreateArgs>(args: SelectSubset<T, ParticipationCreateArgs<ExtArgs>>): Prisma__ParticipationClient<$Result.GetResult<Prisma.$ParticipationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Participations.
+     * @param {ParticipationCreateManyArgs} args - Arguments to create many Participations.
+     * @example
+     * // Create many Participations
+     * const participation = await prisma.participation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ParticipationCreateManyArgs>(args?: SelectSubset<T, ParticipationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Participations and returns the data saved in the database.
+     * @param {ParticipationCreateManyAndReturnArgs} args - Arguments to create many Participations.
+     * @example
+     * // Create many Participations
+     * const participation = await prisma.participation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Participations and only return the `id`
+     * const participationWithIdOnly = await prisma.participation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ParticipationCreateManyAndReturnArgs>(args?: SelectSubset<T, ParticipationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParticipationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Participation.
+     * @param {ParticipationDeleteArgs} args - Arguments to delete one Participation.
+     * @example
+     * // Delete one Participation
+     * const Participation = await prisma.participation.delete({
+     *   where: {
+     *     // ... filter to delete one Participation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ParticipationDeleteArgs>(args: SelectSubset<T, ParticipationDeleteArgs<ExtArgs>>): Prisma__ParticipationClient<$Result.GetResult<Prisma.$ParticipationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Participation.
+     * @param {ParticipationUpdateArgs} args - Arguments to update one Participation.
+     * @example
+     * // Update one Participation
+     * const participation = await prisma.participation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ParticipationUpdateArgs>(args: SelectSubset<T, ParticipationUpdateArgs<ExtArgs>>): Prisma__ParticipationClient<$Result.GetResult<Prisma.$ParticipationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Participations.
+     * @param {ParticipationDeleteManyArgs} args - Arguments to filter Participations to delete.
+     * @example
+     * // Delete a few Participations
+     * const { count } = await prisma.participation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ParticipationDeleteManyArgs>(args?: SelectSubset<T, ParticipationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Participations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParticipationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Participations
+     * const participation = await prisma.participation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ParticipationUpdateManyArgs>(args: SelectSubset<T, ParticipationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Participations and returns the data updated in the database.
+     * @param {ParticipationUpdateManyAndReturnArgs} args - Arguments to update many Participations.
+     * @example
+     * // Update many Participations
+     * const participation = await prisma.participation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Participations and only return the `id`
+     * const participationWithIdOnly = await prisma.participation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ParticipationUpdateManyAndReturnArgs>(args: SelectSubset<T, ParticipationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParticipationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Participation.
+     * @param {ParticipationUpsertArgs} args - Arguments to update or create a Participation.
+     * @example
+     * // Update or create a Participation
+     * const participation = await prisma.participation.upsert({
+     *   create: {
+     *     // ... data to create a Participation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Participation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ParticipationUpsertArgs>(args: SelectSubset<T, ParticipationUpsertArgs<ExtArgs>>): Prisma__ParticipationClient<$Result.GetResult<Prisma.$ParticipationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Participations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParticipationCountArgs} args - Arguments to filter Participations to count.
+     * @example
+     * // Count the number of Participations
+     * const count = await prisma.participation.count({
+     *   where: {
+     *     // ... the filter for the Participations we want to count
+     *   }
+     * })
+    **/
+    count<T extends ParticipationCountArgs>(
+      args?: Subset<T, ParticipationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ParticipationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Participation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParticipationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ParticipationAggregateArgs>(args: Subset<T, ParticipationAggregateArgs>): Prisma.PrismaPromise<GetParticipationAggregateType<T>>
+
+    /**
+     * Group by Participation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParticipationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ParticipationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ParticipationGroupByArgs['orderBy'] }
+        : { orderBy?: ParticipationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ParticipationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetParticipationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Participation model
+   */
+  readonly fields: ParticipationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Participation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ParticipationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    treasureHunt<T extends TreasureHuntDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHuntDefaultArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Participation model
+   */
+  interface ParticipationFieldRefs {
+    readonly id: FieldRef<"Participation", 'String'>
+    readonly userId: FieldRef<"Participation", 'String'>
+    readonly huntId: FieldRef<"Participation", 'String'>
+    readonly status: FieldRef<"Participation", 'ParticipationStatus'>
+    readonly joinDate: FieldRef<"Participation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Participation findUnique
+   */
+  export type ParticipationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Participation
+     */
+    select?: ParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Participation
+     */
+    omit?: ParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticipationInclude<ExtArgs> | null
+    /**
+     * Filter, which Participation to fetch.
+     */
+    where: ParticipationWhereUniqueInput
+  }
+
+  /**
+   * Participation findUniqueOrThrow
+   */
+  export type ParticipationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Participation
+     */
+    select?: ParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Participation
+     */
+    omit?: ParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticipationInclude<ExtArgs> | null
+    /**
+     * Filter, which Participation to fetch.
+     */
+    where: ParticipationWhereUniqueInput
+  }
+
+  /**
+   * Participation findFirst
+   */
+  export type ParticipationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Participation
+     */
+    select?: ParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Participation
+     */
+    omit?: ParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticipationInclude<ExtArgs> | null
+    /**
+     * Filter, which Participation to fetch.
+     */
+    where?: ParticipationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Participations to fetch.
+     */
+    orderBy?: ParticipationOrderByWithRelationInput | ParticipationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Participations.
+     */
+    cursor?: ParticipationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Participations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Participations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Participations.
+     */
+    distinct?: ParticipationScalarFieldEnum | ParticipationScalarFieldEnum[]
+  }
+
+  /**
+   * Participation findFirstOrThrow
+   */
+  export type ParticipationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Participation
+     */
+    select?: ParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Participation
+     */
+    omit?: ParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticipationInclude<ExtArgs> | null
+    /**
+     * Filter, which Participation to fetch.
+     */
+    where?: ParticipationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Participations to fetch.
+     */
+    orderBy?: ParticipationOrderByWithRelationInput | ParticipationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Participations.
+     */
+    cursor?: ParticipationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Participations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Participations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Participations.
+     */
+    distinct?: ParticipationScalarFieldEnum | ParticipationScalarFieldEnum[]
+  }
+
+  /**
+   * Participation findMany
+   */
+  export type ParticipationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Participation
+     */
+    select?: ParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Participation
+     */
+    omit?: ParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticipationInclude<ExtArgs> | null
+    /**
+     * Filter, which Participations to fetch.
+     */
+    where?: ParticipationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Participations to fetch.
+     */
+    orderBy?: ParticipationOrderByWithRelationInput | ParticipationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Participations.
+     */
+    cursor?: ParticipationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Participations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Participations.
+     */
+    skip?: number
+    distinct?: ParticipationScalarFieldEnum | ParticipationScalarFieldEnum[]
+  }
+
+  /**
+   * Participation create
+   */
+  export type ParticipationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Participation
+     */
+    select?: ParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Participation
+     */
+    omit?: ParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticipationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Participation.
+     */
+    data: XOR<ParticipationCreateInput, ParticipationUncheckedCreateInput>
+  }
+
+  /**
+   * Participation createMany
+   */
+  export type ParticipationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Participations.
+     */
+    data: ParticipationCreateManyInput | ParticipationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Participation createManyAndReturn
+   */
+  export type ParticipationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Participation
+     */
+    select?: ParticipationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Participation
+     */
+    omit?: ParticipationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Participations.
+     */
+    data: ParticipationCreateManyInput | ParticipationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticipationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Participation update
+   */
+  export type ParticipationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Participation
+     */
+    select?: ParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Participation
+     */
+    omit?: ParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticipationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Participation.
+     */
+    data: XOR<ParticipationUpdateInput, ParticipationUncheckedUpdateInput>
+    /**
+     * Choose, which Participation to update.
+     */
+    where: ParticipationWhereUniqueInput
+  }
+
+  /**
+   * Participation updateMany
+   */
+  export type ParticipationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Participations.
+     */
+    data: XOR<ParticipationUpdateManyMutationInput, ParticipationUncheckedUpdateManyInput>
+    /**
+     * Filter which Participations to update
+     */
+    where?: ParticipationWhereInput
+    /**
+     * Limit how many Participations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Participation updateManyAndReturn
+   */
+  export type ParticipationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Participation
+     */
+    select?: ParticipationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Participation
+     */
+    omit?: ParticipationOmit<ExtArgs> | null
+    /**
+     * The data used to update Participations.
+     */
+    data: XOR<ParticipationUpdateManyMutationInput, ParticipationUncheckedUpdateManyInput>
+    /**
+     * Filter which Participations to update
+     */
+    where?: ParticipationWhereInput
+    /**
+     * Limit how many Participations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticipationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Participation upsert
+   */
+  export type ParticipationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Participation
+     */
+    select?: ParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Participation
+     */
+    omit?: ParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticipationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Participation to update in case it exists.
+     */
+    where: ParticipationWhereUniqueInput
+    /**
+     * In case the Participation found by the `where` argument doesn't exist, create a new Participation with this data.
+     */
+    create: XOR<ParticipationCreateInput, ParticipationUncheckedCreateInput>
+    /**
+     * In case the Participation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ParticipationUpdateInput, ParticipationUncheckedUpdateInput>
+  }
+
+  /**
+   * Participation delete
+   */
+  export type ParticipationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Participation
+     */
+    select?: ParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Participation
+     */
+    omit?: ParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticipationInclude<ExtArgs> | null
+    /**
+     * Filter which Participation to delete.
+     */
+    where: ParticipationWhereUniqueInput
+  }
+
+  /**
+   * Participation deleteMany
+   */
+  export type ParticipationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Participations to delete
+     */
+    where?: ParticipationWhereInput
+    /**
+     * Limit how many Participations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Participation without action
+   */
+  export type ParticipationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Participation
+     */
+    select?: ParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Participation
+     */
+    omit?: ParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticipationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Artefact
+   */
+
+  export type AggregateArtefact = {
+    _count: ArtefactCountAggregateOutputType | null
+    _min: ArtefactMinAggregateOutputType | null
+    _max: ArtefactMaxAggregateOutputType | null
+  }
+
+  export type ArtefactMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    rarity: $Enums.ArtefactRarity | null
+    description: string | null
+    imageUrl: string | null
+    userId: string | null
+    huntId: string | null
+    foundAt: Date | null
+  }
+
+  export type ArtefactMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    rarity: $Enums.ArtefactRarity | null
+    description: string | null
+    imageUrl: string | null
+    userId: string | null
+    huntId: string | null
+    foundAt: Date | null
+  }
+
+  export type ArtefactCountAggregateOutputType = {
+    id: number
+    name: number
+    rarity: number
+    description: number
+    imageUrl: number
+    userId: number
+    huntId: number
+    foundAt: number
+    _all: number
+  }
+
+
+  export type ArtefactMinAggregateInputType = {
+    id?: true
+    name?: true
+    rarity?: true
+    description?: true
+    imageUrl?: true
+    userId?: true
+    huntId?: true
+    foundAt?: true
+  }
+
+  export type ArtefactMaxAggregateInputType = {
+    id?: true
+    name?: true
+    rarity?: true
+    description?: true
+    imageUrl?: true
+    userId?: true
+    huntId?: true
+    foundAt?: true
+  }
+
+  export type ArtefactCountAggregateInputType = {
+    id?: true
+    name?: true
+    rarity?: true
+    description?: true
+    imageUrl?: true
+    userId?: true
+    huntId?: true
+    foundAt?: true
+    _all?: true
+  }
+
+  export type ArtefactAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Artefact to aggregate.
+     */
+    where?: ArtefactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Artefacts to fetch.
+     */
+    orderBy?: ArtefactOrderByWithRelationInput | ArtefactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ArtefactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Artefacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Artefacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Artefacts
+    **/
+    _count?: true | ArtefactCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ArtefactMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ArtefactMaxAggregateInputType
+  }
+
+  export type GetArtefactAggregateType<T extends ArtefactAggregateArgs> = {
+        [P in keyof T & keyof AggregateArtefact]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateArtefact[P]>
+      : GetScalarType<T[P], AggregateArtefact[P]>
+  }
+
+
+
+
+  export type ArtefactGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ArtefactWhereInput
+    orderBy?: ArtefactOrderByWithAggregationInput | ArtefactOrderByWithAggregationInput[]
+    by: ArtefactScalarFieldEnum[] | ArtefactScalarFieldEnum
+    having?: ArtefactScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ArtefactCountAggregateInputType | true
+    _min?: ArtefactMinAggregateInputType
+    _max?: ArtefactMaxAggregateInputType
+  }
+
+  export type ArtefactGroupByOutputType = {
+    id: string
+    name: string
+    rarity: $Enums.ArtefactRarity
+    description: string | null
+    imageUrl: string | null
+    userId: string
+    huntId: string | null
+    foundAt: Date
+    _count: ArtefactCountAggregateOutputType | null
+    _min: ArtefactMinAggregateOutputType | null
+    _max: ArtefactMaxAggregateOutputType | null
+  }
+
+  type GetArtefactGroupByPayload<T extends ArtefactGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ArtefactGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ArtefactGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ArtefactGroupByOutputType[P]>
+            : GetScalarType<T[P], ArtefactGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ArtefactSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    rarity?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    userId?: boolean
+    huntId?: boolean
+    foundAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    hunt?: boolean | Artefact$huntArgs<ExtArgs>
+  }, ExtArgs["result"]["artefact"]>
+
+  export type ArtefactSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    rarity?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    userId?: boolean
+    huntId?: boolean
+    foundAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    hunt?: boolean | Artefact$huntArgs<ExtArgs>
+  }, ExtArgs["result"]["artefact"]>
+
+  export type ArtefactSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    rarity?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    userId?: boolean
+    huntId?: boolean
+    foundAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    hunt?: boolean | Artefact$huntArgs<ExtArgs>
+  }, ExtArgs["result"]["artefact"]>
+
+  export type ArtefactSelectScalar = {
+    id?: boolean
+    name?: boolean
+    rarity?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    userId?: boolean
+    huntId?: boolean
+    foundAt?: boolean
+  }
+
+  export type ArtefactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rarity" | "description" | "imageUrl" | "userId" | "huntId" | "foundAt", ExtArgs["result"]["artefact"]>
+  export type ArtefactInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    hunt?: boolean | Artefact$huntArgs<ExtArgs>
+  }
+  export type ArtefactIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    hunt?: boolean | Artefact$huntArgs<ExtArgs>
+  }
+  export type ArtefactIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    hunt?: boolean | Artefact$huntArgs<ExtArgs>
+  }
+
+  export type $ArtefactPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Artefact"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      hunt: Prisma.$TreasureHuntPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      rarity: $Enums.ArtefactRarity
+      description: string | null
+      imageUrl: string | null
+      userId: string
+      huntId: string | null
+      foundAt: Date
+    }, ExtArgs["result"]["artefact"]>
+    composites: {}
+  }
+
+  type ArtefactGetPayload<S extends boolean | null | undefined | ArtefactDefaultArgs> = $Result.GetResult<Prisma.$ArtefactPayload, S>
+
+  type ArtefactCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ArtefactFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ArtefactCountAggregateInputType | true
+    }
+
+  export interface ArtefactDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Artefact'], meta: { name: 'Artefact' } }
+    /**
+     * Find zero or one Artefact that matches the filter.
+     * @param {ArtefactFindUniqueArgs} args - Arguments to find a Artefact
+     * @example
+     * // Get one Artefact
+     * const artefact = await prisma.artefact.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ArtefactFindUniqueArgs>(args: SelectSubset<T, ArtefactFindUniqueArgs<ExtArgs>>): Prisma__ArtefactClient<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Artefact that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ArtefactFindUniqueOrThrowArgs} args - Arguments to find a Artefact
+     * @example
+     * // Get one Artefact
+     * const artefact = await prisma.artefact.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ArtefactFindUniqueOrThrowArgs>(args: SelectSubset<T, ArtefactFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ArtefactClient<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Artefact that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ArtefactFindFirstArgs} args - Arguments to find a Artefact
+     * @example
+     * // Get one Artefact
+     * const artefact = await prisma.artefact.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ArtefactFindFirstArgs>(args?: SelectSubset<T, ArtefactFindFirstArgs<ExtArgs>>): Prisma__ArtefactClient<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Artefact that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ArtefactFindFirstOrThrowArgs} args - Arguments to find a Artefact
+     * @example
+     * // Get one Artefact
+     * const artefact = await prisma.artefact.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ArtefactFindFirstOrThrowArgs>(args?: SelectSubset<T, ArtefactFindFirstOrThrowArgs<ExtArgs>>): Prisma__ArtefactClient<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Artefacts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ArtefactFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Artefacts
+     * const artefacts = await prisma.artefact.findMany()
+     * 
+     * // Get first 10 Artefacts
+     * const artefacts = await prisma.artefact.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const artefactWithIdOnly = await prisma.artefact.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ArtefactFindManyArgs>(args?: SelectSubset<T, ArtefactFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Artefact.
+     * @param {ArtefactCreateArgs} args - Arguments to create a Artefact.
+     * @example
+     * // Create one Artefact
+     * const Artefact = await prisma.artefact.create({
+     *   data: {
+     *     // ... data to create a Artefact
+     *   }
+     * })
+     * 
+     */
+    create<T extends ArtefactCreateArgs>(args: SelectSubset<T, ArtefactCreateArgs<ExtArgs>>): Prisma__ArtefactClient<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Artefacts.
+     * @param {ArtefactCreateManyArgs} args - Arguments to create many Artefacts.
+     * @example
+     * // Create many Artefacts
+     * const artefact = await prisma.artefact.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ArtefactCreateManyArgs>(args?: SelectSubset<T, ArtefactCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Artefacts and returns the data saved in the database.
+     * @param {ArtefactCreateManyAndReturnArgs} args - Arguments to create many Artefacts.
+     * @example
+     * // Create many Artefacts
+     * const artefact = await prisma.artefact.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Artefacts and only return the `id`
+     * const artefactWithIdOnly = await prisma.artefact.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ArtefactCreateManyAndReturnArgs>(args?: SelectSubset<T, ArtefactCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Artefact.
+     * @param {ArtefactDeleteArgs} args - Arguments to delete one Artefact.
+     * @example
+     * // Delete one Artefact
+     * const Artefact = await prisma.artefact.delete({
+     *   where: {
+     *     // ... filter to delete one Artefact
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ArtefactDeleteArgs>(args: SelectSubset<T, ArtefactDeleteArgs<ExtArgs>>): Prisma__ArtefactClient<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Artefact.
+     * @param {ArtefactUpdateArgs} args - Arguments to update one Artefact.
+     * @example
+     * // Update one Artefact
+     * const artefact = await prisma.artefact.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ArtefactUpdateArgs>(args: SelectSubset<T, ArtefactUpdateArgs<ExtArgs>>): Prisma__ArtefactClient<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Artefacts.
+     * @param {ArtefactDeleteManyArgs} args - Arguments to filter Artefacts to delete.
+     * @example
+     * // Delete a few Artefacts
+     * const { count } = await prisma.artefact.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ArtefactDeleteManyArgs>(args?: SelectSubset<T, ArtefactDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Artefacts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ArtefactUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Artefacts
+     * const artefact = await prisma.artefact.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ArtefactUpdateManyArgs>(args: SelectSubset<T, ArtefactUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Artefacts and returns the data updated in the database.
+     * @param {ArtefactUpdateManyAndReturnArgs} args - Arguments to update many Artefacts.
+     * @example
+     * // Update many Artefacts
+     * const artefact = await prisma.artefact.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Artefacts and only return the `id`
+     * const artefactWithIdOnly = await prisma.artefact.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ArtefactUpdateManyAndReturnArgs>(args: SelectSubset<T, ArtefactUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Artefact.
+     * @param {ArtefactUpsertArgs} args - Arguments to update or create a Artefact.
+     * @example
+     * // Update or create a Artefact
+     * const artefact = await prisma.artefact.upsert({
+     *   create: {
+     *     // ... data to create a Artefact
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Artefact we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ArtefactUpsertArgs>(args: SelectSubset<T, ArtefactUpsertArgs<ExtArgs>>): Prisma__ArtefactClient<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Artefacts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ArtefactCountArgs} args - Arguments to filter Artefacts to count.
+     * @example
+     * // Count the number of Artefacts
+     * const count = await prisma.artefact.count({
+     *   where: {
+     *     // ... the filter for the Artefacts we want to count
+     *   }
+     * })
+    **/
+    count<T extends ArtefactCountArgs>(
+      args?: Subset<T, ArtefactCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ArtefactCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Artefact.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ArtefactAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ArtefactAggregateArgs>(args: Subset<T, ArtefactAggregateArgs>): Prisma.PrismaPromise<GetArtefactAggregateType<T>>
+
+    /**
+     * Group by Artefact.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ArtefactGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ArtefactGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ArtefactGroupByArgs['orderBy'] }
+        : { orderBy?: ArtefactGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ArtefactGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetArtefactGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Artefact model
+   */
+  readonly fields: ArtefactFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Artefact.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ArtefactClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    hunt<T extends Artefact$huntArgs<ExtArgs> = {}>(args?: Subset<T, Artefact$huntArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Artefact model
+   */
+  interface ArtefactFieldRefs {
+    readonly id: FieldRef<"Artefact", 'String'>
+    readonly name: FieldRef<"Artefact", 'String'>
+    readonly rarity: FieldRef<"Artefact", 'ArtefactRarity'>
+    readonly description: FieldRef<"Artefact", 'String'>
+    readonly imageUrl: FieldRef<"Artefact", 'String'>
+    readonly userId: FieldRef<"Artefact", 'String'>
+    readonly huntId: FieldRef<"Artefact", 'String'>
+    readonly foundAt: FieldRef<"Artefact", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Artefact findUnique
+   */
+  export type ArtefactFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artefact
+     */
+    select?: ArtefactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artefact
+     */
+    omit?: ArtefactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtefactInclude<ExtArgs> | null
+    /**
+     * Filter, which Artefact to fetch.
+     */
+    where: ArtefactWhereUniqueInput
+  }
+
+  /**
+   * Artefact findUniqueOrThrow
+   */
+  export type ArtefactFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artefact
+     */
+    select?: ArtefactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artefact
+     */
+    omit?: ArtefactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtefactInclude<ExtArgs> | null
+    /**
+     * Filter, which Artefact to fetch.
+     */
+    where: ArtefactWhereUniqueInput
+  }
+
+  /**
+   * Artefact findFirst
+   */
+  export type ArtefactFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artefact
+     */
+    select?: ArtefactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artefact
+     */
+    omit?: ArtefactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtefactInclude<ExtArgs> | null
+    /**
+     * Filter, which Artefact to fetch.
+     */
+    where?: ArtefactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Artefacts to fetch.
+     */
+    orderBy?: ArtefactOrderByWithRelationInput | ArtefactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Artefacts.
+     */
+    cursor?: ArtefactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Artefacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Artefacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Artefacts.
+     */
+    distinct?: ArtefactScalarFieldEnum | ArtefactScalarFieldEnum[]
+  }
+
+  /**
+   * Artefact findFirstOrThrow
+   */
+  export type ArtefactFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artefact
+     */
+    select?: ArtefactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artefact
+     */
+    omit?: ArtefactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtefactInclude<ExtArgs> | null
+    /**
+     * Filter, which Artefact to fetch.
+     */
+    where?: ArtefactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Artefacts to fetch.
+     */
+    orderBy?: ArtefactOrderByWithRelationInput | ArtefactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Artefacts.
+     */
+    cursor?: ArtefactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Artefacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Artefacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Artefacts.
+     */
+    distinct?: ArtefactScalarFieldEnum | ArtefactScalarFieldEnum[]
+  }
+
+  /**
+   * Artefact findMany
+   */
+  export type ArtefactFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artefact
+     */
+    select?: ArtefactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artefact
+     */
+    omit?: ArtefactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtefactInclude<ExtArgs> | null
+    /**
+     * Filter, which Artefacts to fetch.
+     */
+    where?: ArtefactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Artefacts to fetch.
+     */
+    orderBy?: ArtefactOrderByWithRelationInput | ArtefactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Artefacts.
+     */
+    cursor?: ArtefactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Artefacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Artefacts.
+     */
+    skip?: number
+    distinct?: ArtefactScalarFieldEnum | ArtefactScalarFieldEnum[]
+  }
+
+  /**
+   * Artefact create
+   */
+  export type ArtefactCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artefact
+     */
+    select?: ArtefactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artefact
+     */
+    omit?: ArtefactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtefactInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Artefact.
+     */
+    data: XOR<ArtefactCreateInput, ArtefactUncheckedCreateInput>
+  }
+
+  /**
+   * Artefact createMany
+   */
+  export type ArtefactCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Artefacts.
+     */
+    data: ArtefactCreateManyInput | ArtefactCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Artefact createManyAndReturn
+   */
+  export type ArtefactCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artefact
+     */
+    select?: ArtefactSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artefact
+     */
+    omit?: ArtefactOmit<ExtArgs> | null
+    /**
+     * The data used to create many Artefacts.
+     */
+    data: ArtefactCreateManyInput | ArtefactCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtefactIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Artefact update
+   */
+  export type ArtefactUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artefact
+     */
+    select?: ArtefactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artefact
+     */
+    omit?: ArtefactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtefactInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Artefact.
+     */
+    data: XOR<ArtefactUpdateInput, ArtefactUncheckedUpdateInput>
+    /**
+     * Choose, which Artefact to update.
+     */
+    where: ArtefactWhereUniqueInput
+  }
+
+  /**
+   * Artefact updateMany
+   */
+  export type ArtefactUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Artefacts.
+     */
+    data: XOR<ArtefactUpdateManyMutationInput, ArtefactUncheckedUpdateManyInput>
+    /**
+     * Filter which Artefacts to update
+     */
+    where?: ArtefactWhereInput
+    /**
+     * Limit how many Artefacts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Artefact updateManyAndReturn
+   */
+  export type ArtefactUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artefact
+     */
+    select?: ArtefactSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artefact
+     */
+    omit?: ArtefactOmit<ExtArgs> | null
+    /**
+     * The data used to update Artefacts.
+     */
+    data: XOR<ArtefactUpdateManyMutationInput, ArtefactUncheckedUpdateManyInput>
+    /**
+     * Filter which Artefacts to update
+     */
+    where?: ArtefactWhereInput
+    /**
+     * Limit how many Artefacts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtefactIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Artefact upsert
+   */
+  export type ArtefactUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artefact
+     */
+    select?: ArtefactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artefact
+     */
+    omit?: ArtefactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtefactInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Artefact to update in case it exists.
+     */
+    where: ArtefactWhereUniqueInput
+    /**
+     * In case the Artefact found by the `where` argument doesn't exist, create a new Artefact with this data.
+     */
+    create: XOR<ArtefactCreateInput, ArtefactUncheckedCreateInput>
+    /**
+     * In case the Artefact was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ArtefactUpdateInput, ArtefactUncheckedUpdateInput>
+  }
+
+  /**
+   * Artefact delete
+   */
+  export type ArtefactDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artefact
+     */
+    select?: ArtefactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artefact
+     */
+    omit?: ArtefactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtefactInclude<ExtArgs> | null
+    /**
+     * Filter which Artefact to delete.
+     */
+    where: ArtefactWhereUniqueInput
+  }
+
+  /**
+   * Artefact deleteMany
+   */
+  export type ArtefactDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Artefacts to delete
+     */
+    where?: ArtefactWhereInput
+    /**
+     * Limit how many Artefacts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Artefact.hunt
+   */
+  export type Artefact$huntArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TreasureHunt
+     */
+    select?: TreasureHuntSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TreasureHunt
+     */
+    omit?: TreasureHuntOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreasureHuntInclude<ExtArgs> | null
+    where?: TreasureHuntWhereInput
+  }
+
+  /**
+   * Artefact without action
+   */
+  export type ArtefactDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artefact
+     */
+    select?: ArtefactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artefact
+     */
+    omit?: ArtefactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtefactInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model HuntStep
+   */
+
+  export type AggregateHuntStep = {
+    _count: HuntStepCountAggregateOutputType | null
+    _avg: HuntStepAvgAggregateOutputType | null
+    _sum: HuntStepSumAggregateOutputType | null
+    _min: HuntStepMinAggregateOutputType | null
+    _max: HuntStepMaxAggregateOutputType | null
+  }
+
+  export type HuntStepAvgAggregateOutputType = {
+    stepOrder: number | null
+  }
+
+  export type HuntStepSumAggregateOutputType = {
+    stepOrder: number | null
+  }
+
+  export type HuntStepMinAggregateOutputType = {
+    id: string | null
+    description: string | null
+    huntId: string | null
+    stepOrder: number | null
+    createdAt: Date | null
+  }
+
+  export type HuntStepMaxAggregateOutputType = {
+    id: string | null
+    description: string | null
+    huntId: string | null
+    stepOrder: number | null
+    createdAt: Date | null
+  }
+
+  export type HuntStepCountAggregateOutputType = {
+    id: number
+    description: number
+    huntId: number
+    stepOrder: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type HuntStepAvgAggregateInputType = {
+    stepOrder?: true
+  }
+
+  export type HuntStepSumAggregateInputType = {
+    stepOrder?: true
+  }
+
+  export type HuntStepMinAggregateInputType = {
+    id?: true
+    description?: true
+    huntId?: true
+    stepOrder?: true
+    createdAt?: true
+  }
+
+  export type HuntStepMaxAggregateInputType = {
+    id?: true
+    description?: true
+    huntId?: true
+    stepOrder?: true
+    createdAt?: true
+  }
+
+  export type HuntStepCountAggregateInputType = {
+    id?: true
+    description?: true
+    huntId?: true
+    stepOrder?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type HuntStepAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HuntStep to aggregate.
+     */
+    where?: HuntStepWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HuntSteps to fetch.
+     */
+    orderBy?: HuntStepOrderByWithRelationInput | HuntStepOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: HuntStepWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HuntSteps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HuntSteps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned HuntSteps
+    **/
+    _count?: true | HuntStepCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: HuntStepAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: HuntStepSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HuntStepMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HuntStepMaxAggregateInputType
+  }
+
+  export type GetHuntStepAggregateType<T extends HuntStepAggregateArgs> = {
+        [P in keyof T & keyof AggregateHuntStep]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHuntStep[P]>
+      : GetScalarType<T[P], AggregateHuntStep[P]>
+  }
+
+
+
+
+  export type HuntStepGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HuntStepWhereInput
+    orderBy?: HuntStepOrderByWithAggregationInput | HuntStepOrderByWithAggregationInput[]
+    by: HuntStepScalarFieldEnum[] | HuntStepScalarFieldEnum
+    having?: HuntStepScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HuntStepCountAggregateInputType | true
+    _avg?: HuntStepAvgAggregateInputType
+    _sum?: HuntStepSumAggregateInputType
+    _min?: HuntStepMinAggregateInputType
+    _max?: HuntStepMaxAggregateInputType
+  }
+
+  export type HuntStepGroupByOutputType = {
+    id: string
+    description: string
+    huntId: string
+    stepOrder: number
+    createdAt: Date
+    _count: HuntStepCountAggregateOutputType | null
+    _avg: HuntStepAvgAggregateOutputType | null
+    _sum: HuntStepSumAggregateOutputType | null
+    _min: HuntStepMinAggregateOutputType | null
+    _max: HuntStepMaxAggregateOutputType | null
+  }
+
+  type GetHuntStepGroupByPayload<T extends HuntStepGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HuntStepGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HuntStepGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HuntStepGroupByOutputType[P]>
+            : GetScalarType<T[P], HuntStepGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type HuntStepSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    description?: boolean
+    huntId?: boolean
+    stepOrder?: boolean
+    createdAt?: boolean
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["huntStep"]>
+
+  export type HuntStepSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    description?: boolean
+    huntId?: boolean
+    stepOrder?: boolean
+    createdAt?: boolean
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["huntStep"]>
+
+  export type HuntStepSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    description?: boolean
+    huntId?: boolean
+    stepOrder?: boolean
+    createdAt?: boolean
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["huntStep"]>
+
+  export type HuntStepSelectScalar = {
+    id?: boolean
+    description?: boolean
+    huntId?: boolean
+    stepOrder?: boolean
+    createdAt?: boolean
+  }
+
+  export type HuntStepOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "description" | "huntId" | "stepOrder" | "createdAt", ExtArgs["result"]["huntStep"]>
+  export type HuntStepInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+  export type HuntStepIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+  export type HuntStepIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+
+  export type $HuntStepPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "HuntStep"
+    objects: {
+      treasureHunt: Prisma.$TreasureHuntPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      description: string
+      huntId: string
+      stepOrder: number
+      createdAt: Date
+    }, ExtArgs["result"]["huntStep"]>
+    composites: {}
+  }
+
+  type HuntStepGetPayload<S extends boolean | null | undefined | HuntStepDefaultArgs> = $Result.GetResult<Prisma.$HuntStepPayload, S>
+
+  type HuntStepCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<HuntStepFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: HuntStepCountAggregateInputType | true
+    }
+
+  export interface HuntStepDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['HuntStep'], meta: { name: 'HuntStep' } }
+    /**
+     * Find zero or one HuntStep that matches the filter.
+     * @param {HuntStepFindUniqueArgs} args - Arguments to find a HuntStep
+     * @example
+     * // Get one HuntStep
+     * const huntStep = await prisma.huntStep.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends HuntStepFindUniqueArgs>(args: SelectSubset<T, HuntStepFindUniqueArgs<ExtArgs>>): Prisma__HuntStepClient<$Result.GetResult<Prisma.$HuntStepPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one HuntStep that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {HuntStepFindUniqueOrThrowArgs} args - Arguments to find a HuntStep
+     * @example
+     * // Get one HuntStep
+     * const huntStep = await prisma.huntStep.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends HuntStepFindUniqueOrThrowArgs>(args: SelectSubset<T, HuntStepFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HuntStepClient<$Result.GetResult<Prisma.$HuntStepPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HuntStep that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HuntStepFindFirstArgs} args - Arguments to find a HuntStep
+     * @example
+     * // Get one HuntStep
+     * const huntStep = await prisma.huntStep.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends HuntStepFindFirstArgs>(args?: SelectSubset<T, HuntStepFindFirstArgs<ExtArgs>>): Prisma__HuntStepClient<$Result.GetResult<Prisma.$HuntStepPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HuntStep that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HuntStepFindFirstOrThrowArgs} args - Arguments to find a HuntStep
+     * @example
+     * // Get one HuntStep
+     * const huntStep = await prisma.huntStep.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends HuntStepFindFirstOrThrowArgs>(args?: SelectSubset<T, HuntStepFindFirstOrThrowArgs<ExtArgs>>): Prisma__HuntStepClient<$Result.GetResult<Prisma.$HuntStepPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more HuntSteps that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HuntStepFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all HuntSteps
+     * const huntSteps = await prisma.huntStep.findMany()
+     * 
+     * // Get first 10 HuntSteps
+     * const huntSteps = await prisma.huntStep.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const huntStepWithIdOnly = await prisma.huntStep.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends HuntStepFindManyArgs>(args?: SelectSubset<T, HuntStepFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HuntStepPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a HuntStep.
+     * @param {HuntStepCreateArgs} args - Arguments to create a HuntStep.
+     * @example
+     * // Create one HuntStep
+     * const HuntStep = await prisma.huntStep.create({
+     *   data: {
+     *     // ... data to create a HuntStep
+     *   }
+     * })
+     * 
+     */
+    create<T extends HuntStepCreateArgs>(args: SelectSubset<T, HuntStepCreateArgs<ExtArgs>>): Prisma__HuntStepClient<$Result.GetResult<Prisma.$HuntStepPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many HuntSteps.
+     * @param {HuntStepCreateManyArgs} args - Arguments to create many HuntSteps.
+     * @example
+     * // Create many HuntSteps
+     * const huntStep = await prisma.huntStep.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends HuntStepCreateManyArgs>(args?: SelectSubset<T, HuntStepCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many HuntSteps and returns the data saved in the database.
+     * @param {HuntStepCreateManyAndReturnArgs} args - Arguments to create many HuntSteps.
+     * @example
+     * // Create many HuntSteps
+     * const huntStep = await prisma.huntStep.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many HuntSteps and only return the `id`
+     * const huntStepWithIdOnly = await prisma.huntStep.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends HuntStepCreateManyAndReturnArgs>(args?: SelectSubset<T, HuntStepCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HuntStepPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a HuntStep.
+     * @param {HuntStepDeleteArgs} args - Arguments to delete one HuntStep.
+     * @example
+     * // Delete one HuntStep
+     * const HuntStep = await prisma.huntStep.delete({
+     *   where: {
+     *     // ... filter to delete one HuntStep
+     *   }
+     * })
+     * 
+     */
+    delete<T extends HuntStepDeleteArgs>(args: SelectSubset<T, HuntStepDeleteArgs<ExtArgs>>): Prisma__HuntStepClient<$Result.GetResult<Prisma.$HuntStepPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one HuntStep.
+     * @param {HuntStepUpdateArgs} args - Arguments to update one HuntStep.
+     * @example
+     * // Update one HuntStep
+     * const huntStep = await prisma.huntStep.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends HuntStepUpdateArgs>(args: SelectSubset<T, HuntStepUpdateArgs<ExtArgs>>): Prisma__HuntStepClient<$Result.GetResult<Prisma.$HuntStepPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more HuntSteps.
+     * @param {HuntStepDeleteManyArgs} args - Arguments to filter HuntSteps to delete.
+     * @example
+     * // Delete a few HuntSteps
+     * const { count } = await prisma.huntStep.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends HuntStepDeleteManyArgs>(args?: SelectSubset<T, HuntStepDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HuntSteps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HuntStepUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many HuntSteps
+     * const huntStep = await prisma.huntStep.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends HuntStepUpdateManyArgs>(args: SelectSubset<T, HuntStepUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HuntSteps and returns the data updated in the database.
+     * @param {HuntStepUpdateManyAndReturnArgs} args - Arguments to update many HuntSteps.
+     * @example
+     * // Update many HuntSteps
+     * const huntStep = await prisma.huntStep.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more HuntSteps and only return the `id`
+     * const huntStepWithIdOnly = await prisma.huntStep.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends HuntStepUpdateManyAndReturnArgs>(args: SelectSubset<T, HuntStepUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HuntStepPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one HuntStep.
+     * @param {HuntStepUpsertArgs} args - Arguments to update or create a HuntStep.
+     * @example
+     * // Update or create a HuntStep
+     * const huntStep = await prisma.huntStep.upsert({
+     *   create: {
+     *     // ... data to create a HuntStep
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the HuntStep we want to update
+     *   }
+     * })
+     */
+    upsert<T extends HuntStepUpsertArgs>(args: SelectSubset<T, HuntStepUpsertArgs<ExtArgs>>): Prisma__HuntStepClient<$Result.GetResult<Prisma.$HuntStepPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of HuntSteps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HuntStepCountArgs} args - Arguments to filter HuntSteps to count.
+     * @example
+     * // Count the number of HuntSteps
+     * const count = await prisma.huntStep.count({
+     *   where: {
+     *     // ... the filter for the HuntSteps we want to count
+     *   }
+     * })
+    **/
+    count<T extends HuntStepCountArgs>(
+      args?: Subset<T, HuntStepCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HuntStepCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a HuntStep.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HuntStepAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HuntStepAggregateArgs>(args: Subset<T, HuntStepAggregateArgs>): Prisma.PrismaPromise<GetHuntStepAggregateType<T>>
+
+    /**
+     * Group by HuntStep.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HuntStepGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends HuntStepGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: HuntStepGroupByArgs['orderBy'] }
+        : { orderBy?: HuntStepGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, HuntStepGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHuntStepGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the HuntStep model
+   */
+  readonly fields: HuntStepFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for HuntStep.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__HuntStepClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    treasureHunt<T extends TreasureHuntDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHuntDefaultArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the HuntStep model
+   */
+  interface HuntStepFieldRefs {
+    readonly id: FieldRef<"HuntStep", 'String'>
+    readonly description: FieldRef<"HuntStep", 'String'>
+    readonly huntId: FieldRef<"HuntStep", 'String'>
+    readonly stepOrder: FieldRef<"HuntStep", 'Int'>
+    readonly createdAt: FieldRef<"HuntStep", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * HuntStep findUnique
+   */
+  export type HuntStepFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HuntStep
+     */
+    select?: HuntStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HuntStep
+     */
+    omit?: HuntStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HuntStepInclude<ExtArgs> | null
+    /**
+     * Filter, which HuntStep to fetch.
+     */
+    where: HuntStepWhereUniqueInput
+  }
+
+  /**
+   * HuntStep findUniqueOrThrow
+   */
+  export type HuntStepFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HuntStep
+     */
+    select?: HuntStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HuntStep
+     */
+    omit?: HuntStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HuntStepInclude<ExtArgs> | null
+    /**
+     * Filter, which HuntStep to fetch.
+     */
+    where: HuntStepWhereUniqueInput
+  }
+
+  /**
+   * HuntStep findFirst
+   */
+  export type HuntStepFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HuntStep
+     */
+    select?: HuntStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HuntStep
+     */
+    omit?: HuntStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HuntStepInclude<ExtArgs> | null
+    /**
+     * Filter, which HuntStep to fetch.
+     */
+    where?: HuntStepWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HuntSteps to fetch.
+     */
+    orderBy?: HuntStepOrderByWithRelationInput | HuntStepOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HuntSteps.
+     */
+    cursor?: HuntStepWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HuntSteps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HuntSteps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HuntSteps.
+     */
+    distinct?: HuntStepScalarFieldEnum | HuntStepScalarFieldEnum[]
+  }
+
+  /**
+   * HuntStep findFirstOrThrow
+   */
+  export type HuntStepFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HuntStep
+     */
+    select?: HuntStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HuntStep
+     */
+    omit?: HuntStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HuntStepInclude<ExtArgs> | null
+    /**
+     * Filter, which HuntStep to fetch.
+     */
+    where?: HuntStepWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HuntSteps to fetch.
+     */
+    orderBy?: HuntStepOrderByWithRelationInput | HuntStepOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HuntSteps.
+     */
+    cursor?: HuntStepWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HuntSteps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HuntSteps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HuntSteps.
+     */
+    distinct?: HuntStepScalarFieldEnum | HuntStepScalarFieldEnum[]
+  }
+
+  /**
+   * HuntStep findMany
+   */
+  export type HuntStepFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HuntStep
+     */
+    select?: HuntStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HuntStep
+     */
+    omit?: HuntStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HuntStepInclude<ExtArgs> | null
+    /**
+     * Filter, which HuntSteps to fetch.
+     */
+    where?: HuntStepWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HuntSteps to fetch.
+     */
+    orderBy?: HuntStepOrderByWithRelationInput | HuntStepOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing HuntSteps.
+     */
+    cursor?: HuntStepWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HuntSteps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HuntSteps.
+     */
+    skip?: number
+    distinct?: HuntStepScalarFieldEnum | HuntStepScalarFieldEnum[]
+  }
+
+  /**
+   * HuntStep create
+   */
+  export type HuntStepCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HuntStep
+     */
+    select?: HuntStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HuntStep
+     */
+    omit?: HuntStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HuntStepInclude<ExtArgs> | null
+    /**
+     * The data needed to create a HuntStep.
+     */
+    data: XOR<HuntStepCreateInput, HuntStepUncheckedCreateInput>
+  }
+
+  /**
+   * HuntStep createMany
+   */
+  export type HuntStepCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many HuntSteps.
+     */
+    data: HuntStepCreateManyInput | HuntStepCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * HuntStep createManyAndReturn
+   */
+  export type HuntStepCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HuntStep
+     */
+    select?: HuntStepSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HuntStep
+     */
+    omit?: HuntStepOmit<ExtArgs> | null
+    /**
+     * The data used to create many HuntSteps.
+     */
+    data: HuntStepCreateManyInput | HuntStepCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HuntStepIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HuntStep update
+   */
+  export type HuntStepUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HuntStep
+     */
+    select?: HuntStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HuntStep
+     */
+    omit?: HuntStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HuntStepInclude<ExtArgs> | null
+    /**
+     * The data needed to update a HuntStep.
+     */
+    data: XOR<HuntStepUpdateInput, HuntStepUncheckedUpdateInput>
+    /**
+     * Choose, which HuntStep to update.
+     */
+    where: HuntStepWhereUniqueInput
+  }
+
+  /**
+   * HuntStep updateMany
+   */
+  export type HuntStepUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update HuntSteps.
+     */
+    data: XOR<HuntStepUpdateManyMutationInput, HuntStepUncheckedUpdateManyInput>
+    /**
+     * Filter which HuntSteps to update
+     */
+    where?: HuntStepWhereInput
+    /**
+     * Limit how many HuntSteps to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * HuntStep updateManyAndReturn
+   */
+  export type HuntStepUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HuntStep
+     */
+    select?: HuntStepSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HuntStep
+     */
+    omit?: HuntStepOmit<ExtArgs> | null
+    /**
+     * The data used to update HuntSteps.
+     */
+    data: XOR<HuntStepUpdateManyMutationInput, HuntStepUncheckedUpdateManyInput>
+    /**
+     * Filter which HuntSteps to update
+     */
+    where?: HuntStepWhereInput
+    /**
+     * Limit how many HuntSteps to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HuntStepIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HuntStep upsert
+   */
+  export type HuntStepUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HuntStep
+     */
+    select?: HuntStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HuntStep
+     */
+    omit?: HuntStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HuntStepInclude<ExtArgs> | null
+    /**
+     * The filter to search for the HuntStep to update in case it exists.
+     */
+    where: HuntStepWhereUniqueInput
+    /**
+     * In case the HuntStep found by the `where` argument doesn't exist, create a new HuntStep with this data.
+     */
+    create: XOR<HuntStepCreateInput, HuntStepUncheckedCreateInput>
+    /**
+     * In case the HuntStep was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<HuntStepUpdateInput, HuntStepUncheckedUpdateInput>
+  }
+
+  /**
+   * HuntStep delete
+   */
+  export type HuntStepDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HuntStep
+     */
+    select?: HuntStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HuntStep
+     */
+    omit?: HuntStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HuntStepInclude<ExtArgs> | null
+    /**
+     * Filter which HuntStep to delete.
+     */
+    where: HuntStepWhereUniqueInput
+  }
+
+  /**
+   * HuntStep deleteMany
+   */
+  export type HuntStepDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HuntSteps to delete
+     */
+    where?: HuntStepWhereInput
+    /**
+     * Limit how many HuntSteps to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * HuntStep without action
+   */
+  export type HuntStepDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HuntStep
+     */
+    select?: HuntStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HuntStep
+     */
+    omit?: HuntStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HuntStepInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Reward
+   */
+
+  export type AggregateReward = {
+    _count: RewardCountAggregateOutputType | null
+    _avg: RewardAvgAggregateOutputType | null
+    _sum: RewardSumAggregateOutputType | null
+    _min: RewardMinAggregateOutputType | null
+    _max: RewardMaxAggregateOutputType | null
+  }
+
+  export type RewardAvgAggregateOutputType = {
+    value: number | null
+  }
+
+  export type RewardSumAggregateOutputType = {
+    value: number | null
+  }
+
+  export type RewardMinAggregateOutputType = {
+    id: string | null
+    type: $Enums.RewardType | null
+    value: number | null
+    description: string | null
+    huntId: string | null
+  }
+
+  export type RewardMaxAggregateOutputType = {
+    id: string | null
+    type: $Enums.RewardType | null
+    value: number | null
+    description: string | null
+    huntId: string | null
+  }
+
+  export type RewardCountAggregateOutputType = {
+    id: number
+    type: number
+    value: number
+    description: number
+    huntId: number
+    _all: number
+  }
+
+
+  export type RewardAvgAggregateInputType = {
+    value?: true
+  }
+
+  export type RewardSumAggregateInputType = {
+    value?: true
+  }
+
+  export type RewardMinAggregateInputType = {
+    id?: true
+    type?: true
+    value?: true
+    description?: true
+    huntId?: true
+  }
+
+  export type RewardMaxAggregateInputType = {
+    id?: true
+    type?: true
+    value?: true
+    description?: true
+    huntId?: true
+  }
+
+  export type RewardCountAggregateInputType = {
+    id?: true
+    type?: true
+    value?: true
+    description?: true
+    huntId?: true
+    _all?: true
+  }
+
+  export type RewardAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Reward to aggregate.
+     */
+    where?: RewardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rewards to fetch.
+     */
+    orderBy?: RewardOrderByWithRelationInput | RewardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RewardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rewards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rewards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Rewards
+    **/
+    _count?: true | RewardCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RewardAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RewardSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RewardMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RewardMaxAggregateInputType
+  }
+
+  export type GetRewardAggregateType<T extends RewardAggregateArgs> = {
+        [P in keyof T & keyof AggregateReward]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReward[P]>
+      : GetScalarType<T[P], AggregateReward[P]>
+  }
+
+
+
+
+  export type RewardGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RewardWhereInput
+    orderBy?: RewardOrderByWithAggregationInput | RewardOrderByWithAggregationInput[]
+    by: RewardScalarFieldEnum[] | RewardScalarFieldEnum
+    having?: RewardScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RewardCountAggregateInputType | true
+    _avg?: RewardAvgAggregateInputType
+    _sum?: RewardSumAggregateInputType
+    _min?: RewardMinAggregateInputType
+    _max?: RewardMaxAggregateInputType
+  }
+
+  export type RewardGroupByOutputType = {
+    id: string
+    type: $Enums.RewardType
+    value: number
+    description: string | null
+    huntId: string
+    _count: RewardCountAggregateOutputType | null
+    _avg: RewardAvgAggregateOutputType | null
+    _sum: RewardSumAggregateOutputType | null
+    _min: RewardMinAggregateOutputType | null
+    _max: RewardMaxAggregateOutputType | null
+  }
+
+  type GetRewardGroupByPayload<T extends RewardGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RewardGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RewardGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RewardGroupByOutputType[P]>
+            : GetScalarType<T[P], RewardGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RewardSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    value?: boolean
+    description?: boolean
+    huntId?: boolean
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reward"]>
+
+  export type RewardSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    value?: boolean
+    description?: boolean
+    huntId?: boolean
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reward"]>
+
+  export type RewardSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    value?: boolean
+    description?: boolean
+    huntId?: boolean
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reward"]>
+
+  export type RewardSelectScalar = {
+    id?: boolean
+    type?: boolean
+    value?: boolean
+    description?: boolean
+    huntId?: boolean
+  }
+
+  export type RewardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "value" | "description" | "huntId", ExtArgs["result"]["reward"]>
+  export type RewardInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+  export type RewardIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+  export type RewardIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+
+  export type $RewardPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Reward"
+    objects: {
+      treasureHunt: Prisma.$TreasureHuntPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      type: $Enums.RewardType
+      value: number
+      description: string | null
+      huntId: string
+    }, ExtArgs["result"]["reward"]>
+    composites: {}
+  }
+
+  type RewardGetPayload<S extends boolean | null | undefined | RewardDefaultArgs> = $Result.GetResult<Prisma.$RewardPayload, S>
+
+  type RewardCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RewardFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RewardCountAggregateInputType | true
+    }
+
+  export interface RewardDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Reward'], meta: { name: 'Reward' } }
+    /**
+     * Find zero or one Reward that matches the filter.
+     * @param {RewardFindUniqueArgs} args - Arguments to find a Reward
+     * @example
+     * // Get one Reward
+     * const reward = await prisma.reward.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RewardFindUniqueArgs>(args: SelectSubset<T, RewardFindUniqueArgs<ExtArgs>>): Prisma__RewardClient<$Result.GetResult<Prisma.$RewardPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Reward that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RewardFindUniqueOrThrowArgs} args - Arguments to find a Reward
+     * @example
+     * // Get one Reward
+     * const reward = await prisma.reward.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RewardFindUniqueOrThrowArgs>(args: SelectSubset<T, RewardFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RewardClient<$Result.GetResult<Prisma.$RewardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Reward that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RewardFindFirstArgs} args - Arguments to find a Reward
+     * @example
+     * // Get one Reward
+     * const reward = await prisma.reward.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RewardFindFirstArgs>(args?: SelectSubset<T, RewardFindFirstArgs<ExtArgs>>): Prisma__RewardClient<$Result.GetResult<Prisma.$RewardPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Reward that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RewardFindFirstOrThrowArgs} args - Arguments to find a Reward
+     * @example
+     * // Get one Reward
+     * const reward = await prisma.reward.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RewardFindFirstOrThrowArgs>(args?: SelectSubset<T, RewardFindFirstOrThrowArgs<ExtArgs>>): Prisma__RewardClient<$Result.GetResult<Prisma.$RewardPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Rewards that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RewardFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Rewards
+     * const rewards = await prisma.reward.findMany()
+     * 
+     * // Get first 10 Rewards
+     * const rewards = await prisma.reward.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const rewardWithIdOnly = await prisma.reward.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RewardFindManyArgs>(args?: SelectSubset<T, RewardFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RewardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Reward.
+     * @param {RewardCreateArgs} args - Arguments to create a Reward.
+     * @example
+     * // Create one Reward
+     * const Reward = await prisma.reward.create({
+     *   data: {
+     *     // ... data to create a Reward
+     *   }
+     * })
+     * 
+     */
+    create<T extends RewardCreateArgs>(args: SelectSubset<T, RewardCreateArgs<ExtArgs>>): Prisma__RewardClient<$Result.GetResult<Prisma.$RewardPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Rewards.
+     * @param {RewardCreateManyArgs} args - Arguments to create many Rewards.
+     * @example
+     * // Create many Rewards
+     * const reward = await prisma.reward.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RewardCreateManyArgs>(args?: SelectSubset<T, RewardCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Rewards and returns the data saved in the database.
+     * @param {RewardCreateManyAndReturnArgs} args - Arguments to create many Rewards.
+     * @example
+     * // Create many Rewards
+     * const reward = await prisma.reward.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Rewards and only return the `id`
+     * const rewardWithIdOnly = await prisma.reward.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RewardCreateManyAndReturnArgs>(args?: SelectSubset<T, RewardCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RewardPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Reward.
+     * @param {RewardDeleteArgs} args - Arguments to delete one Reward.
+     * @example
+     * // Delete one Reward
+     * const Reward = await prisma.reward.delete({
+     *   where: {
+     *     // ... filter to delete one Reward
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RewardDeleteArgs>(args: SelectSubset<T, RewardDeleteArgs<ExtArgs>>): Prisma__RewardClient<$Result.GetResult<Prisma.$RewardPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Reward.
+     * @param {RewardUpdateArgs} args - Arguments to update one Reward.
+     * @example
+     * // Update one Reward
+     * const reward = await prisma.reward.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RewardUpdateArgs>(args: SelectSubset<T, RewardUpdateArgs<ExtArgs>>): Prisma__RewardClient<$Result.GetResult<Prisma.$RewardPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Rewards.
+     * @param {RewardDeleteManyArgs} args - Arguments to filter Rewards to delete.
+     * @example
+     * // Delete a few Rewards
+     * const { count } = await prisma.reward.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RewardDeleteManyArgs>(args?: SelectSubset<T, RewardDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Rewards.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RewardUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Rewards
+     * const reward = await prisma.reward.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RewardUpdateManyArgs>(args: SelectSubset<T, RewardUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Rewards and returns the data updated in the database.
+     * @param {RewardUpdateManyAndReturnArgs} args - Arguments to update many Rewards.
+     * @example
+     * // Update many Rewards
+     * const reward = await prisma.reward.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Rewards and only return the `id`
+     * const rewardWithIdOnly = await prisma.reward.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RewardUpdateManyAndReturnArgs>(args: SelectSubset<T, RewardUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RewardPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Reward.
+     * @param {RewardUpsertArgs} args - Arguments to update or create a Reward.
+     * @example
+     * // Update or create a Reward
+     * const reward = await prisma.reward.upsert({
+     *   create: {
+     *     // ... data to create a Reward
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Reward we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RewardUpsertArgs>(args: SelectSubset<T, RewardUpsertArgs<ExtArgs>>): Prisma__RewardClient<$Result.GetResult<Prisma.$RewardPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Rewards.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RewardCountArgs} args - Arguments to filter Rewards to count.
+     * @example
+     * // Count the number of Rewards
+     * const count = await prisma.reward.count({
+     *   where: {
+     *     // ... the filter for the Rewards we want to count
+     *   }
+     * })
+    **/
+    count<T extends RewardCountArgs>(
+      args?: Subset<T, RewardCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RewardCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Reward.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RewardAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RewardAggregateArgs>(args: Subset<T, RewardAggregateArgs>): Prisma.PrismaPromise<GetRewardAggregateType<T>>
+
+    /**
+     * Group by Reward.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RewardGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RewardGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RewardGroupByArgs['orderBy'] }
+        : { orderBy?: RewardGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RewardGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRewardGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Reward model
+   */
+  readonly fields: RewardFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Reward.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RewardClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    treasureHunt<T extends TreasureHuntDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHuntDefaultArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Reward model
+   */
+  interface RewardFieldRefs {
+    readonly id: FieldRef<"Reward", 'String'>
+    readonly type: FieldRef<"Reward", 'RewardType'>
+    readonly value: FieldRef<"Reward", 'Int'>
+    readonly description: FieldRef<"Reward", 'String'>
+    readonly huntId: FieldRef<"Reward", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Reward findUnique
+   */
+  export type RewardFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reward
+     */
+    select?: RewardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reward
+     */
+    omit?: RewardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RewardInclude<ExtArgs> | null
+    /**
+     * Filter, which Reward to fetch.
+     */
+    where: RewardWhereUniqueInput
+  }
+
+  /**
+   * Reward findUniqueOrThrow
+   */
+  export type RewardFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reward
+     */
+    select?: RewardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reward
+     */
+    omit?: RewardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RewardInclude<ExtArgs> | null
+    /**
+     * Filter, which Reward to fetch.
+     */
+    where: RewardWhereUniqueInput
+  }
+
+  /**
+   * Reward findFirst
+   */
+  export type RewardFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reward
+     */
+    select?: RewardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reward
+     */
+    omit?: RewardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RewardInclude<ExtArgs> | null
+    /**
+     * Filter, which Reward to fetch.
+     */
+    where?: RewardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rewards to fetch.
+     */
+    orderBy?: RewardOrderByWithRelationInput | RewardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Rewards.
+     */
+    cursor?: RewardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rewards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rewards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Rewards.
+     */
+    distinct?: RewardScalarFieldEnum | RewardScalarFieldEnum[]
+  }
+
+  /**
+   * Reward findFirstOrThrow
+   */
+  export type RewardFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reward
+     */
+    select?: RewardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reward
+     */
+    omit?: RewardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RewardInclude<ExtArgs> | null
+    /**
+     * Filter, which Reward to fetch.
+     */
+    where?: RewardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rewards to fetch.
+     */
+    orderBy?: RewardOrderByWithRelationInput | RewardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Rewards.
+     */
+    cursor?: RewardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rewards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rewards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Rewards.
+     */
+    distinct?: RewardScalarFieldEnum | RewardScalarFieldEnum[]
+  }
+
+  /**
+   * Reward findMany
+   */
+  export type RewardFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reward
+     */
+    select?: RewardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reward
+     */
+    omit?: RewardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RewardInclude<ExtArgs> | null
+    /**
+     * Filter, which Rewards to fetch.
+     */
+    where?: RewardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rewards to fetch.
+     */
+    orderBy?: RewardOrderByWithRelationInput | RewardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Rewards.
+     */
+    cursor?: RewardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rewards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rewards.
+     */
+    skip?: number
+    distinct?: RewardScalarFieldEnum | RewardScalarFieldEnum[]
+  }
+
+  /**
+   * Reward create
+   */
+  export type RewardCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reward
+     */
+    select?: RewardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reward
+     */
+    omit?: RewardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RewardInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Reward.
+     */
+    data: XOR<RewardCreateInput, RewardUncheckedCreateInput>
+  }
+
+  /**
+   * Reward createMany
+   */
+  export type RewardCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Rewards.
+     */
+    data: RewardCreateManyInput | RewardCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Reward createManyAndReturn
+   */
+  export type RewardCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reward
+     */
+    select?: RewardSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reward
+     */
+    omit?: RewardOmit<ExtArgs> | null
+    /**
+     * The data used to create many Rewards.
+     */
+    data: RewardCreateManyInput | RewardCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RewardIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Reward update
+   */
+  export type RewardUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reward
+     */
+    select?: RewardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reward
+     */
+    omit?: RewardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RewardInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Reward.
+     */
+    data: XOR<RewardUpdateInput, RewardUncheckedUpdateInput>
+    /**
+     * Choose, which Reward to update.
+     */
+    where: RewardWhereUniqueInput
+  }
+
+  /**
+   * Reward updateMany
+   */
+  export type RewardUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Rewards.
+     */
+    data: XOR<RewardUpdateManyMutationInput, RewardUncheckedUpdateManyInput>
+    /**
+     * Filter which Rewards to update
+     */
+    where?: RewardWhereInput
+    /**
+     * Limit how many Rewards to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Reward updateManyAndReturn
+   */
+  export type RewardUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reward
+     */
+    select?: RewardSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reward
+     */
+    omit?: RewardOmit<ExtArgs> | null
+    /**
+     * The data used to update Rewards.
+     */
+    data: XOR<RewardUpdateManyMutationInput, RewardUncheckedUpdateManyInput>
+    /**
+     * Filter which Rewards to update
+     */
+    where?: RewardWhereInput
+    /**
+     * Limit how many Rewards to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RewardIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Reward upsert
+   */
+  export type RewardUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reward
+     */
+    select?: RewardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reward
+     */
+    omit?: RewardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RewardInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Reward to update in case it exists.
+     */
+    where: RewardWhereUniqueInput
+    /**
+     * In case the Reward found by the `where` argument doesn't exist, create a new Reward with this data.
+     */
+    create: XOR<RewardCreateInput, RewardUncheckedCreateInput>
+    /**
+     * In case the Reward was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RewardUpdateInput, RewardUncheckedUpdateInput>
+  }
+
+  /**
+   * Reward delete
+   */
+  export type RewardDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reward
+     */
+    select?: RewardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reward
+     */
+    omit?: RewardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RewardInclude<ExtArgs> | null
+    /**
+     * Filter which Reward to delete.
+     */
+    where: RewardWhereUniqueInput
+  }
+
+  /**
+   * Reward deleteMany
+   */
+  export type RewardDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Rewards to delete
+     */
+    where?: RewardWhereInput
+    /**
+     * Limit how many Rewards to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Reward without action
+   */
+  export type RewardDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reward
+     */
+    select?: RewardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reward
+     */
+    omit?: RewardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RewardInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model VirtualCurrency
+   */
+
+  export type AggregateVirtualCurrency = {
+    _count: VirtualCurrencyCountAggregateOutputType | null
+    _avg: VirtualCurrencyAvgAggregateOutputType | null
+    _sum: VirtualCurrencySumAggregateOutputType | null
+    _min: VirtualCurrencyMinAggregateOutputType | null
+    _max: VirtualCurrencyMaxAggregateOutputType | null
+  }
+
+  export type VirtualCurrencyAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type VirtualCurrencySumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type VirtualCurrencyMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    amount: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VirtualCurrencyMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    amount: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VirtualCurrencyCountAggregateOutputType = {
+    id: number
+    userId: number
+    amount: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type VirtualCurrencyAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type VirtualCurrencySumAggregateInputType = {
+    amount?: true
+  }
+
+  export type VirtualCurrencyMinAggregateInputType = {
+    id?: true
+    userId?: true
+    amount?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VirtualCurrencyMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    amount?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VirtualCurrencyCountAggregateInputType = {
+    id?: true
+    userId?: true
+    amount?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type VirtualCurrencyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VirtualCurrency to aggregate.
+     */
+    where?: VirtualCurrencyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VirtualCurrencies to fetch.
+     */
+    orderBy?: VirtualCurrencyOrderByWithRelationInput | VirtualCurrencyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VirtualCurrencyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VirtualCurrencies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VirtualCurrencies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned VirtualCurrencies
+    **/
+    _count?: true | VirtualCurrencyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: VirtualCurrencyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: VirtualCurrencySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VirtualCurrencyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VirtualCurrencyMaxAggregateInputType
+  }
+
+  export type GetVirtualCurrencyAggregateType<T extends VirtualCurrencyAggregateArgs> = {
+        [P in keyof T & keyof AggregateVirtualCurrency]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVirtualCurrency[P]>
+      : GetScalarType<T[P], AggregateVirtualCurrency[P]>
+  }
+
+
+
+
+  export type VirtualCurrencyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VirtualCurrencyWhereInput
+    orderBy?: VirtualCurrencyOrderByWithAggregationInput | VirtualCurrencyOrderByWithAggregationInput[]
+    by: VirtualCurrencyScalarFieldEnum[] | VirtualCurrencyScalarFieldEnum
+    having?: VirtualCurrencyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VirtualCurrencyCountAggregateInputType | true
+    _avg?: VirtualCurrencyAvgAggregateInputType
+    _sum?: VirtualCurrencySumAggregateInputType
+    _min?: VirtualCurrencyMinAggregateInputType
+    _max?: VirtualCurrencyMaxAggregateInputType
+  }
+
+  export type VirtualCurrencyGroupByOutputType = {
+    id: string
+    userId: string
+    amount: number
+    createdAt: Date
+    updatedAt: Date
+    _count: VirtualCurrencyCountAggregateOutputType | null
+    _avg: VirtualCurrencyAvgAggregateOutputType | null
+    _sum: VirtualCurrencySumAggregateOutputType | null
+    _min: VirtualCurrencyMinAggregateOutputType | null
+    _max: VirtualCurrencyMaxAggregateOutputType | null
+  }
+
+  type GetVirtualCurrencyGroupByPayload<T extends VirtualCurrencyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VirtualCurrencyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VirtualCurrencyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VirtualCurrencyGroupByOutputType[P]>
+            : GetScalarType<T[P], VirtualCurrencyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VirtualCurrencySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    transactionHistory?: boolean | VirtualCurrency$transactionHistoryArgs<ExtArgs>
+    _count?: boolean | VirtualCurrencyCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["virtualCurrency"]>
+
+  export type VirtualCurrencySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["virtualCurrency"]>
+
+  export type VirtualCurrencySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["virtualCurrency"]>
+
+  export type VirtualCurrencySelectScalar = {
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type VirtualCurrencyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "amount" | "createdAt" | "updatedAt", ExtArgs["result"]["virtualCurrency"]>
+  export type VirtualCurrencyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    transactionHistory?: boolean | VirtualCurrency$transactionHistoryArgs<ExtArgs>
+    _count?: boolean | VirtualCurrencyCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type VirtualCurrencyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type VirtualCurrencyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $VirtualCurrencyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "VirtualCurrency"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      transactionHistory: Prisma.$TransactionHistoryPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      amount: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["virtualCurrency"]>
+    composites: {}
+  }
+
+  type VirtualCurrencyGetPayload<S extends boolean | null | undefined | VirtualCurrencyDefaultArgs> = $Result.GetResult<Prisma.$VirtualCurrencyPayload, S>
+
+  type VirtualCurrencyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VirtualCurrencyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VirtualCurrencyCountAggregateInputType | true
+    }
+
+  export interface VirtualCurrencyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VirtualCurrency'], meta: { name: 'VirtualCurrency' } }
+    /**
+     * Find zero or one VirtualCurrency that matches the filter.
+     * @param {VirtualCurrencyFindUniqueArgs} args - Arguments to find a VirtualCurrency
+     * @example
+     * // Get one VirtualCurrency
+     * const virtualCurrency = await prisma.virtualCurrency.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VirtualCurrencyFindUniqueArgs>(args: SelectSubset<T, VirtualCurrencyFindUniqueArgs<ExtArgs>>): Prisma__VirtualCurrencyClient<$Result.GetResult<Prisma.$VirtualCurrencyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one VirtualCurrency that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VirtualCurrencyFindUniqueOrThrowArgs} args - Arguments to find a VirtualCurrency
+     * @example
+     * // Get one VirtualCurrency
+     * const virtualCurrency = await prisma.virtualCurrency.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VirtualCurrencyFindUniqueOrThrowArgs>(args: SelectSubset<T, VirtualCurrencyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VirtualCurrencyClient<$Result.GetResult<Prisma.$VirtualCurrencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VirtualCurrency that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VirtualCurrencyFindFirstArgs} args - Arguments to find a VirtualCurrency
+     * @example
+     * // Get one VirtualCurrency
+     * const virtualCurrency = await prisma.virtualCurrency.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VirtualCurrencyFindFirstArgs>(args?: SelectSubset<T, VirtualCurrencyFindFirstArgs<ExtArgs>>): Prisma__VirtualCurrencyClient<$Result.GetResult<Prisma.$VirtualCurrencyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VirtualCurrency that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VirtualCurrencyFindFirstOrThrowArgs} args - Arguments to find a VirtualCurrency
+     * @example
+     * // Get one VirtualCurrency
+     * const virtualCurrency = await prisma.virtualCurrency.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VirtualCurrencyFindFirstOrThrowArgs>(args?: SelectSubset<T, VirtualCurrencyFindFirstOrThrowArgs<ExtArgs>>): Prisma__VirtualCurrencyClient<$Result.GetResult<Prisma.$VirtualCurrencyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more VirtualCurrencies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VirtualCurrencyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all VirtualCurrencies
+     * const virtualCurrencies = await prisma.virtualCurrency.findMany()
+     * 
+     * // Get first 10 VirtualCurrencies
+     * const virtualCurrencies = await prisma.virtualCurrency.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const virtualCurrencyWithIdOnly = await prisma.virtualCurrency.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VirtualCurrencyFindManyArgs>(args?: SelectSubset<T, VirtualCurrencyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VirtualCurrencyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a VirtualCurrency.
+     * @param {VirtualCurrencyCreateArgs} args - Arguments to create a VirtualCurrency.
+     * @example
+     * // Create one VirtualCurrency
+     * const VirtualCurrency = await prisma.virtualCurrency.create({
+     *   data: {
+     *     // ... data to create a VirtualCurrency
+     *   }
+     * })
+     * 
+     */
+    create<T extends VirtualCurrencyCreateArgs>(args: SelectSubset<T, VirtualCurrencyCreateArgs<ExtArgs>>): Prisma__VirtualCurrencyClient<$Result.GetResult<Prisma.$VirtualCurrencyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many VirtualCurrencies.
+     * @param {VirtualCurrencyCreateManyArgs} args - Arguments to create many VirtualCurrencies.
+     * @example
+     * // Create many VirtualCurrencies
+     * const virtualCurrency = await prisma.virtualCurrency.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VirtualCurrencyCreateManyArgs>(args?: SelectSubset<T, VirtualCurrencyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many VirtualCurrencies and returns the data saved in the database.
+     * @param {VirtualCurrencyCreateManyAndReturnArgs} args - Arguments to create many VirtualCurrencies.
+     * @example
+     * // Create many VirtualCurrencies
+     * const virtualCurrency = await prisma.virtualCurrency.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many VirtualCurrencies and only return the `id`
+     * const virtualCurrencyWithIdOnly = await prisma.virtualCurrency.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VirtualCurrencyCreateManyAndReturnArgs>(args?: SelectSubset<T, VirtualCurrencyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VirtualCurrencyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a VirtualCurrency.
+     * @param {VirtualCurrencyDeleteArgs} args - Arguments to delete one VirtualCurrency.
+     * @example
+     * // Delete one VirtualCurrency
+     * const VirtualCurrency = await prisma.virtualCurrency.delete({
+     *   where: {
+     *     // ... filter to delete one VirtualCurrency
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VirtualCurrencyDeleteArgs>(args: SelectSubset<T, VirtualCurrencyDeleteArgs<ExtArgs>>): Prisma__VirtualCurrencyClient<$Result.GetResult<Prisma.$VirtualCurrencyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one VirtualCurrency.
+     * @param {VirtualCurrencyUpdateArgs} args - Arguments to update one VirtualCurrency.
+     * @example
+     * // Update one VirtualCurrency
+     * const virtualCurrency = await prisma.virtualCurrency.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VirtualCurrencyUpdateArgs>(args: SelectSubset<T, VirtualCurrencyUpdateArgs<ExtArgs>>): Prisma__VirtualCurrencyClient<$Result.GetResult<Prisma.$VirtualCurrencyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more VirtualCurrencies.
+     * @param {VirtualCurrencyDeleteManyArgs} args - Arguments to filter VirtualCurrencies to delete.
+     * @example
+     * // Delete a few VirtualCurrencies
+     * const { count } = await prisma.virtualCurrency.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VirtualCurrencyDeleteManyArgs>(args?: SelectSubset<T, VirtualCurrencyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VirtualCurrencies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VirtualCurrencyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many VirtualCurrencies
+     * const virtualCurrency = await prisma.virtualCurrency.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VirtualCurrencyUpdateManyArgs>(args: SelectSubset<T, VirtualCurrencyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VirtualCurrencies and returns the data updated in the database.
+     * @param {VirtualCurrencyUpdateManyAndReturnArgs} args - Arguments to update many VirtualCurrencies.
+     * @example
+     * // Update many VirtualCurrencies
+     * const virtualCurrency = await prisma.virtualCurrency.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more VirtualCurrencies and only return the `id`
+     * const virtualCurrencyWithIdOnly = await prisma.virtualCurrency.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VirtualCurrencyUpdateManyAndReturnArgs>(args: SelectSubset<T, VirtualCurrencyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VirtualCurrencyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one VirtualCurrency.
+     * @param {VirtualCurrencyUpsertArgs} args - Arguments to update or create a VirtualCurrency.
+     * @example
+     * // Update or create a VirtualCurrency
+     * const virtualCurrency = await prisma.virtualCurrency.upsert({
+     *   create: {
+     *     // ... data to create a VirtualCurrency
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the VirtualCurrency we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VirtualCurrencyUpsertArgs>(args: SelectSubset<T, VirtualCurrencyUpsertArgs<ExtArgs>>): Prisma__VirtualCurrencyClient<$Result.GetResult<Prisma.$VirtualCurrencyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of VirtualCurrencies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VirtualCurrencyCountArgs} args - Arguments to filter VirtualCurrencies to count.
+     * @example
+     * // Count the number of VirtualCurrencies
+     * const count = await prisma.virtualCurrency.count({
+     *   where: {
+     *     // ... the filter for the VirtualCurrencies we want to count
+     *   }
+     * })
+    **/
+    count<T extends VirtualCurrencyCountArgs>(
+      args?: Subset<T, VirtualCurrencyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VirtualCurrencyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a VirtualCurrency.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VirtualCurrencyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VirtualCurrencyAggregateArgs>(args: Subset<T, VirtualCurrencyAggregateArgs>): Prisma.PrismaPromise<GetVirtualCurrencyAggregateType<T>>
+
+    /**
+     * Group by VirtualCurrency.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VirtualCurrencyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VirtualCurrencyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VirtualCurrencyGroupByArgs['orderBy'] }
+        : { orderBy?: VirtualCurrencyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VirtualCurrencyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVirtualCurrencyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the VirtualCurrency model
+   */
+  readonly fields: VirtualCurrencyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for VirtualCurrency.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VirtualCurrencyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    transactionHistory<T extends VirtualCurrency$transactionHistoryArgs<ExtArgs> = {}>(args?: Subset<T, VirtualCurrency$transactionHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the VirtualCurrency model
+   */
+  interface VirtualCurrencyFieldRefs {
+    readonly id: FieldRef<"VirtualCurrency", 'String'>
+    readonly userId: FieldRef<"VirtualCurrency", 'String'>
+    readonly amount: FieldRef<"VirtualCurrency", 'Int'>
+    readonly createdAt: FieldRef<"VirtualCurrency", 'DateTime'>
+    readonly updatedAt: FieldRef<"VirtualCurrency", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * VirtualCurrency findUnique
+   */
+  export type VirtualCurrencyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualCurrency
+     */
+    select?: VirtualCurrencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualCurrency
+     */
+    omit?: VirtualCurrencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualCurrencyInclude<ExtArgs> | null
+    /**
+     * Filter, which VirtualCurrency to fetch.
+     */
+    where: VirtualCurrencyWhereUniqueInput
+  }
+
+  /**
+   * VirtualCurrency findUniqueOrThrow
+   */
+  export type VirtualCurrencyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualCurrency
+     */
+    select?: VirtualCurrencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualCurrency
+     */
+    omit?: VirtualCurrencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualCurrencyInclude<ExtArgs> | null
+    /**
+     * Filter, which VirtualCurrency to fetch.
+     */
+    where: VirtualCurrencyWhereUniqueInput
+  }
+
+  /**
+   * VirtualCurrency findFirst
+   */
+  export type VirtualCurrencyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualCurrency
+     */
+    select?: VirtualCurrencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualCurrency
+     */
+    omit?: VirtualCurrencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualCurrencyInclude<ExtArgs> | null
+    /**
+     * Filter, which VirtualCurrency to fetch.
+     */
+    where?: VirtualCurrencyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VirtualCurrencies to fetch.
+     */
+    orderBy?: VirtualCurrencyOrderByWithRelationInput | VirtualCurrencyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VirtualCurrencies.
+     */
+    cursor?: VirtualCurrencyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VirtualCurrencies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VirtualCurrencies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VirtualCurrencies.
+     */
+    distinct?: VirtualCurrencyScalarFieldEnum | VirtualCurrencyScalarFieldEnum[]
+  }
+
+  /**
+   * VirtualCurrency findFirstOrThrow
+   */
+  export type VirtualCurrencyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualCurrency
+     */
+    select?: VirtualCurrencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualCurrency
+     */
+    omit?: VirtualCurrencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualCurrencyInclude<ExtArgs> | null
+    /**
+     * Filter, which VirtualCurrency to fetch.
+     */
+    where?: VirtualCurrencyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VirtualCurrencies to fetch.
+     */
+    orderBy?: VirtualCurrencyOrderByWithRelationInput | VirtualCurrencyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VirtualCurrencies.
+     */
+    cursor?: VirtualCurrencyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VirtualCurrencies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VirtualCurrencies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VirtualCurrencies.
+     */
+    distinct?: VirtualCurrencyScalarFieldEnum | VirtualCurrencyScalarFieldEnum[]
+  }
+
+  /**
+   * VirtualCurrency findMany
+   */
+  export type VirtualCurrencyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualCurrency
+     */
+    select?: VirtualCurrencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualCurrency
+     */
+    omit?: VirtualCurrencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualCurrencyInclude<ExtArgs> | null
+    /**
+     * Filter, which VirtualCurrencies to fetch.
+     */
+    where?: VirtualCurrencyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VirtualCurrencies to fetch.
+     */
+    orderBy?: VirtualCurrencyOrderByWithRelationInput | VirtualCurrencyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing VirtualCurrencies.
+     */
+    cursor?: VirtualCurrencyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VirtualCurrencies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VirtualCurrencies.
+     */
+    skip?: number
+    distinct?: VirtualCurrencyScalarFieldEnum | VirtualCurrencyScalarFieldEnum[]
+  }
+
+  /**
+   * VirtualCurrency create
+   */
+  export type VirtualCurrencyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualCurrency
+     */
+    select?: VirtualCurrencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualCurrency
+     */
+    omit?: VirtualCurrencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualCurrencyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a VirtualCurrency.
+     */
+    data: XOR<VirtualCurrencyCreateInput, VirtualCurrencyUncheckedCreateInput>
+  }
+
+  /**
+   * VirtualCurrency createMany
+   */
+  export type VirtualCurrencyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many VirtualCurrencies.
+     */
+    data: VirtualCurrencyCreateManyInput | VirtualCurrencyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * VirtualCurrency createManyAndReturn
+   */
+  export type VirtualCurrencyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualCurrency
+     */
+    select?: VirtualCurrencySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualCurrency
+     */
+    omit?: VirtualCurrencyOmit<ExtArgs> | null
+    /**
+     * The data used to create many VirtualCurrencies.
+     */
+    data: VirtualCurrencyCreateManyInput | VirtualCurrencyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualCurrencyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VirtualCurrency update
+   */
+  export type VirtualCurrencyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualCurrency
+     */
+    select?: VirtualCurrencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualCurrency
+     */
+    omit?: VirtualCurrencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualCurrencyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a VirtualCurrency.
+     */
+    data: XOR<VirtualCurrencyUpdateInput, VirtualCurrencyUncheckedUpdateInput>
+    /**
+     * Choose, which VirtualCurrency to update.
+     */
+    where: VirtualCurrencyWhereUniqueInput
+  }
+
+  /**
+   * VirtualCurrency updateMany
+   */
+  export type VirtualCurrencyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update VirtualCurrencies.
+     */
+    data: XOR<VirtualCurrencyUpdateManyMutationInput, VirtualCurrencyUncheckedUpdateManyInput>
+    /**
+     * Filter which VirtualCurrencies to update
+     */
+    where?: VirtualCurrencyWhereInput
+    /**
+     * Limit how many VirtualCurrencies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * VirtualCurrency updateManyAndReturn
+   */
+  export type VirtualCurrencyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualCurrency
+     */
+    select?: VirtualCurrencySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualCurrency
+     */
+    omit?: VirtualCurrencyOmit<ExtArgs> | null
+    /**
+     * The data used to update VirtualCurrencies.
+     */
+    data: XOR<VirtualCurrencyUpdateManyMutationInput, VirtualCurrencyUncheckedUpdateManyInput>
+    /**
+     * Filter which VirtualCurrencies to update
+     */
+    where?: VirtualCurrencyWhereInput
+    /**
+     * Limit how many VirtualCurrencies to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualCurrencyIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VirtualCurrency upsert
+   */
+  export type VirtualCurrencyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualCurrency
+     */
+    select?: VirtualCurrencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualCurrency
+     */
+    omit?: VirtualCurrencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualCurrencyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the VirtualCurrency to update in case it exists.
+     */
+    where: VirtualCurrencyWhereUniqueInput
+    /**
+     * In case the VirtualCurrency found by the `where` argument doesn't exist, create a new VirtualCurrency with this data.
+     */
+    create: XOR<VirtualCurrencyCreateInput, VirtualCurrencyUncheckedCreateInput>
+    /**
+     * In case the VirtualCurrency was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VirtualCurrencyUpdateInput, VirtualCurrencyUncheckedUpdateInput>
+  }
+
+  /**
+   * VirtualCurrency delete
+   */
+  export type VirtualCurrencyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualCurrency
+     */
+    select?: VirtualCurrencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualCurrency
+     */
+    omit?: VirtualCurrencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualCurrencyInclude<ExtArgs> | null
+    /**
+     * Filter which VirtualCurrency to delete.
+     */
+    where: VirtualCurrencyWhereUniqueInput
+  }
+
+  /**
+   * VirtualCurrency deleteMany
+   */
+  export type VirtualCurrencyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VirtualCurrencies to delete
+     */
+    where?: VirtualCurrencyWhereInput
+    /**
+     * Limit how many VirtualCurrencies to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * VirtualCurrency.transactionHistory
+   */
+  export type VirtualCurrency$transactionHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransactionHistory
+     */
+    select?: TransactionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransactionHistory
+     */
+    omit?: TransactionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransactionHistoryInclude<ExtArgs> | null
+    where?: TransactionHistoryWhereInput
+    orderBy?: TransactionHistoryOrderByWithRelationInput | TransactionHistoryOrderByWithRelationInput[]
+    cursor?: TransactionHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TransactionHistoryScalarFieldEnum | TransactionHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * VirtualCurrency without action
+   */
+  export type VirtualCurrencyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualCurrency
+     */
+    select?: VirtualCurrencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualCurrency
+     */
+    omit?: VirtualCurrencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualCurrencyInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TransactionHistory
+   */
+
+  export type AggregateTransactionHistory = {
+    _count: TransactionHistoryCountAggregateOutputType | null
+    _avg: TransactionHistoryAvgAggregateOutputType | null
+    _sum: TransactionHistorySumAggregateOutputType | null
+    _min: TransactionHistoryMinAggregateOutputType | null
+    _max: TransactionHistoryMaxAggregateOutputType | null
+  }
+
+  export type TransactionHistoryAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type TransactionHistorySumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type TransactionHistoryMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    transactionId: string | null
+    stripeSessionId: string | null
+    amount: number | null
+    transactionType: $Enums.TransactionType | null
+    description: string | null
+    createdAt: Date | null
+    virtualCurrencyId: string | null
+  }
+
+  export type TransactionHistoryMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    transactionId: string | null
+    stripeSessionId: string | null
+    amount: number | null
+    transactionType: $Enums.TransactionType | null
+    description: string | null
+    createdAt: Date | null
+    virtualCurrencyId: string | null
+  }
+
+  export type TransactionHistoryCountAggregateOutputType = {
+    id: number
+    userId: number
+    transactionId: number
+    stripeSessionId: number
+    amount: number
+    transactionType: number
+    description: number
+    createdAt: number
+    virtualCurrencyId: number
+    _all: number
+  }
+
+
+  export type TransactionHistoryAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type TransactionHistorySumAggregateInputType = {
+    amount?: true
+  }
+
+  export type TransactionHistoryMinAggregateInputType = {
+    id?: true
+    userId?: true
+    transactionId?: true
+    stripeSessionId?: true
+    amount?: true
+    transactionType?: true
+    description?: true
+    createdAt?: true
+    virtualCurrencyId?: true
+  }
+
+  export type TransactionHistoryMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    transactionId?: true
+    stripeSessionId?: true
+    amount?: true
+    transactionType?: true
+    description?: true
+    createdAt?: true
+    virtualCurrencyId?: true
+  }
+
+  export type TransactionHistoryCountAggregateInputType = {
+    id?: true
+    userId?: true
+    transactionId?: true
+    stripeSessionId?: true
+    amount?: true
+    transactionType?: true
+    description?: true
+    createdAt?: true
+    virtualCurrencyId?: true
+    _all?: true
+  }
+
+  export type TransactionHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TransactionHistory to aggregate.
+     */
+    where?: TransactionHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TransactionHistories to fetch.
+     */
+    orderBy?: TransactionHistoryOrderByWithRelationInput | TransactionHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TransactionHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TransactionHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TransactionHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TransactionHistories
+    **/
+    _count?: true | TransactionHistoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TransactionHistoryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TransactionHistorySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TransactionHistoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TransactionHistoryMaxAggregateInputType
+  }
+
+  export type GetTransactionHistoryAggregateType<T extends TransactionHistoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateTransactionHistory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTransactionHistory[P]>
+      : GetScalarType<T[P], AggregateTransactionHistory[P]>
+  }
+
+
+
+
+  export type TransactionHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TransactionHistoryWhereInput
+    orderBy?: TransactionHistoryOrderByWithAggregationInput | TransactionHistoryOrderByWithAggregationInput[]
+    by: TransactionHistoryScalarFieldEnum[] | TransactionHistoryScalarFieldEnum
+    having?: TransactionHistoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TransactionHistoryCountAggregateInputType | true
+    _avg?: TransactionHistoryAvgAggregateInputType
+    _sum?: TransactionHistorySumAggregateInputType
+    _min?: TransactionHistoryMinAggregateInputType
+    _max?: TransactionHistoryMaxAggregateInputType
+  }
+
+  export type TransactionHistoryGroupByOutputType = {
+    id: string
+    userId: string
+    transactionId: string
+    stripeSessionId: string | null
+    amount: number
+    transactionType: $Enums.TransactionType
+    description: string | null
+    createdAt: Date
+    virtualCurrencyId: string
+    _count: TransactionHistoryCountAggregateOutputType | null
+    _avg: TransactionHistoryAvgAggregateOutputType | null
+    _sum: TransactionHistorySumAggregateOutputType | null
+    _min: TransactionHistoryMinAggregateOutputType | null
+    _max: TransactionHistoryMaxAggregateOutputType | null
+  }
+
+  type GetTransactionHistoryGroupByPayload<T extends TransactionHistoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TransactionHistoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TransactionHistoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TransactionHistoryGroupByOutputType[P]>
+            : GetScalarType<T[P], TransactionHistoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TransactionHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    transactionId?: boolean
+    stripeSessionId?: boolean
+    amount?: boolean
+    transactionType?: boolean
+    description?: boolean
+    createdAt?: boolean
+    virtualCurrencyId?: boolean
+    virtualCurrency?: boolean | VirtualCurrencyDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["transactionHistory"]>
+
+  export type TransactionHistorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    transactionId?: boolean
+    stripeSessionId?: boolean
+    amount?: boolean
+    transactionType?: boolean
+    description?: boolean
+    createdAt?: boolean
+    virtualCurrencyId?: boolean
+    virtualCurrency?: boolean | VirtualCurrencyDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["transactionHistory"]>
+
+  export type TransactionHistorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    transactionId?: boolean
+    stripeSessionId?: boolean
+    amount?: boolean
+    transactionType?: boolean
+    description?: boolean
+    createdAt?: boolean
+    virtualCurrencyId?: boolean
+    virtualCurrency?: boolean | VirtualCurrencyDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["transactionHistory"]>
+
+  export type TransactionHistorySelectScalar = {
+    id?: boolean
+    userId?: boolean
+    transactionId?: boolean
+    stripeSessionId?: boolean
+    amount?: boolean
+    transactionType?: boolean
+    description?: boolean
+    createdAt?: boolean
+    virtualCurrencyId?: boolean
+  }
+
+  export type TransactionHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "transactionId" | "stripeSessionId" | "amount" | "transactionType" | "description" | "createdAt" | "virtualCurrencyId", ExtArgs["result"]["transactionHistory"]>
+  export type TransactionHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    virtualCurrency?: boolean | VirtualCurrencyDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type TransactionHistoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    virtualCurrency?: boolean | VirtualCurrencyDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type TransactionHistoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    virtualCurrency?: boolean | VirtualCurrencyDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $TransactionHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TransactionHistory"
+    objects: {
+      virtualCurrency: Prisma.$VirtualCurrencyPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      transactionId: string
+      stripeSessionId: string | null
+      amount: number
+      transactionType: $Enums.TransactionType
+      description: string | null
+      createdAt: Date
+      virtualCurrencyId: string
+    }, ExtArgs["result"]["transactionHistory"]>
+    composites: {}
+  }
+
+  type TransactionHistoryGetPayload<S extends boolean | null | undefined | TransactionHistoryDefaultArgs> = $Result.GetResult<Prisma.$TransactionHistoryPayload, S>
+
+  type TransactionHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TransactionHistoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TransactionHistoryCountAggregateInputType | true
+    }
+
+  export interface TransactionHistoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TransactionHistory'], meta: { name: 'TransactionHistory' } }
+    /**
+     * Find zero or one TransactionHistory that matches the filter.
+     * @param {TransactionHistoryFindUniqueArgs} args - Arguments to find a TransactionHistory
+     * @example
+     * // Get one TransactionHistory
+     * const transactionHistory = await prisma.transactionHistory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TransactionHistoryFindUniqueArgs>(args: SelectSubset<T, TransactionHistoryFindUniqueArgs<ExtArgs>>): Prisma__TransactionHistoryClient<$Result.GetResult<Prisma.$TransactionHistoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TransactionHistory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TransactionHistoryFindUniqueOrThrowArgs} args - Arguments to find a TransactionHistory
+     * @example
+     * // Get one TransactionHistory
+     * const transactionHistory = await prisma.transactionHistory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TransactionHistoryFindUniqueOrThrowArgs>(args: SelectSubset<T, TransactionHistoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TransactionHistoryClient<$Result.GetResult<Prisma.$TransactionHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TransactionHistory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransactionHistoryFindFirstArgs} args - Arguments to find a TransactionHistory
+     * @example
+     * // Get one TransactionHistory
+     * const transactionHistory = await prisma.transactionHistory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TransactionHistoryFindFirstArgs>(args?: SelectSubset<T, TransactionHistoryFindFirstArgs<ExtArgs>>): Prisma__TransactionHistoryClient<$Result.GetResult<Prisma.$TransactionHistoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TransactionHistory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransactionHistoryFindFirstOrThrowArgs} args - Arguments to find a TransactionHistory
+     * @example
+     * // Get one TransactionHistory
+     * const transactionHistory = await prisma.transactionHistory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TransactionHistoryFindFirstOrThrowArgs>(args?: SelectSubset<T, TransactionHistoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__TransactionHistoryClient<$Result.GetResult<Prisma.$TransactionHistoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TransactionHistories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransactionHistoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TransactionHistories
+     * const transactionHistories = await prisma.transactionHistory.findMany()
+     * 
+     * // Get first 10 TransactionHistories
+     * const transactionHistories = await prisma.transactionHistory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const transactionHistoryWithIdOnly = await prisma.transactionHistory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TransactionHistoryFindManyArgs>(args?: SelectSubset<T, TransactionHistoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TransactionHistory.
+     * @param {TransactionHistoryCreateArgs} args - Arguments to create a TransactionHistory.
+     * @example
+     * // Create one TransactionHistory
+     * const TransactionHistory = await prisma.transactionHistory.create({
+     *   data: {
+     *     // ... data to create a TransactionHistory
+     *   }
+     * })
+     * 
+     */
+    create<T extends TransactionHistoryCreateArgs>(args: SelectSubset<T, TransactionHistoryCreateArgs<ExtArgs>>): Prisma__TransactionHistoryClient<$Result.GetResult<Prisma.$TransactionHistoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TransactionHistories.
+     * @param {TransactionHistoryCreateManyArgs} args - Arguments to create many TransactionHistories.
+     * @example
+     * // Create many TransactionHistories
+     * const transactionHistory = await prisma.transactionHistory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TransactionHistoryCreateManyArgs>(args?: SelectSubset<T, TransactionHistoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TransactionHistories and returns the data saved in the database.
+     * @param {TransactionHistoryCreateManyAndReturnArgs} args - Arguments to create many TransactionHistories.
+     * @example
+     * // Create many TransactionHistories
+     * const transactionHistory = await prisma.transactionHistory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TransactionHistories and only return the `id`
+     * const transactionHistoryWithIdOnly = await prisma.transactionHistory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TransactionHistoryCreateManyAndReturnArgs>(args?: SelectSubset<T, TransactionHistoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionHistoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TransactionHistory.
+     * @param {TransactionHistoryDeleteArgs} args - Arguments to delete one TransactionHistory.
+     * @example
+     * // Delete one TransactionHistory
+     * const TransactionHistory = await prisma.transactionHistory.delete({
+     *   where: {
+     *     // ... filter to delete one TransactionHistory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TransactionHistoryDeleteArgs>(args: SelectSubset<T, TransactionHistoryDeleteArgs<ExtArgs>>): Prisma__TransactionHistoryClient<$Result.GetResult<Prisma.$TransactionHistoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TransactionHistory.
+     * @param {TransactionHistoryUpdateArgs} args - Arguments to update one TransactionHistory.
+     * @example
+     * // Update one TransactionHistory
+     * const transactionHistory = await prisma.transactionHistory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TransactionHistoryUpdateArgs>(args: SelectSubset<T, TransactionHistoryUpdateArgs<ExtArgs>>): Prisma__TransactionHistoryClient<$Result.GetResult<Prisma.$TransactionHistoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TransactionHistories.
+     * @param {TransactionHistoryDeleteManyArgs} args - Arguments to filter TransactionHistories to delete.
+     * @example
+     * // Delete a few TransactionHistories
+     * const { count } = await prisma.transactionHistory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TransactionHistoryDeleteManyArgs>(args?: SelectSubset<T, TransactionHistoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TransactionHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransactionHistoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TransactionHistories
+     * const transactionHistory = await prisma.transactionHistory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TransactionHistoryUpdateManyArgs>(args: SelectSubset<T, TransactionHistoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TransactionHistories and returns the data updated in the database.
+     * @param {TransactionHistoryUpdateManyAndReturnArgs} args - Arguments to update many TransactionHistories.
+     * @example
+     * // Update many TransactionHistories
+     * const transactionHistory = await prisma.transactionHistory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TransactionHistories and only return the `id`
+     * const transactionHistoryWithIdOnly = await prisma.transactionHistory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TransactionHistoryUpdateManyAndReturnArgs>(args: SelectSubset<T, TransactionHistoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionHistoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TransactionHistory.
+     * @param {TransactionHistoryUpsertArgs} args - Arguments to update or create a TransactionHistory.
+     * @example
+     * // Update or create a TransactionHistory
+     * const transactionHistory = await prisma.transactionHistory.upsert({
+     *   create: {
+     *     // ... data to create a TransactionHistory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TransactionHistory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TransactionHistoryUpsertArgs>(args: SelectSubset<T, TransactionHistoryUpsertArgs<ExtArgs>>): Prisma__TransactionHistoryClient<$Result.GetResult<Prisma.$TransactionHistoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TransactionHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransactionHistoryCountArgs} args - Arguments to filter TransactionHistories to count.
+     * @example
+     * // Count the number of TransactionHistories
+     * const count = await prisma.transactionHistory.count({
+     *   where: {
+     *     // ... the filter for the TransactionHistories we want to count
+     *   }
+     * })
+    **/
+    count<T extends TransactionHistoryCountArgs>(
+      args?: Subset<T, TransactionHistoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TransactionHistoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TransactionHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransactionHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TransactionHistoryAggregateArgs>(args: Subset<T, TransactionHistoryAggregateArgs>): Prisma.PrismaPromise<GetTransactionHistoryAggregateType<T>>
+
+    /**
+     * Group by TransactionHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransactionHistoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TransactionHistoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TransactionHistoryGroupByArgs['orderBy'] }
+        : { orderBy?: TransactionHistoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TransactionHistoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTransactionHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TransactionHistory model
+   */
+  readonly fields: TransactionHistoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TransactionHistory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TransactionHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    virtualCurrency<T extends VirtualCurrencyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VirtualCurrencyDefaultArgs<ExtArgs>>): Prisma__VirtualCurrencyClient<$Result.GetResult<Prisma.$VirtualCurrencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TransactionHistory model
+   */
+  interface TransactionHistoryFieldRefs {
+    readonly id: FieldRef<"TransactionHistory", 'String'>
+    readonly userId: FieldRef<"TransactionHistory", 'String'>
+    readonly transactionId: FieldRef<"TransactionHistory", 'String'>
+    readonly stripeSessionId: FieldRef<"TransactionHistory", 'String'>
+    readonly amount: FieldRef<"TransactionHistory", 'Int'>
+    readonly transactionType: FieldRef<"TransactionHistory", 'TransactionType'>
+    readonly description: FieldRef<"TransactionHistory", 'String'>
+    readonly createdAt: FieldRef<"TransactionHistory", 'DateTime'>
+    readonly virtualCurrencyId: FieldRef<"TransactionHistory", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TransactionHistory findUnique
+   */
+  export type TransactionHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransactionHistory
+     */
+    select?: TransactionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransactionHistory
+     */
+    omit?: TransactionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransactionHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which TransactionHistory to fetch.
+     */
+    where: TransactionHistoryWhereUniqueInput
+  }
+
+  /**
+   * TransactionHistory findUniqueOrThrow
+   */
+  export type TransactionHistoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransactionHistory
+     */
+    select?: TransactionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransactionHistory
+     */
+    omit?: TransactionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransactionHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which TransactionHistory to fetch.
+     */
+    where: TransactionHistoryWhereUniqueInput
+  }
+
+  /**
+   * TransactionHistory findFirst
+   */
+  export type TransactionHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransactionHistory
+     */
+    select?: TransactionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransactionHistory
+     */
+    omit?: TransactionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransactionHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which TransactionHistory to fetch.
+     */
+    where?: TransactionHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TransactionHistories to fetch.
+     */
+    orderBy?: TransactionHistoryOrderByWithRelationInput | TransactionHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TransactionHistories.
+     */
+    cursor?: TransactionHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TransactionHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TransactionHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TransactionHistories.
+     */
+    distinct?: TransactionHistoryScalarFieldEnum | TransactionHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * TransactionHistory findFirstOrThrow
+   */
+  export type TransactionHistoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransactionHistory
+     */
+    select?: TransactionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransactionHistory
+     */
+    omit?: TransactionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransactionHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which TransactionHistory to fetch.
+     */
+    where?: TransactionHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TransactionHistories to fetch.
+     */
+    orderBy?: TransactionHistoryOrderByWithRelationInput | TransactionHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TransactionHistories.
+     */
+    cursor?: TransactionHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TransactionHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TransactionHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TransactionHistories.
+     */
+    distinct?: TransactionHistoryScalarFieldEnum | TransactionHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * TransactionHistory findMany
+   */
+  export type TransactionHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransactionHistory
+     */
+    select?: TransactionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransactionHistory
+     */
+    omit?: TransactionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransactionHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which TransactionHistories to fetch.
+     */
+    where?: TransactionHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TransactionHistories to fetch.
+     */
+    orderBy?: TransactionHistoryOrderByWithRelationInput | TransactionHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TransactionHistories.
+     */
+    cursor?: TransactionHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TransactionHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TransactionHistories.
+     */
+    skip?: number
+    distinct?: TransactionHistoryScalarFieldEnum | TransactionHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * TransactionHistory create
+   */
+  export type TransactionHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransactionHistory
+     */
+    select?: TransactionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransactionHistory
+     */
+    omit?: TransactionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransactionHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TransactionHistory.
+     */
+    data: XOR<TransactionHistoryCreateInput, TransactionHistoryUncheckedCreateInput>
+  }
+
+  /**
+   * TransactionHistory createMany
+   */
+  export type TransactionHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TransactionHistories.
+     */
+    data: TransactionHistoryCreateManyInput | TransactionHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TransactionHistory createManyAndReturn
+   */
+  export type TransactionHistoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransactionHistory
+     */
+    select?: TransactionHistorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransactionHistory
+     */
+    omit?: TransactionHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many TransactionHistories.
+     */
+    data: TransactionHistoryCreateManyInput | TransactionHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransactionHistoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TransactionHistory update
+   */
+  export type TransactionHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransactionHistory
+     */
+    select?: TransactionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransactionHistory
+     */
+    omit?: TransactionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransactionHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TransactionHistory.
+     */
+    data: XOR<TransactionHistoryUpdateInput, TransactionHistoryUncheckedUpdateInput>
+    /**
+     * Choose, which TransactionHistory to update.
+     */
+    where: TransactionHistoryWhereUniqueInput
+  }
+
+  /**
+   * TransactionHistory updateMany
+   */
+  export type TransactionHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TransactionHistories.
+     */
+    data: XOR<TransactionHistoryUpdateManyMutationInput, TransactionHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which TransactionHistories to update
+     */
+    where?: TransactionHistoryWhereInput
+    /**
+     * Limit how many TransactionHistories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TransactionHistory updateManyAndReturn
+   */
+  export type TransactionHistoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransactionHistory
+     */
+    select?: TransactionHistorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransactionHistory
+     */
+    omit?: TransactionHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to update TransactionHistories.
+     */
+    data: XOR<TransactionHistoryUpdateManyMutationInput, TransactionHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which TransactionHistories to update
+     */
+    where?: TransactionHistoryWhereInput
+    /**
+     * Limit how many TransactionHistories to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransactionHistoryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TransactionHistory upsert
+   */
+  export type TransactionHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransactionHistory
+     */
+    select?: TransactionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransactionHistory
+     */
+    omit?: TransactionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransactionHistoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TransactionHistory to update in case it exists.
+     */
+    where: TransactionHistoryWhereUniqueInput
+    /**
+     * In case the TransactionHistory found by the `where` argument doesn't exist, create a new TransactionHistory with this data.
+     */
+    create: XOR<TransactionHistoryCreateInput, TransactionHistoryUncheckedCreateInput>
+    /**
+     * In case the TransactionHistory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TransactionHistoryUpdateInput, TransactionHistoryUncheckedUpdateInput>
+  }
+
+  /**
+   * TransactionHistory delete
+   */
+  export type TransactionHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransactionHistory
+     */
+    select?: TransactionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransactionHistory
+     */
+    omit?: TransactionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransactionHistoryInclude<ExtArgs> | null
+    /**
+     * Filter which TransactionHistory to delete.
+     */
+    where: TransactionHistoryWhereUniqueInput
+  }
+
+  /**
+   * TransactionHistory deleteMany
+   */
+  export type TransactionHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TransactionHistories to delete
+     */
+    where?: TransactionHistoryWhereInput
+    /**
+     * Limit how many TransactionHistories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TransactionHistory without action
+   */
+  export type TransactionHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransactionHistory
+     */
+    select?: TransactionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransactionHistory
+     */
+    omit?: TransactionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransactionHistoryInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5658,6 +14527,95 @@ export namespace Prisma {
   export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+  export const TreasureHuntScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    createdById: 'createdById',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    location: 'location',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TreasureHuntScalarFieldEnum = (typeof TreasureHuntScalarFieldEnum)[keyof typeof TreasureHuntScalarFieldEnum]
+
+
+  export const ParticipationScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    huntId: 'huntId',
+    status: 'status',
+    joinDate: 'joinDate'
+  };
+
+  export type ParticipationScalarFieldEnum = (typeof ParticipationScalarFieldEnum)[keyof typeof ParticipationScalarFieldEnum]
+
+
+  export const ArtefactScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    rarity: 'rarity',
+    description: 'description',
+    imageUrl: 'imageUrl',
+    userId: 'userId',
+    huntId: 'huntId',
+    foundAt: 'foundAt'
+  };
+
+  export type ArtefactScalarFieldEnum = (typeof ArtefactScalarFieldEnum)[keyof typeof ArtefactScalarFieldEnum]
+
+
+  export const HuntStepScalarFieldEnum: {
+    id: 'id',
+    description: 'description',
+    huntId: 'huntId',
+    stepOrder: 'stepOrder',
+    createdAt: 'createdAt'
+  };
+
+  export type HuntStepScalarFieldEnum = (typeof HuntStepScalarFieldEnum)[keyof typeof HuntStepScalarFieldEnum]
+
+
+  export const RewardScalarFieldEnum: {
+    id: 'id',
+    type: 'type',
+    value: 'value',
+    description: 'description',
+    huntId: 'huntId'
+  };
+
+  export type RewardScalarFieldEnum = (typeof RewardScalarFieldEnum)[keyof typeof RewardScalarFieldEnum]
+
+
+  export const VirtualCurrencyScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    amount: 'amount',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type VirtualCurrencyScalarFieldEnum = (typeof VirtualCurrencyScalarFieldEnum)[keyof typeof VirtualCurrencyScalarFieldEnum]
+
+
+  export const TransactionHistoryScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    transactionId: 'transactionId',
+    stripeSessionId: 'stripeSessionId',
+    amount: 'amount',
+    transactionType: 'transactionType',
+    description: 'description',
+    createdAt: 'createdAt',
+    virtualCurrencyId: 'virtualCurrencyId'
+  };
+
+  export type TransactionHistoryScalarFieldEnum = (typeof TransactionHistoryScalarFieldEnum)[keyof typeof TransactionHistoryScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -5723,6 +14681,48 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'HuntStatus'
+   */
+  export type EnumHuntStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HuntStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'HuntStatus[]'
+   */
+  export type ListEnumHuntStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HuntStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ParticipationStatus'
+   */
+  export type EnumParticipationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ParticipationStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ParticipationStatus[]'
+   */
+  export type ListEnumParticipationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ParticipationStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ArtefactRarity'
+   */
+  export type EnumArtefactRarityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ArtefactRarity'>
+    
+
+
+  /**
+   * Reference to a field of type 'ArtefactRarity[]'
+   */
+  export type ListEnumArtefactRarityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ArtefactRarity[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -5733,6 +14733,48 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'RewardType'
+   */
+  export type EnumRewardTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RewardType'>
+    
+
+
+  /**
+   * Reference to a field of type 'RewardType[]'
+   */
+  export type ListEnumRewardTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RewardType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TransactionType'
+   */
+  export type EnumTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionType'>
+    
+
+
+  /**
+   * Reference to a field of type 'TransactionType[]'
+   */
+  export type ListEnumTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -5753,6 +14795,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
+    participations?: ParticipationListRelationFilter
+    createdChasses?: TreasureHuntListRelationFilter
+    collectedArtefacts?: ArtefactListRelationFilter
+    virtualCurrency?: VirtualCurrencyListRelationFilter
+    transactionHistory?: TransactionHistoryListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -5766,6 +14813,11 @@ export namespace Prisma {
     updatedAt?: SortOrder
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
+    participations?: ParticipationOrderByRelationAggregateInput
+    createdChasses?: TreasureHuntOrderByRelationAggregateInput
+    collectedArtefacts?: ArtefactOrderByRelationAggregateInput
+    virtualCurrency?: VirtualCurrencyOrderByRelationAggregateInput
+    transactionHistory?: TransactionHistoryOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -5782,6 +14834,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
+    participations?: ParticipationListRelationFilter
+    createdChasses?: TreasureHuntListRelationFilter
+    collectedArtefacts?: ArtefactListRelationFilter
+    virtualCurrency?: VirtualCurrencyListRelationFilter
+    transactionHistory?: TransactionHistoryListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -6034,6 +15091,483 @@ export namespace Prisma {
     updatedAt?: DateTimeNullableWithAggregatesFilter<"Verification"> | Date | string | null
   }
 
+  export type TreasureHuntWhereInput = {
+    AND?: TreasureHuntWhereInput | TreasureHuntWhereInput[]
+    OR?: TreasureHuntWhereInput[]
+    NOT?: TreasureHuntWhereInput | TreasureHuntWhereInput[]
+    id?: StringFilter<"TreasureHunt"> | string
+    title?: StringFilter<"TreasureHunt"> | string
+    description?: StringNullableFilter<"TreasureHunt"> | string | null
+    createdById?: StringFilter<"TreasureHunt"> | string
+    startDate?: DateTimeNullableFilter<"TreasureHunt"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"TreasureHunt"> | Date | string | null
+    location?: StringNullableFilter<"TreasureHunt"> | string | null
+    status?: EnumHuntStatusFilter<"TreasureHunt"> | $Enums.HuntStatus
+    createdAt?: DateTimeFilter<"TreasureHunt"> | Date | string
+    updatedAt?: DateTimeFilter<"TreasureHunt"> | Date | string
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    participants?: ParticipationListRelationFilter
+    steps?: HuntStepListRelationFilter
+    rewards?: RewardListRelationFilter
+    artefacts?: ArtefactListRelationFilter
+  }
+
+  export type TreasureHuntOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    startDate?: SortOrderInput | SortOrder
+    endDate?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdBy?: UserOrderByWithRelationInput
+    participants?: ParticipationOrderByRelationAggregateInput
+    steps?: HuntStepOrderByRelationAggregateInput
+    rewards?: RewardOrderByRelationAggregateInput
+    artefacts?: ArtefactOrderByRelationAggregateInput
+  }
+
+  export type TreasureHuntWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TreasureHuntWhereInput | TreasureHuntWhereInput[]
+    OR?: TreasureHuntWhereInput[]
+    NOT?: TreasureHuntWhereInput | TreasureHuntWhereInput[]
+    title?: StringFilter<"TreasureHunt"> | string
+    description?: StringNullableFilter<"TreasureHunt"> | string | null
+    createdById?: StringFilter<"TreasureHunt"> | string
+    startDate?: DateTimeNullableFilter<"TreasureHunt"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"TreasureHunt"> | Date | string | null
+    location?: StringNullableFilter<"TreasureHunt"> | string | null
+    status?: EnumHuntStatusFilter<"TreasureHunt"> | $Enums.HuntStatus
+    createdAt?: DateTimeFilter<"TreasureHunt"> | Date | string
+    updatedAt?: DateTimeFilter<"TreasureHunt"> | Date | string
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    participants?: ParticipationListRelationFilter
+    steps?: HuntStepListRelationFilter
+    rewards?: RewardListRelationFilter
+    artefacts?: ArtefactListRelationFilter
+  }, "id">
+
+  export type TreasureHuntOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    startDate?: SortOrderInput | SortOrder
+    endDate?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TreasureHuntCountOrderByAggregateInput
+    _max?: TreasureHuntMaxOrderByAggregateInput
+    _min?: TreasureHuntMinOrderByAggregateInput
+  }
+
+  export type TreasureHuntScalarWhereWithAggregatesInput = {
+    AND?: TreasureHuntScalarWhereWithAggregatesInput | TreasureHuntScalarWhereWithAggregatesInput[]
+    OR?: TreasureHuntScalarWhereWithAggregatesInput[]
+    NOT?: TreasureHuntScalarWhereWithAggregatesInput | TreasureHuntScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TreasureHunt"> | string
+    title?: StringWithAggregatesFilter<"TreasureHunt"> | string
+    description?: StringNullableWithAggregatesFilter<"TreasureHunt"> | string | null
+    createdById?: StringWithAggregatesFilter<"TreasureHunt"> | string
+    startDate?: DateTimeNullableWithAggregatesFilter<"TreasureHunt"> | Date | string | null
+    endDate?: DateTimeNullableWithAggregatesFilter<"TreasureHunt"> | Date | string | null
+    location?: StringNullableWithAggregatesFilter<"TreasureHunt"> | string | null
+    status?: EnumHuntStatusWithAggregatesFilter<"TreasureHunt"> | $Enums.HuntStatus
+    createdAt?: DateTimeWithAggregatesFilter<"TreasureHunt"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TreasureHunt"> | Date | string
+  }
+
+  export type ParticipationWhereInput = {
+    AND?: ParticipationWhereInput | ParticipationWhereInput[]
+    OR?: ParticipationWhereInput[]
+    NOT?: ParticipationWhereInput | ParticipationWhereInput[]
+    id?: StringFilter<"Participation"> | string
+    userId?: StringFilter<"Participation"> | string
+    huntId?: StringFilter<"Participation"> | string
+    status?: EnumParticipationStatusFilter<"Participation"> | $Enums.ParticipationStatus
+    joinDate?: DateTimeFilter<"Participation"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    treasureHunt?: XOR<TreasureHuntScalarRelationFilter, TreasureHuntWhereInput>
+  }
+
+  export type ParticipationOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    status?: SortOrder
+    joinDate?: SortOrder
+    user?: UserOrderByWithRelationInput
+    treasureHunt?: TreasureHuntOrderByWithRelationInput
+  }
+
+  export type ParticipationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ParticipationWhereInput | ParticipationWhereInput[]
+    OR?: ParticipationWhereInput[]
+    NOT?: ParticipationWhereInput | ParticipationWhereInput[]
+    userId?: StringFilter<"Participation"> | string
+    huntId?: StringFilter<"Participation"> | string
+    status?: EnumParticipationStatusFilter<"Participation"> | $Enums.ParticipationStatus
+    joinDate?: DateTimeFilter<"Participation"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    treasureHunt?: XOR<TreasureHuntScalarRelationFilter, TreasureHuntWhereInput>
+  }, "id">
+
+  export type ParticipationOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    status?: SortOrder
+    joinDate?: SortOrder
+    _count?: ParticipationCountOrderByAggregateInput
+    _max?: ParticipationMaxOrderByAggregateInput
+    _min?: ParticipationMinOrderByAggregateInput
+  }
+
+  export type ParticipationScalarWhereWithAggregatesInput = {
+    AND?: ParticipationScalarWhereWithAggregatesInput | ParticipationScalarWhereWithAggregatesInput[]
+    OR?: ParticipationScalarWhereWithAggregatesInput[]
+    NOT?: ParticipationScalarWhereWithAggregatesInput | ParticipationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Participation"> | string
+    userId?: StringWithAggregatesFilter<"Participation"> | string
+    huntId?: StringWithAggregatesFilter<"Participation"> | string
+    status?: EnumParticipationStatusWithAggregatesFilter<"Participation"> | $Enums.ParticipationStatus
+    joinDate?: DateTimeWithAggregatesFilter<"Participation"> | Date | string
+  }
+
+  export type ArtefactWhereInput = {
+    AND?: ArtefactWhereInput | ArtefactWhereInput[]
+    OR?: ArtefactWhereInput[]
+    NOT?: ArtefactWhereInput | ArtefactWhereInput[]
+    id?: StringFilter<"Artefact"> | string
+    name?: StringFilter<"Artefact"> | string
+    rarity?: EnumArtefactRarityFilter<"Artefact"> | $Enums.ArtefactRarity
+    description?: StringNullableFilter<"Artefact"> | string | null
+    imageUrl?: StringNullableFilter<"Artefact"> | string | null
+    userId?: StringFilter<"Artefact"> | string
+    huntId?: StringNullableFilter<"Artefact"> | string | null
+    foundAt?: DateTimeFilter<"Artefact"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    hunt?: XOR<TreasureHuntNullableScalarRelationFilter, TreasureHuntWhereInput> | null
+  }
+
+  export type ArtefactOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    rarity?: SortOrder
+    description?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    huntId?: SortOrderInput | SortOrder
+    foundAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    hunt?: TreasureHuntOrderByWithRelationInput
+  }
+
+  export type ArtefactWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ArtefactWhereInput | ArtefactWhereInput[]
+    OR?: ArtefactWhereInput[]
+    NOT?: ArtefactWhereInput | ArtefactWhereInput[]
+    name?: StringFilter<"Artefact"> | string
+    rarity?: EnumArtefactRarityFilter<"Artefact"> | $Enums.ArtefactRarity
+    description?: StringNullableFilter<"Artefact"> | string | null
+    imageUrl?: StringNullableFilter<"Artefact"> | string | null
+    userId?: StringFilter<"Artefact"> | string
+    huntId?: StringNullableFilter<"Artefact"> | string | null
+    foundAt?: DateTimeFilter<"Artefact"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    hunt?: XOR<TreasureHuntNullableScalarRelationFilter, TreasureHuntWhereInput> | null
+  }, "id">
+
+  export type ArtefactOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    rarity?: SortOrder
+    description?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    huntId?: SortOrderInput | SortOrder
+    foundAt?: SortOrder
+    _count?: ArtefactCountOrderByAggregateInput
+    _max?: ArtefactMaxOrderByAggregateInput
+    _min?: ArtefactMinOrderByAggregateInput
+  }
+
+  export type ArtefactScalarWhereWithAggregatesInput = {
+    AND?: ArtefactScalarWhereWithAggregatesInput | ArtefactScalarWhereWithAggregatesInput[]
+    OR?: ArtefactScalarWhereWithAggregatesInput[]
+    NOT?: ArtefactScalarWhereWithAggregatesInput | ArtefactScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Artefact"> | string
+    name?: StringWithAggregatesFilter<"Artefact"> | string
+    rarity?: EnumArtefactRarityWithAggregatesFilter<"Artefact"> | $Enums.ArtefactRarity
+    description?: StringNullableWithAggregatesFilter<"Artefact"> | string | null
+    imageUrl?: StringNullableWithAggregatesFilter<"Artefact"> | string | null
+    userId?: StringWithAggregatesFilter<"Artefact"> | string
+    huntId?: StringNullableWithAggregatesFilter<"Artefact"> | string | null
+    foundAt?: DateTimeWithAggregatesFilter<"Artefact"> | Date | string
+  }
+
+  export type HuntStepWhereInput = {
+    AND?: HuntStepWhereInput | HuntStepWhereInput[]
+    OR?: HuntStepWhereInput[]
+    NOT?: HuntStepWhereInput | HuntStepWhereInput[]
+    id?: StringFilter<"HuntStep"> | string
+    description?: StringFilter<"HuntStep"> | string
+    huntId?: StringFilter<"HuntStep"> | string
+    stepOrder?: IntFilter<"HuntStep"> | number
+    createdAt?: DateTimeFilter<"HuntStep"> | Date | string
+    treasureHunt?: XOR<TreasureHuntScalarRelationFilter, TreasureHuntWhereInput>
+  }
+
+  export type HuntStepOrderByWithRelationInput = {
+    id?: SortOrder
+    description?: SortOrder
+    huntId?: SortOrder
+    stepOrder?: SortOrder
+    createdAt?: SortOrder
+    treasureHunt?: TreasureHuntOrderByWithRelationInput
+  }
+
+  export type HuntStepWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: HuntStepWhereInput | HuntStepWhereInput[]
+    OR?: HuntStepWhereInput[]
+    NOT?: HuntStepWhereInput | HuntStepWhereInput[]
+    description?: StringFilter<"HuntStep"> | string
+    huntId?: StringFilter<"HuntStep"> | string
+    stepOrder?: IntFilter<"HuntStep"> | number
+    createdAt?: DateTimeFilter<"HuntStep"> | Date | string
+    treasureHunt?: XOR<TreasureHuntScalarRelationFilter, TreasureHuntWhereInput>
+  }, "id">
+
+  export type HuntStepOrderByWithAggregationInput = {
+    id?: SortOrder
+    description?: SortOrder
+    huntId?: SortOrder
+    stepOrder?: SortOrder
+    createdAt?: SortOrder
+    _count?: HuntStepCountOrderByAggregateInput
+    _avg?: HuntStepAvgOrderByAggregateInput
+    _max?: HuntStepMaxOrderByAggregateInput
+    _min?: HuntStepMinOrderByAggregateInput
+    _sum?: HuntStepSumOrderByAggregateInput
+  }
+
+  export type HuntStepScalarWhereWithAggregatesInput = {
+    AND?: HuntStepScalarWhereWithAggregatesInput | HuntStepScalarWhereWithAggregatesInput[]
+    OR?: HuntStepScalarWhereWithAggregatesInput[]
+    NOT?: HuntStepScalarWhereWithAggregatesInput | HuntStepScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"HuntStep"> | string
+    description?: StringWithAggregatesFilter<"HuntStep"> | string
+    huntId?: StringWithAggregatesFilter<"HuntStep"> | string
+    stepOrder?: IntWithAggregatesFilter<"HuntStep"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"HuntStep"> | Date | string
+  }
+
+  export type RewardWhereInput = {
+    AND?: RewardWhereInput | RewardWhereInput[]
+    OR?: RewardWhereInput[]
+    NOT?: RewardWhereInput | RewardWhereInput[]
+    id?: StringFilter<"Reward"> | string
+    type?: EnumRewardTypeFilter<"Reward"> | $Enums.RewardType
+    value?: IntFilter<"Reward"> | number
+    description?: StringNullableFilter<"Reward"> | string | null
+    huntId?: StringFilter<"Reward"> | string
+    treasureHunt?: XOR<TreasureHuntScalarRelationFilter, TreasureHuntWhereInput>
+  }
+
+  export type RewardOrderByWithRelationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    value?: SortOrder
+    description?: SortOrderInput | SortOrder
+    huntId?: SortOrder
+    treasureHunt?: TreasureHuntOrderByWithRelationInput
+  }
+
+  export type RewardWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RewardWhereInput | RewardWhereInput[]
+    OR?: RewardWhereInput[]
+    NOT?: RewardWhereInput | RewardWhereInput[]
+    type?: EnumRewardTypeFilter<"Reward"> | $Enums.RewardType
+    value?: IntFilter<"Reward"> | number
+    description?: StringNullableFilter<"Reward"> | string | null
+    huntId?: StringFilter<"Reward"> | string
+    treasureHunt?: XOR<TreasureHuntScalarRelationFilter, TreasureHuntWhereInput>
+  }, "id">
+
+  export type RewardOrderByWithAggregationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    value?: SortOrder
+    description?: SortOrderInput | SortOrder
+    huntId?: SortOrder
+    _count?: RewardCountOrderByAggregateInput
+    _avg?: RewardAvgOrderByAggregateInput
+    _max?: RewardMaxOrderByAggregateInput
+    _min?: RewardMinOrderByAggregateInput
+    _sum?: RewardSumOrderByAggregateInput
+  }
+
+  export type RewardScalarWhereWithAggregatesInput = {
+    AND?: RewardScalarWhereWithAggregatesInput | RewardScalarWhereWithAggregatesInput[]
+    OR?: RewardScalarWhereWithAggregatesInput[]
+    NOT?: RewardScalarWhereWithAggregatesInput | RewardScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Reward"> | string
+    type?: EnumRewardTypeWithAggregatesFilter<"Reward"> | $Enums.RewardType
+    value?: IntWithAggregatesFilter<"Reward"> | number
+    description?: StringNullableWithAggregatesFilter<"Reward"> | string | null
+    huntId?: StringWithAggregatesFilter<"Reward"> | string
+  }
+
+  export type VirtualCurrencyWhereInput = {
+    AND?: VirtualCurrencyWhereInput | VirtualCurrencyWhereInput[]
+    OR?: VirtualCurrencyWhereInput[]
+    NOT?: VirtualCurrencyWhereInput | VirtualCurrencyWhereInput[]
+    id?: StringFilter<"VirtualCurrency"> | string
+    userId?: StringFilter<"VirtualCurrency"> | string
+    amount?: IntFilter<"VirtualCurrency"> | number
+    createdAt?: DateTimeFilter<"VirtualCurrency"> | Date | string
+    updatedAt?: DateTimeFilter<"VirtualCurrency"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    transactionHistory?: TransactionHistoryListRelationFilter
+  }
+
+  export type VirtualCurrencyOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    transactionHistory?: TransactionHistoryOrderByRelationAggregateInput
+  }
+
+  export type VirtualCurrencyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: VirtualCurrencyWhereInput | VirtualCurrencyWhereInput[]
+    OR?: VirtualCurrencyWhereInput[]
+    NOT?: VirtualCurrencyWhereInput | VirtualCurrencyWhereInput[]
+    userId?: StringFilter<"VirtualCurrency"> | string
+    amount?: IntFilter<"VirtualCurrency"> | number
+    createdAt?: DateTimeFilter<"VirtualCurrency"> | Date | string
+    updatedAt?: DateTimeFilter<"VirtualCurrency"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    transactionHistory?: TransactionHistoryListRelationFilter
+  }, "id">
+
+  export type VirtualCurrencyOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: VirtualCurrencyCountOrderByAggregateInput
+    _avg?: VirtualCurrencyAvgOrderByAggregateInput
+    _max?: VirtualCurrencyMaxOrderByAggregateInput
+    _min?: VirtualCurrencyMinOrderByAggregateInput
+    _sum?: VirtualCurrencySumOrderByAggregateInput
+  }
+
+  export type VirtualCurrencyScalarWhereWithAggregatesInput = {
+    AND?: VirtualCurrencyScalarWhereWithAggregatesInput | VirtualCurrencyScalarWhereWithAggregatesInput[]
+    OR?: VirtualCurrencyScalarWhereWithAggregatesInput[]
+    NOT?: VirtualCurrencyScalarWhereWithAggregatesInput | VirtualCurrencyScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"VirtualCurrency"> | string
+    userId?: StringWithAggregatesFilter<"VirtualCurrency"> | string
+    amount?: IntWithAggregatesFilter<"VirtualCurrency"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"VirtualCurrency"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"VirtualCurrency"> | Date | string
+  }
+
+  export type TransactionHistoryWhereInput = {
+    AND?: TransactionHistoryWhereInput | TransactionHistoryWhereInput[]
+    OR?: TransactionHistoryWhereInput[]
+    NOT?: TransactionHistoryWhereInput | TransactionHistoryWhereInput[]
+    id?: StringFilter<"TransactionHistory"> | string
+    userId?: StringFilter<"TransactionHistory"> | string
+    transactionId?: StringFilter<"TransactionHistory"> | string
+    stripeSessionId?: StringNullableFilter<"TransactionHistory"> | string | null
+    amount?: IntFilter<"TransactionHistory"> | number
+    transactionType?: EnumTransactionTypeFilter<"TransactionHistory"> | $Enums.TransactionType
+    description?: StringNullableFilter<"TransactionHistory"> | string | null
+    createdAt?: DateTimeFilter<"TransactionHistory"> | Date | string
+    virtualCurrencyId?: StringFilter<"TransactionHistory"> | string
+    virtualCurrency?: XOR<VirtualCurrencyScalarRelationFilter, VirtualCurrencyWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type TransactionHistoryOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    transactionId?: SortOrder
+    stripeSessionId?: SortOrderInput | SortOrder
+    amount?: SortOrder
+    transactionType?: SortOrder
+    description?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    virtualCurrencyId?: SortOrder
+    virtualCurrency?: VirtualCurrencyOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type TransactionHistoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    stripeSessionId?: string
+    AND?: TransactionHistoryWhereInput | TransactionHistoryWhereInput[]
+    OR?: TransactionHistoryWhereInput[]
+    NOT?: TransactionHistoryWhereInput | TransactionHistoryWhereInput[]
+    userId?: StringFilter<"TransactionHistory"> | string
+    transactionId?: StringFilter<"TransactionHistory"> | string
+    amount?: IntFilter<"TransactionHistory"> | number
+    transactionType?: EnumTransactionTypeFilter<"TransactionHistory"> | $Enums.TransactionType
+    description?: StringNullableFilter<"TransactionHistory"> | string | null
+    createdAt?: DateTimeFilter<"TransactionHistory"> | Date | string
+    virtualCurrencyId?: StringFilter<"TransactionHistory"> | string
+    virtualCurrency?: XOR<VirtualCurrencyScalarRelationFilter, VirtualCurrencyWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "stripeSessionId">
+
+  export type TransactionHistoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    transactionId?: SortOrder
+    stripeSessionId?: SortOrderInput | SortOrder
+    amount?: SortOrder
+    transactionType?: SortOrder
+    description?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    virtualCurrencyId?: SortOrder
+    _count?: TransactionHistoryCountOrderByAggregateInput
+    _avg?: TransactionHistoryAvgOrderByAggregateInput
+    _max?: TransactionHistoryMaxOrderByAggregateInput
+    _min?: TransactionHistoryMinOrderByAggregateInput
+    _sum?: TransactionHistorySumOrderByAggregateInput
+  }
+
+  export type TransactionHistoryScalarWhereWithAggregatesInput = {
+    AND?: TransactionHistoryScalarWhereWithAggregatesInput | TransactionHistoryScalarWhereWithAggregatesInput[]
+    OR?: TransactionHistoryScalarWhereWithAggregatesInput[]
+    NOT?: TransactionHistoryScalarWhereWithAggregatesInput | TransactionHistoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TransactionHistory"> | string
+    userId?: StringWithAggregatesFilter<"TransactionHistory"> | string
+    transactionId?: StringWithAggregatesFilter<"TransactionHistory"> | string
+    stripeSessionId?: StringNullableWithAggregatesFilter<"TransactionHistory"> | string | null
+    amount?: IntWithAggregatesFilter<"TransactionHistory"> | number
+    transactionType?: EnumTransactionTypeWithAggregatesFilter<"TransactionHistory"> | $Enums.TransactionType
+    description?: StringNullableWithAggregatesFilter<"TransactionHistory"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"TransactionHistory"> | Date | string
+    virtualCurrencyId?: StringWithAggregatesFilter<"TransactionHistory"> | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -6045,6 +15579,11 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
+    participations?: ParticipationCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6058,6 +15597,11 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -6071,6 +15615,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6084,6 +15633,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6369,6 +15923,492 @@ export namespace Prisma {
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type TreasureHuntCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedChassesInput
+    participants?: ParticipationCreateNestedManyWithoutTreasureHuntInput
+    steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
+    rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
+    artefacts?: ArtefactCreateNestedManyWithoutHuntInput
+  }
+
+  export type TreasureHuntUncheckedCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdById: string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    participants?: ParticipationUncheckedCreateNestedManyWithoutTreasureHuntInput
+    steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
+    rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
+    artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
+  }
+
+  export type TreasureHuntUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedChassesNestedInput
+    participants?: ParticipationUpdateManyWithoutTreasureHuntNestedInput
+    steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
+    rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
+    artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
+  }
+
+  export type TreasureHuntUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    participants?: ParticipationUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
+  }
+
+  export type TreasureHuntCreateManyInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdById: string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TreasureHuntUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TreasureHuntUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ParticipationCreateInput = {
+    id?: string
+    status?: $Enums.ParticipationStatus
+    joinDate?: Date | string
+    user: UserCreateNestedOneWithoutParticipationsInput
+    treasureHunt: TreasureHuntCreateNestedOneWithoutParticipantsInput
+  }
+
+  export type ParticipationUncheckedCreateInput = {
+    id?: string
+    userId: string
+    huntId: string
+    status?: $Enums.ParticipationStatus
+    joinDate?: Date | string
+  }
+
+  export type ParticipationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumParticipationStatusFieldUpdateOperationsInput | $Enums.ParticipationStatus
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutParticipationsNestedInput
+    treasureHunt?: TreasureHuntUpdateOneRequiredWithoutParticipantsNestedInput
+  }
+
+  export type ParticipationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    huntId?: StringFieldUpdateOperationsInput | string
+    status?: EnumParticipationStatusFieldUpdateOperationsInput | $Enums.ParticipationStatus
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ParticipationCreateManyInput = {
+    id?: string
+    userId: string
+    huntId: string
+    status?: $Enums.ParticipationStatus
+    joinDate?: Date | string
+  }
+
+  export type ParticipationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumParticipationStatusFieldUpdateOperationsInput | $Enums.ParticipationStatus
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ParticipationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    huntId?: StringFieldUpdateOperationsInput | string
+    status?: EnumParticipationStatusFieldUpdateOperationsInput | $Enums.ParticipationStatus
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ArtefactCreateInput = {
+    id?: string
+    name: string
+    rarity: $Enums.ArtefactRarity
+    description?: string | null
+    imageUrl?: string | null
+    foundAt?: Date | string
+    user: UserCreateNestedOneWithoutCollectedArtefactsInput
+    hunt?: TreasureHuntCreateNestedOneWithoutArtefactsInput
+  }
+
+  export type ArtefactUncheckedCreateInput = {
+    id?: string
+    name: string
+    rarity: $Enums.ArtefactRarity
+    description?: string | null
+    imageUrl?: string | null
+    userId: string
+    huntId?: string | null
+    foundAt?: Date | string
+  }
+
+  export type ArtefactUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCollectedArtefactsNestedInput
+    hunt?: TreasureHuntUpdateOneWithoutArtefactsNestedInput
+  }
+
+  export type ArtefactUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    huntId?: NullableStringFieldUpdateOperationsInput | string | null
+    foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ArtefactCreateManyInput = {
+    id?: string
+    name: string
+    rarity: $Enums.ArtefactRarity
+    description?: string | null
+    imageUrl?: string | null
+    userId: string
+    huntId?: string | null
+    foundAt?: Date | string
+  }
+
+  export type ArtefactUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ArtefactUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    huntId?: NullableStringFieldUpdateOperationsInput | string | null
+    foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HuntStepCreateInput = {
+    id?: string
+    description: string
+    stepOrder: number
+    createdAt?: Date | string
+    treasureHunt: TreasureHuntCreateNestedOneWithoutStepsInput
+  }
+
+  export type HuntStepUncheckedCreateInput = {
+    id?: string
+    description: string
+    huntId: string
+    stepOrder: number
+    createdAt?: Date | string
+  }
+
+  export type HuntStepUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    treasureHunt?: TreasureHuntUpdateOneRequiredWithoutStepsNestedInput
+  }
+
+  export type HuntStepUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    huntId?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HuntStepCreateManyInput = {
+    id?: string
+    description: string
+    huntId: string
+    stepOrder: number
+    createdAt?: Date | string
+  }
+
+  export type HuntStepUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HuntStepUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    huntId?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RewardCreateInput = {
+    id?: string
+    type: $Enums.RewardType
+    value: number
+    description?: string | null
+    treasureHunt: TreasureHuntCreateNestedOneWithoutRewardsInput
+  }
+
+  export type RewardUncheckedCreateInput = {
+    id?: string
+    type: $Enums.RewardType
+    value: number
+    description?: string | null
+    huntId: string
+  }
+
+  export type RewardUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumRewardTypeFieldUpdateOperationsInput | $Enums.RewardType
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    treasureHunt?: TreasureHuntUpdateOneRequiredWithoutRewardsNestedInput
+  }
+
+  export type RewardUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumRewardTypeFieldUpdateOperationsInput | $Enums.RewardType
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    huntId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RewardCreateManyInput = {
+    id?: string
+    type: $Enums.RewardType
+    value: number
+    description?: string | null
+    huntId: string
+  }
+
+  export type RewardUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumRewardTypeFieldUpdateOperationsInput | $Enums.RewardType
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type RewardUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumRewardTypeFieldUpdateOperationsInput | $Enums.RewardType
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    huntId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type VirtualCurrencyCreateInput = {
+    id?: string
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutVirtualCurrencyInput
+    transactionHistory?: TransactionHistoryCreateNestedManyWithoutVirtualCurrencyInput
+  }
+
+  export type VirtualCurrencyUncheckedCreateInput = {
+    id?: string
+    userId: string
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutVirtualCurrencyInput
+  }
+
+  export type VirtualCurrencyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutVirtualCurrencyNestedInput
+    transactionHistory?: TransactionHistoryUpdateManyWithoutVirtualCurrencyNestedInput
+  }
+
+  export type VirtualCurrencyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutVirtualCurrencyNestedInput
+  }
+
+  export type VirtualCurrencyCreateManyInput = {
+    id?: string
+    userId: string
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VirtualCurrencyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VirtualCurrencyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransactionHistoryCreateInput = {
+    id?: string
+    transactionId?: string
+    stripeSessionId?: string | null
+    amount: number
+    transactionType?: $Enums.TransactionType
+    description?: string | null
+    createdAt?: Date | string
+    virtualCurrency: VirtualCurrencyCreateNestedOneWithoutTransactionHistoryInput
+    user: UserCreateNestedOneWithoutTransactionHistoryInput
+  }
+
+  export type TransactionHistoryUncheckedCreateInput = {
+    id?: string
+    userId: string
+    transactionId?: string
+    stripeSessionId?: string | null
+    amount: number
+    transactionType?: $Enums.TransactionType
+    description?: string | null
+    createdAt?: Date | string
+    virtualCurrencyId: string
+  }
+
+  export type TransactionHistoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    stripeSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: IntFieldUpdateOperationsInput | number
+    transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    virtualCurrency?: VirtualCurrencyUpdateOneRequiredWithoutTransactionHistoryNestedInput
+    user?: UserUpdateOneRequiredWithoutTransactionHistoryNestedInput
+  }
+
+  export type TransactionHistoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    stripeSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: IntFieldUpdateOperationsInput | number
+    transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    virtualCurrencyId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TransactionHistoryCreateManyInput = {
+    id?: string
+    userId: string
+    transactionId?: string
+    stripeSessionId?: string | null
+    amount: number
+    transactionType?: $Enums.TransactionType
+    description?: string | null
+    createdAt?: Date | string
+    virtualCurrencyId: string
+  }
+
+  export type TransactionHistoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    stripeSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: IntFieldUpdateOperationsInput | number
+    transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransactionHistoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    stripeSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: IntFieldUpdateOperationsInput | number
+    transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    virtualCurrencyId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6427,6 +16467,36 @@ export namespace Prisma {
     none?: AccountWhereInput
   }
 
+  export type ParticipationListRelationFilter = {
+    every?: ParticipationWhereInput
+    some?: ParticipationWhereInput
+    none?: ParticipationWhereInput
+  }
+
+  export type TreasureHuntListRelationFilter = {
+    every?: TreasureHuntWhereInput
+    some?: TreasureHuntWhereInput
+    none?: TreasureHuntWhereInput
+  }
+
+  export type ArtefactListRelationFilter = {
+    every?: ArtefactWhereInput
+    some?: ArtefactWhereInput
+    none?: ArtefactWhereInput
+  }
+
+  export type VirtualCurrencyListRelationFilter = {
+    every?: VirtualCurrencyWhereInput
+    some?: VirtualCurrencyWhereInput
+    none?: VirtualCurrencyWhereInput
+  }
+
+  export type TransactionHistoryListRelationFilter = {
+    every?: TransactionHistoryWhereInput
+    some?: TransactionHistoryWhereInput
+    none?: TransactionHistoryWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -6437,6 +16507,26 @@ export namespace Prisma {
   }
 
   export type AccountOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ParticipationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TreasureHuntOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ArtefactOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type VirtualCurrencyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TransactionHistoryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6669,6 +16759,389 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumHuntStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.HuntStatus | EnumHuntStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.HuntStatus[] | ListEnumHuntStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HuntStatus[] | ListEnumHuntStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumHuntStatusFilter<$PrismaModel> | $Enums.HuntStatus
+  }
+
+  export type HuntStepListRelationFilter = {
+    every?: HuntStepWhereInput
+    some?: HuntStepWhereInput
+    none?: HuntStepWhereInput
+  }
+
+  export type RewardListRelationFilter = {
+    every?: RewardWhereInput
+    some?: RewardWhereInput
+    none?: RewardWhereInput
+  }
+
+  export type HuntStepOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RewardOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TreasureHuntCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    createdById?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    location?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TreasureHuntMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    createdById?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    location?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TreasureHuntMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    createdById?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    location?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumHuntStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.HuntStatus | EnumHuntStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.HuntStatus[] | ListEnumHuntStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HuntStatus[] | ListEnumHuntStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumHuntStatusWithAggregatesFilter<$PrismaModel> | $Enums.HuntStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumHuntStatusFilter<$PrismaModel>
+    _max?: NestedEnumHuntStatusFilter<$PrismaModel>
+  }
+
+  export type EnumParticipationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ParticipationStatus | EnumParticipationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ParticipationStatus[] | ListEnumParticipationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ParticipationStatus[] | ListEnumParticipationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumParticipationStatusFilter<$PrismaModel> | $Enums.ParticipationStatus
+  }
+
+  export type TreasureHuntScalarRelationFilter = {
+    is?: TreasureHuntWhereInput
+    isNot?: TreasureHuntWhereInput
+  }
+
+  export type ParticipationCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    status?: SortOrder
+    joinDate?: SortOrder
+  }
+
+  export type ParticipationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    status?: SortOrder
+    joinDate?: SortOrder
+  }
+
+  export type ParticipationMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    status?: SortOrder
+    joinDate?: SortOrder
+  }
+
+  export type EnumParticipationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ParticipationStatus | EnumParticipationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ParticipationStatus[] | ListEnumParticipationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ParticipationStatus[] | ListEnumParticipationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumParticipationStatusWithAggregatesFilter<$PrismaModel> | $Enums.ParticipationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumParticipationStatusFilter<$PrismaModel>
+    _max?: NestedEnumParticipationStatusFilter<$PrismaModel>
+  }
+
+  export type EnumArtefactRarityFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArtefactRarity | EnumArtefactRarityFieldRefInput<$PrismaModel>
+    in?: $Enums.ArtefactRarity[] | ListEnumArtefactRarityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArtefactRarity[] | ListEnumArtefactRarityFieldRefInput<$PrismaModel>
+    not?: NestedEnumArtefactRarityFilter<$PrismaModel> | $Enums.ArtefactRarity
+  }
+
+  export type TreasureHuntNullableScalarRelationFilter = {
+    is?: TreasureHuntWhereInput | null
+    isNot?: TreasureHuntWhereInput | null
+  }
+
+  export type ArtefactCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    rarity?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    foundAt?: SortOrder
+  }
+
+  export type ArtefactMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    rarity?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    foundAt?: SortOrder
+  }
+
+  export type ArtefactMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    rarity?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    foundAt?: SortOrder
+  }
+
+  export type EnumArtefactRarityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArtefactRarity | EnumArtefactRarityFieldRefInput<$PrismaModel>
+    in?: $Enums.ArtefactRarity[] | ListEnumArtefactRarityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArtefactRarity[] | ListEnumArtefactRarityFieldRefInput<$PrismaModel>
+    not?: NestedEnumArtefactRarityWithAggregatesFilter<$PrismaModel> | $Enums.ArtefactRarity
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumArtefactRarityFilter<$PrismaModel>
+    _max?: NestedEnumArtefactRarityFilter<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type HuntStepCountOrderByAggregateInput = {
+    id?: SortOrder
+    description?: SortOrder
+    huntId?: SortOrder
+    stepOrder?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type HuntStepAvgOrderByAggregateInput = {
+    stepOrder?: SortOrder
+  }
+
+  export type HuntStepMaxOrderByAggregateInput = {
+    id?: SortOrder
+    description?: SortOrder
+    huntId?: SortOrder
+    stepOrder?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type HuntStepMinOrderByAggregateInput = {
+    id?: SortOrder
+    description?: SortOrder
+    huntId?: SortOrder
+    stepOrder?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type HuntStepSumOrderByAggregateInput = {
+    stepOrder?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type EnumRewardTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.RewardType | EnumRewardTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.RewardType[] | ListEnumRewardTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RewardType[] | ListEnumRewardTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumRewardTypeFilter<$PrismaModel> | $Enums.RewardType
+  }
+
+  export type RewardCountOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    value?: SortOrder
+    description?: SortOrder
+    huntId?: SortOrder
+  }
+
+  export type RewardAvgOrderByAggregateInput = {
+    value?: SortOrder
+  }
+
+  export type RewardMaxOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    value?: SortOrder
+    description?: SortOrder
+    huntId?: SortOrder
+  }
+
+  export type RewardMinOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    value?: SortOrder
+    description?: SortOrder
+    huntId?: SortOrder
+  }
+
+  export type RewardSumOrderByAggregateInput = {
+    value?: SortOrder
+  }
+
+  export type EnumRewardTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RewardType | EnumRewardTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.RewardType[] | ListEnumRewardTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RewardType[] | ListEnumRewardTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumRewardTypeWithAggregatesFilter<$PrismaModel> | $Enums.RewardType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRewardTypeFilter<$PrismaModel>
+    _max?: NestedEnumRewardTypeFilter<$PrismaModel>
+  }
+
+  export type VirtualCurrencyCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VirtualCurrencyAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type VirtualCurrencyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VirtualCurrencyMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VirtualCurrencySumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type EnumTransactionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeFilter<$PrismaModel> | $Enums.TransactionType
+  }
+
+  export type VirtualCurrencyScalarRelationFilter = {
+    is?: VirtualCurrencyWhereInput
+    isNot?: VirtualCurrencyWhereInput
+  }
+
+  export type TransactionHistoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    transactionId?: SortOrder
+    stripeSessionId?: SortOrder
+    amount?: SortOrder
+    transactionType?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    virtualCurrencyId?: SortOrder
+  }
+
+  export type TransactionHistoryAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type TransactionHistoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    transactionId?: SortOrder
+    stripeSessionId?: SortOrder
+    amount?: SortOrder
+    transactionType?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    virtualCurrencyId?: SortOrder
+  }
+
+  export type TransactionHistoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    transactionId?: SortOrder
+    stripeSessionId?: SortOrder
+    amount?: SortOrder
+    transactionType?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    virtualCurrencyId?: SortOrder
+  }
+
+  export type TransactionHistorySumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type EnumTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeWithAggregatesFilter<$PrismaModel> | $Enums.TransactionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTransactionTypeFilter<$PrismaModel>
+    _max?: NestedEnumTransactionTypeFilter<$PrismaModel>
+  }
+
   export type SessionCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -6683,6 +17156,41 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
+  export type ParticipationCreateNestedManyWithoutUserInput = {
+    create?: XOR<ParticipationCreateWithoutUserInput, ParticipationUncheckedCreateWithoutUserInput> | ParticipationCreateWithoutUserInput[] | ParticipationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ParticipationCreateOrConnectWithoutUserInput | ParticipationCreateOrConnectWithoutUserInput[]
+    createMany?: ParticipationCreateManyUserInputEnvelope
+    connect?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+  }
+
+  export type TreasureHuntCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<TreasureHuntCreateWithoutCreatedByInput, TreasureHuntUncheckedCreateWithoutCreatedByInput> | TreasureHuntCreateWithoutCreatedByInput[] | TreasureHuntUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutCreatedByInput | TreasureHuntCreateOrConnectWithoutCreatedByInput[]
+    createMany?: TreasureHuntCreateManyCreatedByInputEnvelope
+    connect?: TreasureHuntWhereUniqueInput | TreasureHuntWhereUniqueInput[]
+  }
+
+  export type ArtefactCreateNestedManyWithoutUserInput = {
+    create?: XOR<ArtefactCreateWithoutUserInput, ArtefactUncheckedCreateWithoutUserInput> | ArtefactCreateWithoutUserInput[] | ArtefactUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ArtefactCreateOrConnectWithoutUserInput | ArtefactCreateOrConnectWithoutUserInput[]
+    createMany?: ArtefactCreateManyUserInputEnvelope
+    connect?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+  }
+
+  export type VirtualCurrencyCreateNestedManyWithoutUserInput = {
+    create?: XOR<VirtualCurrencyCreateWithoutUserInput, VirtualCurrencyUncheckedCreateWithoutUserInput> | VirtualCurrencyCreateWithoutUserInput[] | VirtualCurrencyUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VirtualCurrencyCreateOrConnectWithoutUserInput | VirtualCurrencyCreateOrConnectWithoutUserInput[]
+    createMany?: VirtualCurrencyCreateManyUserInputEnvelope
+    connect?: VirtualCurrencyWhereUniqueInput | VirtualCurrencyWhereUniqueInput[]
+  }
+
+  export type TransactionHistoryCreateNestedManyWithoutUserInput = {
+    create?: XOR<TransactionHistoryCreateWithoutUserInput, TransactionHistoryUncheckedCreateWithoutUserInput> | TransactionHistoryCreateWithoutUserInput[] | TransactionHistoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TransactionHistoryCreateOrConnectWithoutUserInput | TransactionHistoryCreateOrConnectWithoutUserInput[]
+    createMany?: TransactionHistoryCreateManyUserInputEnvelope
+    connect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+  }
+
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -6695,6 +17203,41 @@ export namespace Prisma {
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
     createMany?: AccountCreateManyUserInputEnvelope
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  }
+
+  export type ParticipationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ParticipationCreateWithoutUserInput, ParticipationUncheckedCreateWithoutUserInput> | ParticipationCreateWithoutUserInput[] | ParticipationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ParticipationCreateOrConnectWithoutUserInput | ParticipationCreateOrConnectWithoutUserInput[]
+    createMany?: ParticipationCreateManyUserInputEnvelope
+    connect?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+  }
+
+  export type TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<TreasureHuntCreateWithoutCreatedByInput, TreasureHuntUncheckedCreateWithoutCreatedByInput> | TreasureHuntCreateWithoutCreatedByInput[] | TreasureHuntUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutCreatedByInput | TreasureHuntCreateOrConnectWithoutCreatedByInput[]
+    createMany?: TreasureHuntCreateManyCreatedByInputEnvelope
+    connect?: TreasureHuntWhereUniqueInput | TreasureHuntWhereUniqueInput[]
+  }
+
+  export type ArtefactUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ArtefactCreateWithoutUserInput, ArtefactUncheckedCreateWithoutUserInput> | ArtefactCreateWithoutUserInput[] | ArtefactUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ArtefactCreateOrConnectWithoutUserInput | ArtefactCreateOrConnectWithoutUserInput[]
+    createMany?: ArtefactCreateManyUserInputEnvelope
+    connect?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+  }
+
+  export type VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<VirtualCurrencyCreateWithoutUserInput, VirtualCurrencyUncheckedCreateWithoutUserInput> | VirtualCurrencyCreateWithoutUserInput[] | VirtualCurrencyUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VirtualCurrencyCreateOrConnectWithoutUserInput | VirtualCurrencyCreateOrConnectWithoutUserInput[]
+    createMany?: VirtualCurrencyCreateManyUserInputEnvelope
+    connect?: VirtualCurrencyWhereUniqueInput | VirtualCurrencyWhereUniqueInput[]
+  }
+
+  export type TransactionHistoryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<TransactionHistoryCreateWithoutUserInput, TransactionHistoryUncheckedCreateWithoutUserInput> | TransactionHistoryCreateWithoutUserInput[] | TransactionHistoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TransactionHistoryCreateOrConnectWithoutUserInput | TransactionHistoryCreateOrConnectWithoutUserInput[]
+    createMany?: TransactionHistoryCreateManyUserInputEnvelope
+    connect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6741,6 +17284,76 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
+  export type ParticipationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ParticipationCreateWithoutUserInput, ParticipationUncheckedCreateWithoutUserInput> | ParticipationCreateWithoutUserInput[] | ParticipationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ParticipationCreateOrConnectWithoutUserInput | ParticipationCreateOrConnectWithoutUserInput[]
+    upsert?: ParticipationUpsertWithWhereUniqueWithoutUserInput | ParticipationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ParticipationCreateManyUserInputEnvelope
+    set?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    disconnect?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    delete?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    connect?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    update?: ParticipationUpdateWithWhereUniqueWithoutUserInput | ParticipationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ParticipationUpdateManyWithWhereWithoutUserInput | ParticipationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ParticipationScalarWhereInput | ParticipationScalarWhereInput[]
+  }
+
+  export type TreasureHuntUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<TreasureHuntCreateWithoutCreatedByInput, TreasureHuntUncheckedCreateWithoutCreatedByInput> | TreasureHuntCreateWithoutCreatedByInput[] | TreasureHuntUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutCreatedByInput | TreasureHuntCreateOrConnectWithoutCreatedByInput[]
+    upsert?: TreasureHuntUpsertWithWhereUniqueWithoutCreatedByInput | TreasureHuntUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: TreasureHuntCreateManyCreatedByInputEnvelope
+    set?: TreasureHuntWhereUniqueInput | TreasureHuntWhereUniqueInput[]
+    disconnect?: TreasureHuntWhereUniqueInput | TreasureHuntWhereUniqueInput[]
+    delete?: TreasureHuntWhereUniqueInput | TreasureHuntWhereUniqueInput[]
+    connect?: TreasureHuntWhereUniqueInput | TreasureHuntWhereUniqueInput[]
+    update?: TreasureHuntUpdateWithWhereUniqueWithoutCreatedByInput | TreasureHuntUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: TreasureHuntUpdateManyWithWhereWithoutCreatedByInput | TreasureHuntUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: TreasureHuntScalarWhereInput | TreasureHuntScalarWhereInput[]
+  }
+
+  export type ArtefactUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ArtefactCreateWithoutUserInput, ArtefactUncheckedCreateWithoutUserInput> | ArtefactCreateWithoutUserInput[] | ArtefactUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ArtefactCreateOrConnectWithoutUserInput | ArtefactCreateOrConnectWithoutUserInput[]
+    upsert?: ArtefactUpsertWithWhereUniqueWithoutUserInput | ArtefactUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ArtefactCreateManyUserInputEnvelope
+    set?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    disconnect?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    delete?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    connect?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    update?: ArtefactUpdateWithWhereUniqueWithoutUserInput | ArtefactUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ArtefactUpdateManyWithWhereWithoutUserInput | ArtefactUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ArtefactScalarWhereInput | ArtefactScalarWhereInput[]
+  }
+
+  export type VirtualCurrencyUpdateManyWithoutUserNestedInput = {
+    create?: XOR<VirtualCurrencyCreateWithoutUserInput, VirtualCurrencyUncheckedCreateWithoutUserInput> | VirtualCurrencyCreateWithoutUserInput[] | VirtualCurrencyUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VirtualCurrencyCreateOrConnectWithoutUserInput | VirtualCurrencyCreateOrConnectWithoutUserInput[]
+    upsert?: VirtualCurrencyUpsertWithWhereUniqueWithoutUserInput | VirtualCurrencyUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: VirtualCurrencyCreateManyUserInputEnvelope
+    set?: VirtualCurrencyWhereUniqueInput | VirtualCurrencyWhereUniqueInput[]
+    disconnect?: VirtualCurrencyWhereUniqueInput | VirtualCurrencyWhereUniqueInput[]
+    delete?: VirtualCurrencyWhereUniqueInput | VirtualCurrencyWhereUniqueInput[]
+    connect?: VirtualCurrencyWhereUniqueInput | VirtualCurrencyWhereUniqueInput[]
+    update?: VirtualCurrencyUpdateWithWhereUniqueWithoutUserInput | VirtualCurrencyUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: VirtualCurrencyUpdateManyWithWhereWithoutUserInput | VirtualCurrencyUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: VirtualCurrencyScalarWhereInput | VirtualCurrencyScalarWhereInput[]
+  }
+
+  export type TransactionHistoryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<TransactionHistoryCreateWithoutUserInput, TransactionHistoryUncheckedCreateWithoutUserInput> | TransactionHistoryCreateWithoutUserInput[] | TransactionHistoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TransactionHistoryCreateOrConnectWithoutUserInput | TransactionHistoryCreateOrConnectWithoutUserInput[]
+    upsert?: TransactionHistoryUpsertWithWhereUniqueWithoutUserInput | TransactionHistoryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: TransactionHistoryCreateManyUserInputEnvelope
+    set?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    disconnect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    delete?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    connect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    update?: TransactionHistoryUpdateWithWhereUniqueWithoutUserInput | TransactionHistoryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: TransactionHistoryUpdateManyWithWhereWithoutUserInput | TransactionHistoryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: TransactionHistoryScalarWhereInput | TransactionHistoryScalarWhereInput[]
+  }
+
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -6767,6 +17380,76 @@ export namespace Prisma {
     update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
+  }
+
+  export type ParticipationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ParticipationCreateWithoutUserInput, ParticipationUncheckedCreateWithoutUserInput> | ParticipationCreateWithoutUserInput[] | ParticipationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ParticipationCreateOrConnectWithoutUserInput | ParticipationCreateOrConnectWithoutUserInput[]
+    upsert?: ParticipationUpsertWithWhereUniqueWithoutUserInput | ParticipationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ParticipationCreateManyUserInputEnvelope
+    set?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    disconnect?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    delete?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    connect?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    update?: ParticipationUpdateWithWhereUniqueWithoutUserInput | ParticipationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ParticipationUpdateManyWithWhereWithoutUserInput | ParticipationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ParticipationScalarWhereInput | ParticipationScalarWhereInput[]
+  }
+
+  export type TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<TreasureHuntCreateWithoutCreatedByInput, TreasureHuntUncheckedCreateWithoutCreatedByInput> | TreasureHuntCreateWithoutCreatedByInput[] | TreasureHuntUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutCreatedByInput | TreasureHuntCreateOrConnectWithoutCreatedByInput[]
+    upsert?: TreasureHuntUpsertWithWhereUniqueWithoutCreatedByInput | TreasureHuntUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: TreasureHuntCreateManyCreatedByInputEnvelope
+    set?: TreasureHuntWhereUniqueInput | TreasureHuntWhereUniqueInput[]
+    disconnect?: TreasureHuntWhereUniqueInput | TreasureHuntWhereUniqueInput[]
+    delete?: TreasureHuntWhereUniqueInput | TreasureHuntWhereUniqueInput[]
+    connect?: TreasureHuntWhereUniqueInput | TreasureHuntWhereUniqueInput[]
+    update?: TreasureHuntUpdateWithWhereUniqueWithoutCreatedByInput | TreasureHuntUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: TreasureHuntUpdateManyWithWhereWithoutCreatedByInput | TreasureHuntUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: TreasureHuntScalarWhereInput | TreasureHuntScalarWhereInput[]
+  }
+
+  export type ArtefactUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ArtefactCreateWithoutUserInput, ArtefactUncheckedCreateWithoutUserInput> | ArtefactCreateWithoutUserInput[] | ArtefactUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ArtefactCreateOrConnectWithoutUserInput | ArtefactCreateOrConnectWithoutUserInput[]
+    upsert?: ArtefactUpsertWithWhereUniqueWithoutUserInput | ArtefactUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ArtefactCreateManyUserInputEnvelope
+    set?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    disconnect?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    delete?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    connect?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    update?: ArtefactUpdateWithWhereUniqueWithoutUserInput | ArtefactUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ArtefactUpdateManyWithWhereWithoutUserInput | ArtefactUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ArtefactScalarWhereInput | ArtefactScalarWhereInput[]
+  }
+
+  export type VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<VirtualCurrencyCreateWithoutUserInput, VirtualCurrencyUncheckedCreateWithoutUserInput> | VirtualCurrencyCreateWithoutUserInput[] | VirtualCurrencyUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VirtualCurrencyCreateOrConnectWithoutUserInput | VirtualCurrencyCreateOrConnectWithoutUserInput[]
+    upsert?: VirtualCurrencyUpsertWithWhereUniqueWithoutUserInput | VirtualCurrencyUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: VirtualCurrencyCreateManyUserInputEnvelope
+    set?: VirtualCurrencyWhereUniqueInput | VirtualCurrencyWhereUniqueInput[]
+    disconnect?: VirtualCurrencyWhereUniqueInput | VirtualCurrencyWhereUniqueInput[]
+    delete?: VirtualCurrencyWhereUniqueInput | VirtualCurrencyWhereUniqueInput[]
+    connect?: VirtualCurrencyWhereUniqueInput | VirtualCurrencyWhereUniqueInput[]
+    update?: VirtualCurrencyUpdateWithWhereUniqueWithoutUserInput | VirtualCurrencyUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: VirtualCurrencyUpdateManyWithWhereWithoutUserInput | VirtualCurrencyUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: VirtualCurrencyScalarWhereInput | VirtualCurrencyScalarWhereInput[]
+  }
+
+  export type TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<TransactionHistoryCreateWithoutUserInput, TransactionHistoryUncheckedCreateWithoutUserInput> | TransactionHistoryCreateWithoutUserInput[] | TransactionHistoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TransactionHistoryCreateOrConnectWithoutUserInput | TransactionHistoryCreateOrConnectWithoutUserInput[]
+    upsert?: TransactionHistoryUpsertWithWhereUniqueWithoutUserInput | TransactionHistoryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: TransactionHistoryCreateManyUserInputEnvelope
+    set?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    disconnect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    delete?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    connect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    update?: TransactionHistoryUpdateWithWhereUniqueWithoutUserInput | TransactionHistoryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: TransactionHistoryUpdateManyWithWhereWithoutUserInput | TransactionHistoryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: TransactionHistoryScalarWhereInput | TransactionHistoryScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -6799,6 +17482,386 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutAccountsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAccountsInput, UserUpdateWithoutAccountsInput>, UserUncheckedUpdateWithoutAccountsInput>
+  }
+
+  export type UserCreateNestedOneWithoutCreatedChassesInput = {
+    create?: XOR<UserCreateWithoutCreatedChassesInput, UserUncheckedCreateWithoutCreatedChassesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedChassesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ParticipationCreateNestedManyWithoutTreasureHuntInput = {
+    create?: XOR<ParticipationCreateWithoutTreasureHuntInput, ParticipationUncheckedCreateWithoutTreasureHuntInput> | ParticipationCreateWithoutTreasureHuntInput[] | ParticipationUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: ParticipationCreateOrConnectWithoutTreasureHuntInput | ParticipationCreateOrConnectWithoutTreasureHuntInput[]
+    createMany?: ParticipationCreateManyTreasureHuntInputEnvelope
+    connect?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+  }
+
+  export type HuntStepCreateNestedManyWithoutTreasureHuntInput = {
+    create?: XOR<HuntStepCreateWithoutTreasureHuntInput, HuntStepUncheckedCreateWithoutTreasureHuntInput> | HuntStepCreateWithoutTreasureHuntInput[] | HuntStepUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: HuntStepCreateOrConnectWithoutTreasureHuntInput | HuntStepCreateOrConnectWithoutTreasureHuntInput[]
+    createMany?: HuntStepCreateManyTreasureHuntInputEnvelope
+    connect?: HuntStepWhereUniqueInput | HuntStepWhereUniqueInput[]
+  }
+
+  export type RewardCreateNestedManyWithoutTreasureHuntInput = {
+    create?: XOR<RewardCreateWithoutTreasureHuntInput, RewardUncheckedCreateWithoutTreasureHuntInput> | RewardCreateWithoutTreasureHuntInput[] | RewardUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: RewardCreateOrConnectWithoutTreasureHuntInput | RewardCreateOrConnectWithoutTreasureHuntInput[]
+    createMany?: RewardCreateManyTreasureHuntInputEnvelope
+    connect?: RewardWhereUniqueInput | RewardWhereUniqueInput[]
+  }
+
+  export type ArtefactCreateNestedManyWithoutHuntInput = {
+    create?: XOR<ArtefactCreateWithoutHuntInput, ArtefactUncheckedCreateWithoutHuntInput> | ArtefactCreateWithoutHuntInput[] | ArtefactUncheckedCreateWithoutHuntInput[]
+    connectOrCreate?: ArtefactCreateOrConnectWithoutHuntInput | ArtefactCreateOrConnectWithoutHuntInput[]
+    createMany?: ArtefactCreateManyHuntInputEnvelope
+    connect?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+  }
+
+  export type ParticipationUncheckedCreateNestedManyWithoutTreasureHuntInput = {
+    create?: XOR<ParticipationCreateWithoutTreasureHuntInput, ParticipationUncheckedCreateWithoutTreasureHuntInput> | ParticipationCreateWithoutTreasureHuntInput[] | ParticipationUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: ParticipationCreateOrConnectWithoutTreasureHuntInput | ParticipationCreateOrConnectWithoutTreasureHuntInput[]
+    createMany?: ParticipationCreateManyTreasureHuntInputEnvelope
+    connect?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+  }
+
+  export type HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput = {
+    create?: XOR<HuntStepCreateWithoutTreasureHuntInput, HuntStepUncheckedCreateWithoutTreasureHuntInput> | HuntStepCreateWithoutTreasureHuntInput[] | HuntStepUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: HuntStepCreateOrConnectWithoutTreasureHuntInput | HuntStepCreateOrConnectWithoutTreasureHuntInput[]
+    createMany?: HuntStepCreateManyTreasureHuntInputEnvelope
+    connect?: HuntStepWhereUniqueInput | HuntStepWhereUniqueInput[]
+  }
+
+  export type RewardUncheckedCreateNestedManyWithoutTreasureHuntInput = {
+    create?: XOR<RewardCreateWithoutTreasureHuntInput, RewardUncheckedCreateWithoutTreasureHuntInput> | RewardCreateWithoutTreasureHuntInput[] | RewardUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: RewardCreateOrConnectWithoutTreasureHuntInput | RewardCreateOrConnectWithoutTreasureHuntInput[]
+    createMany?: RewardCreateManyTreasureHuntInputEnvelope
+    connect?: RewardWhereUniqueInput | RewardWhereUniqueInput[]
+  }
+
+  export type ArtefactUncheckedCreateNestedManyWithoutHuntInput = {
+    create?: XOR<ArtefactCreateWithoutHuntInput, ArtefactUncheckedCreateWithoutHuntInput> | ArtefactCreateWithoutHuntInput[] | ArtefactUncheckedCreateWithoutHuntInput[]
+    connectOrCreate?: ArtefactCreateOrConnectWithoutHuntInput | ArtefactCreateOrConnectWithoutHuntInput[]
+    createMany?: ArtefactCreateManyHuntInputEnvelope
+    connect?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+  }
+
+  export type EnumHuntStatusFieldUpdateOperationsInput = {
+    set?: $Enums.HuntStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutCreatedChassesNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedChassesInput, UserUncheckedCreateWithoutCreatedChassesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedChassesInput
+    upsert?: UserUpsertWithoutCreatedChassesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedChassesInput, UserUpdateWithoutCreatedChassesInput>, UserUncheckedUpdateWithoutCreatedChassesInput>
+  }
+
+  export type ParticipationUpdateManyWithoutTreasureHuntNestedInput = {
+    create?: XOR<ParticipationCreateWithoutTreasureHuntInput, ParticipationUncheckedCreateWithoutTreasureHuntInput> | ParticipationCreateWithoutTreasureHuntInput[] | ParticipationUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: ParticipationCreateOrConnectWithoutTreasureHuntInput | ParticipationCreateOrConnectWithoutTreasureHuntInput[]
+    upsert?: ParticipationUpsertWithWhereUniqueWithoutTreasureHuntInput | ParticipationUpsertWithWhereUniqueWithoutTreasureHuntInput[]
+    createMany?: ParticipationCreateManyTreasureHuntInputEnvelope
+    set?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    disconnect?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    delete?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    connect?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    update?: ParticipationUpdateWithWhereUniqueWithoutTreasureHuntInput | ParticipationUpdateWithWhereUniqueWithoutTreasureHuntInput[]
+    updateMany?: ParticipationUpdateManyWithWhereWithoutTreasureHuntInput | ParticipationUpdateManyWithWhereWithoutTreasureHuntInput[]
+    deleteMany?: ParticipationScalarWhereInput | ParticipationScalarWhereInput[]
+  }
+
+  export type HuntStepUpdateManyWithoutTreasureHuntNestedInput = {
+    create?: XOR<HuntStepCreateWithoutTreasureHuntInput, HuntStepUncheckedCreateWithoutTreasureHuntInput> | HuntStepCreateWithoutTreasureHuntInput[] | HuntStepUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: HuntStepCreateOrConnectWithoutTreasureHuntInput | HuntStepCreateOrConnectWithoutTreasureHuntInput[]
+    upsert?: HuntStepUpsertWithWhereUniqueWithoutTreasureHuntInput | HuntStepUpsertWithWhereUniqueWithoutTreasureHuntInput[]
+    createMany?: HuntStepCreateManyTreasureHuntInputEnvelope
+    set?: HuntStepWhereUniqueInput | HuntStepWhereUniqueInput[]
+    disconnect?: HuntStepWhereUniqueInput | HuntStepWhereUniqueInput[]
+    delete?: HuntStepWhereUniqueInput | HuntStepWhereUniqueInput[]
+    connect?: HuntStepWhereUniqueInput | HuntStepWhereUniqueInput[]
+    update?: HuntStepUpdateWithWhereUniqueWithoutTreasureHuntInput | HuntStepUpdateWithWhereUniqueWithoutTreasureHuntInput[]
+    updateMany?: HuntStepUpdateManyWithWhereWithoutTreasureHuntInput | HuntStepUpdateManyWithWhereWithoutTreasureHuntInput[]
+    deleteMany?: HuntStepScalarWhereInput | HuntStepScalarWhereInput[]
+  }
+
+  export type RewardUpdateManyWithoutTreasureHuntNestedInput = {
+    create?: XOR<RewardCreateWithoutTreasureHuntInput, RewardUncheckedCreateWithoutTreasureHuntInput> | RewardCreateWithoutTreasureHuntInput[] | RewardUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: RewardCreateOrConnectWithoutTreasureHuntInput | RewardCreateOrConnectWithoutTreasureHuntInput[]
+    upsert?: RewardUpsertWithWhereUniqueWithoutTreasureHuntInput | RewardUpsertWithWhereUniqueWithoutTreasureHuntInput[]
+    createMany?: RewardCreateManyTreasureHuntInputEnvelope
+    set?: RewardWhereUniqueInput | RewardWhereUniqueInput[]
+    disconnect?: RewardWhereUniqueInput | RewardWhereUniqueInput[]
+    delete?: RewardWhereUniqueInput | RewardWhereUniqueInput[]
+    connect?: RewardWhereUniqueInput | RewardWhereUniqueInput[]
+    update?: RewardUpdateWithWhereUniqueWithoutTreasureHuntInput | RewardUpdateWithWhereUniqueWithoutTreasureHuntInput[]
+    updateMany?: RewardUpdateManyWithWhereWithoutTreasureHuntInput | RewardUpdateManyWithWhereWithoutTreasureHuntInput[]
+    deleteMany?: RewardScalarWhereInput | RewardScalarWhereInput[]
+  }
+
+  export type ArtefactUpdateManyWithoutHuntNestedInput = {
+    create?: XOR<ArtefactCreateWithoutHuntInput, ArtefactUncheckedCreateWithoutHuntInput> | ArtefactCreateWithoutHuntInput[] | ArtefactUncheckedCreateWithoutHuntInput[]
+    connectOrCreate?: ArtefactCreateOrConnectWithoutHuntInput | ArtefactCreateOrConnectWithoutHuntInput[]
+    upsert?: ArtefactUpsertWithWhereUniqueWithoutHuntInput | ArtefactUpsertWithWhereUniqueWithoutHuntInput[]
+    createMany?: ArtefactCreateManyHuntInputEnvelope
+    set?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    disconnect?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    delete?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    connect?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    update?: ArtefactUpdateWithWhereUniqueWithoutHuntInput | ArtefactUpdateWithWhereUniqueWithoutHuntInput[]
+    updateMany?: ArtefactUpdateManyWithWhereWithoutHuntInput | ArtefactUpdateManyWithWhereWithoutHuntInput[]
+    deleteMany?: ArtefactScalarWhereInput | ArtefactScalarWhereInput[]
+  }
+
+  export type ParticipationUncheckedUpdateManyWithoutTreasureHuntNestedInput = {
+    create?: XOR<ParticipationCreateWithoutTreasureHuntInput, ParticipationUncheckedCreateWithoutTreasureHuntInput> | ParticipationCreateWithoutTreasureHuntInput[] | ParticipationUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: ParticipationCreateOrConnectWithoutTreasureHuntInput | ParticipationCreateOrConnectWithoutTreasureHuntInput[]
+    upsert?: ParticipationUpsertWithWhereUniqueWithoutTreasureHuntInput | ParticipationUpsertWithWhereUniqueWithoutTreasureHuntInput[]
+    createMany?: ParticipationCreateManyTreasureHuntInputEnvelope
+    set?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    disconnect?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    delete?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    connect?: ParticipationWhereUniqueInput | ParticipationWhereUniqueInput[]
+    update?: ParticipationUpdateWithWhereUniqueWithoutTreasureHuntInput | ParticipationUpdateWithWhereUniqueWithoutTreasureHuntInput[]
+    updateMany?: ParticipationUpdateManyWithWhereWithoutTreasureHuntInput | ParticipationUpdateManyWithWhereWithoutTreasureHuntInput[]
+    deleteMany?: ParticipationScalarWhereInput | ParticipationScalarWhereInput[]
+  }
+
+  export type HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput = {
+    create?: XOR<HuntStepCreateWithoutTreasureHuntInput, HuntStepUncheckedCreateWithoutTreasureHuntInput> | HuntStepCreateWithoutTreasureHuntInput[] | HuntStepUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: HuntStepCreateOrConnectWithoutTreasureHuntInput | HuntStepCreateOrConnectWithoutTreasureHuntInput[]
+    upsert?: HuntStepUpsertWithWhereUniqueWithoutTreasureHuntInput | HuntStepUpsertWithWhereUniqueWithoutTreasureHuntInput[]
+    createMany?: HuntStepCreateManyTreasureHuntInputEnvelope
+    set?: HuntStepWhereUniqueInput | HuntStepWhereUniqueInput[]
+    disconnect?: HuntStepWhereUniqueInput | HuntStepWhereUniqueInput[]
+    delete?: HuntStepWhereUniqueInput | HuntStepWhereUniqueInput[]
+    connect?: HuntStepWhereUniqueInput | HuntStepWhereUniqueInput[]
+    update?: HuntStepUpdateWithWhereUniqueWithoutTreasureHuntInput | HuntStepUpdateWithWhereUniqueWithoutTreasureHuntInput[]
+    updateMany?: HuntStepUpdateManyWithWhereWithoutTreasureHuntInput | HuntStepUpdateManyWithWhereWithoutTreasureHuntInput[]
+    deleteMany?: HuntStepScalarWhereInput | HuntStepScalarWhereInput[]
+  }
+
+  export type RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput = {
+    create?: XOR<RewardCreateWithoutTreasureHuntInput, RewardUncheckedCreateWithoutTreasureHuntInput> | RewardCreateWithoutTreasureHuntInput[] | RewardUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: RewardCreateOrConnectWithoutTreasureHuntInput | RewardCreateOrConnectWithoutTreasureHuntInput[]
+    upsert?: RewardUpsertWithWhereUniqueWithoutTreasureHuntInput | RewardUpsertWithWhereUniqueWithoutTreasureHuntInput[]
+    createMany?: RewardCreateManyTreasureHuntInputEnvelope
+    set?: RewardWhereUniqueInput | RewardWhereUniqueInput[]
+    disconnect?: RewardWhereUniqueInput | RewardWhereUniqueInput[]
+    delete?: RewardWhereUniqueInput | RewardWhereUniqueInput[]
+    connect?: RewardWhereUniqueInput | RewardWhereUniqueInput[]
+    update?: RewardUpdateWithWhereUniqueWithoutTreasureHuntInput | RewardUpdateWithWhereUniqueWithoutTreasureHuntInput[]
+    updateMany?: RewardUpdateManyWithWhereWithoutTreasureHuntInput | RewardUpdateManyWithWhereWithoutTreasureHuntInput[]
+    deleteMany?: RewardScalarWhereInput | RewardScalarWhereInput[]
+  }
+
+  export type ArtefactUncheckedUpdateManyWithoutHuntNestedInput = {
+    create?: XOR<ArtefactCreateWithoutHuntInput, ArtefactUncheckedCreateWithoutHuntInput> | ArtefactCreateWithoutHuntInput[] | ArtefactUncheckedCreateWithoutHuntInput[]
+    connectOrCreate?: ArtefactCreateOrConnectWithoutHuntInput | ArtefactCreateOrConnectWithoutHuntInput[]
+    upsert?: ArtefactUpsertWithWhereUniqueWithoutHuntInput | ArtefactUpsertWithWhereUniqueWithoutHuntInput[]
+    createMany?: ArtefactCreateManyHuntInputEnvelope
+    set?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    disconnect?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    delete?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    connect?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+    update?: ArtefactUpdateWithWhereUniqueWithoutHuntInput | ArtefactUpdateWithWhereUniqueWithoutHuntInput[]
+    updateMany?: ArtefactUpdateManyWithWhereWithoutHuntInput | ArtefactUpdateManyWithWhereWithoutHuntInput[]
+    deleteMany?: ArtefactScalarWhereInput | ArtefactScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutParticipationsInput = {
+    create?: XOR<UserCreateWithoutParticipationsInput, UserUncheckedCreateWithoutParticipationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutParticipationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type TreasureHuntCreateNestedOneWithoutParticipantsInput = {
+    create?: XOR<TreasureHuntCreateWithoutParticipantsInput, TreasureHuntUncheckedCreateWithoutParticipantsInput>
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutParticipantsInput
+    connect?: TreasureHuntWhereUniqueInput
+  }
+
+  export type EnumParticipationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ParticipationStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutParticipationsNestedInput = {
+    create?: XOR<UserCreateWithoutParticipationsInput, UserUncheckedCreateWithoutParticipationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutParticipationsInput
+    upsert?: UserUpsertWithoutParticipationsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutParticipationsInput, UserUpdateWithoutParticipationsInput>, UserUncheckedUpdateWithoutParticipationsInput>
+  }
+
+  export type TreasureHuntUpdateOneRequiredWithoutParticipantsNestedInput = {
+    create?: XOR<TreasureHuntCreateWithoutParticipantsInput, TreasureHuntUncheckedCreateWithoutParticipantsInput>
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutParticipantsInput
+    upsert?: TreasureHuntUpsertWithoutParticipantsInput
+    connect?: TreasureHuntWhereUniqueInput
+    update?: XOR<XOR<TreasureHuntUpdateToOneWithWhereWithoutParticipantsInput, TreasureHuntUpdateWithoutParticipantsInput>, TreasureHuntUncheckedUpdateWithoutParticipantsInput>
+  }
+
+  export type UserCreateNestedOneWithoutCollectedArtefactsInput = {
+    create?: XOR<UserCreateWithoutCollectedArtefactsInput, UserUncheckedCreateWithoutCollectedArtefactsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCollectedArtefactsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type TreasureHuntCreateNestedOneWithoutArtefactsInput = {
+    create?: XOR<TreasureHuntCreateWithoutArtefactsInput, TreasureHuntUncheckedCreateWithoutArtefactsInput>
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutArtefactsInput
+    connect?: TreasureHuntWhereUniqueInput
+  }
+
+  export type EnumArtefactRarityFieldUpdateOperationsInput = {
+    set?: $Enums.ArtefactRarity
+  }
+
+  export type UserUpdateOneRequiredWithoutCollectedArtefactsNestedInput = {
+    create?: XOR<UserCreateWithoutCollectedArtefactsInput, UserUncheckedCreateWithoutCollectedArtefactsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCollectedArtefactsInput
+    upsert?: UserUpsertWithoutCollectedArtefactsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCollectedArtefactsInput, UserUpdateWithoutCollectedArtefactsInput>, UserUncheckedUpdateWithoutCollectedArtefactsInput>
+  }
+
+  export type TreasureHuntUpdateOneWithoutArtefactsNestedInput = {
+    create?: XOR<TreasureHuntCreateWithoutArtefactsInput, TreasureHuntUncheckedCreateWithoutArtefactsInput>
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutArtefactsInput
+    upsert?: TreasureHuntUpsertWithoutArtefactsInput
+    disconnect?: TreasureHuntWhereInput | boolean
+    delete?: TreasureHuntWhereInput | boolean
+    connect?: TreasureHuntWhereUniqueInput
+    update?: XOR<XOR<TreasureHuntUpdateToOneWithWhereWithoutArtefactsInput, TreasureHuntUpdateWithoutArtefactsInput>, TreasureHuntUncheckedUpdateWithoutArtefactsInput>
+  }
+
+  export type TreasureHuntCreateNestedOneWithoutStepsInput = {
+    create?: XOR<TreasureHuntCreateWithoutStepsInput, TreasureHuntUncheckedCreateWithoutStepsInput>
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutStepsInput
+    connect?: TreasureHuntWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type TreasureHuntUpdateOneRequiredWithoutStepsNestedInput = {
+    create?: XOR<TreasureHuntCreateWithoutStepsInput, TreasureHuntUncheckedCreateWithoutStepsInput>
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutStepsInput
+    upsert?: TreasureHuntUpsertWithoutStepsInput
+    connect?: TreasureHuntWhereUniqueInput
+    update?: XOR<XOR<TreasureHuntUpdateToOneWithWhereWithoutStepsInput, TreasureHuntUpdateWithoutStepsInput>, TreasureHuntUncheckedUpdateWithoutStepsInput>
+  }
+
+  export type TreasureHuntCreateNestedOneWithoutRewardsInput = {
+    create?: XOR<TreasureHuntCreateWithoutRewardsInput, TreasureHuntUncheckedCreateWithoutRewardsInput>
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutRewardsInput
+    connect?: TreasureHuntWhereUniqueInput
+  }
+
+  export type EnumRewardTypeFieldUpdateOperationsInput = {
+    set?: $Enums.RewardType
+  }
+
+  export type TreasureHuntUpdateOneRequiredWithoutRewardsNestedInput = {
+    create?: XOR<TreasureHuntCreateWithoutRewardsInput, TreasureHuntUncheckedCreateWithoutRewardsInput>
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutRewardsInput
+    upsert?: TreasureHuntUpsertWithoutRewardsInput
+    connect?: TreasureHuntWhereUniqueInput
+    update?: XOR<XOR<TreasureHuntUpdateToOneWithWhereWithoutRewardsInput, TreasureHuntUpdateWithoutRewardsInput>, TreasureHuntUncheckedUpdateWithoutRewardsInput>
+  }
+
+  export type UserCreateNestedOneWithoutVirtualCurrencyInput = {
+    create?: XOR<UserCreateWithoutVirtualCurrencyInput, UserUncheckedCreateWithoutVirtualCurrencyInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVirtualCurrencyInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type TransactionHistoryCreateNestedManyWithoutVirtualCurrencyInput = {
+    create?: XOR<TransactionHistoryCreateWithoutVirtualCurrencyInput, TransactionHistoryUncheckedCreateWithoutVirtualCurrencyInput> | TransactionHistoryCreateWithoutVirtualCurrencyInput[] | TransactionHistoryUncheckedCreateWithoutVirtualCurrencyInput[]
+    connectOrCreate?: TransactionHistoryCreateOrConnectWithoutVirtualCurrencyInput | TransactionHistoryCreateOrConnectWithoutVirtualCurrencyInput[]
+    createMany?: TransactionHistoryCreateManyVirtualCurrencyInputEnvelope
+    connect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+  }
+
+  export type TransactionHistoryUncheckedCreateNestedManyWithoutVirtualCurrencyInput = {
+    create?: XOR<TransactionHistoryCreateWithoutVirtualCurrencyInput, TransactionHistoryUncheckedCreateWithoutVirtualCurrencyInput> | TransactionHistoryCreateWithoutVirtualCurrencyInput[] | TransactionHistoryUncheckedCreateWithoutVirtualCurrencyInput[]
+    connectOrCreate?: TransactionHistoryCreateOrConnectWithoutVirtualCurrencyInput | TransactionHistoryCreateOrConnectWithoutVirtualCurrencyInput[]
+    createMany?: TransactionHistoryCreateManyVirtualCurrencyInputEnvelope
+    connect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutVirtualCurrencyNestedInput = {
+    create?: XOR<UserCreateWithoutVirtualCurrencyInput, UserUncheckedCreateWithoutVirtualCurrencyInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVirtualCurrencyInput
+    upsert?: UserUpsertWithoutVirtualCurrencyInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVirtualCurrencyInput, UserUpdateWithoutVirtualCurrencyInput>, UserUncheckedUpdateWithoutVirtualCurrencyInput>
+  }
+
+  export type TransactionHistoryUpdateManyWithoutVirtualCurrencyNestedInput = {
+    create?: XOR<TransactionHistoryCreateWithoutVirtualCurrencyInput, TransactionHistoryUncheckedCreateWithoutVirtualCurrencyInput> | TransactionHistoryCreateWithoutVirtualCurrencyInput[] | TransactionHistoryUncheckedCreateWithoutVirtualCurrencyInput[]
+    connectOrCreate?: TransactionHistoryCreateOrConnectWithoutVirtualCurrencyInput | TransactionHistoryCreateOrConnectWithoutVirtualCurrencyInput[]
+    upsert?: TransactionHistoryUpsertWithWhereUniqueWithoutVirtualCurrencyInput | TransactionHistoryUpsertWithWhereUniqueWithoutVirtualCurrencyInput[]
+    createMany?: TransactionHistoryCreateManyVirtualCurrencyInputEnvelope
+    set?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    disconnect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    delete?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    connect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    update?: TransactionHistoryUpdateWithWhereUniqueWithoutVirtualCurrencyInput | TransactionHistoryUpdateWithWhereUniqueWithoutVirtualCurrencyInput[]
+    updateMany?: TransactionHistoryUpdateManyWithWhereWithoutVirtualCurrencyInput | TransactionHistoryUpdateManyWithWhereWithoutVirtualCurrencyInput[]
+    deleteMany?: TransactionHistoryScalarWhereInput | TransactionHistoryScalarWhereInput[]
+  }
+
+  export type TransactionHistoryUncheckedUpdateManyWithoutVirtualCurrencyNestedInput = {
+    create?: XOR<TransactionHistoryCreateWithoutVirtualCurrencyInput, TransactionHistoryUncheckedCreateWithoutVirtualCurrencyInput> | TransactionHistoryCreateWithoutVirtualCurrencyInput[] | TransactionHistoryUncheckedCreateWithoutVirtualCurrencyInput[]
+    connectOrCreate?: TransactionHistoryCreateOrConnectWithoutVirtualCurrencyInput | TransactionHistoryCreateOrConnectWithoutVirtualCurrencyInput[]
+    upsert?: TransactionHistoryUpsertWithWhereUniqueWithoutVirtualCurrencyInput | TransactionHistoryUpsertWithWhereUniqueWithoutVirtualCurrencyInput[]
+    createMany?: TransactionHistoryCreateManyVirtualCurrencyInputEnvelope
+    set?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    disconnect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    delete?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    connect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+    update?: TransactionHistoryUpdateWithWhereUniqueWithoutVirtualCurrencyInput | TransactionHistoryUpdateWithWhereUniqueWithoutVirtualCurrencyInput[]
+    updateMany?: TransactionHistoryUpdateManyWithWhereWithoutVirtualCurrencyInput | TransactionHistoryUpdateManyWithWhereWithoutVirtualCurrencyInput[]
+    deleteMany?: TransactionHistoryScalarWhereInput | TransactionHistoryScalarWhereInput[]
+  }
+
+  export type VirtualCurrencyCreateNestedOneWithoutTransactionHistoryInput = {
+    create?: XOR<VirtualCurrencyCreateWithoutTransactionHistoryInput, VirtualCurrencyUncheckedCreateWithoutTransactionHistoryInput>
+    connectOrCreate?: VirtualCurrencyCreateOrConnectWithoutTransactionHistoryInput
+    connect?: VirtualCurrencyWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutTransactionHistoryInput = {
+    create?: XOR<UserCreateWithoutTransactionHistoryInput, UserUncheckedCreateWithoutTransactionHistoryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTransactionHistoryInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumTransactionTypeFieldUpdateOperationsInput = {
+    set?: $Enums.TransactionType
+  }
+
+  export type VirtualCurrencyUpdateOneRequiredWithoutTransactionHistoryNestedInput = {
+    create?: XOR<VirtualCurrencyCreateWithoutTransactionHistoryInput, VirtualCurrencyUncheckedCreateWithoutTransactionHistoryInput>
+    connectOrCreate?: VirtualCurrencyCreateOrConnectWithoutTransactionHistoryInput
+    upsert?: VirtualCurrencyUpsertWithoutTransactionHistoryInput
+    connect?: VirtualCurrencyWhereUniqueInput
+    update?: XOR<XOR<VirtualCurrencyUpdateToOneWithWhereWithoutTransactionHistoryInput, VirtualCurrencyUpdateWithoutTransactionHistoryInput>, VirtualCurrencyUncheckedUpdateWithoutTransactionHistoryInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutTransactionHistoryNestedInput = {
+    create?: XOR<UserCreateWithoutTransactionHistoryInput, UserUncheckedCreateWithoutTransactionHistoryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTransactionHistoryInput
+    upsert?: UserUpsertWithoutTransactionHistoryInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTransactionHistoryInput, UserUpdateWithoutTransactionHistoryInput>, UserUncheckedUpdateWithoutTransactionHistoryInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -6948,6 +18011,118 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumHuntStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.HuntStatus | EnumHuntStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.HuntStatus[] | ListEnumHuntStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HuntStatus[] | ListEnumHuntStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumHuntStatusFilter<$PrismaModel> | $Enums.HuntStatus
+  }
+
+  export type NestedEnumHuntStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.HuntStatus | EnumHuntStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.HuntStatus[] | ListEnumHuntStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HuntStatus[] | ListEnumHuntStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumHuntStatusWithAggregatesFilter<$PrismaModel> | $Enums.HuntStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumHuntStatusFilter<$PrismaModel>
+    _max?: NestedEnumHuntStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumParticipationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ParticipationStatus | EnumParticipationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ParticipationStatus[] | ListEnumParticipationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ParticipationStatus[] | ListEnumParticipationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumParticipationStatusFilter<$PrismaModel> | $Enums.ParticipationStatus
+  }
+
+  export type NestedEnumParticipationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ParticipationStatus | EnumParticipationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ParticipationStatus[] | ListEnumParticipationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ParticipationStatus[] | ListEnumParticipationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumParticipationStatusWithAggregatesFilter<$PrismaModel> | $Enums.ParticipationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumParticipationStatusFilter<$PrismaModel>
+    _max?: NestedEnumParticipationStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumArtefactRarityFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArtefactRarity | EnumArtefactRarityFieldRefInput<$PrismaModel>
+    in?: $Enums.ArtefactRarity[] | ListEnumArtefactRarityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArtefactRarity[] | ListEnumArtefactRarityFieldRefInput<$PrismaModel>
+    not?: NestedEnumArtefactRarityFilter<$PrismaModel> | $Enums.ArtefactRarity
+  }
+
+  export type NestedEnumArtefactRarityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArtefactRarity | EnumArtefactRarityFieldRefInput<$PrismaModel>
+    in?: $Enums.ArtefactRarity[] | ListEnumArtefactRarityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArtefactRarity[] | ListEnumArtefactRarityFieldRefInput<$PrismaModel>
+    not?: NestedEnumArtefactRarityWithAggregatesFilter<$PrismaModel> | $Enums.ArtefactRarity
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumArtefactRarityFilter<$PrismaModel>
+    _max?: NestedEnumArtefactRarityFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumRewardTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.RewardType | EnumRewardTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.RewardType[] | ListEnumRewardTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RewardType[] | ListEnumRewardTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumRewardTypeFilter<$PrismaModel> | $Enums.RewardType
+  }
+
+  export type NestedEnumRewardTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RewardType | EnumRewardTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.RewardType[] | ListEnumRewardTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RewardType[] | ListEnumRewardTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumRewardTypeWithAggregatesFilter<$PrismaModel> | $Enums.RewardType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRewardTypeFilter<$PrismaModel>
+    _max?: NestedEnumRewardTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTransactionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeFilter<$PrismaModel> | $Enums.TransactionType
+  }
+
+  export type NestedEnumTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeWithAggregatesFilter<$PrismaModel> | $Enums.TransactionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTransactionTypeFilter<$PrismaModel>
+    _max?: NestedEnumTransactionTypeFilter<$PrismaModel>
+  }
+
   export type SessionCreateWithoutUserInput = {
     id: string
     expiresAt: Date | string
@@ -7018,6 +18193,160 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ParticipationCreateWithoutUserInput = {
+    id?: string
+    status?: $Enums.ParticipationStatus
+    joinDate?: Date | string
+    treasureHunt: TreasureHuntCreateNestedOneWithoutParticipantsInput
+  }
+
+  export type ParticipationUncheckedCreateWithoutUserInput = {
+    id?: string
+    huntId: string
+    status?: $Enums.ParticipationStatus
+    joinDate?: Date | string
+  }
+
+  export type ParticipationCreateOrConnectWithoutUserInput = {
+    where: ParticipationWhereUniqueInput
+    create: XOR<ParticipationCreateWithoutUserInput, ParticipationUncheckedCreateWithoutUserInput>
+  }
+
+  export type ParticipationCreateManyUserInputEnvelope = {
+    data: ParticipationCreateManyUserInput | ParticipationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TreasureHuntCreateWithoutCreatedByInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    participants?: ParticipationCreateNestedManyWithoutTreasureHuntInput
+    steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
+    rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
+    artefacts?: ArtefactCreateNestedManyWithoutHuntInput
+  }
+
+  export type TreasureHuntUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    participants?: ParticipationUncheckedCreateNestedManyWithoutTreasureHuntInput
+    steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
+    rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
+    artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
+  }
+
+  export type TreasureHuntCreateOrConnectWithoutCreatedByInput = {
+    where: TreasureHuntWhereUniqueInput
+    create: XOR<TreasureHuntCreateWithoutCreatedByInput, TreasureHuntUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type TreasureHuntCreateManyCreatedByInputEnvelope = {
+    data: TreasureHuntCreateManyCreatedByInput | TreasureHuntCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ArtefactCreateWithoutUserInput = {
+    id?: string
+    name: string
+    rarity: $Enums.ArtefactRarity
+    description?: string | null
+    imageUrl?: string | null
+    foundAt?: Date | string
+    hunt?: TreasureHuntCreateNestedOneWithoutArtefactsInput
+  }
+
+  export type ArtefactUncheckedCreateWithoutUserInput = {
+    id?: string
+    name: string
+    rarity: $Enums.ArtefactRarity
+    description?: string | null
+    imageUrl?: string | null
+    huntId?: string | null
+    foundAt?: Date | string
+  }
+
+  export type ArtefactCreateOrConnectWithoutUserInput = {
+    where: ArtefactWhereUniqueInput
+    create: XOR<ArtefactCreateWithoutUserInput, ArtefactUncheckedCreateWithoutUserInput>
+  }
+
+  export type ArtefactCreateManyUserInputEnvelope = {
+    data: ArtefactCreateManyUserInput | ArtefactCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type VirtualCurrencyCreateWithoutUserInput = {
+    id?: string
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transactionHistory?: TransactionHistoryCreateNestedManyWithoutVirtualCurrencyInput
+  }
+
+  export type VirtualCurrencyUncheckedCreateWithoutUserInput = {
+    id?: string
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutVirtualCurrencyInput
+  }
+
+  export type VirtualCurrencyCreateOrConnectWithoutUserInput = {
+    where: VirtualCurrencyWhereUniqueInput
+    create: XOR<VirtualCurrencyCreateWithoutUserInput, VirtualCurrencyUncheckedCreateWithoutUserInput>
+  }
+
+  export type VirtualCurrencyCreateManyUserInputEnvelope = {
+    data: VirtualCurrencyCreateManyUserInput | VirtualCurrencyCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TransactionHistoryCreateWithoutUserInput = {
+    id?: string
+    transactionId?: string
+    stripeSessionId?: string | null
+    amount: number
+    transactionType?: $Enums.TransactionType
+    description?: string | null
+    createdAt?: Date | string
+    virtualCurrency: VirtualCurrencyCreateNestedOneWithoutTransactionHistoryInput
+  }
+
+  export type TransactionHistoryUncheckedCreateWithoutUserInput = {
+    id?: string
+    transactionId?: string
+    stripeSessionId?: string | null
+    amount: number
+    transactionType?: $Enums.TransactionType
+    description?: string | null
+    createdAt?: Date | string
+    virtualCurrencyId: string
+  }
+
+  export type TransactionHistoryCreateOrConnectWithoutUserInput = {
+    where: TransactionHistoryWhereUniqueInput
+    create: XOR<TransactionHistoryCreateWithoutUserInput, TransactionHistoryUncheckedCreateWithoutUserInput>
+  }
+
+  export type TransactionHistoryCreateManyUserInputEnvelope = {
+    data: TransactionHistoryCreateManyUserInput | TransactionHistoryCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SessionUpsertWithWhereUniqueWithoutUserInput = {
     where: SessionWhereUniqueInput
     update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
@@ -7083,6 +18412,153 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
 
+  export type ParticipationUpsertWithWhereUniqueWithoutUserInput = {
+    where: ParticipationWhereUniqueInput
+    update: XOR<ParticipationUpdateWithoutUserInput, ParticipationUncheckedUpdateWithoutUserInput>
+    create: XOR<ParticipationCreateWithoutUserInput, ParticipationUncheckedCreateWithoutUserInput>
+  }
+
+  export type ParticipationUpdateWithWhereUniqueWithoutUserInput = {
+    where: ParticipationWhereUniqueInput
+    data: XOR<ParticipationUpdateWithoutUserInput, ParticipationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ParticipationUpdateManyWithWhereWithoutUserInput = {
+    where: ParticipationScalarWhereInput
+    data: XOR<ParticipationUpdateManyMutationInput, ParticipationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ParticipationScalarWhereInput = {
+    AND?: ParticipationScalarWhereInput | ParticipationScalarWhereInput[]
+    OR?: ParticipationScalarWhereInput[]
+    NOT?: ParticipationScalarWhereInput | ParticipationScalarWhereInput[]
+    id?: StringFilter<"Participation"> | string
+    userId?: StringFilter<"Participation"> | string
+    huntId?: StringFilter<"Participation"> | string
+    status?: EnumParticipationStatusFilter<"Participation"> | $Enums.ParticipationStatus
+    joinDate?: DateTimeFilter<"Participation"> | Date | string
+  }
+
+  export type TreasureHuntUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: TreasureHuntWhereUniqueInput
+    update: XOR<TreasureHuntUpdateWithoutCreatedByInput, TreasureHuntUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<TreasureHuntCreateWithoutCreatedByInput, TreasureHuntUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type TreasureHuntUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: TreasureHuntWhereUniqueInput
+    data: XOR<TreasureHuntUpdateWithoutCreatedByInput, TreasureHuntUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type TreasureHuntUpdateManyWithWhereWithoutCreatedByInput = {
+    where: TreasureHuntScalarWhereInput
+    data: XOR<TreasureHuntUpdateManyMutationInput, TreasureHuntUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type TreasureHuntScalarWhereInput = {
+    AND?: TreasureHuntScalarWhereInput | TreasureHuntScalarWhereInput[]
+    OR?: TreasureHuntScalarWhereInput[]
+    NOT?: TreasureHuntScalarWhereInput | TreasureHuntScalarWhereInput[]
+    id?: StringFilter<"TreasureHunt"> | string
+    title?: StringFilter<"TreasureHunt"> | string
+    description?: StringNullableFilter<"TreasureHunt"> | string | null
+    createdById?: StringFilter<"TreasureHunt"> | string
+    startDate?: DateTimeNullableFilter<"TreasureHunt"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"TreasureHunt"> | Date | string | null
+    location?: StringNullableFilter<"TreasureHunt"> | string | null
+    status?: EnumHuntStatusFilter<"TreasureHunt"> | $Enums.HuntStatus
+    createdAt?: DateTimeFilter<"TreasureHunt"> | Date | string
+    updatedAt?: DateTimeFilter<"TreasureHunt"> | Date | string
+  }
+
+  export type ArtefactUpsertWithWhereUniqueWithoutUserInput = {
+    where: ArtefactWhereUniqueInput
+    update: XOR<ArtefactUpdateWithoutUserInput, ArtefactUncheckedUpdateWithoutUserInput>
+    create: XOR<ArtefactCreateWithoutUserInput, ArtefactUncheckedCreateWithoutUserInput>
+  }
+
+  export type ArtefactUpdateWithWhereUniqueWithoutUserInput = {
+    where: ArtefactWhereUniqueInput
+    data: XOR<ArtefactUpdateWithoutUserInput, ArtefactUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ArtefactUpdateManyWithWhereWithoutUserInput = {
+    where: ArtefactScalarWhereInput
+    data: XOR<ArtefactUpdateManyMutationInput, ArtefactUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ArtefactScalarWhereInput = {
+    AND?: ArtefactScalarWhereInput | ArtefactScalarWhereInput[]
+    OR?: ArtefactScalarWhereInput[]
+    NOT?: ArtefactScalarWhereInput | ArtefactScalarWhereInput[]
+    id?: StringFilter<"Artefact"> | string
+    name?: StringFilter<"Artefact"> | string
+    rarity?: EnumArtefactRarityFilter<"Artefact"> | $Enums.ArtefactRarity
+    description?: StringNullableFilter<"Artefact"> | string | null
+    imageUrl?: StringNullableFilter<"Artefact"> | string | null
+    userId?: StringFilter<"Artefact"> | string
+    huntId?: StringNullableFilter<"Artefact"> | string | null
+    foundAt?: DateTimeFilter<"Artefact"> | Date | string
+  }
+
+  export type VirtualCurrencyUpsertWithWhereUniqueWithoutUserInput = {
+    where: VirtualCurrencyWhereUniqueInput
+    update: XOR<VirtualCurrencyUpdateWithoutUserInput, VirtualCurrencyUncheckedUpdateWithoutUserInput>
+    create: XOR<VirtualCurrencyCreateWithoutUserInput, VirtualCurrencyUncheckedCreateWithoutUserInput>
+  }
+
+  export type VirtualCurrencyUpdateWithWhereUniqueWithoutUserInput = {
+    where: VirtualCurrencyWhereUniqueInput
+    data: XOR<VirtualCurrencyUpdateWithoutUserInput, VirtualCurrencyUncheckedUpdateWithoutUserInput>
+  }
+
+  export type VirtualCurrencyUpdateManyWithWhereWithoutUserInput = {
+    where: VirtualCurrencyScalarWhereInput
+    data: XOR<VirtualCurrencyUpdateManyMutationInput, VirtualCurrencyUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type VirtualCurrencyScalarWhereInput = {
+    AND?: VirtualCurrencyScalarWhereInput | VirtualCurrencyScalarWhereInput[]
+    OR?: VirtualCurrencyScalarWhereInput[]
+    NOT?: VirtualCurrencyScalarWhereInput | VirtualCurrencyScalarWhereInput[]
+    id?: StringFilter<"VirtualCurrency"> | string
+    userId?: StringFilter<"VirtualCurrency"> | string
+    amount?: IntFilter<"VirtualCurrency"> | number
+    createdAt?: DateTimeFilter<"VirtualCurrency"> | Date | string
+    updatedAt?: DateTimeFilter<"VirtualCurrency"> | Date | string
+  }
+
+  export type TransactionHistoryUpsertWithWhereUniqueWithoutUserInput = {
+    where: TransactionHistoryWhereUniqueInput
+    update: XOR<TransactionHistoryUpdateWithoutUserInput, TransactionHistoryUncheckedUpdateWithoutUserInput>
+    create: XOR<TransactionHistoryCreateWithoutUserInput, TransactionHistoryUncheckedCreateWithoutUserInput>
+  }
+
+  export type TransactionHistoryUpdateWithWhereUniqueWithoutUserInput = {
+    where: TransactionHistoryWhereUniqueInput
+    data: XOR<TransactionHistoryUpdateWithoutUserInput, TransactionHistoryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type TransactionHistoryUpdateManyWithWhereWithoutUserInput = {
+    where: TransactionHistoryScalarWhereInput
+    data: XOR<TransactionHistoryUpdateManyMutationInput, TransactionHistoryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type TransactionHistoryScalarWhereInput = {
+    AND?: TransactionHistoryScalarWhereInput | TransactionHistoryScalarWhereInput[]
+    OR?: TransactionHistoryScalarWhereInput[]
+    NOT?: TransactionHistoryScalarWhereInput | TransactionHistoryScalarWhereInput[]
+    id?: StringFilter<"TransactionHistory"> | string
+    userId?: StringFilter<"TransactionHistory"> | string
+    transactionId?: StringFilter<"TransactionHistory"> | string
+    stripeSessionId?: StringNullableFilter<"TransactionHistory"> | string | null
+    amount?: IntFilter<"TransactionHistory"> | number
+    transactionType?: EnumTransactionTypeFilter<"TransactionHistory"> | $Enums.TransactionType
+    description?: StringNullableFilter<"TransactionHistory"> | string | null
+    createdAt?: DateTimeFilter<"TransactionHistory"> | Date | string
+    virtualCurrencyId?: StringFilter<"TransactionHistory"> | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id?: string
     name?: string | null
@@ -7093,6 +18569,11 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
+    participations?: ParticipationCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -7105,6 +18586,11 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -7133,6 +18619,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -7145,6 +18636,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -7157,6 +18653,11 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
+    participations?: ParticipationCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -7169,6 +18670,11 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -7197,6 +18703,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -7209,6 +18720,1035 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutCreatedChassesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    participations?: ParticipationCreateNestedManyWithoutUserInput
+    collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedChassesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
+    collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedChassesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedChassesInput, UserUncheckedCreateWithoutCreatedChassesInput>
+  }
+
+  export type ParticipationCreateWithoutTreasureHuntInput = {
+    id?: string
+    status?: $Enums.ParticipationStatus
+    joinDate?: Date | string
+    user: UserCreateNestedOneWithoutParticipationsInput
+  }
+
+  export type ParticipationUncheckedCreateWithoutTreasureHuntInput = {
+    id?: string
+    userId: string
+    status?: $Enums.ParticipationStatus
+    joinDate?: Date | string
+  }
+
+  export type ParticipationCreateOrConnectWithoutTreasureHuntInput = {
+    where: ParticipationWhereUniqueInput
+    create: XOR<ParticipationCreateWithoutTreasureHuntInput, ParticipationUncheckedCreateWithoutTreasureHuntInput>
+  }
+
+  export type ParticipationCreateManyTreasureHuntInputEnvelope = {
+    data: ParticipationCreateManyTreasureHuntInput | ParticipationCreateManyTreasureHuntInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type HuntStepCreateWithoutTreasureHuntInput = {
+    id?: string
+    description: string
+    stepOrder: number
+    createdAt?: Date | string
+  }
+
+  export type HuntStepUncheckedCreateWithoutTreasureHuntInput = {
+    id?: string
+    description: string
+    stepOrder: number
+    createdAt?: Date | string
+  }
+
+  export type HuntStepCreateOrConnectWithoutTreasureHuntInput = {
+    where: HuntStepWhereUniqueInput
+    create: XOR<HuntStepCreateWithoutTreasureHuntInput, HuntStepUncheckedCreateWithoutTreasureHuntInput>
+  }
+
+  export type HuntStepCreateManyTreasureHuntInputEnvelope = {
+    data: HuntStepCreateManyTreasureHuntInput | HuntStepCreateManyTreasureHuntInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RewardCreateWithoutTreasureHuntInput = {
+    id?: string
+    type: $Enums.RewardType
+    value: number
+    description?: string | null
+  }
+
+  export type RewardUncheckedCreateWithoutTreasureHuntInput = {
+    id?: string
+    type: $Enums.RewardType
+    value: number
+    description?: string | null
+  }
+
+  export type RewardCreateOrConnectWithoutTreasureHuntInput = {
+    where: RewardWhereUniqueInput
+    create: XOR<RewardCreateWithoutTreasureHuntInput, RewardUncheckedCreateWithoutTreasureHuntInput>
+  }
+
+  export type RewardCreateManyTreasureHuntInputEnvelope = {
+    data: RewardCreateManyTreasureHuntInput | RewardCreateManyTreasureHuntInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ArtefactCreateWithoutHuntInput = {
+    id?: string
+    name: string
+    rarity: $Enums.ArtefactRarity
+    description?: string | null
+    imageUrl?: string | null
+    foundAt?: Date | string
+    user: UserCreateNestedOneWithoutCollectedArtefactsInput
+  }
+
+  export type ArtefactUncheckedCreateWithoutHuntInput = {
+    id?: string
+    name: string
+    rarity: $Enums.ArtefactRarity
+    description?: string | null
+    imageUrl?: string | null
+    userId: string
+    foundAt?: Date | string
+  }
+
+  export type ArtefactCreateOrConnectWithoutHuntInput = {
+    where: ArtefactWhereUniqueInput
+    create: XOR<ArtefactCreateWithoutHuntInput, ArtefactUncheckedCreateWithoutHuntInput>
+  }
+
+  export type ArtefactCreateManyHuntInputEnvelope = {
+    data: ArtefactCreateManyHuntInput | ArtefactCreateManyHuntInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutCreatedChassesInput = {
+    update: XOR<UserUpdateWithoutCreatedChassesInput, UserUncheckedUpdateWithoutCreatedChassesInput>
+    create: XOR<UserCreateWithoutCreatedChassesInput, UserUncheckedCreateWithoutCreatedChassesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedChassesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedChassesInput, UserUncheckedUpdateWithoutCreatedChassesInput>
+  }
+
+  export type UserUpdateWithoutCreatedChassesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUpdateManyWithoutUserNestedInput
+    collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedChassesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
+    collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ParticipationUpsertWithWhereUniqueWithoutTreasureHuntInput = {
+    where: ParticipationWhereUniqueInput
+    update: XOR<ParticipationUpdateWithoutTreasureHuntInput, ParticipationUncheckedUpdateWithoutTreasureHuntInput>
+    create: XOR<ParticipationCreateWithoutTreasureHuntInput, ParticipationUncheckedCreateWithoutTreasureHuntInput>
+  }
+
+  export type ParticipationUpdateWithWhereUniqueWithoutTreasureHuntInput = {
+    where: ParticipationWhereUniqueInput
+    data: XOR<ParticipationUpdateWithoutTreasureHuntInput, ParticipationUncheckedUpdateWithoutTreasureHuntInput>
+  }
+
+  export type ParticipationUpdateManyWithWhereWithoutTreasureHuntInput = {
+    where: ParticipationScalarWhereInput
+    data: XOR<ParticipationUpdateManyMutationInput, ParticipationUncheckedUpdateManyWithoutTreasureHuntInput>
+  }
+
+  export type HuntStepUpsertWithWhereUniqueWithoutTreasureHuntInput = {
+    where: HuntStepWhereUniqueInput
+    update: XOR<HuntStepUpdateWithoutTreasureHuntInput, HuntStepUncheckedUpdateWithoutTreasureHuntInput>
+    create: XOR<HuntStepCreateWithoutTreasureHuntInput, HuntStepUncheckedCreateWithoutTreasureHuntInput>
+  }
+
+  export type HuntStepUpdateWithWhereUniqueWithoutTreasureHuntInput = {
+    where: HuntStepWhereUniqueInput
+    data: XOR<HuntStepUpdateWithoutTreasureHuntInput, HuntStepUncheckedUpdateWithoutTreasureHuntInput>
+  }
+
+  export type HuntStepUpdateManyWithWhereWithoutTreasureHuntInput = {
+    where: HuntStepScalarWhereInput
+    data: XOR<HuntStepUpdateManyMutationInput, HuntStepUncheckedUpdateManyWithoutTreasureHuntInput>
+  }
+
+  export type HuntStepScalarWhereInput = {
+    AND?: HuntStepScalarWhereInput | HuntStepScalarWhereInput[]
+    OR?: HuntStepScalarWhereInput[]
+    NOT?: HuntStepScalarWhereInput | HuntStepScalarWhereInput[]
+    id?: StringFilter<"HuntStep"> | string
+    description?: StringFilter<"HuntStep"> | string
+    huntId?: StringFilter<"HuntStep"> | string
+    stepOrder?: IntFilter<"HuntStep"> | number
+    createdAt?: DateTimeFilter<"HuntStep"> | Date | string
+  }
+
+  export type RewardUpsertWithWhereUniqueWithoutTreasureHuntInput = {
+    where: RewardWhereUniqueInput
+    update: XOR<RewardUpdateWithoutTreasureHuntInput, RewardUncheckedUpdateWithoutTreasureHuntInput>
+    create: XOR<RewardCreateWithoutTreasureHuntInput, RewardUncheckedCreateWithoutTreasureHuntInput>
+  }
+
+  export type RewardUpdateWithWhereUniqueWithoutTreasureHuntInput = {
+    where: RewardWhereUniqueInput
+    data: XOR<RewardUpdateWithoutTreasureHuntInput, RewardUncheckedUpdateWithoutTreasureHuntInput>
+  }
+
+  export type RewardUpdateManyWithWhereWithoutTreasureHuntInput = {
+    where: RewardScalarWhereInput
+    data: XOR<RewardUpdateManyMutationInput, RewardUncheckedUpdateManyWithoutTreasureHuntInput>
+  }
+
+  export type RewardScalarWhereInput = {
+    AND?: RewardScalarWhereInput | RewardScalarWhereInput[]
+    OR?: RewardScalarWhereInput[]
+    NOT?: RewardScalarWhereInput | RewardScalarWhereInput[]
+    id?: StringFilter<"Reward"> | string
+    type?: EnumRewardTypeFilter<"Reward"> | $Enums.RewardType
+    value?: IntFilter<"Reward"> | number
+    description?: StringNullableFilter<"Reward"> | string | null
+    huntId?: StringFilter<"Reward"> | string
+  }
+
+  export type ArtefactUpsertWithWhereUniqueWithoutHuntInput = {
+    where: ArtefactWhereUniqueInput
+    update: XOR<ArtefactUpdateWithoutHuntInput, ArtefactUncheckedUpdateWithoutHuntInput>
+    create: XOR<ArtefactCreateWithoutHuntInput, ArtefactUncheckedCreateWithoutHuntInput>
+  }
+
+  export type ArtefactUpdateWithWhereUniqueWithoutHuntInput = {
+    where: ArtefactWhereUniqueInput
+    data: XOR<ArtefactUpdateWithoutHuntInput, ArtefactUncheckedUpdateWithoutHuntInput>
+  }
+
+  export type ArtefactUpdateManyWithWhereWithoutHuntInput = {
+    where: ArtefactScalarWhereInput
+    data: XOR<ArtefactUpdateManyMutationInput, ArtefactUncheckedUpdateManyWithoutHuntInput>
+  }
+
+  export type UserCreateWithoutParticipationsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutParticipationsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutParticipationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutParticipationsInput, UserUncheckedCreateWithoutParticipationsInput>
+  }
+
+  export type TreasureHuntCreateWithoutParticipantsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedChassesInput
+    steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
+    rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
+    artefacts?: ArtefactCreateNestedManyWithoutHuntInput
+  }
+
+  export type TreasureHuntUncheckedCreateWithoutParticipantsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdById: string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
+    rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
+    artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
+  }
+
+  export type TreasureHuntCreateOrConnectWithoutParticipantsInput = {
+    where: TreasureHuntWhereUniqueInput
+    create: XOR<TreasureHuntCreateWithoutParticipantsInput, TreasureHuntUncheckedCreateWithoutParticipantsInput>
+  }
+
+  export type UserUpsertWithoutParticipationsInput = {
+    update: XOR<UserUpdateWithoutParticipationsInput, UserUncheckedUpdateWithoutParticipationsInput>
+    create: XOR<UserCreateWithoutParticipationsInput, UserUncheckedCreateWithoutParticipationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutParticipationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutParticipationsInput, UserUncheckedUpdateWithoutParticipationsInput>
+  }
+
+  export type UserUpdateWithoutParticipationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutParticipationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type TreasureHuntUpsertWithoutParticipantsInput = {
+    update: XOR<TreasureHuntUpdateWithoutParticipantsInput, TreasureHuntUncheckedUpdateWithoutParticipantsInput>
+    create: XOR<TreasureHuntCreateWithoutParticipantsInput, TreasureHuntUncheckedCreateWithoutParticipantsInput>
+    where?: TreasureHuntWhereInput
+  }
+
+  export type TreasureHuntUpdateToOneWithWhereWithoutParticipantsInput = {
+    where?: TreasureHuntWhereInput
+    data: XOR<TreasureHuntUpdateWithoutParticipantsInput, TreasureHuntUncheckedUpdateWithoutParticipantsInput>
+  }
+
+  export type TreasureHuntUpdateWithoutParticipantsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedChassesNestedInput
+    steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
+    rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
+    artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
+  }
+
+  export type TreasureHuntUncheckedUpdateWithoutParticipantsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
+  }
+
+  export type UserCreateWithoutCollectedArtefactsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    participations?: ParticipationCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
+    virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCollectedArtefactsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
+    virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCollectedArtefactsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCollectedArtefactsInput, UserUncheckedCreateWithoutCollectedArtefactsInput>
+  }
+
+  export type TreasureHuntCreateWithoutArtefactsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedChassesInput
+    participants?: ParticipationCreateNestedManyWithoutTreasureHuntInput
+    steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
+    rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
+  }
+
+  export type TreasureHuntUncheckedCreateWithoutArtefactsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdById: string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    participants?: ParticipationUncheckedCreateNestedManyWithoutTreasureHuntInput
+    steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
+    rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
+  }
+
+  export type TreasureHuntCreateOrConnectWithoutArtefactsInput = {
+    where: TreasureHuntWhereUniqueInput
+    create: XOR<TreasureHuntCreateWithoutArtefactsInput, TreasureHuntUncheckedCreateWithoutArtefactsInput>
+  }
+
+  export type UserUpsertWithoutCollectedArtefactsInput = {
+    update: XOR<UserUpdateWithoutCollectedArtefactsInput, UserUncheckedUpdateWithoutCollectedArtefactsInput>
+    create: XOR<UserCreateWithoutCollectedArtefactsInput, UserUncheckedCreateWithoutCollectedArtefactsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCollectedArtefactsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCollectedArtefactsInput, UserUncheckedUpdateWithoutCollectedArtefactsInput>
+  }
+
+  export type UserUpdateWithoutCollectedArtefactsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
+    virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCollectedArtefactsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
+    virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type TreasureHuntUpsertWithoutArtefactsInput = {
+    update: XOR<TreasureHuntUpdateWithoutArtefactsInput, TreasureHuntUncheckedUpdateWithoutArtefactsInput>
+    create: XOR<TreasureHuntCreateWithoutArtefactsInput, TreasureHuntUncheckedCreateWithoutArtefactsInput>
+    where?: TreasureHuntWhereInput
+  }
+
+  export type TreasureHuntUpdateToOneWithWhereWithoutArtefactsInput = {
+    where?: TreasureHuntWhereInput
+    data: XOR<TreasureHuntUpdateWithoutArtefactsInput, TreasureHuntUncheckedUpdateWithoutArtefactsInput>
+  }
+
+  export type TreasureHuntUpdateWithoutArtefactsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedChassesNestedInput
+    participants?: ParticipationUpdateManyWithoutTreasureHuntNestedInput
+    steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
+    rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
+  }
+
+  export type TreasureHuntUncheckedUpdateWithoutArtefactsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    participants?: ParticipationUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
+  }
+
+  export type TreasureHuntCreateWithoutStepsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedChassesInput
+    participants?: ParticipationCreateNestedManyWithoutTreasureHuntInput
+    rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
+    artefacts?: ArtefactCreateNestedManyWithoutHuntInput
+  }
+
+  export type TreasureHuntUncheckedCreateWithoutStepsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdById: string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    participants?: ParticipationUncheckedCreateNestedManyWithoutTreasureHuntInput
+    rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
+    artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
+  }
+
+  export type TreasureHuntCreateOrConnectWithoutStepsInput = {
+    where: TreasureHuntWhereUniqueInput
+    create: XOR<TreasureHuntCreateWithoutStepsInput, TreasureHuntUncheckedCreateWithoutStepsInput>
+  }
+
+  export type TreasureHuntUpsertWithoutStepsInput = {
+    update: XOR<TreasureHuntUpdateWithoutStepsInput, TreasureHuntUncheckedUpdateWithoutStepsInput>
+    create: XOR<TreasureHuntCreateWithoutStepsInput, TreasureHuntUncheckedCreateWithoutStepsInput>
+    where?: TreasureHuntWhereInput
+  }
+
+  export type TreasureHuntUpdateToOneWithWhereWithoutStepsInput = {
+    where?: TreasureHuntWhereInput
+    data: XOR<TreasureHuntUpdateWithoutStepsInput, TreasureHuntUncheckedUpdateWithoutStepsInput>
+  }
+
+  export type TreasureHuntUpdateWithoutStepsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedChassesNestedInput
+    participants?: ParticipationUpdateManyWithoutTreasureHuntNestedInput
+    rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
+    artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
+  }
+
+  export type TreasureHuntUncheckedUpdateWithoutStepsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    participants?: ParticipationUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
+  }
+
+  export type TreasureHuntCreateWithoutRewardsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedChassesInput
+    participants?: ParticipationCreateNestedManyWithoutTreasureHuntInput
+    steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
+    artefacts?: ArtefactCreateNestedManyWithoutHuntInput
+  }
+
+  export type TreasureHuntUncheckedCreateWithoutRewardsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdById: string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    participants?: ParticipationUncheckedCreateNestedManyWithoutTreasureHuntInput
+    steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
+    artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
+  }
+
+  export type TreasureHuntCreateOrConnectWithoutRewardsInput = {
+    where: TreasureHuntWhereUniqueInput
+    create: XOR<TreasureHuntCreateWithoutRewardsInput, TreasureHuntUncheckedCreateWithoutRewardsInput>
+  }
+
+  export type TreasureHuntUpsertWithoutRewardsInput = {
+    update: XOR<TreasureHuntUpdateWithoutRewardsInput, TreasureHuntUncheckedUpdateWithoutRewardsInput>
+    create: XOR<TreasureHuntCreateWithoutRewardsInput, TreasureHuntUncheckedCreateWithoutRewardsInput>
+    where?: TreasureHuntWhereInput
+  }
+
+  export type TreasureHuntUpdateToOneWithWhereWithoutRewardsInput = {
+    where?: TreasureHuntWhereInput
+    data: XOR<TreasureHuntUpdateWithoutRewardsInput, TreasureHuntUncheckedUpdateWithoutRewardsInput>
+  }
+
+  export type TreasureHuntUpdateWithoutRewardsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedChassesNestedInput
+    participants?: ParticipationUpdateManyWithoutTreasureHuntNestedInput
+    steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
+    artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
+  }
+
+  export type TreasureHuntUncheckedUpdateWithoutRewardsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    participants?: ParticipationUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
+  }
+
+  export type UserCreateWithoutVirtualCurrencyInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    participations?: ParticipationCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutVirtualCurrencyInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutVirtualCurrencyInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutVirtualCurrencyInput, UserUncheckedCreateWithoutVirtualCurrencyInput>
+  }
+
+  export type TransactionHistoryCreateWithoutVirtualCurrencyInput = {
+    id?: string
+    transactionId?: string
+    stripeSessionId?: string | null
+    amount: number
+    transactionType?: $Enums.TransactionType
+    description?: string | null
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutTransactionHistoryInput
+  }
+
+  export type TransactionHistoryUncheckedCreateWithoutVirtualCurrencyInput = {
+    id?: string
+    userId: string
+    transactionId?: string
+    stripeSessionId?: string | null
+    amount: number
+    transactionType?: $Enums.TransactionType
+    description?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TransactionHistoryCreateOrConnectWithoutVirtualCurrencyInput = {
+    where: TransactionHistoryWhereUniqueInput
+    create: XOR<TransactionHistoryCreateWithoutVirtualCurrencyInput, TransactionHistoryUncheckedCreateWithoutVirtualCurrencyInput>
+  }
+
+  export type TransactionHistoryCreateManyVirtualCurrencyInputEnvelope = {
+    data: TransactionHistoryCreateManyVirtualCurrencyInput | TransactionHistoryCreateManyVirtualCurrencyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutVirtualCurrencyInput = {
+    update: XOR<UserUpdateWithoutVirtualCurrencyInput, UserUncheckedUpdateWithoutVirtualCurrencyInput>
+    create: XOR<UserCreateWithoutVirtualCurrencyInput, UserUncheckedCreateWithoutVirtualCurrencyInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutVirtualCurrencyInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutVirtualCurrencyInput, UserUncheckedUpdateWithoutVirtualCurrencyInput>
+  }
+
+  export type UserUpdateWithoutVirtualCurrencyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutVirtualCurrencyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type TransactionHistoryUpsertWithWhereUniqueWithoutVirtualCurrencyInput = {
+    where: TransactionHistoryWhereUniqueInput
+    update: XOR<TransactionHistoryUpdateWithoutVirtualCurrencyInput, TransactionHistoryUncheckedUpdateWithoutVirtualCurrencyInput>
+    create: XOR<TransactionHistoryCreateWithoutVirtualCurrencyInput, TransactionHistoryUncheckedCreateWithoutVirtualCurrencyInput>
+  }
+
+  export type TransactionHistoryUpdateWithWhereUniqueWithoutVirtualCurrencyInput = {
+    where: TransactionHistoryWhereUniqueInput
+    data: XOR<TransactionHistoryUpdateWithoutVirtualCurrencyInput, TransactionHistoryUncheckedUpdateWithoutVirtualCurrencyInput>
+  }
+
+  export type TransactionHistoryUpdateManyWithWhereWithoutVirtualCurrencyInput = {
+    where: TransactionHistoryScalarWhereInput
+    data: XOR<TransactionHistoryUpdateManyMutationInput, TransactionHistoryUncheckedUpdateManyWithoutVirtualCurrencyInput>
+  }
+
+  export type VirtualCurrencyCreateWithoutTransactionHistoryInput = {
+    id?: string
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutVirtualCurrencyInput
+  }
+
+  export type VirtualCurrencyUncheckedCreateWithoutTransactionHistoryInput = {
+    id?: string
+    userId: string
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VirtualCurrencyCreateOrConnectWithoutTransactionHistoryInput = {
+    where: VirtualCurrencyWhereUniqueInput
+    create: XOR<VirtualCurrencyCreateWithoutTransactionHistoryInput, VirtualCurrencyUncheckedCreateWithoutTransactionHistoryInput>
+  }
+
+  export type UserCreateWithoutTransactionHistoryInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    participations?: ParticipationCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutTransactionHistoryInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutTransactionHistoryInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutTransactionHistoryInput, UserUncheckedCreateWithoutTransactionHistoryInput>
+  }
+
+  export type VirtualCurrencyUpsertWithoutTransactionHistoryInput = {
+    update: XOR<VirtualCurrencyUpdateWithoutTransactionHistoryInput, VirtualCurrencyUncheckedUpdateWithoutTransactionHistoryInput>
+    create: XOR<VirtualCurrencyCreateWithoutTransactionHistoryInput, VirtualCurrencyUncheckedCreateWithoutTransactionHistoryInput>
+    where?: VirtualCurrencyWhereInput
+  }
+
+  export type VirtualCurrencyUpdateToOneWithWhereWithoutTransactionHistoryInput = {
+    where?: VirtualCurrencyWhereInput
+    data: XOR<VirtualCurrencyUpdateWithoutTransactionHistoryInput, VirtualCurrencyUncheckedUpdateWithoutTransactionHistoryInput>
+  }
+
+  export type VirtualCurrencyUpdateWithoutTransactionHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutVirtualCurrencyNestedInput
+  }
+
+  export type VirtualCurrencyUncheckedUpdateWithoutTransactionHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutTransactionHistoryInput = {
+    update: XOR<UserUpdateWithoutTransactionHistoryInput, UserUncheckedUpdateWithoutTransactionHistoryInput>
+    create: XOR<UserCreateWithoutTransactionHistoryInput, UserUncheckedCreateWithoutTransactionHistoryInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutTransactionHistoryInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutTransactionHistoryInput, UserUncheckedUpdateWithoutTransactionHistoryInput>
+  }
+
+  export type UserUpdateWithoutTransactionHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutTransactionHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SessionCreateManyUserInput = {
@@ -7234,6 +19774,53 @@ export namespace Prisma {
     password?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+  }
+
+  export type ParticipationCreateManyUserInput = {
+    id?: string
+    huntId: string
+    status?: $Enums.ParticipationStatus
+    joinDate?: Date | string
+  }
+
+  export type TreasureHuntCreateManyCreatedByInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ArtefactCreateManyUserInput = {
+    id?: string
+    name: string
+    rarity: $Enums.ArtefactRarity
+    description?: string | null
+    imageUrl?: string | null
+    huntId?: string | null
+    foundAt?: Date | string
+  }
+
+  export type VirtualCurrencyCreateManyUserInput = {
+    id?: string
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransactionHistoryCreateManyUserInput = {
+    id?: string
+    transactionId?: string
+    stripeSessionId?: string | null
+    amount: number
+    transactionType?: $Enums.TransactionType
+    description?: string | null
+    createdAt?: Date | string
+    virtualCurrencyId: string
   }
 
   export type SessionUpdateWithoutUserInput = {
@@ -7309,6 +19896,325 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ParticipationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumParticipationStatusFieldUpdateOperationsInput | $Enums.ParticipationStatus
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    treasureHunt?: TreasureHuntUpdateOneRequiredWithoutParticipantsNestedInput
+  }
+
+  export type ParticipationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    huntId?: StringFieldUpdateOperationsInput | string
+    status?: EnumParticipationStatusFieldUpdateOperationsInput | $Enums.ParticipationStatus
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ParticipationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    huntId?: StringFieldUpdateOperationsInput | string
+    status?: EnumParticipationStatusFieldUpdateOperationsInput | $Enums.ParticipationStatus
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TreasureHuntUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    participants?: ParticipationUpdateManyWithoutTreasureHuntNestedInput
+    steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
+    rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
+    artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
+  }
+
+  export type TreasureHuntUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    participants?: ParticipationUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
+  }
+
+  export type TreasureHuntUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ArtefactUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hunt?: TreasureHuntUpdateOneWithoutArtefactsNestedInput
+  }
+
+  export type ArtefactUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    huntId?: NullableStringFieldUpdateOperationsInput | string | null
+    foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ArtefactUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    huntId?: NullableStringFieldUpdateOperationsInput | string | null
+    foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VirtualCurrencyUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transactionHistory?: TransactionHistoryUpdateManyWithoutVirtualCurrencyNestedInput
+  }
+
+  export type VirtualCurrencyUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutVirtualCurrencyNestedInput
+  }
+
+  export type VirtualCurrencyUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransactionHistoryUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    stripeSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: IntFieldUpdateOperationsInput | number
+    transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    virtualCurrency?: VirtualCurrencyUpdateOneRequiredWithoutTransactionHistoryNestedInput
+  }
+
+  export type TransactionHistoryUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    stripeSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: IntFieldUpdateOperationsInput | number
+    transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    virtualCurrencyId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TransactionHistoryUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    stripeSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: IntFieldUpdateOperationsInput | number
+    transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    virtualCurrencyId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ParticipationCreateManyTreasureHuntInput = {
+    id?: string
+    userId: string
+    status?: $Enums.ParticipationStatus
+    joinDate?: Date | string
+  }
+
+  export type HuntStepCreateManyTreasureHuntInput = {
+    id?: string
+    description: string
+    stepOrder: number
+    createdAt?: Date | string
+  }
+
+  export type RewardCreateManyTreasureHuntInput = {
+    id?: string
+    type: $Enums.RewardType
+    value: number
+    description?: string | null
+  }
+
+  export type ArtefactCreateManyHuntInput = {
+    id?: string
+    name: string
+    rarity: $Enums.ArtefactRarity
+    description?: string | null
+    imageUrl?: string | null
+    userId: string
+    foundAt?: Date | string
+  }
+
+  export type ParticipationUpdateWithoutTreasureHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumParticipationStatusFieldUpdateOperationsInput | $Enums.ParticipationStatus
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutParticipationsNestedInput
+  }
+
+  export type ParticipationUncheckedUpdateWithoutTreasureHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    status?: EnumParticipationStatusFieldUpdateOperationsInput | $Enums.ParticipationStatus
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ParticipationUncheckedUpdateManyWithoutTreasureHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    status?: EnumParticipationStatusFieldUpdateOperationsInput | $Enums.ParticipationStatus
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HuntStepUpdateWithoutTreasureHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HuntStepUncheckedUpdateWithoutTreasureHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HuntStepUncheckedUpdateManyWithoutTreasureHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RewardUpdateWithoutTreasureHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumRewardTypeFieldUpdateOperationsInput | $Enums.RewardType
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type RewardUncheckedUpdateWithoutTreasureHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumRewardTypeFieldUpdateOperationsInput | $Enums.RewardType
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type RewardUncheckedUpdateManyWithoutTreasureHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumRewardTypeFieldUpdateOperationsInput | $Enums.RewardType
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ArtefactUpdateWithoutHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCollectedArtefactsNestedInput
+  }
+
+  export type ArtefactUncheckedUpdateWithoutHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ArtefactUncheckedUpdateManyWithoutHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransactionHistoryCreateManyVirtualCurrencyInput = {
+    id?: string
+    userId: string
+    transactionId?: string
+    stripeSessionId?: string | null
+    amount: number
+    transactionType?: $Enums.TransactionType
+    description?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TransactionHistoryUpdateWithoutVirtualCurrencyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    stripeSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: IntFieldUpdateOperationsInput | number
+    transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutTransactionHistoryNestedInput
+  }
+
+  export type TransactionHistoryUncheckedUpdateWithoutVirtualCurrencyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    stripeSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: IntFieldUpdateOperationsInput | number
+    transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransactionHistoryUncheckedUpdateManyWithoutVirtualCurrencyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    stripeSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: IntFieldUpdateOperationsInput | number
+    transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

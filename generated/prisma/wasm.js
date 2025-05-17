@@ -164,6 +164,74 @@ exports.Prisma.VerificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.TreasureHuntScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  createdById: 'createdById',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  location: 'location',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ParticipationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  huntId: 'huntId',
+  status: 'status',
+  joinDate: 'joinDate'
+};
+
+exports.Prisma.ArtefactScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  rarity: 'rarity',
+  description: 'description',
+  imageUrl: 'imageUrl',
+  userId: 'userId',
+  huntId: 'huntId',
+  foundAt: 'foundAt'
+};
+
+exports.Prisma.HuntStepScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  huntId: 'huntId',
+  stepOrder: 'stepOrder',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.RewardScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  value: 'value',
+  description: 'description',
+  huntId: 'huntId'
+};
+
+exports.Prisma.VirtualCurrencyScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  amount: 'amount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TransactionHistoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  transactionId: 'transactionId',
+  stripeSessionId: 'stripeSessionId',
+  amount: 'amount',
+  transactionType: 'transactionType',
+  description: 'description',
+  createdAt: 'createdAt',
+  virtualCurrencyId: 'virtualCurrencyId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -178,13 +246,51 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.HuntStatus = exports.$Enums.HuntStatus = {
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
 
+exports.ParticipationStatus = exports.$Enums.ParticipationStatus = {
+  ONGOING: 'ONGOING',
+  COMPLETED: 'COMPLETED',
+  ABANDONED: 'ABANDONED'
+};
+
+exports.ArtefactRarity = exports.$Enums.ArtefactRarity = {
+  COMMON: 'COMMON',
+  RARE: 'RARE',
+  EPIC: 'EPIC',
+  LEGENDARY: 'LEGENDARY'
+};
+
+exports.RewardType = exports.$Enums.RewardType = {
+  VIRTUAL_CURRENCY: 'VIRTUAL_CURRENCY',
+  ARTEFACT: 'ARTEFACT',
+  DISCOUNT: 'DISCOUNT',
+  PHYSICAL_ITEM: 'PHYSICAL_ITEM'
+};
+
+exports.TransactionType = exports.$Enums.TransactionType = {
+  EARNED: 'EARNED',
+  SPENT: 'SPENT',
+  BOUGHT: 'BOUGHT'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  TreasureHunt: 'TreasureHunt',
+  Participation: 'Participation',
+  Artefact: 'Artefact',
+  HuntStep: 'HuntStep',
+  Reward: 'Reward',
+  VirtualCurrency: 'VirtualCurrency',
+  TransactionHistory: 'TransactionHistory'
 };
 
 /**

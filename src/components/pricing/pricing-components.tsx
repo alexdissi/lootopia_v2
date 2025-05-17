@@ -27,12 +27,17 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
   const router = useRouter();
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
-  const handleBuy = async (priceId: string) => {
-    const res = await fetch("/api/payment/checkout", {
+  const handleBuy = async (priceId: string, currencyAmount: number) => {
+    const res = await fetch("/api/stripe/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ priceId }),
+      body: JSON.stringify({
+        priceId,
+        currencyAmount,
+      }),
     });
+
+    console.log(priceId, currencyAmount);
 
     const { url } = await res.json();
     router.push(url);
@@ -182,7 +187,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                       ? "bg-gradient-to-r from-purple-600 to-purple-400 hover:from-purple-500 hover:to-purple-300 text-white"
                       : "bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500 text-white"
                   )}
-                  onClick={() => handleBuy(pack.id)}
+                  onClick={() => handleBuy(pack.id, pack.artefacts)}
                 >
                   <span className="relative z-10">
                     Acheter pour {pack.amount.toFixed(2)} €

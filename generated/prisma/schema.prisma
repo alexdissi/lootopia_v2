@@ -1,9 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
+// === AUTH CORE ===
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -26,6 +21,12 @@ model User {
   sessions         Session[]
   accounts         Account[]
 
+  participations     Participation[]
+  createdChasses     TreasureHunt[]       @relation("CreatedByUser")
+  collectedArtefacts Artefact[]           @relation("CollectedByUser")
+  virtualCurrency    VirtualCurrency[]
+  transactionHistory TransactionHistory[]
+
   @@unique([email])
   @@map("user")
 }
@@ -33,7 +34,7 @@ model User {
 model Session {
   id        String   @id
   expiresAt DateTime
-  token     String
+  token     String   @unique
   createdAt DateTime
   updatedAt DateTime
   ipAddress String?
@@ -41,7 +42,6 @@ model Session {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([token])
   @@map("session")
 }
 
@@ -73,4 +73,120 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+model TreasureHunt {
+  id           String          @id @default(cuid())
+  title        String
+  description  String?
+  createdBy    User            @relation("CreatedByUser", fields: [createdById], references: [id])
+  createdById  String
+  startDate    DateTime?
+  endDate      DateTime?
+  location     String?
+  status       HuntStatus      @default(PENDING)
+  participants Participation[]
+  steps        HuntStep[]
+  rewards      Reward[]
+  artefacts    Artefact[]
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+enum HuntStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model Participation {
+  id           String              @id @default(cuid())
+  userId       String
+  huntId       String
+  status       ParticipationStatus @default(ONGOING)
+  joinDate     DateTime            @default(now())
+  user         User                @relation(fields: [userId], references: [id])
+  treasureHunt TreasureHunt        @relation(fields: [huntId], references: [id])
+}
+
+enum ParticipationStatus {
+  ONGOING
+  COMPLETED
+  ABANDONED
+}
+
+model Artefact {
+  id          String         @id @default(cuid())
+  name        String
+  rarity      ArtefactRarity
+  description String?
+  imageUrl    String?
+  userId      String
+  user        User           @relation("CollectedByUser", fields: [userId], references: [id])
+  huntId      String?
+  hunt        TreasureHunt?  @relation(fields: [huntId], references: [id])
+  foundAt     DateTime       @default(now())
+}
+
+enum ArtefactRarity {
+  COMMON
+  RARE
+  EPIC
+  LEGENDARY
+}
+
+model HuntStep {
+  id           String       @id @default(cuid())
+  description  String
+  huntId       String
+  stepOrder    Int
+  treasureHunt TreasureHunt @relation(fields: [huntId], references: [id])
+  createdAt    DateTime     @default(now())
+}
+
+model Reward {
+  id           String       @id @default(cuid())
+  type         RewardType
+  value        Int
+  description  String?
+  huntId       String
+  treasureHunt TreasureHunt @relation(fields: [huntId], references: [id])
+}
+
+enum RewardType {
+  VIRTUAL_CURRENCY
+  ARTEFACT
+  DISCOUNT
+  PHYSICAL_ITEM
+}
+
+model VirtualCurrency {
+  id                 String               @id @default(cuid())
+  userId             String
+  amount             Int
+  user               User                 @relation(fields: [userId], references: [id])
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  transactionHistory TransactionHistory[]
+}
+
+model TransactionHistory {
+  id                String          @id @default(cuid())
+  userId            String
+  transactionId     String          @default(cuid())
+  stripeSessionId   String?         @unique
+  amount            Int
+  transactionType   TransactionType @default(EARNED)
+  description       String?
+  createdAt         DateTime        @default(now())
+  virtualCurrencyId String
+  virtualCurrency   VirtualCurrency @relation(fields: [virtualCurrencyId], references: [id])
+  user              User            @relation(fields: [userId], references: [id])
+}
+
+enum TransactionType {
+  EARNED
+  SPENT
+  BOUGHT
 }
