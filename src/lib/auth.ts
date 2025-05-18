@@ -3,7 +3,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import prisma from "./db";
 import { resend } from "./resend";
 import { nextCookies } from "better-auth/next-js";
-import { twoFactor } from "better-auth/plugins";
+import { customSession, twoFactor } from "better-auth/plugins";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -52,5 +52,26 @@ export const auth = betterAuth({
     window: 10,
     max: 100,
   },
-  plugins: [nextCookies(), twoFactor()],
+  plugins: [
+    nextCookies(),
+    twoFactor(),
+    customSession(async ({ user, session }) => {
+      const roles = await prisma.user.findFirst({
+        where: {
+          id: user.id,
+        },
+        select: {
+          role: true,
+        },
+      });
+      return {
+        roles,
+        user: {
+          ...user,
+          role: roles?.role,
+        },
+        session,
+      };
+    }),
+  ],
 });

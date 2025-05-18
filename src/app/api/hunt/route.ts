@@ -24,7 +24,6 @@ const huntSchema = z.object({
 
 export async function POST(req: Request) {
   try {
-    // Vérification de l'authentification
     const session = await auth.api.getSession({ headers: await headers() });
 
     if (!session?.user) {
@@ -34,7 +33,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Vérification des permissions
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
       select: { role: true },
@@ -47,7 +45,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Validation des données
     const body = await req.json();
     const validatedData = huntSchema.safeParse(body);
 
@@ -60,9 +57,7 @@ export async function POST(req: Request) {
 
     const data = validatedData.data;
 
-    // Création de la chasse en transaction
     const hunt = await prisma.$transaction(async (tx) => {
-      // Création de la chasse
       const newHunt = await tx.treasureHunt.create({
         data: {
           title: data.title,
@@ -78,7 +73,6 @@ export async function POST(req: Request) {
         },
       });
 
-      // Création des étapes
       if (data.steps && data.steps.length > 0) {
         await tx.huntStep.createMany({
           data: data.steps.map((step) => ({

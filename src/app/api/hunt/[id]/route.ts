@@ -58,7 +58,6 @@ export async function PATCH(
       );
     }
 
-    // Vérifier que l'utilisateur est le créateur ou admin
     const hunt = await prisma.treasureHunt.findUnique({
       where: { id: params.id },
       select: { createdById: true },
@@ -82,9 +81,7 @@ export async function PATCH(
 
     const body = await req.json();
 
-    // Transaction pour mettre à jour la chasse et ses étapes
     await prisma.$transaction(async (tx) => {
-      // Mettre à jour la chasse
       await tx.treasureHunt.update({
         where: { id: params.id },
         data: {
@@ -100,14 +97,11 @@ export async function PATCH(
         },
       });
 
-      // Mettre à jour les étapes
       if (body.steps) {
-        // Supprimer les étapes existantes
         await tx.huntStep.deleteMany({
           where: { huntId: params.id },
         });
 
-        // Créer les nouvelles étapes
         await tx.huntStep.createMany({
           data: body.steps.map((step: any) => ({
             description: step.description,
@@ -118,7 +112,6 @@ export async function PATCH(
       }
     });
 
-    // Récupérer la chasse mise à jour
     const updatedHunt = await prisma.treasureHunt.findUnique({
       where: { id: params.id },
       include: {
@@ -152,7 +145,6 @@ export async function DELETE(
       );
     }
 
-    // Vérifier que l'utilisateur est le créateur ou admin
     const hunt = await prisma.treasureHunt.findUnique({
       where: { id: params.id },
       select: { createdById: true },
@@ -174,7 +166,6 @@ export async function DELETE(
       );
     }
 
-    // Supprimer en cascade
     await prisma.$transaction([
       prisma.huntStep.deleteMany({ where: { huntId: params.id } }),
       prisma.participation.deleteMany({ where: { huntId: params.id } }),

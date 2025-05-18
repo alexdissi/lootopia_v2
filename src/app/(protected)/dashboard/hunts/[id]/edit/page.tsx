@@ -71,7 +71,7 @@ const formSchema = z.object({
           .string()
           .min(3, "La description doit contenir au moins 3 caractères"),
         stepOrder: z.number().int().min(1),
-      })
+      }),
     )
     .min(1, "Au moins une étape est requise"),
 });
@@ -135,7 +135,7 @@ export default function EditHuntPage({
         const error = await res.json();
         throw new Error(
           error.message ||
-            "Une erreur s'est produite lors de la récupération des données"
+            "Une erreur s'est produite lors de la récupération des données",
         );
       }
       return res.json() as Promise<HuntDetails>;
@@ -165,7 +165,7 @@ export default function EditHuntPage({
           id: step.id,
           description: step.description,
           stepOrder: step.stepOrder,
-        }))
+        })),
       );
     }
   }, [hunt, form]);

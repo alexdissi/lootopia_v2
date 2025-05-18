@@ -45,6 +45,7 @@ import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
 import { HuntDetailsSkeleton } from "@/components/context/hunts/hunt-detail-skeleton";
+import { authClient } from "@/lib/auth-client";
 
 interface Step {
   id: string;
@@ -79,6 +80,7 @@ export function HuntDetails({ huntId }: { huntId: string }) {
   const router = useRouter();
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [expandedSteps, setExpandedSteps] = useState(true);
+  const { data: session } = authClient.useSession();
 
   const {
     data: hunt,
@@ -169,6 +171,8 @@ export function HuntDetails({ huntId }: { huntId: string }) {
     return <HuntDetailsSkeleton />;
   }
 
+  const isCreator = hunt?.createdBy?.email === session?.user?.email;
+
   if (error || !hunt) {
     return (
       <div className="flex flex-col items-center justify-center py-12 px-4">
@@ -194,22 +198,24 @@ export function HuntDetails({ huntId }: { huntId: string }) {
             Retour
           </Link>
         </Button>
-        <div className="flex flex-wrap gap-2">
-          <Button variant="outline" size="sm" asChild>
-            <Link href={`/dashboard/hunts/${huntId}/edit`}>
-              <Edit className="mr-2 h-4 w-4" />
-              Modifier
-            </Link>
-          </Button>
-          <Button
-            variant="destructive"
-            size="sm"
-            onClick={() => setIsDeleteDialogOpen(true)}
-          >
-            <Trash2 className="mr-2 h-4 w-4" />
-            Supprimer
-          </Button>
-        </div>
+        {isCreator && (
+          <div className="flex flex-wrap gap-2">
+            <Button variant="outline" size="sm" asChild>
+              <Link href={`/dashboard/hunts/${huntId}/edit`}>
+                <Edit className="mr-2 h-4 w-4" />
+                Modifier
+              </Link>
+            </Button>
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={() => setIsDeleteDialogOpen(true)}
+            >
+              <Trash2 className="mr-2 h-4 w-4" />
+              Supprimer
+            </Button>
+          </div>
+        )}
       </div>
 
       <div className="mb-8">
@@ -378,7 +384,6 @@ export function HuntDetails({ huntId }: { huntId: string }) {
             </CardContent>
           </Card>
 
-          {/* Actions card based on status */}
           {hunt.status === "PENDING" && (
             <Card className="border-primary/20">
               <CardHeader className="bg-primary/5 pb-4">

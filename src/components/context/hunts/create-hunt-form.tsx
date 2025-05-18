@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -17,7 +17,7 @@ import { StepsSection } from "@/components/context/hunts/form/steps-section";
 
 export function CreateHuntForm() {
   const router = useRouter();
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const [steps, setSteps] = useState<
     { description: string; stepOrder: number }[]
   >([{ description: "", stepOrder: 1 }]);
@@ -77,13 +77,13 @@ export function CreateHuntForm() {
   const onSubmit = (data: FormValues) => {
     createHuntMutation.mutate(data, {
       onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey: ['hunts'] });
+        await queryClient.invalidateQueries({ queryKey: ["hunts"] });
         toast.success("Chasse au trésor créée avec succès !");
         router.push("/dashboard/hunts");
       },
       onError: (error: any) => {
         toast.error(
-            error.message || "Une erreur s'est produite lors de la création.",
+          error.message || "Une erreur s'est produite lors de la création.",
         );
       },
     });
