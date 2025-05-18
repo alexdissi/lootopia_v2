@@ -31,6 +31,7 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { FormValues } from "@/schemas/hunt-schema";
+import { LocationSearch } from "@/components/ui/location-search";
 
 interface GeneralInfoSectionProps {
   control: Control<FormValues>;
@@ -107,13 +108,10 @@ export function GeneralInfoSection({ control }: GeneralInfoSectionProps) {
             <FormItem>
               <FormLabel>Lieu</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Localisation de la chasse"
+                <LocationSearch
                   value={field.value || ""}
                   onChange={field.onChange}
-                  onBlur={field.onBlur}
-                  name={field.name}
-                  ref={field.ref}
+                  placeholder="Rechercher un lieu pour votre chasse"
                 />
               </FormControl>
               <FormDescription>
