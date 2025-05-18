@@ -1,0 +1,192 @@
+import { NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
+import prisma from "@/lib/db";
+import { headers } from "next/headers";
+
+export async function GET(req: Request, { params }: { params: { id: string } }) {
+  try {
+    const session = await auth.api.getSession({ headers: await headers() });
+    
+    if (!session?.user) {
+      return NextResponse.json(
+        { error: "Authentication required" },
+        { status: 401 }
+      );
+    }
+
+    const hunt = await prisma.treasureHunt.findUnique({
+      where: { id: params.id },
+      include: {
+        steps: {
+          orderBy: { stepOrder: 'asc' }
+        },
+        participants: true,
+        createdBy: {
+          select: { name: true, email: true }
+        }
+      }
+    });
+
+    if (!hunt) {
+      return NextResponse.json(
+        { error: "Hunt not found" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(hunt);
+  } catch (error) {
+    console.error("Error fetching hunt:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch hunt details" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+  try {
+    const session = await auth.api.getSession({ headers: await headers() });
+    
+    if (!session?.user) {
+      return NextResponse.json(
+        { error: "Authentication required" },
+        { status: 401 }
+      );
+    }
+
+    // Vérifier que l'utilisateur est le créateur ou admin
+    const hunt = await prisma.treasureHunt.findUnique({
+      where: { id: params.id },
+      select: { createdById: true }
+    });
+
+    if (!hunt) {
+      return NextResponse.json(
+        { error: "Hunt not found" },
+        { status: 404 }
+      );
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { role: true }
+    });
+
+    if (hunt.createdById !== session.user.id && user?.role !== "ADMIN") {
+      return NextResponse.json(
+        { error: "Insufficient permissions" },
+        { status: 403 }
+      );
+    }
+
+    const body = await req.json();
+    
+    // Transaction pour mettre à jour la chasse et ses étapes
+    await prisma.$transaction(async (tx) => {
+      // Mettre à jour la chasse
+      await tx.treasureHunt.update({
+        where: { id: params.id },
+        data: {
+          title: body.title,
+          description: body.description,
+          startDate: body.startDate ? new Date(body.startDate) : null,
+          endDate: body.endDate ? new Date(body.endDate) : null,
+          location: body.location,
+          mode: body.mode,
+          fee: body.fee,
+          mapStyle: body.mapStyle,
+          status: body.status,
+        }
+      });
+
+      // Mettre à jour les étapes
+      if (body.steps) {
+        // Supprimer les étapes existantes
+        await tx.huntStep.deleteMany({
+          where: { huntId: params.id }
+        });
+        
+        // Créer les nouvelles étapes
+        await tx.huntStep.createMany({
+          data: body.steps.map((step: any) => ({
+            description: step.description,
+            huntId: params.id,
+            stepOrder: step.stepOrder
+          }))
+        });
+      }
+    });
+
+    // Récupérer la chasse mise à jour
+    const updatedHunt = await prisma.treasureHunt.findUnique({
+      where: { id: params.id },
+      include: {
+        steps: {
+          orderBy: { stepOrder: 'asc' }
+        }
+      }
+    });
+
+    return NextResponse.json(updatedHunt);
+  } catch (error) {
+    console.error("Error updating hunt:", error);
+    return NextResponse.json(
+      { error: "Failed to update hunt" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+  try {
+    const session = await auth.api.getSession({ headers: await headers() });
+    
+    if (!session?.user) {
+      return NextResponse.json(
+        { error: "Authentication required" },
+        { status: 401 }
+      );
+    }
+
+    // Vérifier que l'utilisateur est le créateur ou admin
+    const hunt = await prisma.treasureHunt.findUnique({
+      where: { id: params.id },
+      select: { createdById: true }
+    });
+
+    if (!hunt) {
+      return NextResponse.json(
+        { error: "Hunt not found" },
+        { status: 404 }
+      );
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { role: true }
+    });
+
+    if (hunt.createdById !== session.user.id && user?.role !== "ADMIN") {
+      return NextResponse.json(
+        { error: "Insufficient permissions" },
+        { status: 403 }
+      );
+    }
+
+    // Supprimer en cascade
+    await prisma.$transaction([
+      prisma.huntStep.deleteMany({ where: { huntId: params.id } }),
+      prisma.participation.deleteMany({ where: { huntId: params.id } }),
+      prisma.treasureHunt.delete({ where: { id: params.id } })
+    ]);
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Error deleting hunt:", error);
+    return NextResponse.json(
+      { error: "Failed to delete hunt" },
+      { status: 500 }
+    );
+  }
+}

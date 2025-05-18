@@ -34,6 +34,7 @@ import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
 import { authClient } from "@/lib/auth-client";
 import { User } from "better-auth";
+import { CurrencyTracker } from "../context/common/currency-tracker";
 
 const data = {
   navMain: [
@@ -156,6 +157,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
+        <CurrencyTracker />
         <NavUser user={session?.user as User} />
       </SidebarFooter>
     </Sidebar>

@@ -10,25 +10,35 @@ datasource db {
 }
 
 model User {
-  id               String    @id @default(cuid())
-  name             String?
-  email            String
-  emailVerified    Boolean
-  image            String?
-  stripeCustomerId String?
-  createdAt        DateTime
-  updatedAt        DateTime
-  sessions         Session[]
-  accounts         Account[]
-
+  id                 String               @id @default(cuid())
+  name               String?
+  email              String
+  emailVerified      Boolean
+  image              String?
+  stripeCustomerId   String?
+  createdAt          DateTime
+  updatedAt          DateTime
+  sessions           Session[]
+  accounts           Account[]
+  nickname           String?
+  role               UserRole             @default(PLAYER)
+  isMfaEnabled       Boolean              @default(false)
   participations     Participation[]
   createdChasses     TreasureHunt[]       @relation("CreatedByUser")
   collectedArtefacts Artefact[]           @relation("CollectedByUser")
   virtualCurrency    VirtualCurrency[]
   transactionHistory TransactionHistory[]
+  Craft              Craft[]
+  LeaderboardEntry   LeaderboardEntry[]
 
   @@unique([email])
   @@map("user")
+}
+
+enum UserRole {
+  PLAYER
+  ORGANIZER
+  ADMIN
 }
 
 model Session {
@@ -76,21 +86,32 @@ model Verification {
 }
 
 model TreasureHunt {
-  id           String          @id @default(cuid())
-  title        String
-  description  String?
-  createdBy    User            @relation("CreatedByUser", fields: [createdById], references: [id])
-  createdById  String
-  startDate    DateTime?
-  endDate      DateTime?
-  location     String?
-  status       HuntStatus      @default(PENDING)
-  participants Participation[]
-  steps        HuntStep[]
-  rewards      Reward[]
-  artefacts    Artefact[]
-  createdAt    DateTime        @default(now())
-  updatedAt    DateTime        @updatedAt
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  createdBy   User      @relation("CreatedByUser", fields: [createdById], references: [id])
+  createdById String
+  startDate   DateTime?
+  endDate     DateTime?
+  location    String?
+  mode        HuntMode  @default(PUBLIC)
+  fee         Int?
+  mapStyle    String?
+  isFinished  Boolean   @default(false)
+
+  status           HuntStatus         @default(PENDING)
+  participants     Participation[]
+  steps            HuntStep[]
+  rewards          Reward[]
+  artefacts        Artefact[]
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  LeaderboardEntry LeaderboardEntry[]
+}
+
+enum HuntMode {
+  PUBLIC
+  PRIVATE
 }
 
 enum HuntStatus {
@@ -117,16 +138,27 @@ enum ParticipationStatus {
 }
 
 model Artefact {
-  id          String         @id @default(cuid())
-  name        String
-  rarity      ArtefactRarity
-  description String?
-  imageUrl    String?
-  userId      String
-  user        User           @relation("CollectedByUser", fields: [userId], references: [id])
-  huntId      String?
-  hunt        TreasureHunt?  @relation(fields: [huntId], references: [id])
-  foundAt     DateTime       @default(now())
+  id            String          @id @default(cuid())
+  name          String
+  rarity        ArtefactRarity
+  description   String?
+  imageUrl      String?
+  isHidden      Boolean         @default(false)
+  source        ArtefactSource
+  userId        String
+  user          User            @relation("CollectedByUser", fields: [userId], references: [id])
+  huntId        String?
+  hunt          TreasureHunt?   @relation(fields: [huntId], references: [id])
+  foundAt       DateTime        @default(now())
+  Craft         Craft[]
+  CraftMaterial CraftMaterial[]
+}
+
+enum ArtefactSource {
+  CACHE
+  SHOP
+  CRAFT
+  EVENT
 }
 
 enum ArtefactRarity {
@@ -165,10 +197,17 @@ model VirtualCurrency {
   id                 String               @id @default(cuid())
   userId             String
   amount             Int
+  type               CurrencySourceType   @default(EARNED)
   user               User                 @relation(fields: [userId], references: [id])
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
   transactionHistory TransactionHistory[]
+}
+
+enum CurrencySourceType {
+  EARNED
+  PURCHASED
+  GIFTED
 }
 
 model TransactionHistory {
@@ -189,4 +228,37 @@ enum TransactionType {
   EARNED
   SPENT
   BOUGHT
+}
+
+model Craft {
+  id        String   @id @default(cuid())
+  userId    String
+  resultId  String // Artefact créé
+  createdAt DateTime @default(now())
+
+  user   User     @relation(fields: [userId], references: [id])
+  result Artefact @relation(fields: [resultId], references: [id])
+
+  materials CraftMaterial[]
+}
+
+model CraftMaterial {
+  id         String @id @default(cuid())
+  craftId    String
+  artefactId String
+
+  craft    Craft    @relation(fields: [craftId], references: [id])
+  artefact Artefact @relation(fields: [artefactId], references: [id])
+}
+
+model LeaderboardEntry {
+  id          String   @id @default(cuid())
+  userId      String
+  huntId      String
+  rank        Int
+  score       Int
+  completedAt DateTime
+
+  user User         @relation(fields: [userId], references: [id])
+  hunt TreasureHunt @relation(fields: [huntId], references: [id])
 }

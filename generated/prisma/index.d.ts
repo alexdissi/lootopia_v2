@@ -68,12 +68,44 @@ export type VirtualCurrency = $Result.DefaultSelection<Prisma.$VirtualCurrencyPa
  * 
  */
 export type TransactionHistory = $Result.DefaultSelection<Prisma.$TransactionHistoryPayload>
+/**
+ * Model Craft
+ * 
+ */
+export type Craft = $Result.DefaultSelection<Prisma.$CraftPayload>
+/**
+ * Model CraftMaterial
+ * 
+ */
+export type CraftMaterial = $Result.DefaultSelection<Prisma.$CraftMaterialPayload>
+/**
+ * Model LeaderboardEntry
+ * 
+ */
+export type LeaderboardEntry = $Result.DefaultSelection<Prisma.$LeaderboardEntryPayload>
 
 /**
  * Enums
  */
 export namespace $Enums {
-  export const HuntStatus: {
+  export const UserRole: {
+  PLAYER: 'PLAYER',
+  ORGANIZER: 'ORGANIZER',
+  ADMIN: 'ADMIN'
+};
+
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
+export const HuntMode: {
+  PUBLIC: 'PUBLIC',
+  PRIVATE: 'PRIVATE'
+};
+
+export type HuntMode = (typeof HuntMode)[keyof typeof HuntMode]
+
+
+export const HuntStatus: {
   PENDING: 'PENDING',
   IN_PROGRESS: 'IN_PROGRESS',
   COMPLETED: 'COMPLETED',
@@ -90,6 +122,16 @@ export const ParticipationStatus: {
 };
 
 export type ParticipationStatus = (typeof ParticipationStatus)[keyof typeof ParticipationStatus]
+
+
+export const ArtefactSource: {
+  CACHE: 'CACHE',
+  SHOP: 'SHOP',
+  CRAFT: 'CRAFT',
+  EVENT: 'EVENT'
+};
+
+export type ArtefactSource = (typeof ArtefactSource)[keyof typeof ArtefactSource]
 
 
 export const ArtefactRarity: {
@@ -112,6 +154,15 @@ export const RewardType: {
 export type RewardType = (typeof RewardType)[keyof typeof RewardType]
 
 
+export const CurrencySourceType: {
+  EARNED: 'EARNED',
+  PURCHASED: 'PURCHASED',
+  GIFTED: 'GIFTED'
+};
+
+export type CurrencySourceType = (typeof CurrencySourceType)[keyof typeof CurrencySourceType]
+
+
 export const TransactionType: {
   EARNED: 'EARNED',
   SPENT: 'SPENT',
@@ -122,6 +173,14 @@ export type TransactionType = (typeof TransactionType)[keyof typeof TransactionT
 
 }
 
+export type UserRole = $Enums.UserRole
+
+export const UserRole: typeof $Enums.UserRole
+
+export type HuntMode = $Enums.HuntMode
+
+export const HuntMode: typeof $Enums.HuntMode
+
 export type HuntStatus = $Enums.HuntStatus
 
 export const HuntStatus: typeof $Enums.HuntStatus
@@ -130,6 +189,10 @@ export type ParticipationStatus = $Enums.ParticipationStatus
 
 export const ParticipationStatus: typeof $Enums.ParticipationStatus
 
+export type ArtefactSource = $Enums.ArtefactSource
+
+export const ArtefactSource: typeof $Enums.ArtefactSource
+
 export type ArtefactRarity = $Enums.ArtefactRarity
 
 export const ArtefactRarity: typeof $Enums.ArtefactRarity
@@ -137,6 +200,10 @@ export const ArtefactRarity: typeof $Enums.ArtefactRarity
 export type RewardType = $Enums.RewardType
 
 export const RewardType: typeof $Enums.RewardType
+
+export type CurrencySourceType = $Enums.CurrencySourceType
+
+export const CurrencySourceType: typeof $Enums.CurrencySourceType
 
 export type TransactionType = $Enums.TransactionType
 
@@ -376,6 +443,36 @@ export class PrismaClient<
     * ```
     */
   get transactionHistory(): Prisma.TransactionHistoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.craft`: Exposes CRUD operations for the **Craft** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Crafts
+    * const crafts = await prisma.craft.findMany()
+    * ```
+    */
+  get craft(): Prisma.CraftDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.craftMaterial`: Exposes CRUD operations for the **CraftMaterial** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CraftMaterials
+    * const craftMaterials = await prisma.craftMaterial.findMany()
+    * ```
+    */
+  get craftMaterial(): Prisma.CraftMaterialDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.leaderboardEntry`: Exposes CRUD operations for the **LeaderboardEntry** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LeaderboardEntries
+    * const leaderboardEntries = await prisma.leaderboardEntry.findMany()
+    * ```
+    */
+  get leaderboardEntry(): Prisma.LeaderboardEntryDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -434,8 +531,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.6.0
-   * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -826,7 +923,10 @@ export namespace Prisma {
     HuntStep: 'HuntStep',
     Reward: 'Reward',
     VirtualCurrency: 'VirtualCurrency',
-    TransactionHistory: 'TransactionHistory'
+    TransactionHistory: 'TransactionHistory',
+    Craft: 'Craft',
+    CraftMaterial: 'CraftMaterial',
+    LeaderboardEntry: 'LeaderboardEntry'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -845,7 +945,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification" | "treasureHunt" | "participation" | "artefact" | "huntStep" | "reward" | "virtualCurrency" | "transactionHistory"
+      modelProps: "user" | "session" | "account" | "verification" | "treasureHunt" | "participation" | "artefact" | "huntStep" | "reward" | "virtualCurrency" | "transactionHistory" | "craft" | "craftMaterial" | "leaderboardEntry"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1663,6 +1763,228 @@ export namespace Prisma {
           }
         }
       }
+      Craft: {
+        payload: Prisma.$CraftPayload<ExtArgs>
+        fields: Prisma.CraftFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CraftFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CraftFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftPayload>
+          }
+          findFirst: {
+            args: Prisma.CraftFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CraftFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftPayload>
+          }
+          findMany: {
+            args: Prisma.CraftFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftPayload>[]
+          }
+          create: {
+            args: Prisma.CraftCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftPayload>
+          }
+          createMany: {
+            args: Prisma.CraftCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CraftCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftPayload>[]
+          }
+          delete: {
+            args: Prisma.CraftDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftPayload>
+          }
+          update: {
+            args: Prisma.CraftUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftPayload>
+          }
+          deleteMany: {
+            args: Prisma.CraftDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CraftUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CraftUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftPayload>[]
+          }
+          upsert: {
+            args: Prisma.CraftUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftPayload>
+          }
+          aggregate: {
+            args: Prisma.CraftAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCraft>
+          }
+          groupBy: {
+            args: Prisma.CraftGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CraftGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CraftCountArgs<ExtArgs>
+            result: $Utils.Optional<CraftCountAggregateOutputType> | number
+          }
+        }
+      }
+      CraftMaterial: {
+        payload: Prisma.$CraftMaterialPayload<ExtArgs>
+        fields: Prisma.CraftMaterialFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CraftMaterialFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftMaterialPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CraftMaterialFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftMaterialPayload>
+          }
+          findFirst: {
+            args: Prisma.CraftMaterialFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftMaterialPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CraftMaterialFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftMaterialPayload>
+          }
+          findMany: {
+            args: Prisma.CraftMaterialFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftMaterialPayload>[]
+          }
+          create: {
+            args: Prisma.CraftMaterialCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftMaterialPayload>
+          }
+          createMany: {
+            args: Prisma.CraftMaterialCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CraftMaterialCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftMaterialPayload>[]
+          }
+          delete: {
+            args: Prisma.CraftMaterialDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftMaterialPayload>
+          }
+          update: {
+            args: Prisma.CraftMaterialUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftMaterialPayload>
+          }
+          deleteMany: {
+            args: Prisma.CraftMaterialDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CraftMaterialUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CraftMaterialUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftMaterialPayload>[]
+          }
+          upsert: {
+            args: Prisma.CraftMaterialUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CraftMaterialPayload>
+          }
+          aggregate: {
+            args: Prisma.CraftMaterialAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCraftMaterial>
+          }
+          groupBy: {
+            args: Prisma.CraftMaterialGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CraftMaterialGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CraftMaterialCountArgs<ExtArgs>
+            result: $Utils.Optional<CraftMaterialCountAggregateOutputType> | number
+          }
+        }
+      }
+      LeaderboardEntry: {
+        payload: Prisma.$LeaderboardEntryPayload<ExtArgs>
+        fields: Prisma.LeaderboardEntryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LeaderboardEntryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeaderboardEntryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LeaderboardEntryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeaderboardEntryPayload>
+          }
+          findFirst: {
+            args: Prisma.LeaderboardEntryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeaderboardEntryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LeaderboardEntryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeaderboardEntryPayload>
+          }
+          findMany: {
+            args: Prisma.LeaderboardEntryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeaderboardEntryPayload>[]
+          }
+          create: {
+            args: Prisma.LeaderboardEntryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeaderboardEntryPayload>
+          }
+          createMany: {
+            args: Prisma.LeaderboardEntryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LeaderboardEntryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeaderboardEntryPayload>[]
+          }
+          delete: {
+            args: Prisma.LeaderboardEntryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeaderboardEntryPayload>
+          }
+          update: {
+            args: Prisma.LeaderboardEntryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeaderboardEntryPayload>
+          }
+          deleteMany: {
+            args: Prisma.LeaderboardEntryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LeaderboardEntryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LeaderboardEntryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeaderboardEntryPayload>[]
+          }
+          upsert: {
+            args: Prisma.LeaderboardEntryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeaderboardEntryPayload>
+          }
+          aggregate: {
+            args: Prisma.LeaderboardEntryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLeaderboardEntry>
+          }
+          groupBy: {
+            args: Prisma.LeaderboardEntryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LeaderboardEntryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LeaderboardEntryCountArgs<ExtArgs>
+            result: $Utils.Optional<LeaderboardEntryCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1758,6 +2080,9 @@ export namespace Prisma {
     reward?: RewardOmit
     virtualCurrency?: VirtualCurrencyOmit
     transactionHistory?: TransactionHistoryOmit
+    craft?: CraftOmit
+    craftMaterial?: CraftMaterialOmit
+    leaderboardEntry?: LeaderboardEntryOmit
   }
 
   /* Types for Logging */
@@ -1859,6 +2184,8 @@ export namespace Prisma {
     collectedArtefacts: number
     virtualCurrency: number
     transactionHistory: number
+    Craft: number
+    LeaderboardEntry: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1869,6 +2196,8 @@ export namespace Prisma {
     collectedArtefacts?: boolean | UserCountOutputTypeCountCollectedArtefactsArgs
     virtualCurrency?: boolean | UserCountOutputTypeCountVirtualCurrencyArgs
     transactionHistory?: boolean | UserCountOutputTypeCountTransactionHistoryArgs
+    Craft?: boolean | UserCountOutputTypeCountCraftArgs
+    LeaderboardEntry?: boolean | UserCountOutputTypeCountLeaderboardEntryArgs
   }
 
   // Custom InputTypes
@@ -1931,6 +2260,20 @@ export namespace Prisma {
     where?: TransactionHistoryWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCraftArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CraftWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountLeaderboardEntryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LeaderboardEntryWhereInput
+  }
+
 
   /**
    * Count Type TreasureHuntCountOutputType
@@ -1941,6 +2284,7 @@ export namespace Prisma {
     steps: number
     rewards: number
     artefacts: number
+    LeaderboardEntry: number
   }
 
   export type TreasureHuntCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1948,6 +2292,7 @@ export namespace Prisma {
     steps?: boolean | TreasureHuntCountOutputTypeCountStepsArgs
     rewards?: boolean | TreasureHuntCountOutputTypeCountRewardsArgs
     artefacts?: boolean | TreasureHuntCountOutputTypeCountArtefactsArgs
+    LeaderboardEntry?: boolean | TreasureHuntCountOutputTypeCountLeaderboardEntryArgs
   }
 
   // Custom InputTypes
@@ -1989,6 +2334,53 @@ export namespace Prisma {
     where?: ArtefactWhereInput
   }
 
+  /**
+   * TreasureHuntCountOutputType without action
+   */
+  export type TreasureHuntCountOutputTypeCountLeaderboardEntryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LeaderboardEntryWhereInput
+  }
+
+
+  /**
+   * Count Type ArtefactCountOutputType
+   */
+
+  export type ArtefactCountOutputType = {
+    Craft: number
+    CraftMaterial: number
+  }
+
+  export type ArtefactCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Craft?: boolean | ArtefactCountOutputTypeCountCraftArgs
+    CraftMaterial?: boolean | ArtefactCountOutputTypeCountCraftMaterialArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ArtefactCountOutputType without action
+   */
+  export type ArtefactCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArtefactCountOutputType
+     */
+    select?: ArtefactCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ArtefactCountOutputType without action
+   */
+  export type ArtefactCountOutputTypeCountCraftArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CraftWhereInput
+  }
+
+  /**
+   * ArtefactCountOutputType without action
+   */
+  export type ArtefactCountOutputTypeCountCraftMaterialArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CraftMaterialWhereInput
+  }
+
 
   /**
    * Count Type VirtualCurrencyCountOutputType
@@ -2022,6 +2414,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type CraftCountOutputType
+   */
+
+  export type CraftCountOutputType = {
+    materials: number
+  }
+
+  export type CraftCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    materials?: boolean | CraftCountOutputTypeCountMaterialsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CraftCountOutputType without action
+   */
+  export type CraftCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftCountOutputType
+     */
+    select?: CraftCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CraftCountOutputType without action
+   */
+  export type CraftCountOutputTypeCountMaterialsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CraftMaterialWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -2044,6 +2467,9 @@ export namespace Prisma {
     stripeCustomerId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    nickname: string | null
+    role: $Enums.UserRole | null
+    isMfaEnabled: boolean | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2055,6 +2481,9 @@ export namespace Prisma {
     stripeCustomerId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    nickname: string | null
+    role: $Enums.UserRole | null
+    isMfaEnabled: boolean | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2066,6 +2495,9 @@ export namespace Prisma {
     stripeCustomerId: number
     createdAt: number
     updatedAt: number
+    nickname: number
+    role: number
+    isMfaEnabled: number
     _all: number
   }
 
@@ -2079,6 +2511,9 @@ export namespace Prisma {
     stripeCustomerId?: true
     createdAt?: true
     updatedAt?: true
+    nickname?: true
+    role?: true
+    isMfaEnabled?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2090,6 +2525,9 @@ export namespace Prisma {
     stripeCustomerId?: true
     createdAt?: true
     updatedAt?: true
+    nickname?: true
+    role?: true
+    isMfaEnabled?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2101,6 +2539,9 @@ export namespace Prisma {
     stripeCustomerId?: true
     createdAt?: true
     updatedAt?: true
+    nickname?: true
+    role?: true
+    isMfaEnabled?: true
     _all?: true
   }
 
@@ -2185,6 +2626,9 @@ export namespace Prisma {
     stripeCustomerId: string | null
     createdAt: Date
     updatedAt: Date
+    nickname: string | null
+    role: $Enums.UserRole
+    isMfaEnabled: boolean
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -2213,6 +2657,9 @@ export namespace Prisma {
     stripeCustomerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    nickname?: boolean
+    role?: boolean
+    isMfaEnabled?: boolean
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     participations?: boolean | User$participationsArgs<ExtArgs>
@@ -2220,6 +2667,8 @@ export namespace Prisma {
     collectedArtefacts?: boolean | User$collectedArtefactsArgs<ExtArgs>
     virtualCurrency?: boolean | User$virtualCurrencyArgs<ExtArgs>
     transactionHistory?: boolean | User$transactionHistoryArgs<ExtArgs>
+    Craft?: boolean | User$CraftArgs<ExtArgs>
+    LeaderboardEntry?: boolean | User$LeaderboardEntryArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2232,6 +2681,9 @@ export namespace Prisma {
     stripeCustomerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    nickname?: boolean
+    role?: boolean
+    isMfaEnabled?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2243,6 +2695,9 @@ export namespace Prisma {
     stripeCustomerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    nickname?: boolean
+    role?: boolean
+    isMfaEnabled?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -2254,9 +2709,12 @@ export namespace Prisma {
     stripeCustomerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    nickname?: boolean
+    role?: boolean
+    isMfaEnabled?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "stripeCustomerId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "stripeCustomerId" | "createdAt" | "updatedAt" | "nickname" | "role" | "isMfaEnabled", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
@@ -2265,6 +2723,8 @@ export namespace Prisma {
     collectedArtefacts?: boolean | User$collectedArtefactsArgs<ExtArgs>
     virtualCurrency?: boolean | User$virtualCurrencyArgs<ExtArgs>
     transactionHistory?: boolean | User$transactionHistoryArgs<ExtArgs>
+    Craft?: boolean | User$CraftArgs<ExtArgs>
+    LeaderboardEntry?: boolean | User$LeaderboardEntryArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2280,6 +2740,8 @@ export namespace Prisma {
       collectedArtefacts: Prisma.$ArtefactPayload<ExtArgs>[]
       virtualCurrency: Prisma.$VirtualCurrencyPayload<ExtArgs>[]
       transactionHistory: Prisma.$TransactionHistoryPayload<ExtArgs>[]
+      Craft: Prisma.$CraftPayload<ExtArgs>[]
+      LeaderboardEntry: Prisma.$LeaderboardEntryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2290,6 +2752,9 @@ export namespace Prisma {
       stripeCustomerId: string | null
       createdAt: Date
       updatedAt: Date
+      nickname: string | null
+      role: $Enums.UserRole
+      isMfaEnabled: boolean
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2691,6 +3156,8 @@ export namespace Prisma {
     collectedArtefacts<T extends User$collectedArtefactsArgs<ExtArgs> = {}>(args?: Subset<T, User$collectedArtefactsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     virtualCurrency<T extends User$virtualCurrencyArgs<ExtArgs> = {}>(args?: Subset<T, User$virtualCurrencyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VirtualCurrencyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     transactionHistory<T extends User$transactionHistoryArgs<ExtArgs> = {}>(args?: Subset<T, User$transactionHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Craft<T extends User$CraftArgs<ExtArgs> = {}>(args?: Subset<T, User$CraftArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    LeaderboardEntry<T extends User$LeaderboardEntryArgs<ExtArgs> = {}>(args?: Subset<T, User$LeaderboardEntryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2728,6 +3195,9 @@ export namespace Prisma {
     readonly stripeCustomerId: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
+    readonly nickname: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'UserRole'>
+    readonly isMfaEnabled: FieldRef<"User", 'Boolean'>
   }
     
 
@@ -3281,6 +3751,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TransactionHistoryScalarFieldEnum | TransactionHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * User.Craft
+   */
+  export type User$CraftArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Craft
+     */
+    select?: CraftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Craft
+     */
+    omit?: CraftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftInclude<ExtArgs> | null
+    where?: CraftWhereInput
+    orderBy?: CraftOrderByWithRelationInput | CraftOrderByWithRelationInput[]
+    cursor?: CraftWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CraftScalarFieldEnum | CraftScalarFieldEnum[]
+  }
+
+  /**
+   * User.LeaderboardEntry
+   */
+  export type User$LeaderboardEntryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeaderboardEntry
+     */
+    select?: LeaderboardEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LeaderboardEntry
+     */
+    omit?: LeaderboardEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaderboardEntryInclude<ExtArgs> | null
+    where?: LeaderboardEntryWhereInput
+    orderBy?: LeaderboardEntryOrderByWithRelationInput | LeaderboardEntryOrderByWithRelationInput[]
+    cursor?: LeaderboardEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LeaderboardEntryScalarFieldEnum | LeaderboardEntryScalarFieldEnum[]
   }
 
   /**
@@ -6575,8 +7093,18 @@ export namespace Prisma {
 
   export type AggregateTreasureHunt = {
     _count: TreasureHuntCountAggregateOutputType | null
+    _avg: TreasureHuntAvgAggregateOutputType | null
+    _sum: TreasureHuntSumAggregateOutputType | null
     _min: TreasureHuntMinAggregateOutputType | null
     _max: TreasureHuntMaxAggregateOutputType | null
+  }
+
+  export type TreasureHuntAvgAggregateOutputType = {
+    fee: number | null
+  }
+
+  export type TreasureHuntSumAggregateOutputType = {
+    fee: number | null
   }
 
   export type TreasureHuntMinAggregateOutputType = {
@@ -6587,6 +7115,10 @@ export namespace Prisma {
     startDate: Date | null
     endDate: Date | null
     location: string | null
+    mode: $Enums.HuntMode | null
+    fee: number | null
+    mapStyle: string | null
+    isFinished: boolean | null
     status: $Enums.HuntStatus | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -6600,6 +7132,10 @@ export namespace Prisma {
     startDate: Date | null
     endDate: Date | null
     location: string | null
+    mode: $Enums.HuntMode | null
+    fee: number | null
+    mapStyle: string | null
+    isFinished: boolean | null
     status: $Enums.HuntStatus | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -6613,12 +7149,24 @@ export namespace Prisma {
     startDate: number
     endDate: number
     location: number
+    mode: number
+    fee: number
+    mapStyle: number
+    isFinished: number
     status: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
+
+  export type TreasureHuntAvgAggregateInputType = {
+    fee?: true
+  }
+
+  export type TreasureHuntSumAggregateInputType = {
+    fee?: true
+  }
 
   export type TreasureHuntMinAggregateInputType = {
     id?: true
@@ -6628,6 +7176,10 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     location?: true
+    mode?: true
+    fee?: true
+    mapStyle?: true
+    isFinished?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -6641,6 +7193,10 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     location?: true
+    mode?: true
+    fee?: true
+    mapStyle?: true
+    isFinished?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -6654,6 +7210,10 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     location?: true
+    mode?: true
+    fee?: true
+    mapStyle?: true
+    isFinished?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -6698,6 +7258,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: TreasureHuntAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TreasureHuntSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: TreasureHuntMinAggregateInputType
@@ -6728,6 +7300,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: TreasureHuntCountAggregateInputType | true
+    _avg?: TreasureHuntAvgAggregateInputType
+    _sum?: TreasureHuntSumAggregateInputType
     _min?: TreasureHuntMinAggregateInputType
     _max?: TreasureHuntMaxAggregateInputType
   }
@@ -6740,10 +7314,16 @@ export namespace Prisma {
     startDate: Date | null
     endDate: Date | null
     location: string | null
+    mode: $Enums.HuntMode
+    fee: number | null
+    mapStyle: string | null
+    isFinished: boolean
     status: $Enums.HuntStatus
     createdAt: Date
     updatedAt: Date
     _count: TreasureHuntCountAggregateOutputType | null
+    _avg: TreasureHuntAvgAggregateOutputType | null
+    _sum: TreasureHuntSumAggregateOutputType | null
     _min: TreasureHuntMinAggregateOutputType | null
     _max: TreasureHuntMaxAggregateOutputType | null
   }
@@ -6770,6 +7350,10 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     location?: boolean
+    mode?: boolean
+    fee?: boolean
+    mapStyle?: boolean
+    isFinished?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -6778,6 +7362,7 @@ export namespace Prisma {
     steps?: boolean | TreasureHunt$stepsArgs<ExtArgs>
     rewards?: boolean | TreasureHunt$rewardsArgs<ExtArgs>
     artefacts?: boolean | TreasureHunt$artefactsArgs<ExtArgs>
+    LeaderboardEntry?: boolean | TreasureHunt$LeaderboardEntryArgs<ExtArgs>
     _count?: boolean | TreasureHuntCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["treasureHunt"]>
 
@@ -6789,6 +7374,10 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     location?: boolean
+    mode?: boolean
+    fee?: boolean
+    mapStyle?: boolean
+    isFinished?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -6803,6 +7392,10 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     location?: boolean
+    mode?: boolean
+    fee?: boolean
+    mapStyle?: boolean
+    isFinished?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -6817,18 +7410,23 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     location?: boolean
+    mode?: boolean
+    fee?: boolean
+    mapStyle?: boolean
+    isFinished?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type TreasureHuntOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "createdById" | "startDate" | "endDate" | "location" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["treasureHunt"]>
+  export type TreasureHuntOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "createdById" | "startDate" | "endDate" | "location" | "mode" | "fee" | "mapStyle" | "isFinished" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["treasureHunt"]>
   export type TreasureHuntInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     participants?: boolean | TreasureHunt$participantsArgs<ExtArgs>
     steps?: boolean | TreasureHunt$stepsArgs<ExtArgs>
     rewards?: boolean | TreasureHunt$rewardsArgs<ExtArgs>
     artefacts?: boolean | TreasureHunt$artefactsArgs<ExtArgs>
+    LeaderboardEntry?: boolean | TreasureHunt$LeaderboardEntryArgs<ExtArgs>
     _count?: boolean | TreasureHuntCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TreasureHuntIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6846,6 +7444,7 @@ export namespace Prisma {
       steps: Prisma.$HuntStepPayload<ExtArgs>[]
       rewards: Prisma.$RewardPayload<ExtArgs>[]
       artefacts: Prisma.$ArtefactPayload<ExtArgs>[]
+      LeaderboardEntry: Prisma.$LeaderboardEntryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6855,6 +7454,10 @@ export namespace Prisma {
       startDate: Date | null
       endDate: Date | null
       location: string | null
+      mode: $Enums.HuntMode
+      fee: number | null
+      mapStyle: string | null
+      isFinished: boolean
       status: $Enums.HuntStatus
       createdAt: Date
       updatedAt: Date
@@ -7257,6 +7860,7 @@ export namespace Prisma {
     steps<T extends TreasureHunt$stepsArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHunt$stepsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HuntStepPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     rewards<T extends TreasureHunt$rewardsArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHunt$rewardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RewardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     artefacts<T extends TreasureHunt$artefactsArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHunt$artefactsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    LeaderboardEntry<T extends TreasureHunt$LeaderboardEntryArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHunt$LeaderboardEntryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7293,6 +7897,10 @@ export namespace Prisma {
     readonly startDate: FieldRef<"TreasureHunt", 'DateTime'>
     readonly endDate: FieldRef<"TreasureHunt", 'DateTime'>
     readonly location: FieldRef<"TreasureHunt", 'String'>
+    readonly mode: FieldRef<"TreasureHunt", 'HuntMode'>
+    readonly fee: FieldRef<"TreasureHunt", 'Int'>
+    readonly mapStyle: FieldRef<"TreasureHunt", 'String'>
+    readonly isFinished: FieldRef<"TreasureHunt", 'Boolean'>
     readonly status: FieldRef<"TreasureHunt", 'HuntStatus'>
     readonly createdAt: FieldRef<"TreasureHunt", 'DateTime'>
     readonly updatedAt: FieldRef<"TreasureHunt", 'DateTime'>
@@ -7785,6 +8393,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ArtefactScalarFieldEnum | ArtefactScalarFieldEnum[]
+  }
+
+  /**
+   * TreasureHunt.LeaderboardEntry
+   */
+  export type TreasureHunt$LeaderboardEntryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeaderboardEntry
+     */
+    select?: LeaderboardEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LeaderboardEntry
+     */
+    omit?: LeaderboardEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaderboardEntryInclude<ExtArgs> | null
+    where?: LeaderboardEntryWhereInput
+    orderBy?: LeaderboardEntryOrderByWithRelationInput | LeaderboardEntryOrderByWithRelationInput[]
+    cursor?: LeaderboardEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LeaderboardEntryScalarFieldEnum | LeaderboardEntryScalarFieldEnum[]
   }
 
   /**
@@ -8888,6 +9520,8 @@ export namespace Prisma {
     rarity: $Enums.ArtefactRarity | null
     description: string | null
     imageUrl: string | null
+    isHidden: boolean | null
+    source: $Enums.ArtefactSource | null
     userId: string | null
     huntId: string | null
     foundAt: Date | null
@@ -8899,6 +9533,8 @@ export namespace Prisma {
     rarity: $Enums.ArtefactRarity | null
     description: string | null
     imageUrl: string | null
+    isHidden: boolean | null
+    source: $Enums.ArtefactSource | null
     userId: string | null
     huntId: string | null
     foundAt: Date | null
@@ -8910,6 +9546,8 @@ export namespace Prisma {
     rarity: number
     description: number
     imageUrl: number
+    isHidden: number
+    source: number
     userId: number
     huntId: number
     foundAt: number
@@ -8923,6 +9561,8 @@ export namespace Prisma {
     rarity?: true
     description?: true
     imageUrl?: true
+    isHidden?: true
+    source?: true
     userId?: true
     huntId?: true
     foundAt?: true
@@ -8934,6 +9574,8 @@ export namespace Prisma {
     rarity?: true
     description?: true
     imageUrl?: true
+    isHidden?: true
+    source?: true
     userId?: true
     huntId?: true
     foundAt?: true
@@ -8945,6 +9587,8 @@ export namespace Prisma {
     rarity?: true
     description?: true
     imageUrl?: true
+    isHidden?: true
+    source?: true
     userId?: true
     huntId?: true
     foundAt?: true
@@ -9029,6 +9673,8 @@ export namespace Prisma {
     rarity: $Enums.ArtefactRarity
     description: string | null
     imageUrl: string | null
+    isHidden: boolean
+    source: $Enums.ArtefactSource
     userId: string
     huntId: string | null
     foundAt: Date
@@ -9057,11 +9703,16 @@ export namespace Prisma {
     rarity?: boolean
     description?: boolean
     imageUrl?: boolean
+    isHidden?: boolean
+    source?: boolean
     userId?: boolean
     huntId?: boolean
     foundAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     hunt?: boolean | Artefact$huntArgs<ExtArgs>
+    Craft?: boolean | Artefact$CraftArgs<ExtArgs>
+    CraftMaterial?: boolean | Artefact$CraftMaterialArgs<ExtArgs>
+    _count?: boolean | ArtefactCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["artefact"]>
 
   export type ArtefactSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -9070,6 +9721,8 @@ export namespace Prisma {
     rarity?: boolean
     description?: boolean
     imageUrl?: boolean
+    isHidden?: boolean
+    source?: boolean
     userId?: boolean
     huntId?: boolean
     foundAt?: boolean
@@ -9083,6 +9736,8 @@ export namespace Prisma {
     rarity?: boolean
     description?: boolean
     imageUrl?: boolean
+    isHidden?: boolean
+    source?: boolean
     userId?: boolean
     huntId?: boolean
     foundAt?: boolean
@@ -9096,15 +9751,20 @@ export namespace Prisma {
     rarity?: boolean
     description?: boolean
     imageUrl?: boolean
+    isHidden?: boolean
+    source?: boolean
     userId?: boolean
     huntId?: boolean
     foundAt?: boolean
   }
 
-  export type ArtefactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rarity" | "description" | "imageUrl" | "userId" | "huntId" | "foundAt", ExtArgs["result"]["artefact"]>
+  export type ArtefactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rarity" | "description" | "imageUrl" | "isHidden" | "source" | "userId" | "huntId" | "foundAt", ExtArgs["result"]["artefact"]>
   export type ArtefactInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     hunt?: boolean | Artefact$huntArgs<ExtArgs>
+    Craft?: boolean | Artefact$CraftArgs<ExtArgs>
+    CraftMaterial?: boolean | Artefact$CraftMaterialArgs<ExtArgs>
+    _count?: boolean | ArtefactCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ArtefactIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -9120,6 +9780,8 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       hunt: Prisma.$TreasureHuntPayload<ExtArgs> | null
+      Craft: Prisma.$CraftPayload<ExtArgs>[]
+      CraftMaterial: Prisma.$CraftMaterialPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9127,6 +9789,8 @@ export namespace Prisma {
       rarity: $Enums.ArtefactRarity
       description: string | null
       imageUrl: string | null
+      isHidden: boolean
+      source: $Enums.ArtefactSource
       userId: string
       huntId: string | null
       foundAt: Date
@@ -9526,6 +10190,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     hunt<T extends Artefact$huntArgs<ExtArgs> = {}>(args?: Subset<T, Artefact$huntArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Craft<T extends Artefact$CraftArgs<ExtArgs> = {}>(args?: Subset<T, Artefact$CraftArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    CraftMaterial<T extends Artefact$CraftMaterialArgs<ExtArgs> = {}>(args?: Subset<T, Artefact$CraftMaterialArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CraftMaterialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9560,6 +10226,8 @@ export namespace Prisma {
     readonly rarity: FieldRef<"Artefact", 'ArtefactRarity'>
     readonly description: FieldRef<"Artefact", 'String'>
     readonly imageUrl: FieldRef<"Artefact", 'String'>
+    readonly isHidden: FieldRef<"Artefact", 'Boolean'>
+    readonly source: FieldRef<"Artefact", 'ArtefactSource'>
     readonly userId: FieldRef<"Artefact", 'String'>
     readonly huntId: FieldRef<"Artefact", 'String'>
     readonly foundAt: FieldRef<"Artefact", 'DateTime'>
@@ -9975,6 +10643,54 @@ export namespace Prisma {
      */
     include?: TreasureHuntInclude<ExtArgs> | null
     where?: TreasureHuntWhereInput
+  }
+
+  /**
+   * Artefact.Craft
+   */
+  export type Artefact$CraftArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Craft
+     */
+    select?: CraftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Craft
+     */
+    omit?: CraftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftInclude<ExtArgs> | null
+    where?: CraftWhereInput
+    orderBy?: CraftOrderByWithRelationInput | CraftOrderByWithRelationInput[]
+    cursor?: CraftWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CraftScalarFieldEnum | CraftScalarFieldEnum[]
+  }
+
+  /**
+   * Artefact.CraftMaterial
+   */
+  export type Artefact$CraftMaterialArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftMaterial
+     */
+    select?: CraftMaterialSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CraftMaterial
+     */
+    omit?: CraftMaterialOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftMaterialInclude<ExtArgs> | null
+    where?: CraftMaterialWhereInput
+    orderBy?: CraftMaterialOrderByWithRelationInput | CraftMaterialOrderByWithRelationInput[]
+    cursor?: CraftMaterialWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CraftMaterialScalarFieldEnum | CraftMaterialScalarFieldEnum[]
   }
 
   /**
@@ -12204,6 +12920,7 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     amount: number | null
+    type: $Enums.CurrencySourceType | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -12212,6 +12929,7 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     amount: number | null
+    type: $Enums.CurrencySourceType | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -12220,6 +12938,7 @@ export namespace Prisma {
     id: number
     userId: number
     amount: number
+    type: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -12238,6 +12957,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     amount?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12246,6 +12966,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     amount?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12254,6 +12975,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     amount?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -12349,6 +13071,7 @@ export namespace Prisma {
     id: string
     userId: string
     amount: number
+    type: $Enums.CurrencySourceType
     createdAt: Date
     updatedAt: Date
     _count: VirtualCurrencyCountAggregateOutputType | null
@@ -12376,6 +13099,7 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     amount?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -12387,6 +13111,7 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     amount?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -12396,6 +13121,7 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     amount?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -12405,11 +13131,12 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     amount?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type VirtualCurrencyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "amount" | "createdAt" | "updatedAt", ExtArgs["result"]["virtualCurrency"]>
+  export type VirtualCurrencyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "amount" | "type" | "createdAt" | "updatedAt", ExtArgs["result"]["virtualCurrency"]>
   export type VirtualCurrencyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     transactionHistory?: boolean | VirtualCurrency$transactionHistoryArgs<ExtArgs>
@@ -12432,6 +13159,7 @@ export namespace Prisma {
       id: string
       userId: string
       amount: number
+      type: $Enums.CurrencySourceType
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["virtualCurrency"]>
@@ -12862,6 +13590,7 @@ export namespace Prisma {
     readonly id: FieldRef<"VirtualCurrency", 'String'>
     readonly userId: FieldRef<"VirtualCurrency", 'String'>
     readonly amount: FieldRef<"VirtualCurrency", 'Int'>
+    readonly type: FieldRef<"VirtualCurrency", 'CurrencySourceType'>
     readonly createdAt: FieldRef<"VirtualCurrency", 'DateTime'>
     readonly updatedAt: FieldRef<"VirtualCurrency", 'DateTime'>
   }
@@ -14455,6 +15184,3246 @@ export namespace Prisma {
 
 
   /**
+   * Model Craft
+   */
+
+  export type AggregateCraft = {
+    _count: CraftCountAggregateOutputType | null
+    _min: CraftMinAggregateOutputType | null
+    _max: CraftMaxAggregateOutputType | null
+  }
+
+  export type CraftMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    resultId: string | null
+    createdAt: Date | null
+  }
+
+  export type CraftMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    resultId: string | null
+    createdAt: Date | null
+  }
+
+  export type CraftCountAggregateOutputType = {
+    id: number
+    userId: number
+    resultId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type CraftMinAggregateInputType = {
+    id?: true
+    userId?: true
+    resultId?: true
+    createdAt?: true
+  }
+
+  export type CraftMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    resultId?: true
+    createdAt?: true
+  }
+
+  export type CraftCountAggregateInputType = {
+    id?: true
+    userId?: true
+    resultId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type CraftAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Craft to aggregate.
+     */
+    where?: CraftWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Crafts to fetch.
+     */
+    orderBy?: CraftOrderByWithRelationInput | CraftOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CraftWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Crafts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Crafts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Crafts
+    **/
+    _count?: true | CraftCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CraftMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CraftMaxAggregateInputType
+  }
+
+  export type GetCraftAggregateType<T extends CraftAggregateArgs> = {
+        [P in keyof T & keyof AggregateCraft]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCraft[P]>
+      : GetScalarType<T[P], AggregateCraft[P]>
+  }
+
+
+
+
+  export type CraftGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CraftWhereInput
+    orderBy?: CraftOrderByWithAggregationInput | CraftOrderByWithAggregationInput[]
+    by: CraftScalarFieldEnum[] | CraftScalarFieldEnum
+    having?: CraftScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CraftCountAggregateInputType | true
+    _min?: CraftMinAggregateInputType
+    _max?: CraftMaxAggregateInputType
+  }
+
+  export type CraftGroupByOutputType = {
+    id: string
+    userId: string
+    resultId: string
+    createdAt: Date
+    _count: CraftCountAggregateOutputType | null
+    _min: CraftMinAggregateOutputType | null
+    _max: CraftMaxAggregateOutputType | null
+  }
+
+  type GetCraftGroupByPayload<T extends CraftGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CraftGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CraftGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CraftGroupByOutputType[P]>
+            : GetScalarType<T[P], CraftGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CraftSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    resultId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    result?: boolean | ArtefactDefaultArgs<ExtArgs>
+    materials?: boolean | Craft$materialsArgs<ExtArgs>
+    _count?: boolean | CraftCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["craft"]>
+
+  export type CraftSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    resultId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    result?: boolean | ArtefactDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["craft"]>
+
+  export type CraftSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    resultId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    result?: boolean | ArtefactDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["craft"]>
+
+  export type CraftSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    resultId?: boolean
+    createdAt?: boolean
+  }
+
+  export type CraftOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "resultId" | "createdAt", ExtArgs["result"]["craft"]>
+  export type CraftInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    result?: boolean | ArtefactDefaultArgs<ExtArgs>
+    materials?: boolean | Craft$materialsArgs<ExtArgs>
+    _count?: boolean | CraftCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CraftIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    result?: boolean | ArtefactDefaultArgs<ExtArgs>
+  }
+  export type CraftIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    result?: boolean | ArtefactDefaultArgs<ExtArgs>
+  }
+
+  export type $CraftPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Craft"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      result: Prisma.$ArtefactPayload<ExtArgs>
+      materials: Prisma.$CraftMaterialPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      resultId: string
+      createdAt: Date
+    }, ExtArgs["result"]["craft"]>
+    composites: {}
+  }
+
+  type CraftGetPayload<S extends boolean | null | undefined | CraftDefaultArgs> = $Result.GetResult<Prisma.$CraftPayload, S>
+
+  type CraftCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CraftFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CraftCountAggregateInputType | true
+    }
+
+  export interface CraftDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Craft'], meta: { name: 'Craft' } }
+    /**
+     * Find zero or one Craft that matches the filter.
+     * @param {CraftFindUniqueArgs} args - Arguments to find a Craft
+     * @example
+     * // Get one Craft
+     * const craft = await prisma.craft.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CraftFindUniqueArgs>(args: SelectSubset<T, CraftFindUniqueArgs<ExtArgs>>): Prisma__CraftClient<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Craft that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CraftFindUniqueOrThrowArgs} args - Arguments to find a Craft
+     * @example
+     * // Get one Craft
+     * const craft = await prisma.craft.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CraftFindUniqueOrThrowArgs>(args: SelectSubset<T, CraftFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CraftClient<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Craft that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CraftFindFirstArgs} args - Arguments to find a Craft
+     * @example
+     * // Get one Craft
+     * const craft = await prisma.craft.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CraftFindFirstArgs>(args?: SelectSubset<T, CraftFindFirstArgs<ExtArgs>>): Prisma__CraftClient<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Craft that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CraftFindFirstOrThrowArgs} args - Arguments to find a Craft
+     * @example
+     * // Get one Craft
+     * const craft = await prisma.craft.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CraftFindFirstOrThrowArgs>(args?: SelectSubset<T, CraftFindFirstOrThrowArgs<ExtArgs>>): Prisma__CraftClient<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Crafts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CraftFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Crafts
+     * const crafts = await prisma.craft.findMany()
+     * 
+     * // Get first 10 Crafts
+     * const crafts = await prisma.craft.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const craftWithIdOnly = await prisma.craft.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CraftFindManyArgs>(args?: SelectSubset<T, CraftFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Craft.
+     * @param {CraftCreateArgs} args - Arguments to create a Craft.
+     * @example
+     * // Create one Craft
+     * const Craft = await prisma.craft.create({
+     *   data: {
+     *     // ... data to create a Craft
+     *   }
+     * })
+     * 
+     */
+    create<T extends CraftCreateArgs>(args: SelectSubset<T, CraftCreateArgs<ExtArgs>>): Prisma__CraftClient<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Crafts.
+     * @param {CraftCreateManyArgs} args - Arguments to create many Crafts.
+     * @example
+     * // Create many Crafts
+     * const craft = await prisma.craft.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CraftCreateManyArgs>(args?: SelectSubset<T, CraftCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Crafts and returns the data saved in the database.
+     * @param {CraftCreateManyAndReturnArgs} args - Arguments to create many Crafts.
+     * @example
+     * // Create many Crafts
+     * const craft = await prisma.craft.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Crafts and only return the `id`
+     * const craftWithIdOnly = await prisma.craft.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CraftCreateManyAndReturnArgs>(args?: SelectSubset<T, CraftCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Craft.
+     * @param {CraftDeleteArgs} args - Arguments to delete one Craft.
+     * @example
+     * // Delete one Craft
+     * const Craft = await prisma.craft.delete({
+     *   where: {
+     *     // ... filter to delete one Craft
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CraftDeleteArgs>(args: SelectSubset<T, CraftDeleteArgs<ExtArgs>>): Prisma__CraftClient<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Craft.
+     * @param {CraftUpdateArgs} args - Arguments to update one Craft.
+     * @example
+     * // Update one Craft
+     * const craft = await prisma.craft.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CraftUpdateArgs>(args: SelectSubset<T, CraftUpdateArgs<ExtArgs>>): Prisma__CraftClient<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Crafts.
+     * @param {CraftDeleteManyArgs} args - Arguments to filter Crafts to delete.
+     * @example
+     * // Delete a few Crafts
+     * const { count } = await prisma.craft.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CraftDeleteManyArgs>(args?: SelectSubset<T, CraftDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Crafts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CraftUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Crafts
+     * const craft = await prisma.craft.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CraftUpdateManyArgs>(args: SelectSubset<T, CraftUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Crafts and returns the data updated in the database.
+     * @param {CraftUpdateManyAndReturnArgs} args - Arguments to update many Crafts.
+     * @example
+     * // Update many Crafts
+     * const craft = await prisma.craft.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Crafts and only return the `id`
+     * const craftWithIdOnly = await prisma.craft.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CraftUpdateManyAndReturnArgs>(args: SelectSubset<T, CraftUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Craft.
+     * @param {CraftUpsertArgs} args - Arguments to update or create a Craft.
+     * @example
+     * // Update or create a Craft
+     * const craft = await prisma.craft.upsert({
+     *   create: {
+     *     // ... data to create a Craft
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Craft we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CraftUpsertArgs>(args: SelectSubset<T, CraftUpsertArgs<ExtArgs>>): Prisma__CraftClient<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Crafts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CraftCountArgs} args - Arguments to filter Crafts to count.
+     * @example
+     * // Count the number of Crafts
+     * const count = await prisma.craft.count({
+     *   where: {
+     *     // ... the filter for the Crafts we want to count
+     *   }
+     * })
+    **/
+    count<T extends CraftCountArgs>(
+      args?: Subset<T, CraftCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CraftCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Craft.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CraftAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CraftAggregateArgs>(args: Subset<T, CraftAggregateArgs>): Prisma.PrismaPromise<GetCraftAggregateType<T>>
+
+    /**
+     * Group by Craft.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CraftGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CraftGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CraftGroupByArgs['orderBy'] }
+        : { orderBy?: CraftGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CraftGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCraftGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Craft model
+   */
+  readonly fields: CraftFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Craft.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CraftClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    result<T extends ArtefactDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ArtefactDefaultArgs<ExtArgs>>): Prisma__ArtefactClient<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    materials<T extends Craft$materialsArgs<ExtArgs> = {}>(args?: Subset<T, Craft$materialsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CraftMaterialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Craft model
+   */
+  interface CraftFieldRefs {
+    readonly id: FieldRef<"Craft", 'String'>
+    readonly userId: FieldRef<"Craft", 'String'>
+    readonly resultId: FieldRef<"Craft", 'String'>
+    readonly createdAt: FieldRef<"Craft", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Craft findUnique
+   */
+  export type CraftFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Craft
+     */
+    select?: CraftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Craft
+     */
+    omit?: CraftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftInclude<ExtArgs> | null
+    /**
+     * Filter, which Craft to fetch.
+     */
+    where: CraftWhereUniqueInput
+  }
+
+  /**
+   * Craft findUniqueOrThrow
+   */
+  export type CraftFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Craft
+     */
+    select?: CraftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Craft
+     */
+    omit?: CraftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftInclude<ExtArgs> | null
+    /**
+     * Filter, which Craft to fetch.
+     */
+    where: CraftWhereUniqueInput
+  }
+
+  /**
+   * Craft findFirst
+   */
+  export type CraftFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Craft
+     */
+    select?: CraftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Craft
+     */
+    omit?: CraftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftInclude<ExtArgs> | null
+    /**
+     * Filter, which Craft to fetch.
+     */
+    where?: CraftWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Crafts to fetch.
+     */
+    orderBy?: CraftOrderByWithRelationInput | CraftOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Crafts.
+     */
+    cursor?: CraftWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Crafts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Crafts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Crafts.
+     */
+    distinct?: CraftScalarFieldEnum | CraftScalarFieldEnum[]
+  }
+
+  /**
+   * Craft findFirstOrThrow
+   */
+  export type CraftFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Craft
+     */
+    select?: CraftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Craft
+     */
+    omit?: CraftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftInclude<ExtArgs> | null
+    /**
+     * Filter, which Craft to fetch.
+     */
+    where?: CraftWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Crafts to fetch.
+     */
+    orderBy?: CraftOrderByWithRelationInput | CraftOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Crafts.
+     */
+    cursor?: CraftWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Crafts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Crafts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Crafts.
+     */
+    distinct?: CraftScalarFieldEnum | CraftScalarFieldEnum[]
+  }
+
+  /**
+   * Craft findMany
+   */
+  export type CraftFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Craft
+     */
+    select?: CraftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Craft
+     */
+    omit?: CraftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftInclude<ExtArgs> | null
+    /**
+     * Filter, which Crafts to fetch.
+     */
+    where?: CraftWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Crafts to fetch.
+     */
+    orderBy?: CraftOrderByWithRelationInput | CraftOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Crafts.
+     */
+    cursor?: CraftWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Crafts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Crafts.
+     */
+    skip?: number
+    distinct?: CraftScalarFieldEnum | CraftScalarFieldEnum[]
+  }
+
+  /**
+   * Craft create
+   */
+  export type CraftCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Craft
+     */
+    select?: CraftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Craft
+     */
+    omit?: CraftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Craft.
+     */
+    data: XOR<CraftCreateInput, CraftUncheckedCreateInput>
+  }
+
+  /**
+   * Craft createMany
+   */
+  export type CraftCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Crafts.
+     */
+    data: CraftCreateManyInput | CraftCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Craft createManyAndReturn
+   */
+  export type CraftCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Craft
+     */
+    select?: CraftSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Craft
+     */
+    omit?: CraftOmit<ExtArgs> | null
+    /**
+     * The data used to create many Crafts.
+     */
+    data: CraftCreateManyInput | CraftCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Craft update
+   */
+  export type CraftUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Craft
+     */
+    select?: CraftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Craft
+     */
+    omit?: CraftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Craft.
+     */
+    data: XOR<CraftUpdateInput, CraftUncheckedUpdateInput>
+    /**
+     * Choose, which Craft to update.
+     */
+    where: CraftWhereUniqueInput
+  }
+
+  /**
+   * Craft updateMany
+   */
+  export type CraftUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Crafts.
+     */
+    data: XOR<CraftUpdateManyMutationInput, CraftUncheckedUpdateManyInput>
+    /**
+     * Filter which Crafts to update
+     */
+    where?: CraftWhereInput
+    /**
+     * Limit how many Crafts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Craft updateManyAndReturn
+   */
+  export type CraftUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Craft
+     */
+    select?: CraftSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Craft
+     */
+    omit?: CraftOmit<ExtArgs> | null
+    /**
+     * The data used to update Crafts.
+     */
+    data: XOR<CraftUpdateManyMutationInput, CraftUncheckedUpdateManyInput>
+    /**
+     * Filter which Crafts to update
+     */
+    where?: CraftWhereInput
+    /**
+     * Limit how many Crafts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Craft upsert
+   */
+  export type CraftUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Craft
+     */
+    select?: CraftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Craft
+     */
+    omit?: CraftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Craft to update in case it exists.
+     */
+    where: CraftWhereUniqueInput
+    /**
+     * In case the Craft found by the `where` argument doesn't exist, create a new Craft with this data.
+     */
+    create: XOR<CraftCreateInput, CraftUncheckedCreateInput>
+    /**
+     * In case the Craft was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CraftUpdateInput, CraftUncheckedUpdateInput>
+  }
+
+  /**
+   * Craft delete
+   */
+  export type CraftDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Craft
+     */
+    select?: CraftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Craft
+     */
+    omit?: CraftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftInclude<ExtArgs> | null
+    /**
+     * Filter which Craft to delete.
+     */
+    where: CraftWhereUniqueInput
+  }
+
+  /**
+   * Craft deleteMany
+   */
+  export type CraftDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Crafts to delete
+     */
+    where?: CraftWhereInput
+    /**
+     * Limit how many Crafts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Craft.materials
+   */
+  export type Craft$materialsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftMaterial
+     */
+    select?: CraftMaterialSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CraftMaterial
+     */
+    omit?: CraftMaterialOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftMaterialInclude<ExtArgs> | null
+    where?: CraftMaterialWhereInput
+    orderBy?: CraftMaterialOrderByWithRelationInput | CraftMaterialOrderByWithRelationInput[]
+    cursor?: CraftMaterialWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CraftMaterialScalarFieldEnum | CraftMaterialScalarFieldEnum[]
+  }
+
+  /**
+   * Craft without action
+   */
+  export type CraftDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Craft
+     */
+    select?: CraftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Craft
+     */
+    omit?: CraftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CraftMaterial
+   */
+
+  export type AggregateCraftMaterial = {
+    _count: CraftMaterialCountAggregateOutputType | null
+    _min: CraftMaterialMinAggregateOutputType | null
+    _max: CraftMaterialMaxAggregateOutputType | null
+  }
+
+  export type CraftMaterialMinAggregateOutputType = {
+    id: string | null
+    craftId: string | null
+    artefactId: string | null
+  }
+
+  export type CraftMaterialMaxAggregateOutputType = {
+    id: string | null
+    craftId: string | null
+    artefactId: string | null
+  }
+
+  export type CraftMaterialCountAggregateOutputType = {
+    id: number
+    craftId: number
+    artefactId: number
+    _all: number
+  }
+
+
+  export type CraftMaterialMinAggregateInputType = {
+    id?: true
+    craftId?: true
+    artefactId?: true
+  }
+
+  export type CraftMaterialMaxAggregateInputType = {
+    id?: true
+    craftId?: true
+    artefactId?: true
+  }
+
+  export type CraftMaterialCountAggregateInputType = {
+    id?: true
+    craftId?: true
+    artefactId?: true
+    _all?: true
+  }
+
+  export type CraftMaterialAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CraftMaterial to aggregate.
+     */
+    where?: CraftMaterialWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CraftMaterials to fetch.
+     */
+    orderBy?: CraftMaterialOrderByWithRelationInput | CraftMaterialOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CraftMaterialWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CraftMaterials from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CraftMaterials.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CraftMaterials
+    **/
+    _count?: true | CraftMaterialCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CraftMaterialMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CraftMaterialMaxAggregateInputType
+  }
+
+  export type GetCraftMaterialAggregateType<T extends CraftMaterialAggregateArgs> = {
+        [P in keyof T & keyof AggregateCraftMaterial]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCraftMaterial[P]>
+      : GetScalarType<T[P], AggregateCraftMaterial[P]>
+  }
+
+
+
+
+  export type CraftMaterialGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CraftMaterialWhereInput
+    orderBy?: CraftMaterialOrderByWithAggregationInput | CraftMaterialOrderByWithAggregationInput[]
+    by: CraftMaterialScalarFieldEnum[] | CraftMaterialScalarFieldEnum
+    having?: CraftMaterialScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CraftMaterialCountAggregateInputType | true
+    _min?: CraftMaterialMinAggregateInputType
+    _max?: CraftMaterialMaxAggregateInputType
+  }
+
+  export type CraftMaterialGroupByOutputType = {
+    id: string
+    craftId: string
+    artefactId: string
+    _count: CraftMaterialCountAggregateOutputType | null
+    _min: CraftMaterialMinAggregateOutputType | null
+    _max: CraftMaterialMaxAggregateOutputType | null
+  }
+
+  type GetCraftMaterialGroupByPayload<T extends CraftMaterialGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CraftMaterialGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CraftMaterialGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CraftMaterialGroupByOutputType[P]>
+            : GetScalarType<T[P], CraftMaterialGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CraftMaterialSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    craftId?: boolean
+    artefactId?: boolean
+    craft?: boolean | CraftDefaultArgs<ExtArgs>
+    artefact?: boolean | ArtefactDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["craftMaterial"]>
+
+  export type CraftMaterialSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    craftId?: boolean
+    artefactId?: boolean
+    craft?: boolean | CraftDefaultArgs<ExtArgs>
+    artefact?: boolean | ArtefactDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["craftMaterial"]>
+
+  export type CraftMaterialSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    craftId?: boolean
+    artefactId?: boolean
+    craft?: boolean | CraftDefaultArgs<ExtArgs>
+    artefact?: boolean | ArtefactDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["craftMaterial"]>
+
+  export type CraftMaterialSelectScalar = {
+    id?: boolean
+    craftId?: boolean
+    artefactId?: boolean
+  }
+
+  export type CraftMaterialOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "craftId" | "artefactId", ExtArgs["result"]["craftMaterial"]>
+  export type CraftMaterialInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    craft?: boolean | CraftDefaultArgs<ExtArgs>
+    artefact?: boolean | ArtefactDefaultArgs<ExtArgs>
+  }
+  export type CraftMaterialIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    craft?: boolean | CraftDefaultArgs<ExtArgs>
+    artefact?: boolean | ArtefactDefaultArgs<ExtArgs>
+  }
+  export type CraftMaterialIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    craft?: boolean | CraftDefaultArgs<ExtArgs>
+    artefact?: boolean | ArtefactDefaultArgs<ExtArgs>
+  }
+
+  export type $CraftMaterialPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CraftMaterial"
+    objects: {
+      craft: Prisma.$CraftPayload<ExtArgs>
+      artefact: Prisma.$ArtefactPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      craftId: string
+      artefactId: string
+    }, ExtArgs["result"]["craftMaterial"]>
+    composites: {}
+  }
+
+  type CraftMaterialGetPayload<S extends boolean | null | undefined | CraftMaterialDefaultArgs> = $Result.GetResult<Prisma.$CraftMaterialPayload, S>
+
+  type CraftMaterialCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CraftMaterialFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CraftMaterialCountAggregateInputType | true
+    }
+
+  export interface CraftMaterialDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CraftMaterial'], meta: { name: 'CraftMaterial' } }
+    /**
+     * Find zero or one CraftMaterial that matches the filter.
+     * @param {CraftMaterialFindUniqueArgs} args - Arguments to find a CraftMaterial
+     * @example
+     * // Get one CraftMaterial
+     * const craftMaterial = await prisma.craftMaterial.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CraftMaterialFindUniqueArgs>(args: SelectSubset<T, CraftMaterialFindUniqueArgs<ExtArgs>>): Prisma__CraftMaterialClient<$Result.GetResult<Prisma.$CraftMaterialPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CraftMaterial that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CraftMaterialFindUniqueOrThrowArgs} args - Arguments to find a CraftMaterial
+     * @example
+     * // Get one CraftMaterial
+     * const craftMaterial = await prisma.craftMaterial.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CraftMaterialFindUniqueOrThrowArgs>(args: SelectSubset<T, CraftMaterialFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CraftMaterialClient<$Result.GetResult<Prisma.$CraftMaterialPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CraftMaterial that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CraftMaterialFindFirstArgs} args - Arguments to find a CraftMaterial
+     * @example
+     * // Get one CraftMaterial
+     * const craftMaterial = await prisma.craftMaterial.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CraftMaterialFindFirstArgs>(args?: SelectSubset<T, CraftMaterialFindFirstArgs<ExtArgs>>): Prisma__CraftMaterialClient<$Result.GetResult<Prisma.$CraftMaterialPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CraftMaterial that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CraftMaterialFindFirstOrThrowArgs} args - Arguments to find a CraftMaterial
+     * @example
+     * // Get one CraftMaterial
+     * const craftMaterial = await prisma.craftMaterial.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CraftMaterialFindFirstOrThrowArgs>(args?: SelectSubset<T, CraftMaterialFindFirstOrThrowArgs<ExtArgs>>): Prisma__CraftMaterialClient<$Result.GetResult<Prisma.$CraftMaterialPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CraftMaterials that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CraftMaterialFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CraftMaterials
+     * const craftMaterials = await prisma.craftMaterial.findMany()
+     * 
+     * // Get first 10 CraftMaterials
+     * const craftMaterials = await prisma.craftMaterial.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const craftMaterialWithIdOnly = await prisma.craftMaterial.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CraftMaterialFindManyArgs>(args?: SelectSubset<T, CraftMaterialFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CraftMaterialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CraftMaterial.
+     * @param {CraftMaterialCreateArgs} args - Arguments to create a CraftMaterial.
+     * @example
+     * // Create one CraftMaterial
+     * const CraftMaterial = await prisma.craftMaterial.create({
+     *   data: {
+     *     // ... data to create a CraftMaterial
+     *   }
+     * })
+     * 
+     */
+    create<T extends CraftMaterialCreateArgs>(args: SelectSubset<T, CraftMaterialCreateArgs<ExtArgs>>): Prisma__CraftMaterialClient<$Result.GetResult<Prisma.$CraftMaterialPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CraftMaterials.
+     * @param {CraftMaterialCreateManyArgs} args - Arguments to create many CraftMaterials.
+     * @example
+     * // Create many CraftMaterials
+     * const craftMaterial = await prisma.craftMaterial.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CraftMaterialCreateManyArgs>(args?: SelectSubset<T, CraftMaterialCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CraftMaterials and returns the data saved in the database.
+     * @param {CraftMaterialCreateManyAndReturnArgs} args - Arguments to create many CraftMaterials.
+     * @example
+     * // Create many CraftMaterials
+     * const craftMaterial = await prisma.craftMaterial.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CraftMaterials and only return the `id`
+     * const craftMaterialWithIdOnly = await prisma.craftMaterial.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CraftMaterialCreateManyAndReturnArgs>(args?: SelectSubset<T, CraftMaterialCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CraftMaterialPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CraftMaterial.
+     * @param {CraftMaterialDeleteArgs} args - Arguments to delete one CraftMaterial.
+     * @example
+     * // Delete one CraftMaterial
+     * const CraftMaterial = await prisma.craftMaterial.delete({
+     *   where: {
+     *     // ... filter to delete one CraftMaterial
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CraftMaterialDeleteArgs>(args: SelectSubset<T, CraftMaterialDeleteArgs<ExtArgs>>): Prisma__CraftMaterialClient<$Result.GetResult<Prisma.$CraftMaterialPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CraftMaterial.
+     * @param {CraftMaterialUpdateArgs} args - Arguments to update one CraftMaterial.
+     * @example
+     * // Update one CraftMaterial
+     * const craftMaterial = await prisma.craftMaterial.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CraftMaterialUpdateArgs>(args: SelectSubset<T, CraftMaterialUpdateArgs<ExtArgs>>): Prisma__CraftMaterialClient<$Result.GetResult<Prisma.$CraftMaterialPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CraftMaterials.
+     * @param {CraftMaterialDeleteManyArgs} args - Arguments to filter CraftMaterials to delete.
+     * @example
+     * // Delete a few CraftMaterials
+     * const { count } = await prisma.craftMaterial.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CraftMaterialDeleteManyArgs>(args?: SelectSubset<T, CraftMaterialDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CraftMaterials.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CraftMaterialUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CraftMaterials
+     * const craftMaterial = await prisma.craftMaterial.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CraftMaterialUpdateManyArgs>(args: SelectSubset<T, CraftMaterialUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CraftMaterials and returns the data updated in the database.
+     * @param {CraftMaterialUpdateManyAndReturnArgs} args - Arguments to update many CraftMaterials.
+     * @example
+     * // Update many CraftMaterials
+     * const craftMaterial = await prisma.craftMaterial.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CraftMaterials and only return the `id`
+     * const craftMaterialWithIdOnly = await prisma.craftMaterial.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CraftMaterialUpdateManyAndReturnArgs>(args: SelectSubset<T, CraftMaterialUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CraftMaterialPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CraftMaterial.
+     * @param {CraftMaterialUpsertArgs} args - Arguments to update or create a CraftMaterial.
+     * @example
+     * // Update or create a CraftMaterial
+     * const craftMaterial = await prisma.craftMaterial.upsert({
+     *   create: {
+     *     // ... data to create a CraftMaterial
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CraftMaterial we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CraftMaterialUpsertArgs>(args: SelectSubset<T, CraftMaterialUpsertArgs<ExtArgs>>): Prisma__CraftMaterialClient<$Result.GetResult<Prisma.$CraftMaterialPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CraftMaterials.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CraftMaterialCountArgs} args - Arguments to filter CraftMaterials to count.
+     * @example
+     * // Count the number of CraftMaterials
+     * const count = await prisma.craftMaterial.count({
+     *   where: {
+     *     // ... the filter for the CraftMaterials we want to count
+     *   }
+     * })
+    **/
+    count<T extends CraftMaterialCountArgs>(
+      args?: Subset<T, CraftMaterialCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CraftMaterialCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CraftMaterial.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CraftMaterialAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CraftMaterialAggregateArgs>(args: Subset<T, CraftMaterialAggregateArgs>): Prisma.PrismaPromise<GetCraftMaterialAggregateType<T>>
+
+    /**
+     * Group by CraftMaterial.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CraftMaterialGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CraftMaterialGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CraftMaterialGroupByArgs['orderBy'] }
+        : { orderBy?: CraftMaterialGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CraftMaterialGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCraftMaterialGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CraftMaterial model
+   */
+  readonly fields: CraftMaterialFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CraftMaterial.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CraftMaterialClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    craft<T extends CraftDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CraftDefaultArgs<ExtArgs>>): Prisma__CraftClient<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    artefact<T extends ArtefactDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ArtefactDefaultArgs<ExtArgs>>): Prisma__ArtefactClient<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CraftMaterial model
+   */
+  interface CraftMaterialFieldRefs {
+    readonly id: FieldRef<"CraftMaterial", 'String'>
+    readonly craftId: FieldRef<"CraftMaterial", 'String'>
+    readonly artefactId: FieldRef<"CraftMaterial", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CraftMaterial findUnique
+   */
+  export type CraftMaterialFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftMaterial
+     */
+    select?: CraftMaterialSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CraftMaterial
+     */
+    omit?: CraftMaterialOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftMaterialInclude<ExtArgs> | null
+    /**
+     * Filter, which CraftMaterial to fetch.
+     */
+    where: CraftMaterialWhereUniqueInput
+  }
+
+  /**
+   * CraftMaterial findUniqueOrThrow
+   */
+  export type CraftMaterialFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftMaterial
+     */
+    select?: CraftMaterialSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CraftMaterial
+     */
+    omit?: CraftMaterialOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftMaterialInclude<ExtArgs> | null
+    /**
+     * Filter, which CraftMaterial to fetch.
+     */
+    where: CraftMaterialWhereUniqueInput
+  }
+
+  /**
+   * CraftMaterial findFirst
+   */
+  export type CraftMaterialFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftMaterial
+     */
+    select?: CraftMaterialSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CraftMaterial
+     */
+    omit?: CraftMaterialOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftMaterialInclude<ExtArgs> | null
+    /**
+     * Filter, which CraftMaterial to fetch.
+     */
+    where?: CraftMaterialWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CraftMaterials to fetch.
+     */
+    orderBy?: CraftMaterialOrderByWithRelationInput | CraftMaterialOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CraftMaterials.
+     */
+    cursor?: CraftMaterialWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CraftMaterials from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CraftMaterials.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CraftMaterials.
+     */
+    distinct?: CraftMaterialScalarFieldEnum | CraftMaterialScalarFieldEnum[]
+  }
+
+  /**
+   * CraftMaterial findFirstOrThrow
+   */
+  export type CraftMaterialFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftMaterial
+     */
+    select?: CraftMaterialSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CraftMaterial
+     */
+    omit?: CraftMaterialOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftMaterialInclude<ExtArgs> | null
+    /**
+     * Filter, which CraftMaterial to fetch.
+     */
+    where?: CraftMaterialWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CraftMaterials to fetch.
+     */
+    orderBy?: CraftMaterialOrderByWithRelationInput | CraftMaterialOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CraftMaterials.
+     */
+    cursor?: CraftMaterialWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CraftMaterials from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CraftMaterials.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CraftMaterials.
+     */
+    distinct?: CraftMaterialScalarFieldEnum | CraftMaterialScalarFieldEnum[]
+  }
+
+  /**
+   * CraftMaterial findMany
+   */
+  export type CraftMaterialFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftMaterial
+     */
+    select?: CraftMaterialSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CraftMaterial
+     */
+    omit?: CraftMaterialOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftMaterialInclude<ExtArgs> | null
+    /**
+     * Filter, which CraftMaterials to fetch.
+     */
+    where?: CraftMaterialWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CraftMaterials to fetch.
+     */
+    orderBy?: CraftMaterialOrderByWithRelationInput | CraftMaterialOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CraftMaterials.
+     */
+    cursor?: CraftMaterialWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CraftMaterials from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CraftMaterials.
+     */
+    skip?: number
+    distinct?: CraftMaterialScalarFieldEnum | CraftMaterialScalarFieldEnum[]
+  }
+
+  /**
+   * CraftMaterial create
+   */
+  export type CraftMaterialCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftMaterial
+     */
+    select?: CraftMaterialSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CraftMaterial
+     */
+    omit?: CraftMaterialOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftMaterialInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CraftMaterial.
+     */
+    data: XOR<CraftMaterialCreateInput, CraftMaterialUncheckedCreateInput>
+  }
+
+  /**
+   * CraftMaterial createMany
+   */
+  export type CraftMaterialCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CraftMaterials.
+     */
+    data: CraftMaterialCreateManyInput | CraftMaterialCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CraftMaterial createManyAndReturn
+   */
+  export type CraftMaterialCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftMaterial
+     */
+    select?: CraftMaterialSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CraftMaterial
+     */
+    omit?: CraftMaterialOmit<ExtArgs> | null
+    /**
+     * The data used to create many CraftMaterials.
+     */
+    data: CraftMaterialCreateManyInput | CraftMaterialCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftMaterialIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CraftMaterial update
+   */
+  export type CraftMaterialUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftMaterial
+     */
+    select?: CraftMaterialSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CraftMaterial
+     */
+    omit?: CraftMaterialOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftMaterialInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CraftMaterial.
+     */
+    data: XOR<CraftMaterialUpdateInput, CraftMaterialUncheckedUpdateInput>
+    /**
+     * Choose, which CraftMaterial to update.
+     */
+    where: CraftMaterialWhereUniqueInput
+  }
+
+  /**
+   * CraftMaterial updateMany
+   */
+  export type CraftMaterialUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CraftMaterials.
+     */
+    data: XOR<CraftMaterialUpdateManyMutationInput, CraftMaterialUncheckedUpdateManyInput>
+    /**
+     * Filter which CraftMaterials to update
+     */
+    where?: CraftMaterialWhereInput
+    /**
+     * Limit how many CraftMaterials to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CraftMaterial updateManyAndReturn
+   */
+  export type CraftMaterialUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftMaterial
+     */
+    select?: CraftMaterialSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CraftMaterial
+     */
+    omit?: CraftMaterialOmit<ExtArgs> | null
+    /**
+     * The data used to update CraftMaterials.
+     */
+    data: XOR<CraftMaterialUpdateManyMutationInput, CraftMaterialUncheckedUpdateManyInput>
+    /**
+     * Filter which CraftMaterials to update
+     */
+    where?: CraftMaterialWhereInput
+    /**
+     * Limit how many CraftMaterials to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftMaterialIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CraftMaterial upsert
+   */
+  export type CraftMaterialUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftMaterial
+     */
+    select?: CraftMaterialSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CraftMaterial
+     */
+    omit?: CraftMaterialOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftMaterialInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CraftMaterial to update in case it exists.
+     */
+    where: CraftMaterialWhereUniqueInput
+    /**
+     * In case the CraftMaterial found by the `where` argument doesn't exist, create a new CraftMaterial with this data.
+     */
+    create: XOR<CraftMaterialCreateInput, CraftMaterialUncheckedCreateInput>
+    /**
+     * In case the CraftMaterial was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CraftMaterialUpdateInput, CraftMaterialUncheckedUpdateInput>
+  }
+
+  /**
+   * CraftMaterial delete
+   */
+  export type CraftMaterialDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftMaterial
+     */
+    select?: CraftMaterialSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CraftMaterial
+     */
+    omit?: CraftMaterialOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftMaterialInclude<ExtArgs> | null
+    /**
+     * Filter which CraftMaterial to delete.
+     */
+    where: CraftMaterialWhereUniqueInput
+  }
+
+  /**
+   * CraftMaterial deleteMany
+   */
+  export type CraftMaterialDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CraftMaterials to delete
+     */
+    where?: CraftMaterialWhereInput
+    /**
+     * Limit how many CraftMaterials to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CraftMaterial without action
+   */
+  export type CraftMaterialDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CraftMaterial
+     */
+    select?: CraftMaterialSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CraftMaterial
+     */
+    omit?: CraftMaterialOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CraftMaterialInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model LeaderboardEntry
+   */
+
+  export type AggregateLeaderboardEntry = {
+    _count: LeaderboardEntryCountAggregateOutputType | null
+    _avg: LeaderboardEntryAvgAggregateOutputType | null
+    _sum: LeaderboardEntrySumAggregateOutputType | null
+    _min: LeaderboardEntryMinAggregateOutputType | null
+    _max: LeaderboardEntryMaxAggregateOutputType | null
+  }
+
+  export type LeaderboardEntryAvgAggregateOutputType = {
+    rank: number | null
+    score: number | null
+  }
+
+  export type LeaderboardEntrySumAggregateOutputType = {
+    rank: number | null
+    score: number | null
+  }
+
+  export type LeaderboardEntryMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    huntId: string | null
+    rank: number | null
+    score: number | null
+    completedAt: Date | null
+  }
+
+  export type LeaderboardEntryMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    huntId: string | null
+    rank: number | null
+    score: number | null
+    completedAt: Date | null
+  }
+
+  export type LeaderboardEntryCountAggregateOutputType = {
+    id: number
+    userId: number
+    huntId: number
+    rank: number
+    score: number
+    completedAt: number
+    _all: number
+  }
+
+
+  export type LeaderboardEntryAvgAggregateInputType = {
+    rank?: true
+    score?: true
+  }
+
+  export type LeaderboardEntrySumAggregateInputType = {
+    rank?: true
+    score?: true
+  }
+
+  export type LeaderboardEntryMinAggregateInputType = {
+    id?: true
+    userId?: true
+    huntId?: true
+    rank?: true
+    score?: true
+    completedAt?: true
+  }
+
+  export type LeaderboardEntryMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    huntId?: true
+    rank?: true
+    score?: true
+    completedAt?: true
+  }
+
+  export type LeaderboardEntryCountAggregateInputType = {
+    id?: true
+    userId?: true
+    huntId?: true
+    rank?: true
+    score?: true
+    completedAt?: true
+    _all?: true
+  }
+
+  export type LeaderboardEntryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LeaderboardEntry to aggregate.
+     */
+    where?: LeaderboardEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LeaderboardEntries to fetch.
+     */
+    orderBy?: LeaderboardEntryOrderByWithRelationInput | LeaderboardEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LeaderboardEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LeaderboardEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LeaderboardEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LeaderboardEntries
+    **/
+    _count?: true | LeaderboardEntryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LeaderboardEntryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LeaderboardEntrySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LeaderboardEntryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LeaderboardEntryMaxAggregateInputType
+  }
+
+  export type GetLeaderboardEntryAggregateType<T extends LeaderboardEntryAggregateArgs> = {
+        [P in keyof T & keyof AggregateLeaderboardEntry]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLeaderboardEntry[P]>
+      : GetScalarType<T[P], AggregateLeaderboardEntry[P]>
+  }
+
+
+
+
+  export type LeaderboardEntryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LeaderboardEntryWhereInput
+    orderBy?: LeaderboardEntryOrderByWithAggregationInput | LeaderboardEntryOrderByWithAggregationInput[]
+    by: LeaderboardEntryScalarFieldEnum[] | LeaderboardEntryScalarFieldEnum
+    having?: LeaderboardEntryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LeaderboardEntryCountAggregateInputType | true
+    _avg?: LeaderboardEntryAvgAggregateInputType
+    _sum?: LeaderboardEntrySumAggregateInputType
+    _min?: LeaderboardEntryMinAggregateInputType
+    _max?: LeaderboardEntryMaxAggregateInputType
+  }
+
+  export type LeaderboardEntryGroupByOutputType = {
+    id: string
+    userId: string
+    huntId: string
+    rank: number
+    score: number
+    completedAt: Date
+    _count: LeaderboardEntryCountAggregateOutputType | null
+    _avg: LeaderboardEntryAvgAggregateOutputType | null
+    _sum: LeaderboardEntrySumAggregateOutputType | null
+    _min: LeaderboardEntryMinAggregateOutputType | null
+    _max: LeaderboardEntryMaxAggregateOutputType | null
+  }
+
+  type GetLeaderboardEntryGroupByPayload<T extends LeaderboardEntryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LeaderboardEntryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LeaderboardEntryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LeaderboardEntryGroupByOutputType[P]>
+            : GetScalarType<T[P], LeaderboardEntryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LeaderboardEntrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    huntId?: boolean
+    rank?: boolean
+    score?: boolean
+    completedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    hunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["leaderboardEntry"]>
+
+  export type LeaderboardEntrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    huntId?: boolean
+    rank?: boolean
+    score?: boolean
+    completedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    hunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["leaderboardEntry"]>
+
+  export type LeaderboardEntrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    huntId?: boolean
+    rank?: boolean
+    score?: boolean
+    completedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    hunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["leaderboardEntry"]>
+
+  export type LeaderboardEntrySelectScalar = {
+    id?: boolean
+    userId?: boolean
+    huntId?: boolean
+    rank?: boolean
+    score?: boolean
+    completedAt?: boolean
+  }
+
+  export type LeaderboardEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "huntId" | "rank" | "score" | "completedAt", ExtArgs["result"]["leaderboardEntry"]>
+  export type LeaderboardEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    hunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+  export type LeaderboardEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    hunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+  export type LeaderboardEntryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    hunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+
+  export type $LeaderboardEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LeaderboardEntry"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      hunt: Prisma.$TreasureHuntPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      huntId: string
+      rank: number
+      score: number
+      completedAt: Date
+    }, ExtArgs["result"]["leaderboardEntry"]>
+    composites: {}
+  }
+
+  type LeaderboardEntryGetPayload<S extends boolean | null | undefined | LeaderboardEntryDefaultArgs> = $Result.GetResult<Prisma.$LeaderboardEntryPayload, S>
+
+  type LeaderboardEntryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LeaderboardEntryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LeaderboardEntryCountAggregateInputType | true
+    }
+
+  export interface LeaderboardEntryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LeaderboardEntry'], meta: { name: 'LeaderboardEntry' } }
+    /**
+     * Find zero or one LeaderboardEntry that matches the filter.
+     * @param {LeaderboardEntryFindUniqueArgs} args - Arguments to find a LeaderboardEntry
+     * @example
+     * // Get one LeaderboardEntry
+     * const leaderboardEntry = await prisma.leaderboardEntry.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LeaderboardEntryFindUniqueArgs>(args: SelectSubset<T, LeaderboardEntryFindUniqueArgs<ExtArgs>>): Prisma__LeaderboardEntryClient<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LeaderboardEntry that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LeaderboardEntryFindUniqueOrThrowArgs} args - Arguments to find a LeaderboardEntry
+     * @example
+     * // Get one LeaderboardEntry
+     * const leaderboardEntry = await prisma.leaderboardEntry.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LeaderboardEntryFindUniqueOrThrowArgs>(args: SelectSubset<T, LeaderboardEntryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LeaderboardEntryClient<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LeaderboardEntry that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeaderboardEntryFindFirstArgs} args - Arguments to find a LeaderboardEntry
+     * @example
+     * // Get one LeaderboardEntry
+     * const leaderboardEntry = await prisma.leaderboardEntry.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LeaderboardEntryFindFirstArgs>(args?: SelectSubset<T, LeaderboardEntryFindFirstArgs<ExtArgs>>): Prisma__LeaderboardEntryClient<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LeaderboardEntry that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeaderboardEntryFindFirstOrThrowArgs} args - Arguments to find a LeaderboardEntry
+     * @example
+     * // Get one LeaderboardEntry
+     * const leaderboardEntry = await prisma.leaderboardEntry.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LeaderboardEntryFindFirstOrThrowArgs>(args?: SelectSubset<T, LeaderboardEntryFindFirstOrThrowArgs<ExtArgs>>): Prisma__LeaderboardEntryClient<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LeaderboardEntries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeaderboardEntryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LeaderboardEntries
+     * const leaderboardEntries = await prisma.leaderboardEntry.findMany()
+     * 
+     * // Get first 10 LeaderboardEntries
+     * const leaderboardEntries = await prisma.leaderboardEntry.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const leaderboardEntryWithIdOnly = await prisma.leaderboardEntry.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LeaderboardEntryFindManyArgs>(args?: SelectSubset<T, LeaderboardEntryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LeaderboardEntry.
+     * @param {LeaderboardEntryCreateArgs} args - Arguments to create a LeaderboardEntry.
+     * @example
+     * // Create one LeaderboardEntry
+     * const LeaderboardEntry = await prisma.leaderboardEntry.create({
+     *   data: {
+     *     // ... data to create a LeaderboardEntry
+     *   }
+     * })
+     * 
+     */
+    create<T extends LeaderboardEntryCreateArgs>(args: SelectSubset<T, LeaderboardEntryCreateArgs<ExtArgs>>): Prisma__LeaderboardEntryClient<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LeaderboardEntries.
+     * @param {LeaderboardEntryCreateManyArgs} args - Arguments to create many LeaderboardEntries.
+     * @example
+     * // Create many LeaderboardEntries
+     * const leaderboardEntry = await prisma.leaderboardEntry.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LeaderboardEntryCreateManyArgs>(args?: SelectSubset<T, LeaderboardEntryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LeaderboardEntries and returns the data saved in the database.
+     * @param {LeaderboardEntryCreateManyAndReturnArgs} args - Arguments to create many LeaderboardEntries.
+     * @example
+     * // Create many LeaderboardEntries
+     * const leaderboardEntry = await prisma.leaderboardEntry.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LeaderboardEntries and only return the `id`
+     * const leaderboardEntryWithIdOnly = await prisma.leaderboardEntry.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LeaderboardEntryCreateManyAndReturnArgs>(args?: SelectSubset<T, LeaderboardEntryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LeaderboardEntry.
+     * @param {LeaderboardEntryDeleteArgs} args - Arguments to delete one LeaderboardEntry.
+     * @example
+     * // Delete one LeaderboardEntry
+     * const LeaderboardEntry = await prisma.leaderboardEntry.delete({
+     *   where: {
+     *     // ... filter to delete one LeaderboardEntry
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LeaderboardEntryDeleteArgs>(args: SelectSubset<T, LeaderboardEntryDeleteArgs<ExtArgs>>): Prisma__LeaderboardEntryClient<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LeaderboardEntry.
+     * @param {LeaderboardEntryUpdateArgs} args - Arguments to update one LeaderboardEntry.
+     * @example
+     * // Update one LeaderboardEntry
+     * const leaderboardEntry = await prisma.leaderboardEntry.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LeaderboardEntryUpdateArgs>(args: SelectSubset<T, LeaderboardEntryUpdateArgs<ExtArgs>>): Prisma__LeaderboardEntryClient<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LeaderboardEntries.
+     * @param {LeaderboardEntryDeleteManyArgs} args - Arguments to filter LeaderboardEntries to delete.
+     * @example
+     * // Delete a few LeaderboardEntries
+     * const { count } = await prisma.leaderboardEntry.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LeaderboardEntryDeleteManyArgs>(args?: SelectSubset<T, LeaderboardEntryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LeaderboardEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeaderboardEntryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LeaderboardEntries
+     * const leaderboardEntry = await prisma.leaderboardEntry.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LeaderboardEntryUpdateManyArgs>(args: SelectSubset<T, LeaderboardEntryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LeaderboardEntries and returns the data updated in the database.
+     * @param {LeaderboardEntryUpdateManyAndReturnArgs} args - Arguments to update many LeaderboardEntries.
+     * @example
+     * // Update many LeaderboardEntries
+     * const leaderboardEntry = await prisma.leaderboardEntry.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LeaderboardEntries and only return the `id`
+     * const leaderboardEntryWithIdOnly = await prisma.leaderboardEntry.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LeaderboardEntryUpdateManyAndReturnArgs>(args: SelectSubset<T, LeaderboardEntryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LeaderboardEntry.
+     * @param {LeaderboardEntryUpsertArgs} args - Arguments to update or create a LeaderboardEntry.
+     * @example
+     * // Update or create a LeaderboardEntry
+     * const leaderboardEntry = await prisma.leaderboardEntry.upsert({
+     *   create: {
+     *     // ... data to create a LeaderboardEntry
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LeaderboardEntry we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LeaderboardEntryUpsertArgs>(args: SelectSubset<T, LeaderboardEntryUpsertArgs<ExtArgs>>): Prisma__LeaderboardEntryClient<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LeaderboardEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeaderboardEntryCountArgs} args - Arguments to filter LeaderboardEntries to count.
+     * @example
+     * // Count the number of LeaderboardEntries
+     * const count = await prisma.leaderboardEntry.count({
+     *   where: {
+     *     // ... the filter for the LeaderboardEntries we want to count
+     *   }
+     * })
+    **/
+    count<T extends LeaderboardEntryCountArgs>(
+      args?: Subset<T, LeaderboardEntryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LeaderboardEntryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LeaderboardEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeaderboardEntryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LeaderboardEntryAggregateArgs>(args: Subset<T, LeaderboardEntryAggregateArgs>): Prisma.PrismaPromise<GetLeaderboardEntryAggregateType<T>>
+
+    /**
+     * Group by LeaderboardEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeaderboardEntryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LeaderboardEntryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LeaderboardEntryGroupByArgs['orderBy'] }
+        : { orderBy?: LeaderboardEntryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LeaderboardEntryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLeaderboardEntryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LeaderboardEntry model
+   */
+  readonly fields: LeaderboardEntryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LeaderboardEntry.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LeaderboardEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    hunt<T extends TreasureHuntDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHuntDefaultArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LeaderboardEntry model
+   */
+  interface LeaderboardEntryFieldRefs {
+    readonly id: FieldRef<"LeaderboardEntry", 'String'>
+    readonly userId: FieldRef<"LeaderboardEntry", 'String'>
+    readonly huntId: FieldRef<"LeaderboardEntry", 'String'>
+    readonly rank: FieldRef<"LeaderboardEntry", 'Int'>
+    readonly score: FieldRef<"LeaderboardEntry", 'Int'>
+    readonly completedAt: FieldRef<"LeaderboardEntry", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LeaderboardEntry findUnique
+   */
+  export type LeaderboardEntryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeaderboardEntry
+     */
+    select?: LeaderboardEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LeaderboardEntry
+     */
+    omit?: LeaderboardEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaderboardEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which LeaderboardEntry to fetch.
+     */
+    where: LeaderboardEntryWhereUniqueInput
+  }
+
+  /**
+   * LeaderboardEntry findUniqueOrThrow
+   */
+  export type LeaderboardEntryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeaderboardEntry
+     */
+    select?: LeaderboardEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LeaderboardEntry
+     */
+    omit?: LeaderboardEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaderboardEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which LeaderboardEntry to fetch.
+     */
+    where: LeaderboardEntryWhereUniqueInput
+  }
+
+  /**
+   * LeaderboardEntry findFirst
+   */
+  export type LeaderboardEntryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeaderboardEntry
+     */
+    select?: LeaderboardEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LeaderboardEntry
+     */
+    omit?: LeaderboardEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaderboardEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which LeaderboardEntry to fetch.
+     */
+    where?: LeaderboardEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LeaderboardEntries to fetch.
+     */
+    orderBy?: LeaderboardEntryOrderByWithRelationInput | LeaderboardEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LeaderboardEntries.
+     */
+    cursor?: LeaderboardEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LeaderboardEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LeaderboardEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LeaderboardEntries.
+     */
+    distinct?: LeaderboardEntryScalarFieldEnum | LeaderboardEntryScalarFieldEnum[]
+  }
+
+  /**
+   * LeaderboardEntry findFirstOrThrow
+   */
+  export type LeaderboardEntryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeaderboardEntry
+     */
+    select?: LeaderboardEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LeaderboardEntry
+     */
+    omit?: LeaderboardEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaderboardEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which LeaderboardEntry to fetch.
+     */
+    where?: LeaderboardEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LeaderboardEntries to fetch.
+     */
+    orderBy?: LeaderboardEntryOrderByWithRelationInput | LeaderboardEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LeaderboardEntries.
+     */
+    cursor?: LeaderboardEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LeaderboardEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LeaderboardEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LeaderboardEntries.
+     */
+    distinct?: LeaderboardEntryScalarFieldEnum | LeaderboardEntryScalarFieldEnum[]
+  }
+
+  /**
+   * LeaderboardEntry findMany
+   */
+  export type LeaderboardEntryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeaderboardEntry
+     */
+    select?: LeaderboardEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LeaderboardEntry
+     */
+    omit?: LeaderboardEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaderboardEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which LeaderboardEntries to fetch.
+     */
+    where?: LeaderboardEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LeaderboardEntries to fetch.
+     */
+    orderBy?: LeaderboardEntryOrderByWithRelationInput | LeaderboardEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LeaderboardEntries.
+     */
+    cursor?: LeaderboardEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LeaderboardEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LeaderboardEntries.
+     */
+    skip?: number
+    distinct?: LeaderboardEntryScalarFieldEnum | LeaderboardEntryScalarFieldEnum[]
+  }
+
+  /**
+   * LeaderboardEntry create
+   */
+  export type LeaderboardEntryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeaderboardEntry
+     */
+    select?: LeaderboardEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LeaderboardEntry
+     */
+    omit?: LeaderboardEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaderboardEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LeaderboardEntry.
+     */
+    data: XOR<LeaderboardEntryCreateInput, LeaderboardEntryUncheckedCreateInput>
+  }
+
+  /**
+   * LeaderboardEntry createMany
+   */
+  export type LeaderboardEntryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LeaderboardEntries.
+     */
+    data: LeaderboardEntryCreateManyInput | LeaderboardEntryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LeaderboardEntry createManyAndReturn
+   */
+  export type LeaderboardEntryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeaderboardEntry
+     */
+    select?: LeaderboardEntrySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LeaderboardEntry
+     */
+    omit?: LeaderboardEntryOmit<ExtArgs> | null
+    /**
+     * The data used to create many LeaderboardEntries.
+     */
+    data: LeaderboardEntryCreateManyInput | LeaderboardEntryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaderboardEntryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LeaderboardEntry update
+   */
+  export type LeaderboardEntryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeaderboardEntry
+     */
+    select?: LeaderboardEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LeaderboardEntry
+     */
+    omit?: LeaderboardEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaderboardEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LeaderboardEntry.
+     */
+    data: XOR<LeaderboardEntryUpdateInput, LeaderboardEntryUncheckedUpdateInput>
+    /**
+     * Choose, which LeaderboardEntry to update.
+     */
+    where: LeaderboardEntryWhereUniqueInput
+  }
+
+  /**
+   * LeaderboardEntry updateMany
+   */
+  export type LeaderboardEntryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LeaderboardEntries.
+     */
+    data: XOR<LeaderboardEntryUpdateManyMutationInput, LeaderboardEntryUncheckedUpdateManyInput>
+    /**
+     * Filter which LeaderboardEntries to update
+     */
+    where?: LeaderboardEntryWhereInput
+    /**
+     * Limit how many LeaderboardEntries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LeaderboardEntry updateManyAndReturn
+   */
+  export type LeaderboardEntryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeaderboardEntry
+     */
+    select?: LeaderboardEntrySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LeaderboardEntry
+     */
+    omit?: LeaderboardEntryOmit<ExtArgs> | null
+    /**
+     * The data used to update LeaderboardEntries.
+     */
+    data: XOR<LeaderboardEntryUpdateManyMutationInput, LeaderboardEntryUncheckedUpdateManyInput>
+    /**
+     * Filter which LeaderboardEntries to update
+     */
+    where?: LeaderboardEntryWhereInput
+    /**
+     * Limit how many LeaderboardEntries to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaderboardEntryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LeaderboardEntry upsert
+   */
+  export type LeaderboardEntryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeaderboardEntry
+     */
+    select?: LeaderboardEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LeaderboardEntry
+     */
+    omit?: LeaderboardEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaderboardEntryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LeaderboardEntry to update in case it exists.
+     */
+    where: LeaderboardEntryWhereUniqueInput
+    /**
+     * In case the LeaderboardEntry found by the `where` argument doesn't exist, create a new LeaderboardEntry with this data.
+     */
+    create: XOR<LeaderboardEntryCreateInput, LeaderboardEntryUncheckedCreateInput>
+    /**
+     * In case the LeaderboardEntry was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LeaderboardEntryUpdateInput, LeaderboardEntryUncheckedUpdateInput>
+  }
+
+  /**
+   * LeaderboardEntry delete
+   */
+  export type LeaderboardEntryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeaderboardEntry
+     */
+    select?: LeaderboardEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LeaderboardEntry
+     */
+    omit?: LeaderboardEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaderboardEntryInclude<ExtArgs> | null
+    /**
+     * Filter which LeaderboardEntry to delete.
+     */
+    where: LeaderboardEntryWhereUniqueInput
+  }
+
+  /**
+   * LeaderboardEntry deleteMany
+   */
+  export type LeaderboardEntryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LeaderboardEntries to delete
+     */
+    where?: LeaderboardEntryWhereInput
+    /**
+     * Limit how many LeaderboardEntries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LeaderboardEntry without action
+   */
+  export type LeaderboardEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeaderboardEntry
+     */
+    select?: LeaderboardEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LeaderboardEntry
+     */
+    omit?: LeaderboardEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaderboardEntryInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -14476,7 +18445,10 @@ export namespace Prisma {
     image: 'image',
     stripeCustomerId: 'stripeCustomerId',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    nickname: 'nickname',
+    role: 'role',
+    isMfaEnabled: 'isMfaEnabled'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -14535,6 +18507,10 @@ export namespace Prisma {
     startDate: 'startDate',
     endDate: 'endDate',
     location: 'location',
+    mode: 'mode',
+    fee: 'fee',
+    mapStyle: 'mapStyle',
+    isFinished: 'isFinished',
     status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -14560,6 +18536,8 @@ export namespace Prisma {
     rarity: 'rarity',
     description: 'description',
     imageUrl: 'imageUrl',
+    isHidden: 'isHidden',
+    source: 'source',
     userId: 'userId',
     huntId: 'huntId',
     foundAt: 'foundAt'
@@ -14594,6 +18572,7 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     amount: 'amount',
+    type: 'type',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -14614,6 +18593,37 @@ export namespace Prisma {
   };
 
   export type TransactionHistoryScalarFieldEnum = (typeof TransactionHistoryScalarFieldEnum)[keyof typeof TransactionHistoryScalarFieldEnum]
+
+
+  export const CraftScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    resultId: 'resultId',
+    createdAt: 'createdAt'
+  };
+
+  export type CraftScalarFieldEnum = (typeof CraftScalarFieldEnum)[keyof typeof CraftScalarFieldEnum]
+
+
+  export const CraftMaterialScalarFieldEnum: {
+    id: 'id',
+    craftId: 'craftId',
+    artefactId: 'artefactId'
+  };
+
+  export type CraftMaterialScalarFieldEnum = (typeof CraftMaterialScalarFieldEnum)[keyof typeof CraftMaterialScalarFieldEnum]
+
+
+  export const LeaderboardEntryScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    huntId: 'huntId',
+    rank: 'rank',
+    score: 'score',
+    completedAt: 'completedAt'
+  };
+
+  export type LeaderboardEntryScalarFieldEnum = (typeof LeaderboardEntryScalarFieldEnum)[keyof typeof LeaderboardEntryScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -14681,6 +18691,48 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'UserRole'
+   */
+  export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserRole[]'
+   */
+  export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'HuntMode'
+   */
+  export type EnumHuntModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HuntMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'HuntMode[]'
+   */
+  export type ListEnumHuntModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HuntMode[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'HuntStatus'
    */
   export type EnumHuntStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HuntStatus'>
@@ -14723,16 +18775,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'ArtefactSource'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type EnumArtefactSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ArtefactSource'>
     
 
 
   /**
-   * Reference to a field of type 'Int[]'
+   * Reference to a field of type 'ArtefactSource[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+  export type ListEnumArtefactSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ArtefactSource[]'>
     
 
 
@@ -14747,6 +18799,20 @@ export namespace Prisma {
    * Reference to a field of type 'RewardType[]'
    */
   export type ListEnumRewardTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RewardType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'CurrencySourceType'
+   */
+  export type EnumCurrencySourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CurrencySourceType'>
+    
+
+
+  /**
+   * Reference to a field of type 'CurrencySourceType[]'
+   */
+  export type ListEnumCurrencySourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CurrencySourceType[]'>
     
 
 
@@ -14793,6 +18859,9 @@ export namespace Prisma {
     stripeCustomerId?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    nickname?: StringNullableFilter<"User"> | string | null
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    isMfaEnabled?: BoolFilter<"User"> | boolean
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
     participations?: ParticipationListRelationFilter
@@ -14800,6 +18869,8 @@ export namespace Prisma {
     collectedArtefacts?: ArtefactListRelationFilter
     virtualCurrency?: VirtualCurrencyListRelationFilter
     transactionHistory?: TransactionHistoryListRelationFilter
+    Craft?: CraftListRelationFilter
+    LeaderboardEntry?: LeaderboardEntryListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -14811,6 +18882,9 @@ export namespace Prisma {
     stripeCustomerId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    nickname?: SortOrderInput | SortOrder
+    role?: SortOrder
+    isMfaEnabled?: SortOrder
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
     participations?: ParticipationOrderByRelationAggregateInput
@@ -14818,6 +18892,8 @@ export namespace Prisma {
     collectedArtefacts?: ArtefactOrderByRelationAggregateInput
     virtualCurrency?: VirtualCurrencyOrderByRelationAggregateInput
     transactionHistory?: TransactionHistoryOrderByRelationAggregateInput
+    Craft?: CraftOrderByRelationAggregateInput
+    LeaderboardEntry?: LeaderboardEntryOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -14832,6 +18908,9 @@ export namespace Prisma {
     stripeCustomerId?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    nickname?: StringNullableFilter<"User"> | string | null
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    isMfaEnabled?: BoolFilter<"User"> | boolean
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
     participations?: ParticipationListRelationFilter
@@ -14839,6 +18918,8 @@ export namespace Prisma {
     collectedArtefacts?: ArtefactListRelationFilter
     virtualCurrency?: VirtualCurrencyListRelationFilter
     transactionHistory?: TransactionHistoryListRelationFilter
+    Craft?: CraftListRelationFilter
+    LeaderboardEntry?: LeaderboardEntryListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -14850,6 +18931,9 @@ export namespace Prisma {
     stripeCustomerId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    nickname?: SortOrderInput | SortOrder
+    role?: SortOrder
+    isMfaEnabled?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -14867,6 +18951,9 @@ export namespace Prisma {
     stripeCustomerId?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    nickname?: StringNullableWithAggregatesFilter<"User"> | string | null
+    role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
+    isMfaEnabled?: BoolWithAggregatesFilter<"User"> | boolean
   }
 
   export type SessionWhereInput = {
@@ -15102,6 +19189,10 @@ export namespace Prisma {
     startDate?: DateTimeNullableFilter<"TreasureHunt"> | Date | string | null
     endDate?: DateTimeNullableFilter<"TreasureHunt"> | Date | string | null
     location?: StringNullableFilter<"TreasureHunt"> | string | null
+    mode?: EnumHuntModeFilter<"TreasureHunt"> | $Enums.HuntMode
+    fee?: IntNullableFilter<"TreasureHunt"> | number | null
+    mapStyle?: StringNullableFilter<"TreasureHunt"> | string | null
+    isFinished?: BoolFilter<"TreasureHunt"> | boolean
     status?: EnumHuntStatusFilter<"TreasureHunt"> | $Enums.HuntStatus
     createdAt?: DateTimeFilter<"TreasureHunt"> | Date | string
     updatedAt?: DateTimeFilter<"TreasureHunt"> | Date | string
@@ -15110,6 +19201,7 @@ export namespace Prisma {
     steps?: HuntStepListRelationFilter
     rewards?: RewardListRelationFilter
     artefacts?: ArtefactListRelationFilter
+    LeaderboardEntry?: LeaderboardEntryListRelationFilter
   }
 
   export type TreasureHuntOrderByWithRelationInput = {
@@ -15120,6 +19212,10 @@ export namespace Prisma {
     startDate?: SortOrderInput | SortOrder
     endDate?: SortOrderInput | SortOrder
     location?: SortOrderInput | SortOrder
+    mode?: SortOrder
+    fee?: SortOrderInput | SortOrder
+    mapStyle?: SortOrderInput | SortOrder
+    isFinished?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -15128,6 +19224,7 @@ export namespace Prisma {
     steps?: HuntStepOrderByRelationAggregateInput
     rewards?: RewardOrderByRelationAggregateInput
     artefacts?: ArtefactOrderByRelationAggregateInput
+    LeaderboardEntry?: LeaderboardEntryOrderByRelationAggregateInput
   }
 
   export type TreasureHuntWhereUniqueInput = Prisma.AtLeast<{
@@ -15141,6 +19238,10 @@ export namespace Prisma {
     startDate?: DateTimeNullableFilter<"TreasureHunt"> | Date | string | null
     endDate?: DateTimeNullableFilter<"TreasureHunt"> | Date | string | null
     location?: StringNullableFilter<"TreasureHunt"> | string | null
+    mode?: EnumHuntModeFilter<"TreasureHunt"> | $Enums.HuntMode
+    fee?: IntNullableFilter<"TreasureHunt"> | number | null
+    mapStyle?: StringNullableFilter<"TreasureHunt"> | string | null
+    isFinished?: BoolFilter<"TreasureHunt"> | boolean
     status?: EnumHuntStatusFilter<"TreasureHunt"> | $Enums.HuntStatus
     createdAt?: DateTimeFilter<"TreasureHunt"> | Date | string
     updatedAt?: DateTimeFilter<"TreasureHunt"> | Date | string
@@ -15149,6 +19250,7 @@ export namespace Prisma {
     steps?: HuntStepListRelationFilter
     rewards?: RewardListRelationFilter
     artefacts?: ArtefactListRelationFilter
+    LeaderboardEntry?: LeaderboardEntryListRelationFilter
   }, "id">
 
   export type TreasureHuntOrderByWithAggregationInput = {
@@ -15159,12 +19261,18 @@ export namespace Prisma {
     startDate?: SortOrderInput | SortOrder
     endDate?: SortOrderInput | SortOrder
     location?: SortOrderInput | SortOrder
+    mode?: SortOrder
+    fee?: SortOrderInput | SortOrder
+    mapStyle?: SortOrderInput | SortOrder
+    isFinished?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: TreasureHuntCountOrderByAggregateInput
+    _avg?: TreasureHuntAvgOrderByAggregateInput
     _max?: TreasureHuntMaxOrderByAggregateInput
     _min?: TreasureHuntMinOrderByAggregateInput
+    _sum?: TreasureHuntSumOrderByAggregateInput
   }
 
   export type TreasureHuntScalarWhereWithAggregatesInput = {
@@ -15178,6 +19286,10 @@ export namespace Prisma {
     startDate?: DateTimeNullableWithAggregatesFilter<"TreasureHunt"> | Date | string | null
     endDate?: DateTimeNullableWithAggregatesFilter<"TreasureHunt"> | Date | string | null
     location?: StringNullableWithAggregatesFilter<"TreasureHunt"> | string | null
+    mode?: EnumHuntModeWithAggregatesFilter<"TreasureHunt"> | $Enums.HuntMode
+    fee?: IntNullableWithAggregatesFilter<"TreasureHunt"> | number | null
+    mapStyle?: StringNullableWithAggregatesFilter<"TreasureHunt"> | string | null
+    isFinished?: BoolWithAggregatesFilter<"TreasureHunt"> | boolean
     status?: EnumHuntStatusWithAggregatesFilter<"TreasureHunt"> | $Enums.HuntStatus
     createdAt?: DateTimeWithAggregatesFilter<"TreasureHunt"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"TreasureHunt"> | Date | string
@@ -15250,11 +19362,15 @@ export namespace Prisma {
     rarity?: EnumArtefactRarityFilter<"Artefact"> | $Enums.ArtefactRarity
     description?: StringNullableFilter<"Artefact"> | string | null
     imageUrl?: StringNullableFilter<"Artefact"> | string | null
+    isHidden?: BoolFilter<"Artefact"> | boolean
+    source?: EnumArtefactSourceFilter<"Artefact"> | $Enums.ArtefactSource
     userId?: StringFilter<"Artefact"> | string
     huntId?: StringNullableFilter<"Artefact"> | string | null
     foundAt?: DateTimeFilter<"Artefact"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     hunt?: XOR<TreasureHuntNullableScalarRelationFilter, TreasureHuntWhereInput> | null
+    Craft?: CraftListRelationFilter
+    CraftMaterial?: CraftMaterialListRelationFilter
   }
 
   export type ArtefactOrderByWithRelationInput = {
@@ -15263,11 +19379,15 @@ export namespace Prisma {
     rarity?: SortOrder
     description?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
+    isHidden?: SortOrder
+    source?: SortOrder
     userId?: SortOrder
     huntId?: SortOrderInput | SortOrder
     foundAt?: SortOrder
     user?: UserOrderByWithRelationInput
     hunt?: TreasureHuntOrderByWithRelationInput
+    Craft?: CraftOrderByRelationAggregateInput
+    CraftMaterial?: CraftMaterialOrderByRelationAggregateInput
   }
 
   export type ArtefactWhereUniqueInput = Prisma.AtLeast<{
@@ -15279,11 +19399,15 @@ export namespace Prisma {
     rarity?: EnumArtefactRarityFilter<"Artefact"> | $Enums.ArtefactRarity
     description?: StringNullableFilter<"Artefact"> | string | null
     imageUrl?: StringNullableFilter<"Artefact"> | string | null
+    isHidden?: BoolFilter<"Artefact"> | boolean
+    source?: EnumArtefactSourceFilter<"Artefact"> | $Enums.ArtefactSource
     userId?: StringFilter<"Artefact"> | string
     huntId?: StringNullableFilter<"Artefact"> | string | null
     foundAt?: DateTimeFilter<"Artefact"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     hunt?: XOR<TreasureHuntNullableScalarRelationFilter, TreasureHuntWhereInput> | null
+    Craft?: CraftListRelationFilter
+    CraftMaterial?: CraftMaterialListRelationFilter
   }, "id">
 
   export type ArtefactOrderByWithAggregationInput = {
@@ -15292,6 +19416,8 @@ export namespace Prisma {
     rarity?: SortOrder
     description?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
+    isHidden?: SortOrder
+    source?: SortOrder
     userId?: SortOrder
     huntId?: SortOrderInput | SortOrder
     foundAt?: SortOrder
@@ -15309,6 +19435,8 @@ export namespace Prisma {
     rarity?: EnumArtefactRarityWithAggregatesFilter<"Artefact"> | $Enums.ArtefactRarity
     description?: StringNullableWithAggregatesFilter<"Artefact"> | string | null
     imageUrl?: StringNullableWithAggregatesFilter<"Artefact"> | string | null
+    isHidden?: BoolWithAggregatesFilter<"Artefact"> | boolean
+    source?: EnumArtefactSourceWithAggregatesFilter<"Artefact"> | $Enums.ArtefactSource
     userId?: StringWithAggregatesFilter<"Artefact"> | string
     huntId?: StringNullableWithAggregatesFilter<"Artefact"> | string | null
     foundAt?: DateTimeWithAggregatesFilter<"Artefact"> | Date | string
@@ -15435,6 +19563,7 @@ export namespace Prisma {
     id?: StringFilter<"VirtualCurrency"> | string
     userId?: StringFilter<"VirtualCurrency"> | string
     amount?: IntFilter<"VirtualCurrency"> | number
+    type?: EnumCurrencySourceTypeFilter<"VirtualCurrency"> | $Enums.CurrencySourceType
     createdAt?: DateTimeFilter<"VirtualCurrency"> | Date | string
     updatedAt?: DateTimeFilter<"VirtualCurrency"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -15445,6 +19574,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     amount?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -15458,6 +19588,7 @@ export namespace Prisma {
     NOT?: VirtualCurrencyWhereInput | VirtualCurrencyWhereInput[]
     userId?: StringFilter<"VirtualCurrency"> | string
     amount?: IntFilter<"VirtualCurrency"> | number
+    type?: EnumCurrencySourceTypeFilter<"VirtualCurrency"> | $Enums.CurrencySourceType
     createdAt?: DateTimeFilter<"VirtualCurrency"> | Date | string
     updatedAt?: DateTimeFilter<"VirtualCurrency"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -15468,6 +19599,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     amount?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: VirtualCurrencyCountOrderByAggregateInput
@@ -15484,6 +19616,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"VirtualCurrency"> | string
     userId?: StringWithAggregatesFilter<"VirtualCurrency"> | string
     amount?: IntWithAggregatesFilter<"VirtualCurrency"> | number
+    type?: EnumCurrencySourceTypeWithAggregatesFilter<"VirtualCurrency"> | $Enums.CurrencySourceType
     createdAt?: DateTimeWithAggregatesFilter<"VirtualCurrency"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"VirtualCurrency"> | Date | string
   }
@@ -15568,6 +19701,175 @@ export namespace Prisma {
     virtualCurrencyId?: StringWithAggregatesFilter<"TransactionHistory"> | string
   }
 
+  export type CraftWhereInput = {
+    AND?: CraftWhereInput | CraftWhereInput[]
+    OR?: CraftWhereInput[]
+    NOT?: CraftWhereInput | CraftWhereInput[]
+    id?: StringFilter<"Craft"> | string
+    userId?: StringFilter<"Craft"> | string
+    resultId?: StringFilter<"Craft"> | string
+    createdAt?: DateTimeFilter<"Craft"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    result?: XOR<ArtefactScalarRelationFilter, ArtefactWhereInput>
+    materials?: CraftMaterialListRelationFilter
+  }
+
+  export type CraftOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    resultId?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    result?: ArtefactOrderByWithRelationInput
+    materials?: CraftMaterialOrderByRelationAggregateInput
+  }
+
+  export type CraftWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CraftWhereInput | CraftWhereInput[]
+    OR?: CraftWhereInput[]
+    NOT?: CraftWhereInput | CraftWhereInput[]
+    userId?: StringFilter<"Craft"> | string
+    resultId?: StringFilter<"Craft"> | string
+    createdAt?: DateTimeFilter<"Craft"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    result?: XOR<ArtefactScalarRelationFilter, ArtefactWhereInput>
+    materials?: CraftMaterialListRelationFilter
+  }, "id">
+
+  export type CraftOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    resultId?: SortOrder
+    createdAt?: SortOrder
+    _count?: CraftCountOrderByAggregateInput
+    _max?: CraftMaxOrderByAggregateInput
+    _min?: CraftMinOrderByAggregateInput
+  }
+
+  export type CraftScalarWhereWithAggregatesInput = {
+    AND?: CraftScalarWhereWithAggregatesInput | CraftScalarWhereWithAggregatesInput[]
+    OR?: CraftScalarWhereWithAggregatesInput[]
+    NOT?: CraftScalarWhereWithAggregatesInput | CraftScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Craft"> | string
+    userId?: StringWithAggregatesFilter<"Craft"> | string
+    resultId?: StringWithAggregatesFilter<"Craft"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Craft"> | Date | string
+  }
+
+  export type CraftMaterialWhereInput = {
+    AND?: CraftMaterialWhereInput | CraftMaterialWhereInput[]
+    OR?: CraftMaterialWhereInput[]
+    NOT?: CraftMaterialWhereInput | CraftMaterialWhereInput[]
+    id?: StringFilter<"CraftMaterial"> | string
+    craftId?: StringFilter<"CraftMaterial"> | string
+    artefactId?: StringFilter<"CraftMaterial"> | string
+    craft?: XOR<CraftScalarRelationFilter, CraftWhereInput>
+    artefact?: XOR<ArtefactScalarRelationFilter, ArtefactWhereInput>
+  }
+
+  export type CraftMaterialOrderByWithRelationInput = {
+    id?: SortOrder
+    craftId?: SortOrder
+    artefactId?: SortOrder
+    craft?: CraftOrderByWithRelationInput
+    artefact?: ArtefactOrderByWithRelationInput
+  }
+
+  export type CraftMaterialWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CraftMaterialWhereInput | CraftMaterialWhereInput[]
+    OR?: CraftMaterialWhereInput[]
+    NOT?: CraftMaterialWhereInput | CraftMaterialWhereInput[]
+    craftId?: StringFilter<"CraftMaterial"> | string
+    artefactId?: StringFilter<"CraftMaterial"> | string
+    craft?: XOR<CraftScalarRelationFilter, CraftWhereInput>
+    artefact?: XOR<ArtefactScalarRelationFilter, ArtefactWhereInput>
+  }, "id">
+
+  export type CraftMaterialOrderByWithAggregationInput = {
+    id?: SortOrder
+    craftId?: SortOrder
+    artefactId?: SortOrder
+    _count?: CraftMaterialCountOrderByAggregateInput
+    _max?: CraftMaterialMaxOrderByAggregateInput
+    _min?: CraftMaterialMinOrderByAggregateInput
+  }
+
+  export type CraftMaterialScalarWhereWithAggregatesInput = {
+    AND?: CraftMaterialScalarWhereWithAggregatesInput | CraftMaterialScalarWhereWithAggregatesInput[]
+    OR?: CraftMaterialScalarWhereWithAggregatesInput[]
+    NOT?: CraftMaterialScalarWhereWithAggregatesInput | CraftMaterialScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CraftMaterial"> | string
+    craftId?: StringWithAggregatesFilter<"CraftMaterial"> | string
+    artefactId?: StringWithAggregatesFilter<"CraftMaterial"> | string
+  }
+
+  export type LeaderboardEntryWhereInput = {
+    AND?: LeaderboardEntryWhereInput | LeaderboardEntryWhereInput[]
+    OR?: LeaderboardEntryWhereInput[]
+    NOT?: LeaderboardEntryWhereInput | LeaderboardEntryWhereInput[]
+    id?: StringFilter<"LeaderboardEntry"> | string
+    userId?: StringFilter<"LeaderboardEntry"> | string
+    huntId?: StringFilter<"LeaderboardEntry"> | string
+    rank?: IntFilter<"LeaderboardEntry"> | number
+    score?: IntFilter<"LeaderboardEntry"> | number
+    completedAt?: DateTimeFilter<"LeaderboardEntry"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    hunt?: XOR<TreasureHuntScalarRelationFilter, TreasureHuntWhereInput>
+  }
+
+  export type LeaderboardEntryOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    rank?: SortOrder
+    score?: SortOrder
+    completedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    hunt?: TreasureHuntOrderByWithRelationInput
+  }
+
+  export type LeaderboardEntryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: LeaderboardEntryWhereInput | LeaderboardEntryWhereInput[]
+    OR?: LeaderboardEntryWhereInput[]
+    NOT?: LeaderboardEntryWhereInput | LeaderboardEntryWhereInput[]
+    userId?: StringFilter<"LeaderboardEntry"> | string
+    huntId?: StringFilter<"LeaderboardEntry"> | string
+    rank?: IntFilter<"LeaderboardEntry"> | number
+    score?: IntFilter<"LeaderboardEntry"> | number
+    completedAt?: DateTimeFilter<"LeaderboardEntry"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    hunt?: XOR<TreasureHuntScalarRelationFilter, TreasureHuntWhereInput>
+  }, "id">
+
+  export type LeaderboardEntryOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    rank?: SortOrder
+    score?: SortOrder
+    completedAt?: SortOrder
+    _count?: LeaderboardEntryCountOrderByAggregateInput
+    _avg?: LeaderboardEntryAvgOrderByAggregateInput
+    _max?: LeaderboardEntryMaxOrderByAggregateInput
+    _min?: LeaderboardEntryMinOrderByAggregateInput
+    _sum?: LeaderboardEntrySumOrderByAggregateInput
+  }
+
+  export type LeaderboardEntryScalarWhereWithAggregatesInput = {
+    AND?: LeaderboardEntryScalarWhereWithAggregatesInput | LeaderboardEntryScalarWhereWithAggregatesInput[]
+    OR?: LeaderboardEntryScalarWhereWithAggregatesInput[]
+    NOT?: LeaderboardEntryScalarWhereWithAggregatesInput | LeaderboardEntryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"LeaderboardEntry"> | string
+    userId?: StringWithAggregatesFilter<"LeaderboardEntry"> | string
+    huntId?: StringWithAggregatesFilter<"LeaderboardEntry"> | string
+    rank?: IntWithAggregatesFilter<"LeaderboardEntry"> | number
+    score?: IntWithAggregatesFilter<"LeaderboardEntry"> | number
+    completedAt?: DateTimeWithAggregatesFilter<"LeaderboardEntry"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -15577,6 +19879,9 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     participations?: ParticipationCreateNestedManyWithoutUserInput
@@ -15584,6 +19889,8 @@ export namespace Prisma {
     collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
     virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
     transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
+    Craft?: CraftCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -15595,6 +19902,9 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
@@ -15602,6 +19912,8 @@ export namespace Prisma {
     collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
     virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
     transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
+    Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -15613,6 +19925,9 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     participations?: ParticipationUpdateManyWithoutUserNestedInput
@@ -15620,6 +19935,8 @@ export namespace Prisma {
     collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
     virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
     transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
+    Craft?: CraftUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -15631,6 +19948,9 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
@@ -15638,6 +19958,8 @@ export namespace Prisma {
     collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
     virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
     transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -15649,6 +19971,9 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
   }
 
   export type UserUpdateManyMutationInput = {
@@ -15660,6 +19985,9 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -15671,6 +19999,9 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SessionCreateInput = {
@@ -15930,6 +20261,10 @@ export namespace Prisma {
     startDate?: Date | string | null
     endDate?: Date | string | null
     location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
     status?: $Enums.HuntStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15938,6 +20273,7 @@ export namespace Prisma {
     steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
     rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactCreateNestedManyWithoutHuntInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutHuntInput
   }
 
   export type TreasureHuntUncheckedCreateInput = {
@@ -15948,6 +20284,10 @@ export namespace Prisma {
     startDate?: Date | string | null
     endDate?: Date | string | null
     location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
     status?: $Enums.HuntStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15955,6 +20295,7 @@ export namespace Prisma {
     steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
     rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutHuntInput
   }
 
   export type TreasureHuntUpdateInput = {
@@ -15964,6 +20305,10 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15972,6 +20317,7 @@ export namespace Prisma {
     steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
     rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateInput = {
@@ -15982,6 +20328,10 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15989,6 +20339,7 @@ export namespace Prisma {
     steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
     rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutHuntNestedInput
   }
 
   export type TreasureHuntCreateManyInput = {
@@ -15999,6 +20350,10 @@ export namespace Prisma {
     startDate?: Date | string | null
     endDate?: Date | string | null
     location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
     status?: $Enums.HuntStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16011,6 +20366,10 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16024,6 +20383,10 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16089,9 +20452,13 @@ export namespace Prisma {
     rarity: $Enums.ArtefactRarity
     description?: string | null
     imageUrl?: string | null
+    isHidden?: boolean
+    source: $Enums.ArtefactSource
     foundAt?: Date | string
     user: UserCreateNestedOneWithoutCollectedArtefactsInput
     hunt?: TreasureHuntCreateNestedOneWithoutArtefactsInput
+    Craft?: CraftCreateNestedManyWithoutResultInput
+    CraftMaterial?: CraftMaterialCreateNestedManyWithoutArtefactInput
   }
 
   export type ArtefactUncheckedCreateInput = {
@@ -16100,9 +20467,13 @@ export namespace Prisma {
     rarity: $Enums.ArtefactRarity
     description?: string | null
     imageUrl?: string | null
+    isHidden?: boolean
+    source: $Enums.ArtefactSource
     userId: string
     huntId?: string | null
     foundAt?: Date | string
+    Craft?: CraftUncheckedCreateNestedManyWithoutResultInput
+    CraftMaterial?: CraftMaterialUncheckedCreateNestedManyWithoutArtefactInput
   }
 
   export type ArtefactUpdateInput = {
@@ -16111,9 +20482,13 @@ export namespace Prisma {
     rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    source?: EnumArtefactSourceFieldUpdateOperationsInput | $Enums.ArtefactSource
     foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCollectedArtefactsNestedInput
     hunt?: TreasureHuntUpdateOneWithoutArtefactsNestedInput
+    Craft?: CraftUpdateManyWithoutResultNestedInput
+    CraftMaterial?: CraftMaterialUpdateManyWithoutArtefactNestedInput
   }
 
   export type ArtefactUncheckedUpdateInput = {
@@ -16122,9 +20497,13 @@ export namespace Prisma {
     rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    source?: EnumArtefactSourceFieldUpdateOperationsInput | $Enums.ArtefactSource
     userId?: StringFieldUpdateOperationsInput | string
     huntId?: NullableStringFieldUpdateOperationsInput | string | null
     foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Craft?: CraftUncheckedUpdateManyWithoutResultNestedInput
+    CraftMaterial?: CraftMaterialUncheckedUpdateManyWithoutArtefactNestedInput
   }
 
   export type ArtefactCreateManyInput = {
@@ -16133,6 +20512,8 @@ export namespace Prisma {
     rarity: $Enums.ArtefactRarity
     description?: string | null
     imageUrl?: string | null
+    isHidden?: boolean
+    source: $Enums.ArtefactSource
     userId: string
     huntId?: string | null
     foundAt?: Date | string
@@ -16144,6 +20525,8 @@ export namespace Prisma {
     rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    source?: EnumArtefactSourceFieldUpdateOperationsInput | $Enums.ArtefactSource
     foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -16153,6 +20536,8 @@ export namespace Prisma {
     rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    source?: EnumArtefactSourceFieldUpdateOperationsInput | $Enums.ArtefactSource
     userId?: StringFieldUpdateOperationsInput | string
     huntId?: NullableStringFieldUpdateOperationsInput | string | null
     foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16271,6 +20656,7 @@ export namespace Prisma {
   export type VirtualCurrencyCreateInput = {
     id?: string
     amount: number
+    type?: $Enums.CurrencySourceType
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutVirtualCurrencyInput
@@ -16281,6 +20667,7 @@ export namespace Prisma {
     id?: string
     userId: string
     amount: number
+    type?: $Enums.CurrencySourceType
     createdAt?: Date | string
     updatedAt?: Date | string
     transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutVirtualCurrencyInput
@@ -16289,6 +20676,7 @@ export namespace Prisma {
   export type VirtualCurrencyUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
+    type?: EnumCurrencySourceTypeFieldUpdateOperationsInput | $Enums.CurrencySourceType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutVirtualCurrencyNestedInput
@@ -16299,6 +20687,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
+    type?: EnumCurrencySourceTypeFieldUpdateOperationsInput | $Enums.CurrencySourceType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutVirtualCurrencyNestedInput
@@ -16308,6 +20697,7 @@ export namespace Prisma {
     id?: string
     userId: string
     amount: number
+    type?: $Enums.CurrencySourceType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16315,6 +20705,7 @@ export namespace Prisma {
   export type VirtualCurrencyUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
+    type?: EnumCurrencySourceTypeFieldUpdateOperationsInput | $Enums.CurrencySourceType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16323,6 +20714,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
+    type?: EnumCurrencySourceTypeFieldUpdateOperationsInput | $Enums.CurrencySourceType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16409,6 +20801,158 @@ export namespace Prisma {
     virtualCurrencyId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type CraftCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutCraftInput
+    result: ArtefactCreateNestedOneWithoutCraftInput
+    materials?: CraftMaterialCreateNestedManyWithoutCraftInput
+  }
+
+  export type CraftUncheckedCreateInput = {
+    id?: string
+    userId: string
+    resultId: string
+    createdAt?: Date | string
+    materials?: CraftMaterialUncheckedCreateNestedManyWithoutCraftInput
+  }
+
+  export type CraftUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCraftNestedInput
+    result?: ArtefactUpdateOneRequiredWithoutCraftNestedInput
+    materials?: CraftMaterialUpdateManyWithoutCraftNestedInput
+  }
+
+  export type CraftUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    resultId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    materials?: CraftMaterialUncheckedUpdateManyWithoutCraftNestedInput
+  }
+
+  export type CraftCreateManyInput = {
+    id?: string
+    userId: string
+    resultId: string
+    createdAt?: Date | string
+  }
+
+  export type CraftUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CraftUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    resultId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CraftMaterialCreateInput = {
+    id?: string
+    craft: CraftCreateNestedOneWithoutMaterialsInput
+    artefact: ArtefactCreateNestedOneWithoutCraftMaterialInput
+  }
+
+  export type CraftMaterialUncheckedCreateInput = {
+    id?: string
+    craftId: string
+    artefactId: string
+  }
+
+  export type CraftMaterialUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    craft?: CraftUpdateOneRequiredWithoutMaterialsNestedInput
+    artefact?: ArtefactUpdateOneRequiredWithoutCraftMaterialNestedInput
+  }
+
+  export type CraftMaterialUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    craftId?: StringFieldUpdateOperationsInput | string
+    artefactId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CraftMaterialCreateManyInput = {
+    id?: string
+    craftId: string
+    artefactId: string
+  }
+
+  export type CraftMaterialUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CraftMaterialUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    craftId?: StringFieldUpdateOperationsInput | string
+    artefactId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LeaderboardEntryCreateInput = {
+    id?: string
+    rank: number
+    score: number
+    completedAt: Date | string
+    user: UserCreateNestedOneWithoutLeaderboardEntryInput
+    hunt: TreasureHuntCreateNestedOneWithoutLeaderboardEntryInput
+  }
+
+  export type LeaderboardEntryUncheckedCreateInput = {
+    id?: string
+    userId: string
+    huntId: string
+    rank: number
+    score: number
+    completedAt: Date | string
+  }
+
+  export type LeaderboardEntryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutLeaderboardEntryNestedInput
+    hunt?: TreasureHuntUpdateOneRequiredWithoutLeaderboardEntryNestedInput
+  }
+
+  export type LeaderboardEntryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    huntId?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeaderboardEntryCreateManyInput = {
+    id?: string
+    userId: string
+    huntId: string
+    rank: number
+    score: number
+    completedAt: Date | string
+  }
+
+  export type LeaderboardEntryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeaderboardEntryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    huntId?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -16455,6 +20999,13 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type EnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
+  }
+
   export type SessionListRelationFilter = {
     every?: SessionWhereInput
     some?: SessionWhereInput
@@ -16497,6 +21048,18 @@ export namespace Prisma {
     none?: TransactionHistoryWhereInput
   }
 
+  export type CraftListRelationFilter = {
+    every?: CraftWhereInput
+    some?: CraftWhereInput
+    none?: CraftWhereInput
+  }
+
+  export type LeaderboardEntryListRelationFilter = {
+    every?: LeaderboardEntryWhereInput
+    some?: LeaderboardEntryWhereInput
+    none?: LeaderboardEntryWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -16530,6 +21093,14 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type CraftOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LeaderboardEntryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -16539,6 +21110,9 @@ export namespace Prisma {
     stripeCustomerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    nickname?: SortOrder
+    role?: SortOrder
+    isMfaEnabled?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -16550,6 +21124,9 @@ export namespace Prisma {
     stripeCustomerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    nickname?: SortOrder
+    role?: SortOrder
+    isMfaEnabled?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -16561,6 +21138,9 @@ export namespace Prisma {
     stripeCustomerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    nickname?: SortOrder
+    role?: SortOrder
+    isMfaEnabled?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -16619,6 +21199,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type EnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
   }
 
   export type UserScalarRelationFilter = {
@@ -16759,6 +21349,24 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumHuntModeFilter<$PrismaModel = never> = {
+    equals?: $Enums.HuntMode | EnumHuntModeFieldRefInput<$PrismaModel>
+    in?: $Enums.HuntMode[] | ListEnumHuntModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HuntMode[] | ListEnumHuntModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumHuntModeFilter<$PrismaModel> | $Enums.HuntMode
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type EnumHuntStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.HuntStatus | EnumHuntStatusFieldRefInput<$PrismaModel>
     in?: $Enums.HuntStatus[] | ListEnumHuntStatusFieldRefInput<$PrismaModel>
@@ -16794,9 +21402,17 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     location?: SortOrder
+    mode?: SortOrder
+    fee?: SortOrder
+    mapStyle?: SortOrder
+    isFinished?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type TreasureHuntAvgOrderByAggregateInput = {
+    fee?: SortOrder
   }
 
   export type TreasureHuntMaxOrderByAggregateInput = {
@@ -16807,6 +21423,10 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     location?: SortOrder
+    mode?: SortOrder
+    fee?: SortOrder
+    mapStyle?: SortOrder
+    isFinished?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16820,9 +21440,43 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     location?: SortOrder
+    mode?: SortOrder
+    fee?: SortOrder
+    mapStyle?: SortOrder
+    isFinished?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type TreasureHuntSumOrderByAggregateInput = {
+    fee?: SortOrder
+  }
+
+  export type EnumHuntModeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.HuntMode | EnumHuntModeFieldRefInput<$PrismaModel>
+    in?: $Enums.HuntMode[] | ListEnumHuntModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HuntMode[] | ListEnumHuntModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumHuntModeWithAggregatesFilter<$PrismaModel> | $Enums.HuntMode
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumHuntModeFilter<$PrismaModel>
+    _max?: NestedEnumHuntModeFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type EnumHuntStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -16888,9 +21542,26 @@ export namespace Prisma {
     not?: NestedEnumArtefactRarityFilter<$PrismaModel> | $Enums.ArtefactRarity
   }
 
+  export type EnumArtefactSourceFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArtefactSource | EnumArtefactSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.ArtefactSource[] | ListEnumArtefactSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArtefactSource[] | ListEnumArtefactSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumArtefactSourceFilter<$PrismaModel> | $Enums.ArtefactSource
+  }
+
   export type TreasureHuntNullableScalarRelationFilter = {
     is?: TreasureHuntWhereInput | null
     isNot?: TreasureHuntWhereInput | null
+  }
+
+  export type CraftMaterialListRelationFilter = {
+    every?: CraftMaterialWhereInput
+    some?: CraftMaterialWhereInput
+    none?: CraftMaterialWhereInput
+  }
+
+  export type CraftMaterialOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ArtefactCountOrderByAggregateInput = {
@@ -16899,6 +21570,8 @@ export namespace Prisma {
     rarity?: SortOrder
     description?: SortOrder
     imageUrl?: SortOrder
+    isHidden?: SortOrder
+    source?: SortOrder
     userId?: SortOrder
     huntId?: SortOrder
     foundAt?: SortOrder
@@ -16910,6 +21583,8 @@ export namespace Prisma {
     rarity?: SortOrder
     description?: SortOrder
     imageUrl?: SortOrder
+    isHidden?: SortOrder
+    source?: SortOrder
     userId?: SortOrder
     huntId?: SortOrder
     foundAt?: SortOrder
@@ -16921,6 +21596,8 @@ export namespace Prisma {
     rarity?: SortOrder
     description?: SortOrder
     imageUrl?: SortOrder
+    isHidden?: SortOrder
+    source?: SortOrder
     userId?: SortOrder
     huntId?: SortOrder
     foundAt?: SortOrder
@@ -16934,6 +21611,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumArtefactRarityFilter<$PrismaModel>
     _max?: NestedEnumArtefactRarityFilter<$PrismaModel>
+  }
+
+  export type EnumArtefactSourceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArtefactSource | EnumArtefactSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.ArtefactSource[] | ListEnumArtefactSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArtefactSource[] | ListEnumArtefactSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumArtefactSourceWithAggregatesFilter<$PrismaModel> | $Enums.ArtefactSource
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumArtefactSourceFilter<$PrismaModel>
+    _max?: NestedEnumArtefactSourceFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -17044,10 +21731,18 @@ export namespace Prisma {
     _max?: NestedEnumRewardTypeFilter<$PrismaModel>
   }
 
+  export type EnumCurrencySourceTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.CurrencySourceType | EnumCurrencySourceTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CurrencySourceType[] | ListEnumCurrencySourceTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CurrencySourceType[] | ListEnumCurrencySourceTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCurrencySourceTypeFilter<$PrismaModel> | $Enums.CurrencySourceType
+  }
+
   export type VirtualCurrencyCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     amount?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -17060,6 +21755,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     amount?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -17068,12 +21764,23 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     amount?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type VirtualCurrencySumOrderByAggregateInput = {
     amount?: SortOrder
+  }
+
+  export type EnumCurrencySourceTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CurrencySourceType | EnumCurrencySourceTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CurrencySourceType[] | ListEnumCurrencySourceTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CurrencySourceType[] | ListEnumCurrencySourceTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCurrencySourceTypeWithAggregatesFilter<$PrismaModel> | $Enums.CurrencySourceType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCurrencySourceTypeFilter<$PrismaModel>
+    _max?: NestedEnumCurrencySourceTypeFilter<$PrismaModel>
   }
 
   export type EnumTransactionTypeFilter<$PrismaModel = never> = {
@@ -17142,6 +21849,92 @@ export namespace Prisma {
     _max?: NestedEnumTransactionTypeFilter<$PrismaModel>
   }
 
+  export type ArtefactScalarRelationFilter = {
+    is?: ArtefactWhereInput
+    isNot?: ArtefactWhereInput
+  }
+
+  export type CraftCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    resultId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CraftMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    resultId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CraftMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    resultId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CraftScalarRelationFilter = {
+    is?: CraftWhereInput
+    isNot?: CraftWhereInput
+  }
+
+  export type CraftMaterialCountOrderByAggregateInput = {
+    id?: SortOrder
+    craftId?: SortOrder
+    artefactId?: SortOrder
+  }
+
+  export type CraftMaterialMaxOrderByAggregateInput = {
+    id?: SortOrder
+    craftId?: SortOrder
+    artefactId?: SortOrder
+  }
+
+  export type CraftMaterialMinOrderByAggregateInput = {
+    id?: SortOrder
+    craftId?: SortOrder
+    artefactId?: SortOrder
+  }
+
+  export type LeaderboardEntryCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    rank?: SortOrder
+    score?: SortOrder
+    completedAt?: SortOrder
+  }
+
+  export type LeaderboardEntryAvgOrderByAggregateInput = {
+    rank?: SortOrder
+    score?: SortOrder
+  }
+
+  export type LeaderboardEntryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    rank?: SortOrder
+    score?: SortOrder
+    completedAt?: SortOrder
+  }
+
+  export type LeaderboardEntryMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    rank?: SortOrder
+    score?: SortOrder
+    completedAt?: SortOrder
+  }
+
+  export type LeaderboardEntrySumOrderByAggregateInput = {
+    rank?: SortOrder
+    score?: SortOrder
+  }
+
   export type SessionCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -17189,6 +21982,20 @@ export namespace Prisma {
     connectOrCreate?: TransactionHistoryCreateOrConnectWithoutUserInput | TransactionHistoryCreateOrConnectWithoutUserInput[]
     createMany?: TransactionHistoryCreateManyUserInputEnvelope
     connect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+  }
+
+  export type CraftCreateNestedManyWithoutUserInput = {
+    create?: XOR<CraftCreateWithoutUserInput, CraftUncheckedCreateWithoutUserInput> | CraftCreateWithoutUserInput[] | CraftUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CraftCreateOrConnectWithoutUserInput | CraftCreateOrConnectWithoutUserInput[]
+    createMany?: CraftCreateManyUserInputEnvelope
+    connect?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+  }
+
+  export type LeaderboardEntryCreateNestedManyWithoutUserInput = {
+    create?: XOR<LeaderboardEntryCreateWithoutUserInput, LeaderboardEntryUncheckedCreateWithoutUserInput> | LeaderboardEntryCreateWithoutUserInput[] | LeaderboardEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LeaderboardEntryCreateOrConnectWithoutUserInput | LeaderboardEntryCreateOrConnectWithoutUserInput[]
+    createMany?: LeaderboardEntryCreateManyUserInputEnvelope
+    connect?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
   }
 
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
@@ -17240,6 +22047,20 @@ export namespace Prisma {
     connect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
   }
 
+  export type CraftUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CraftCreateWithoutUserInput, CraftUncheckedCreateWithoutUserInput> | CraftCreateWithoutUserInput[] | CraftUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CraftCreateOrConnectWithoutUserInput | CraftCreateOrConnectWithoutUserInput[]
+    createMany?: CraftCreateManyUserInputEnvelope
+    connect?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+  }
+
+  export type LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<LeaderboardEntryCreateWithoutUserInput, LeaderboardEntryUncheckedCreateWithoutUserInput> | LeaderboardEntryCreateWithoutUserInput[] | LeaderboardEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LeaderboardEntryCreateOrConnectWithoutUserInput | LeaderboardEntryCreateOrConnectWithoutUserInput[]
+    createMany?: LeaderboardEntryCreateManyUserInputEnvelope
+    connect?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -17254,6 +22075,10 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type EnumUserRoleFieldUpdateOperationsInput = {
+    set?: $Enums.UserRole
   }
 
   export type SessionUpdateManyWithoutUserNestedInput = {
@@ -17354,6 +22179,34 @@ export namespace Prisma {
     deleteMany?: TransactionHistoryScalarWhereInput | TransactionHistoryScalarWhereInput[]
   }
 
+  export type CraftUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CraftCreateWithoutUserInput, CraftUncheckedCreateWithoutUserInput> | CraftCreateWithoutUserInput[] | CraftUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CraftCreateOrConnectWithoutUserInput | CraftCreateOrConnectWithoutUserInput[]
+    upsert?: CraftUpsertWithWhereUniqueWithoutUserInput | CraftUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CraftCreateManyUserInputEnvelope
+    set?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    disconnect?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    delete?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    connect?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    update?: CraftUpdateWithWhereUniqueWithoutUserInput | CraftUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CraftUpdateManyWithWhereWithoutUserInput | CraftUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CraftScalarWhereInput | CraftScalarWhereInput[]
+  }
+
+  export type LeaderboardEntryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<LeaderboardEntryCreateWithoutUserInput, LeaderboardEntryUncheckedCreateWithoutUserInput> | LeaderboardEntryCreateWithoutUserInput[] | LeaderboardEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LeaderboardEntryCreateOrConnectWithoutUserInput | LeaderboardEntryCreateOrConnectWithoutUserInput[]
+    upsert?: LeaderboardEntryUpsertWithWhereUniqueWithoutUserInput | LeaderboardEntryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: LeaderboardEntryCreateManyUserInputEnvelope
+    set?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    disconnect?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    delete?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    connect?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    update?: LeaderboardEntryUpdateWithWhereUniqueWithoutUserInput | LeaderboardEntryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: LeaderboardEntryUpdateManyWithWhereWithoutUserInput | LeaderboardEntryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: LeaderboardEntryScalarWhereInput | LeaderboardEntryScalarWhereInput[]
+  }
+
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -17452,6 +22305,34 @@ export namespace Prisma {
     deleteMany?: TransactionHistoryScalarWhereInput | TransactionHistoryScalarWhereInput[]
   }
 
+  export type CraftUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CraftCreateWithoutUserInput, CraftUncheckedCreateWithoutUserInput> | CraftCreateWithoutUserInput[] | CraftUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CraftCreateOrConnectWithoutUserInput | CraftCreateOrConnectWithoutUserInput[]
+    upsert?: CraftUpsertWithWhereUniqueWithoutUserInput | CraftUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CraftCreateManyUserInputEnvelope
+    set?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    disconnect?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    delete?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    connect?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    update?: CraftUpdateWithWhereUniqueWithoutUserInput | CraftUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CraftUpdateManyWithWhereWithoutUserInput | CraftUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CraftScalarWhereInput | CraftScalarWhereInput[]
+  }
+
+  export type LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<LeaderboardEntryCreateWithoutUserInput, LeaderboardEntryUncheckedCreateWithoutUserInput> | LeaderboardEntryCreateWithoutUserInput[] | LeaderboardEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LeaderboardEntryCreateOrConnectWithoutUserInput | LeaderboardEntryCreateOrConnectWithoutUserInput[]
+    upsert?: LeaderboardEntryUpsertWithWhereUniqueWithoutUserInput | LeaderboardEntryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: LeaderboardEntryCreateManyUserInputEnvelope
+    set?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    disconnect?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    delete?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    connect?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    update?: LeaderboardEntryUpdateWithWhereUniqueWithoutUserInput | LeaderboardEntryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: LeaderboardEntryUpdateManyWithWhereWithoutUserInput | LeaderboardEntryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: LeaderboardEntryScalarWhereInput | LeaderboardEntryScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutSessionsInput = {
     create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
@@ -17518,6 +22399,13 @@ export namespace Prisma {
     connect?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
   }
 
+  export type LeaderboardEntryCreateNestedManyWithoutHuntInput = {
+    create?: XOR<LeaderboardEntryCreateWithoutHuntInput, LeaderboardEntryUncheckedCreateWithoutHuntInput> | LeaderboardEntryCreateWithoutHuntInput[] | LeaderboardEntryUncheckedCreateWithoutHuntInput[]
+    connectOrCreate?: LeaderboardEntryCreateOrConnectWithoutHuntInput | LeaderboardEntryCreateOrConnectWithoutHuntInput[]
+    createMany?: LeaderboardEntryCreateManyHuntInputEnvelope
+    connect?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+  }
+
   export type ParticipationUncheckedCreateNestedManyWithoutTreasureHuntInput = {
     create?: XOR<ParticipationCreateWithoutTreasureHuntInput, ParticipationUncheckedCreateWithoutTreasureHuntInput> | ParticipationCreateWithoutTreasureHuntInput[] | ParticipationUncheckedCreateWithoutTreasureHuntInput[]
     connectOrCreate?: ParticipationCreateOrConnectWithoutTreasureHuntInput | ParticipationCreateOrConnectWithoutTreasureHuntInput[]
@@ -17544,6 +22432,25 @@ export namespace Prisma {
     connectOrCreate?: ArtefactCreateOrConnectWithoutHuntInput | ArtefactCreateOrConnectWithoutHuntInput[]
     createMany?: ArtefactCreateManyHuntInputEnvelope
     connect?: ArtefactWhereUniqueInput | ArtefactWhereUniqueInput[]
+  }
+
+  export type LeaderboardEntryUncheckedCreateNestedManyWithoutHuntInput = {
+    create?: XOR<LeaderboardEntryCreateWithoutHuntInput, LeaderboardEntryUncheckedCreateWithoutHuntInput> | LeaderboardEntryCreateWithoutHuntInput[] | LeaderboardEntryUncheckedCreateWithoutHuntInput[]
+    connectOrCreate?: LeaderboardEntryCreateOrConnectWithoutHuntInput | LeaderboardEntryCreateOrConnectWithoutHuntInput[]
+    createMany?: LeaderboardEntryCreateManyHuntInputEnvelope
+    connect?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+  }
+
+  export type EnumHuntModeFieldUpdateOperationsInput = {
+    set?: $Enums.HuntMode
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type EnumHuntStatusFieldUpdateOperationsInput = {
@@ -17614,6 +22521,20 @@ export namespace Prisma {
     deleteMany?: ArtefactScalarWhereInput | ArtefactScalarWhereInput[]
   }
 
+  export type LeaderboardEntryUpdateManyWithoutHuntNestedInput = {
+    create?: XOR<LeaderboardEntryCreateWithoutHuntInput, LeaderboardEntryUncheckedCreateWithoutHuntInput> | LeaderboardEntryCreateWithoutHuntInput[] | LeaderboardEntryUncheckedCreateWithoutHuntInput[]
+    connectOrCreate?: LeaderboardEntryCreateOrConnectWithoutHuntInput | LeaderboardEntryCreateOrConnectWithoutHuntInput[]
+    upsert?: LeaderboardEntryUpsertWithWhereUniqueWithoutHuntInput | LeaderboardEntryUpsertWithWhereUniqueWithoutHuntInput[]
+    createMany?: LeaderboardEntryCreateManyHuntInputEnvelope
+    set?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    disconnect?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    delete?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    connect?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    update?: LeaderboardEntryUpdateWithWhereUniqueWithoutHuntInput | LeaderboardEntryUpdateWithWhereUniqueWithoutHuntInput[]
+    updateMany?: LeaderboardEntryUpdateManyWithWhereWithoutHuntInput | LeaderboardEntryUpdateManyWithWhereWithoutHuntInput[]
+    deleteMany?: LeaderboardEntryScalarWhereInput | LeaderboardEntryScalarWhereInput[]
+  }
+
   export type ParticipationUncheckedUpdateManyWithoutTreasureHuntNestedInput = {
     create?: XOR<ParticipationCreateWithoutTreasureHuntInput, ParticipationUncheckedCreateWithoutTreasureHuntInput> | ParticipationCreateWithoutTreasureHuntInput[] | ParticipationUncheckedCreateWithoutTreasureHuntInput[]
     connectOrCreate?: ParticipationCreateOrConnectWithoutTreasureHuntInput | ParticipationCreateOrConnectWithoutTreasureHuntInput[]
@@ -17670,6 +22591,20 @@ export namespace Prisma {
     deleteMany?: ArtefactScalarWhereInput | ArtefactScalarWhereInput[]
   }
 
+  export type LeaderboardEntryUncheckedUpdateManyWithoutHuntNestedInput = {
+    create?: XOR<LeaderboardEntryCreateWithoutHuntInput, LeaderboardEntryUncheckedCreateWithoutHuntInput> | LeaderboardEntryCreateWithoutHuntInput[] | LeaderboardEntryUncheckedCreateWithoutHuntInput[]
+    connectOrCreate?: LeaderboardEntryCreateOrConnectWithoutHuntInput | LeaderboardEntryCreateOrConnectWithoutHuntInput[]
+    upsert?: LeaderboardEntryUpsertWithWhereUniqueWithoutHuntInput | LeaderboardEntryUpsertWithWhereUniqueWithoutHuntInput[]
+    createMany?: LeaderboardEntryCreateManyHuntInputEnvelope
+    set?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    disconnect?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    delete?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    connect?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+    update?: LeaderboardEntryUpdateWithWhereUniqueWithoutHuntInput | LeaderboardEntryUpdateWithWhereUniqueWithoutHuntInput[]
+    updateMany?: LeaderboardEntryUpdateManyWithWhereWithoutHuntInput | LeaderboardEntryUpdateManyWithWhereWithoutHuntInput[]
+    deleteMany?: LeaderboardEntryScalarWhereInput | LeaderboardEntryScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutParticipationsInput = {
     create?: XOR<UserCreateWithoutParticipationsInput, UserUncheckedCreateWithoutParticipationsInput>
     connectOrCreate?: UserCreateOrConnectWithoutParticipationsInput
@@ -17714,8 +22649,40 @@ export namespace Prisma {
     connect?: TreasureHuntWhereUniqueInput
   }
 
+  export type CraftCreateNestedManyWithoutResultInput = {
+    create?: XOR<CraftCreateWithoutResultInput, CraftUncheckedCreateWithoutResultInput> | CraftCreateWithoutResultInput[] | CraftUncheckedCreateWithoutResultInput[]
+    connectOrCreate?: CraftCreateOrConnectWithoutResultInput | CraftCreateOrConnectWithoutResultInput[]
+    createMany?: CraftCreateManyResultInputEnvelope
+    connect?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+  }
+
+  export type CraftMaterialCreateNestedManyWithoutArtefactInput = {
+    create?: XOR<CraftMaterialCreateWithoutArtefactInput, CraftMaterialUncheckedCreateWithoutArtefactInput> | CraftMaterialCreateWithoutArtefactInput[] | CraftMaterialUncheckedCreateWithoutArtefactInput[]
+    connectOrCreate?: CraftMaterialCreateOrConnectWithoutArtefactInput | CraftMaterialCreateOrConnectWithoutArtefactInput[]
+    createMany?: CraftMaterialCreateManyArtefactInputEnvelope
+    connect?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+  }
+
+  export type CraftUncheckedCreateNestedManyWithoutResultInput = {
+    create?: XOR<CraftCreateWithoutResultInput, CraftUncheckedCreateWithoutResultInput> | CraftCreateWithoutResultInput[] | CraftUncheckedCreateWithoutResultInput[]
+    connectOrCreate?: CraftCreateOrConnectWithoutResultInput | CraftCreateOrConnectWithoutResultInput[]
+    createMany?: CraftCreateManyResultInputEnvelope
+    connect?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+  }
+
+  export type CraftMaterialUncheckedCreateNestedManyWithoutArtefactInput = {
+    create?: XOR<CraftMaterialCreateWithoutArtefactInput, CraftMaterialUncheckedCreateWithoutArtefactInput> | CraftMaterialCreateWithoutArtefactInput[] | CraftMaterialUncheckedCreateWithoutArtefactInput[]
+    connectOrCreate?: CraftMaterialCreateOrConnectWithoutArtefactInput | CraftMaterialCreateOrConnectWithoutArtefactInput[]
+    createMany?: CraftMaterialCreateManyArtefactInputEnvelope
+    connect?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+  }
+
   export type EnumArtefactRarityFieldUpdateOperationsInput = {
     set?: $Enums.ArtefactRarity
+  }
+
+  export type EnumArtefactSourceFieldUpdateOperationsInput = {
+    set?: $Enums.ArtefactSource
   }
 
   export type UserUpdateOneRequiredWithoutCollectedArtefactsNestedInput = {
@@ -17734,6 +22701,62 @@ export namespace Prisma {
     delete?: TreasureHuntWhereInput | boolean
     connect?: TreasureHuntWhereUniqueInput
     update?: XOR<XOR<TreasureHuntUpdateToOneWithWhereWithoutArtefactsInput, TreasureHuntUpdateWithoutArtefactsInput>, TreasureHuntUncheckedUpdateWithoutArtefactsInput>
+  }
+
+  export type CraftUpdateManyWithoutResultNestedInput = {
+    create?: XOR<CraftCreateWithoutResultInput, CraftUncheckedCreateWithoutResultInput> | CraftCreateWithoutResultInput[] | CraftUncheckedCreateWithoutResultInput[]
+    connectOrCreate?: CraftCreateOrConnectWithoutResultInput | CraftCreateOrConnectWithoutResultInput[]
+    upsert?: CraftUpsertWithWhereUniqueWithoutResultInput | CraftUpsertWithWhereUniqueWithoutResultInput[]
+    createMany?: CraftCreateManyResultInputEnvelope
+    set?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    disconnect?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    delete?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    connect?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    update?: CraftUpdateWithWhereUniqueWithoutResultInput | CraftUpdateWithWhereUniqueWithoutResultInput[]
+    updateMany?: CraftUpdateManyWithWhereWithoutResultInput | CraftUpdateManyWithWhereWithoutResultInput[]
+    deleteMany?: CraftScalarWhereInput | CraftScalarWhereInput[]
+  }
+
+  export type CraftMaterialUpdateManyWithoutArtefactNestedInput = {
+    create?: XOR<CraftMaterialCreateWithoutArtefactInput, CraftMaterialUncheckedCreateWithoutArtefactInput> | CraftMaterialCreateWithoutArtefactInput[] | CraftMaterialUncheckedCreateWithoutArtefactInput[]
+    connectOrCreate?: CraftMaterialCreateOrConnectWithoutArtefactInput | CraftMaterialCreateOrConnectWithoutArtefactInput[]
+    upsert?: CraftMaterialUpsertWithWhereUniqueWithoutArtefactInput | CraftMaterialUpsertWithWhereUniqueWithoutArtefactInput[]
+    createMany?: CraftMaterialCreateManyArtefactInputEnvelope
+    set?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    disconnect?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    delete?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    connect?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    update?: CraftMaterialUpdateWithWhereUniqueWithoutArtefactInput | CraftMaterialUpdateWithWhereUniqueWithoutArtefactInput[]
+    updateMany?: CraftMaterialUpdateManyWithWhereWithoutArtefactInput | CraftMaterialUpdateManyWithWhereWithoutArtefactInput[]
+    deleteMany?: CraftMaterialScalarWhereInput | CraftMaterialScalarWhereInput[]
+  }
+
+  export type CraftUncheckedUpdateManyWithoutResultNestedInput = {
+    create?: XOR<CraftCreateWithoutResultInput, CraftUncheckedCreateWithoutResultInput> | CraftCreateWithoutResultInput[] | CraftUncheckedCreateWithoutResultInput[]
+    connectOrCreate?: CraftCreateOrConnectWithoutResultInput | CraftCreateOrConnectWithoutResultInput[]
+    upsert?: CraftUpsertWithWhereUniqueWithoutResultInput | CraftUpsertWithWhereUniqueWithoutResultInput[]
+    createMany?: CraftCreateManyResultInputEnvelope
+    set?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    disconnect?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    delete?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    connect?: CraftWhereUniqueInput | CraftWhereUniqueInput[]
+    update?: CraftUpdateWithWhereUniqueWithoutResultInput | CraftUpdateWithWhereUniqueWithoutResultInput[]
+    updateMany?: CraftUpdateManyWithWhereWithoutResultInput | CraftUpdateManyWithWhereWithoutResultInput[]
+    deleteMany?: CraftScalarWhereInput | CraftScalarWhereInput[]
+  }
+
+  export type CraftMaterialUncheckedUpdateManyWithoutArtefactNestedInput = {
+    create?: XOR<CraftMaterialCreateWithoutArtefactInput, CraftMaterialUncheckedCreateWithoutArtefactInput> | CraftMaterialCreateWithoutArtefactInput[] | CraftMaterialUncheckedCreateWithoutArtefactInput[]
+    connectOrCreate?: CraftMaterialCreateOrConnectWithoutArtefactInput | CraftMaterialCreateOrConnectWithoutArtefactInput[]
+    upsert?: CraftMaterialUpsertWithWhereUniqueWithoutArtefactInput | CraftMaterialUpsertWithWhereUniqueWithoutArtefactInput[]
+    createMany?: CraftMaterialCreateManyArtefactInputEnvelope
+    set?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    disconnect?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    delete?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    connect?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    update?: CraftMaterialUpdateWithWhereUniqueWithoutArtefactInput | CraftMaterialUpdateWithWhereUniqueWithoutArtefactInput[]
+    updateMany?: CraftMaterialUpdateManyWithWhereWithoutArtefactInput | CraftMaterialUpdateManyWithWhereWithoutArtefactInput[]
+    deleteMany?: CraftMaterialScalarWhereInput | CraftMaterialScalarWhereInput[]
   }
 
   export type TreasureHuntCreateNestedOneWithoutStepsInput = {
@@ -17794,6 +22817,10 @@ export namespace Prisma {
     connectOrCreate?: TransactionHistoryCreateOrConnectWithoutVirtualCurrencyInput | TransactionHistoryCreateOrConnectWithoutVirtualCurrencyInput[]
     createMany?: TransactionHistoryCreateManyVirtualCurrencyInputEnvelope
     connect?: TransactionHistoryWhereUniqueInput | TransactionHistoryWhereUniqueInput[]
+  }
+
+  export type EnumCurrencySourceTypeFieldUpdateOperationsInput = {
+    set?: $Enums.CurrencySourceType
   }
 
   export type UserUpdateOneRequiredWithoutVirtualCurrencyNestedInput = {
@@ -17864,6 +22891,132 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTransactionHistoryInput, UserUpdateWithoutTransactionHistoryInput>, UserUncheckedUpdateWithoutTransactionHistoryInput>
   }
 
+  export type UserCreateNestedOneWithoutCraftInput = {
+    create?: XOR<UserCreateWithoutCraftInput, UserUncheckedCreateWithoutCraftInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCraftInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ArtefactCreateNestedOneWithoutCraftInput = {
+    create?: XOR<ArtefactCreateWithoutCraftInput, ArtefactUncheckedCreateWithoutCraftInput>
+    connectOrCreate?: ArtefactCreateOrConnectWithoutCraftInput
+    connect?: ArtefactWhereUniqueInput
+  }
+
+  export type CraftMaterialCreateNestedManyWithoutCraftInput = {
+    create?: XOR<CraftMaterialCreateWithoutCraftInput, CraftMaterialUncheckedCreateWithoutCraftInput> | CraftMaterialCreateWithoutCraftInput[] | CraftMaterialUncheckedCreateWithoutCraftInput[]
+    connectOrCreate?: CraftMaterialCreateOrConnectWithoutCraftInput | CraftMaterialCreateOrConnectWithoutCraftInput[]
+    createMany?: CraftMaterialCreateManyCraftInputEnvelope
+    connect?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+  }
+
+  export type CraftMaterialUncheckedCreateNestedManyWithoutCraftInput = {
+    create?: XOR<CraftMaterialCreateWithoutCraftInput, CraftMaterialUncheckedCreateWithoutCraftInput> | CraftMaterialCreateWithoutCraftInput[] | CraftMaterialUncheckedCreateWithoutCraftInput[]
+    connectOrCreate?: CraftMaterialCreateOrConnectWithoutCraftInput | CraftMaterialCreateOrConnectWithoutCraftInput[]
+    createMany?: CraftMaterialCreateManyCraftInputEnvelope
+    connect?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutCraftNestedInput = {
+    create?: XOR<UserCreateWithoutCraftInput, UserUncheckedCreateWithoutCraftInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCraftInput
+    upsert?: UserUpsertWithoutCraftInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCraftInput, UserUpdateWithoutCraftInput>, UserUncheckedUpdateWithoutCraftInput>
+  }
+
+  export type ArtefactUpdateOneRequiredWithoutCraftNestedInput = {
+    create?: XOR<ArtefactCreateWithoutCraftInput, ArtefactUncheckedCreateWithoutCraftInput>
+    connectOrCreate?: ArtefactCreateOrConnectWithoutCraftInput
+    upsert?: ArtefactUpsertWithoutCraftInput
+    connect?: ArtefactWhereUniqueInput
+    update?: XOR<XOR<ArtefactUpdateToOneWithWhereWithoutCraftInput, ArtefactUpdateWithoutCraftInput>, ArtefactUncheckedUpdateWithoutCraftInput>
+  }
+
+  export type CraftMaterialUpdateManyWithoutCraftNestedInput = {
+    create?: XOR<CraftMaterialCreateWithoutCraftInput, CraftMaterialUncheckedCreateWithoutCraftInput> | CraftMaterialCreateWithoutCraftInput[] | CraftMaterialUncheckedCreateWithoutCraftInput[]
+    connectOrCreate?: CraftMaterialCreateOrConnectWithoutCraftInput | CraftMaterialCreateOrConnectWithoutCraftInput[]
+    upsert?: CraftMaterialUpsertWithWhereUniqueWithoutCraftInput | CraftMaterialUpsertWithWhereUniqueWithoutCraftInput[]
+    createMany?: CraftMaterialCreateManyCraftInputEnvelope
+    set?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    disconnect?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    delete?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    connect?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    update?: CraftMaterialUpdateWithWhereUniqueWithoutCraftInput | CraftMaterialUpdateWithWhereUniqueWithoutCraftInput[]
+    updateMany?: CraftMaterialUpdateManyWithWhereWithoutCraftInput | CraftMaterialUpdateManyWithWhereWithoutCraftInput[]
+    deleteMany?: CraftMaterialScalarWhereInput | CraftMaterialScalarWhereInput[]
+  }
+
+  export type CraftMaterialUncheckedUpdateManyWithoutCraftNestedInput = {
+    create?: XOR<CraftMaterialCreateWithoutCraftInput, CraftMaterialUncheckedCreateWithoutCraftInput> | CraftMaterialCreateWithoutCraftInput[] | CraftMaterialUncheckedCreateWithoutCraftInput[]
+    connectOrCreate?: CraftMaterialCreateOrConnectWithoutCraftInput | CraftMaterialCreateOrConnectWithoutCraftInput[]
+    upsert?: CraftMaterialUpsertWithWhereUniqueWithoutCraftInput | CraftMaterialUpsertWithWhereUniqueWithoutCraftInput[]
+    createMany?: CraftMaterialCreateManyCraftInputEnvelope
+    set?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    disconnect?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    delete?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    connect?: CraftMaterialWhereUniqueInput | CraftMaterialWhereUniqueInput[]
+    update?: CraftMaterialUpdateWithWhereUniqueWithoutCraftInput | CraftMaterialUpdateWithWhereUniqueWithoutCraftInput[]
+    updateMany?: CraftMaterialUpdateManyWithWhereWithoutCraftInput | CraftMaterialUpdateManyWithWhereWithoutCraftInput[]
+    deleteMany?: CraftMaterialScalarWhereInput | CraftMaterialScalarWhereInput[]
+  }
+
+  export type CraftCreateNestedOneWithoutMaterialsInput = {
+    create?: XOR<CraftCreateWithoutMaterialsInput, CraftUncheckedCreateWithoutMaterialsInput>
+    connectOrCreate?: CraftCreateOrConnectWithoutMaterialsInput
+    connect?: CraftWhereUniqueInput
+  }
+
+  export type ArtefactCreateNestedOneWithoutCraftMaterialInput = {
+    create?: XOR<ArtefactCreateWithoutCraftMaterialInput, ArtefactUncheckedCreateWithoutCraftMaterialInput>
+    connectOrCreate?: ArtefactCreateOrConnectWithoutCraftMaterialInput
+    connect?: ArtefactWhereUniqueInput
+  }
+
+  export type CraftUpdateOneRequiredWithoutMaterialsNestedInput = {
+    create?: XOR<CraftCreateWithoutMaterialsInput, CraftUncheckedCreateWithoutMaterialsInput>
+    connectOrCreate?: CraftCreateOrConnectWithoutMaterialsInput
+    upsert?: CraftUpsertWithoutMaterialsInput
+    connect?: CraftWhereUniqueInput
+    update?: XOR<XOR<CraftUpdateToOneWithWhereWithoutMaterialsInput, CraftUpdateWithoutMaterialsInput>, CraftUncheckedUpdateWithoutMaterialsInput>
+  }
+
+  export type ArtefactUpdateOneRequiredWithoutCraftMaterialNestedInput = {
+    create?: XOR<ArtefactCreateWithoutCraftMaterialInput, ArtefactUncheckedCreateWithoutCraftMaterialInput>
+    connectOrCreate?: ArtefactCreateOrConnectWithoutCraftMaterialInput
+    upsert?: ArtefactUpsertWithoutCraftMaterialInput
+    connect?: ArtefactWhereUniqueInput
+    update?: XOR<XOR<ArtefactUpdateToOneWithWhereWithoutCraftMaterialInput, ArtefactUpdateWithoutCraftMaterialInput>, ArtefactUncheckedUpdateWithoutCraftMaterialInput>
+  }
+
+  export type UserCreateNestedOneWithoutLeaderboardEntryInput = {
+    create?: XOR<UserCreateWithoutLeaderboardEntryInput, UserUncheckedCreateWithoutLeaderboardEntryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLeaderboardEntryInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type TreasureHuntCreateNestedOneWithoutLeaderboardEntryInput = {
+    create?: XOR<TreasureHuntCreateWithoutLeaderboardEntryInput, TreasureHuntUncheckedCreateWithoutLeaderboardEntryInput>
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutLeaderboardEntryInput
+    connect?: TreasureHuntWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutLeaderboardEntryNestedInput = {
+    create?: XOR<UserCreateWithoutLeaderboardEntryInput, UserUncheckedCreateWithoutLeaderboardEntryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLeaderboardEntryInput
+    upsert?: UserUpsertWithoutLeaderboardEntryInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLeaderboardEntryInput, UserUpdateWithoutLeaderboardEntryInput>, UserUncheckedUpdateWithoutLeaderboardEntryInput>
+  }
+
+  export type TreasureHuntUpdateOneRequiredWithoutLeaderboardEntryNestedInput = {
+    create?: XOR<TreasureHuntCreateWithoutLeaderboardEntryInput, TreasureHuntUncheckedCreateWithoutLeaderboardEntryInput>
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutLeaderboardEntryInput
+    upsert?: TreasureHuntUpsertWithoutLeaderboardEntryInput
+    connect?: TreasureHuntWhereUniqueInput
+    update?: XOR<XOR<TreasureHuntUpdateToOneWithWhereWithoutLeaderboardEntryInput, TreasureHuntUpdateWithoutLeaderboardEntryInput>, TreasureHuntUncheckedUpdateWithoutLeaderboardEntryInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -17906,6 +23059,13 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -17986,6 +23146,16 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -18011,11 +23181,55 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumHuntModeFilter<$PrismaModel = never> = {
+    equals?: $Enums.HuntMode | EnumHuntModeFieldRefInput<$PrismaModel>
+    in?: $Enums.HuntMode[] | ListEnumHuntModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HuntMode[] | ListEnumHuntModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumHuntModeFilter<$PrismaModel> | $Enums.HuntMode
+  }
+
   export type NestedEnumHuntStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.HuntStatus | EnumHuntStatusFieldRefInput<$PrismaModel>
     in?: $Enums.HuntStatus[] | ListEnumHuntStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.HuntStatus[] | ListEnumHuntStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumHuntStatusFilter<$PrismaModel> | $Enums.HuntStatus
+  }
+
+  export type NestedEnumHuntModeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.HuntMode | EnumHuntModeFieldRefInput<$PrismaModel>
+    in?: $Enums.HuntMode[] | ListEnumHuntModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HuntMode[] | ListEnumHuntModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumHuntModeWithAggregatesFilter<$PrismaModel> | $Enums.HuntMode
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumHuntModeFilter<$PrismaModel>
+    _max?: NestedEnumHuntModeFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedEnumHuntStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -18052,6 +23266,13 @@ export namespace Prisma {
     not?: NestedEnumArtefactRarityFilter<$PrismaModel> | $Enums.ArtefactRarity
   }
 
+  export type NestedEnumArtefactSourceFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArtefactSource | EnumArtefactSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.ArtefactSource[] | ListEnumArtefactSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArtefactSource[] | ListEnumArtefactSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumArtefactSourceFilter<$PrismaModel> | $Enums.ArtefactSource
+  }
+
   export type NestedEnumArtefactRarityWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.ArtefactRarity | EnumArtefactRarityFieldRefInput<$PrismaModel>
     in?: $Enums.ArtefactRarity[] | ListEnumArtefactRarityFieldRefInput<$PrismaModel>
@@ -18060,6 +23281,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumArtefactRarityFilter<$PrismaModel>
     _max?: NestedEnumArtefactRarityFilter<$PrismaModel>
+  }
+
+  export type NestedEnumArtefactSourceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArtefactSource | EnumArtefactSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.ArtefactSource[] | ListEnumArtefactSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArtefactSource[] | ListEnumArtefactSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumArtefactSourceWithAggregatesFilter<$PrismaModel> | $Enums.ArtefactSource
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumArtefactSourceFilter<$PrismaModel>
+    _max?: NestedEnumArtefactSourceFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -18104,6 +23335,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRewardTypeFilter<$PrismaModel>
     _max?: NestedEnumRewardTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCurrencySourceTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.CurrencySourceType | EnumCurrencySourceTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CurrencySourceType[] | ListEnumCurrencySourceTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CurrencySourceType[] | ListEnumCurrencySourceTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCurrencySourceTypeFilter<$PrismaModel> | $Enums.CurrencySourceType
+  }
+
+  export type NestedEnumCurrencySourceTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CurrencySourceType | EnumCurrencySourceTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CurrencySourceType[] | ListEnumCurrencySourceTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CurrencySourceType[] | ListEnumCurrencySourceTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCurrencySourceTypeWithAggregatesFilter<$PrismaModel> | $Enums.CurrencySourceType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCurrencySourceTypeFilter<$PrismaModel>
+    _max?: NestedEnumCurrencySourceTypeFilter<$PrismaModel>
   }
 
   export type NestedEnumTransactionTypeFilter<$PrismaModel = never> = {
@@ -18224,6 +23472,10 @@ export namespace Prisma {
     startDate?: Date | string | null
     endDate?: Date | string | null
     location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
     status?: $Enums.HuntStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18231,6 +23483,7 @@ export namespace Prisma {
     steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
     rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactCreateNestedManyWithoutHuntInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutHuntInput
   }
 
   export type TreasureHuntUncheckedCreateWithoutCreatedByInput = {
@@ -18240,6 +23493,10 @@ export namespace Prisma {
     startDate?: Date | string | null
     endDate?: Date | string | null
     location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
     status?: $Enums.HuntStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18247,6 +23504,7 @@ export namespace Prisma {
     steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
     rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutHuntInput
   }
 
   export type TreasureHuntCreateOrConnectWithoutCreatedByInput = {
@@ -18265,8 +23523,12 @@ export namespace Prisma {
     rarity: $Enums.ArtefactRarity
     description?: string | null
     imageUrl?: string | null
+    isHidden?: boolean
+    source: $Enums.ArtefactSource
     foundAt?: Date | string
     hunt?: TreasureHuntCreateNestedOneWithoutArtefactsInput
+    Craft?: CraftCreateNestedManyWithoutResultInput
+    CraftMaterial?: CraftMaterialCreateNestedManyWithoutArtefactInput
   }
 
   export type ArtefactUncheckedCreateWithoutUserInput = {
@@ -18275,8 +23537,12 @@ export namespace Prisma {
     rarity: $Enums.ArtefactRarity
     description?: string | null
     imageUrl?: string | null
+    isHidden?: boolean
+    source: $Enums.ArtefactSource
     huntId?: string | null
     foundAt?: Date | string
+    Craft?: CraftUncheckedCreateNestedManyWithoutResultInput
+    CraftMaterial?: CraftMaterialUncheckedCreateNestedManyWithoutArtefactInput
   }
 
   export type ArtefactCreateOrConnectWithoutUserInput = {
@@ -18292,6 +23558,7 @@ export namespace Prisma {
   export type VirtualCurrencyCreateWithoutUserInput = {
     id?: string
     amount: number
+    type?: $Enums.CurrencySourceType
     createdAt?: Date | string
     updatedAt?: Date | string
     transactionHistory?: TransactionHistoryCreateNestedManyWithoutVirtualCurrencyInput
@@ -18300,6 +23567,7 @@ export namespace Prisma {
   export type VirtualCurrencyUncheckedCreateWithoutUserInput = {
     id?: string
     amount: number
+    type?: $Enums.CurrencySourceType
     createdAt?: Date | string
     updatedAt?: Date | string
     transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutVirtualCurrencyInput
@@ -18344,6 +23612,56 @@ export namespace Prisma {
 
   export type TransactionHistoryCreateManyUserInputEnvelope = {
     data: TransactionHistoryCreateManyUserInput | TransactionHistoryCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CraftCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    result: ArtefactCreateNestedOneWithoutCraftInput
+    materials?: CraftMaterialCreateNestedManyWithoutCraftInput
+  }
+
+  export type CraftUncheckedCreateWithoutUserInput = {
+    id?: string
+    resultId: string
+    createdAt?: Date | string
+    materials?: CraftMaterialUncheckedCreateNestedManyWithoutCraftInput
+  }
+
+  export type CraftCreateOrConnectWithoutUserInput = {
+    where: CraftWhereUniqueInput
+    create: XOR<CraftCreateWithoutUserInput, CraftUncheckedCreateWithoutUserInput>
+  }
+
+  export type CraftCreateManyUserInputEnvelope = {
+    data: CraftCreateManyUserInput | CraftCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LeaderboardEntryCreateWithoutUserInput = {
+    id?: string
+    rank: number
+    score: number
+    completedAt: Date | string
+    hunt: TreasureHuntCreateNestedOneWithoutLeaderboardEntryInput
+  }
+
+  export type LeaderboardEntryUncheckedCreateWithoutUserInput = {
+    id?: string
+    huntId: string
+    rank: number
+    score: number
+    completedAt: Date | string
+  }
+
+  export type LeaderboardEntryCreateOrConnectWithoutUserInput = {
+    where: LeaderboardEntryWhereUniqueInput
+    create: XOR<LeaderboardEntryCreateWithoutUserInput, LeaderboardEntryUncheckedCreateWithoutUserInput>
+  }
+
+  export type LeaderboardEntryCreateManyUserInputEnvelope = {
+    data: LeaderboardEntryCreateManyUserInput | LeaderboardEntryCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -18466,6 +23784,10 @@ export namespace Prisma {
     startDate?: DateTimeNullableFilter<"TreasureHunt"> | Date | string | null
     endDate?: DateTimeNullableFilter<"TreasureHunt"> | Date | string | null
     location?: StringNullableFilter<"TreasureHunt"> | string | null
+    mode?: EnumHuntModeFilter<"TreasureHunt"> | $Enums.HuntMode
+    fee?: IntNullableFilter<"TreasureHunt"> | number | null
+    mapStyle?: StringNullableFilter<"TreasureHunt"> | string | null
+    isFinished?: BoolFilter<"TreasureHunt"> | boolean
     status?: EnumHuntStatusFilter<"TreasureHunt"> | $Enums.HuntStatus
     createdAt?: DateTimeFilter<"TreasureHunt"> | Date | string
     updatedAt?: DateTimeFilter<"TreasureHunt"> | Date | string
@@ -18496,6 +23818,8 @@ export namespace Prisma {
     rarity?: EnumArtefactRarityFilter<"Artefact"> | $Enums.ArtefactRarity
     description?: StringNullableFilter<"Artefact"> | string | null
     imageUrl?: StringNullableFilter<"Artefact"> | string | null
+    isHidden?: BoolFilter<"Artefact"> | boolean
+    source?: EnumArtefactSourceFilter<"Artefact"> | $Enums.ArtefactSource
     userId?: StringFilter<"Artefact"> | string
     huntId?: StringNullableFilter<"Artefact"> | string | null
     foundAt?: DateTimeFilter<"Artefact"> | Date | string
@@ -18524,6 +23848,7 @@ export namespace Prisma {
     id?: StringFilter<"VirtualCurrency"> | string
     userId?: StringFilter<"VirtualCurrency"> | string
     amount?: IntFilter<"VirtualCurrency"> | number
+    type?: EnumCurrencySourceTypeFilter<"VirtualCurrency"> | $Enums.CurrencySourceType
     createdAt?: DateTimeFilter<"VirtualCurrency"> | Date | string
     updatedAt?: DateTimeFilter<"VirtualCurrency"> | Date | string
   }
@@ -18559,6 +23884,60 @@ export namespace Prisma {
     virtualCurrencyId?: StringFilter<"TransactionHistory"> | string
   }
 
+  export type CraftUpsertWithWhereUniqueWithoutUserInput = {
+    where: CraftWhereUniqueInput
+    update: XOR<CraftUpdateWithoutUserInput, CraftUncheckedUpdateWithoutUserInput>
+    create: XOR<CraftCreateWithoutUserInput, CraftUncheckedCreateWithoutUserInput>
+  }
+
+  export type CraftUpdateWithWhereUniqueWithoutUserInput = {
+    where: CraftWhereUniqueInput
+    data: XOR<CraftUpdateWithoutUserInput, CraftUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CraftUpdateManyWithWhereWithoutUserInput = {
+    where: CraftScalarWhereInput
+    data: XOR<CraftUpdateManyMutationInput, CraftUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CraftScalarWhereInput = {
+    AND?: CraftScalarWhereInput | CraftScalarWhereInput[]
+    OR?: CraftScalarWhereInput[]
+    NOT?: CraftScalarWhereInput | CraftScalarWhereInput[]
+    id?: StringFilter<"Craft"> | string
+    userId?: StringFilter<"Craft"> | string
+    resultId?: StringFilter<"Craft"> | string
+    createdAt?: DateTimeFilter<"Craft"> | Date | string
+  }
+
+  export type LeaderboardEntryUpsertWithWhereUniqueWithoutUserInput = {
+    where: LeaderboardEntryWhereUniqueInput
+    update: XOR<LeaderboardEntryUpdateWithoutUserInput, LeaderboardEntryUncheckedUpdateWithoutUserInput>
+    create: XOR<LeaderboardEntryCreateWithoutUserInput, LeaderboardEntryUncheckedCreateWithoutUserInput>
+  }
+
+  export type LeaderboardEntryUpdateWithWhereUniqueWithoutUserInput = {
+    where: LeaderboardEntryWhereUniqueInput
+    data: XOR<LeaderboardEntryUpdateWithoutUserInput, LeaderboardEntryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type LeaderboardEntryUpdateManyWithWhereWithoutUserInput = {
+    where: LeaderboardEntryScalarWhereInput
+    data: XOR<LeaderboardEntryUpdateManyMutationInput, LeaderboardEntryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type LeaderboardEntryScalarWhereInput = {
+    AND?: LeaderboardEntryScalarWhereInput | LeaderboardEntryScalarWhereInput[]
+    OR?: LeaderboardEntryScalarWhereInput[]
+    NOT?: LeaderboardEntryScalarWhereInput | LeaderboardEntryScalarWhereInput[]
+    id?: StringFilter<"LeaderboardEntry"> | string
+    userId?: StringFilter<"LeaderboardEntry"> | string
+    huntId?: StringFilter<"LeaderboardEntry"> | string
+    rank?: IntFilter<"LeaderboardEntry"> | number
+    score?: IntFilter<"LeaderboardEntry"> | number
+    completedAt?: DateTimeFilter<"LeaderboardEntry"> | Date | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id?: string
     name?: string | null
@@ -18568,12 +23947,17 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     accounts?: AccountCreateNestedManyWithoutUserInput
     participations?: ParticipationCreateNestedManyWithoutUserInput
     createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
     collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
     virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
     transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
+    Craft?: CraftCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -18585,12 +23969,17 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
     createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
     collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
     virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
     transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
+    Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -18618,12 +24007,17 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     accounts?: AccountUpdateManyWithoutUserNestedInput
     participations?: ParticipationUpdateManyWithoutUserNestedInput
     createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
     collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
     virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
     transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
+    Craft?: CraftUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -18635,12 +24029,17 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
     createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
     collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
     virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
     transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -18652,12 +24051,17 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     sessions?: SessionCreateNestedManyWithoutUserInput
     participations?: ParticipationCreateNestedManyWithoutUserInput
     createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
     collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
     virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
     transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
+    Craft?: CraftCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -18669,12 +24073,17 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
     createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
     collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
     virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
     transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
+    Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -18702,12 +24111,17 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUpdateManyWithoutUserNestedInput
     participations?: ParticipationUpdateManyWithoutUserNestedInput
     createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
     collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
     virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
     transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
+    Craft?: CraftUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -18719,12 +24133,17 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
     createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
     collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
     virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
     transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCreatedChassesInput = {
@@ -18736,12 +24155,17 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     participations?: ParticipationCreateNestedManyWithoutUserInput
     collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
     virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
     transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
+    Craft?: CraftCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedChassesInput = {
@@ -18753,12 +24177,17 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
     collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
     virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
     transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
+    Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedChassesInput = {
@@ -18844,8 +24273,12 @@ export namespace Prisma {
     rarity: $Enums.ArtefactRarity
     description?: string | null
     imageUrl?: string | null
+    isHidden?: boolean
+    source: $Enums.ArtefactSource
     foundAt?: Date | string
     user: UserCreateNestedOneWithoutCollectedArtefactsInput
+    Craft?: CraftCreateNestedManyWithoutResultInput
+    CraftMaterial?: CraftMaterialCreateNestedManyWithoutArtefactInput
   }
 
   export type ArtefactUncheckedCreateWithoutHuntInput = {
@@ -18854,8 +24287,12 @@ export namespace Prisma {
     rarity: $Enums.ArtefactRarity
     description?: string | null
     imageUrl?: string | null
+    isHidden?: boolean
+    source: $Enums.ArtefactSource
     userId: string
     foundAt?: Date | string
+    Craft?: CraftUncheckedCreateNestedManyWithoutResultInput
+    CraftMaterial?: CraftMaterialUncheckedCreateNestedManyWithoutArtefactInput
   }
 
   export type ArtefactCreateOrConnectWithoutHuntInput = {
@@ -18865,6 +24302,32 @@ export namespace Prisma {
 
   export type ArtefactCreateManyHuntInputEnvelope = {
     data: ArtefactCreateManyHuntInput | ArtefactCreateManyHuntInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LeaderboardEntryCreateWithoutHuntInput = {
+    id?: string
+    rank: number
+    score: number
+    completedAt: Date | string
+    user: UserCreateNestedOneWithoutLeaderboardEntryInput
+  }
+
+  export type LeaderboardEntryUncheckedCreateWithoutHuntInput = {
+    id?: string
+    userId: string
+    rank: number
+    score: number
+    completedAt: Date | string
+  }
+
+  export type LeaderboardEntryCreateOrConnectWithoutHuntInput = {
+    where: LeaderboardEntryWhereUniqueInput
+    create: XOR<LeaderboardEntryCreateWithoutHuntInput, LeaderboardEntryUncheckedCreateWithoutHuntInput>
+  }
+
+  export type LeaderboardEntryCreateManyHuntInputEnvelope = {
+    data: LeaderboardEntryCreateManyHuntInput | LeaderboardEntryCreateManyHuntInput[]
     skipDuplicates?: boolean
   }
 
@@ -18888,12 +24351,17 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     participations?: ParticipationUpdateManyWithoutUserNestedInput
     collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
     virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
     transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
+    Craft?: CraftUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedChassesInput = {
@@ -18905,12 +24373,17 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
     collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
     virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
     transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ParticipationUpsertWithWhereUniqueWithoutTreasureHuntInput = {
@@ -18999,6 +24472,22 @@ export namespace Prisma {
     data: XOR<ArtefactUpdateManyMutationInput, ArtefactUncheckedUpdateManyWithoutHuntInput>
   }
 
+  export type LeaderboardEntryUpsertWithWhereUniqueWithoutHuntInput = {
+    where: LeaderboardEntryWhereUniqueInput
+    update: XOR<LeaderboardEntryUpdateWithoutHuntInput, LeaderboardEntryUncheckedUpdateWithoutHuntInput>
+    create: XOR<LeaderboardEntryCreateWithoutHuntInput, LeaderboardEntryUncheckedCreateWithoutHuntInput>
+  }
+
+  export type LeaderboardEntryUpdateWithWhereUniqueWithoutHuntInput = {
+    where: LeaderboardEntryWhereUniqueInput
+    data: XOR<LeaderboardEntryUpdateWithoutHuntInput, LeaderboardEntryUncheckedUpdateWithoutHuntInput>
+  }
+
+  export type LeaderboardEntryUpdateManyWithWhereWithoutHuntInput = {
+    where: LeaderboardEntryScalarWhereInput
+    data: XOR<LeaderboardEntryUpdateManyMutationInput, LeaderboardEntryUncheckedUpdateManyWithoutHuntInput>
+  }
+
   export type UserCreateWithoutParticipationsInput = {
     id?: string
     name?: string | null
@@ -19008,12 +24497,17 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
     collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
     virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
     transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
+    Craft?: CraftCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutParticipationsInput = {
@@ -19025,12 +24519,17 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
     collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
     virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
     transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
+    Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutParticipationsInput = {
@@ -19045,6 +24544,10 @@ export namespace Prisma {
     startDate?: Date | string | null
     endDate?: Date | string | null
     location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
     status?: $Enums.HuntStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19052,6 +24555,7 @@ export namespace Prisma {
     steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
     rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactCreateNestedManyWithoutHuntInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutHuntInput
   }
 
   export type TreasureHuntUncheckedCreateWithoutParticipantsInput = {
@@ -19062,12 +24566,17 @@ export namespace Prisma {
     startDate?: Date | string | null
     endDate?: Date | string | null
     location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
     status?: $Enums.HuntStatus
     createdAt?: Date | string
     updatedAt?: Date | string
     steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
     rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutHuntInput
   }
 
   export type TreasureHuntCreateOrConnectWithoutParticipantsInput = {
@@ -19095,12 +24604,17 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
     collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
     virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
     transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
+    Craft?: CraftUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutParticipationsInput = {
@@ -19112,12 +24626,17 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
     collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
     virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
     transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TreasureHuntUpsertWithoutParticipantsInput = {
@@ -19138,6 +24657,10 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19145,6 +24668,7 @@ export namespace Prisma {
     steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
     rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateWithoutParticipantsInput = {
@@ -19155,12 +24679,17 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
     rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutHuntNestedInput
   }
 
   export type UserCreateWithoutCollectedArtefactsInput = {
@@ -19172,12 +24701,17 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     participations?: ParticipationCreateNestedManyWithoutUserInput
     createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
     virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
     transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
+    Craft?: CraftCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCollectedArtefactsInput = {
@@ -19189,12 +24723,17 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
     createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
     virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
     transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
+    Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCollectedArtefactsInput = {
@@ -19209,6 +24748,10 @@ export namespace Prisma {
     startDate?: Date | string | null
     endDate?: Date | string | null
     location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
     status?: $Enums.HuntStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19216,6 +24759,7 @@ export namespace Prisma {
     participants?: ParticipationCreateNestedManyWithoutTreasureHuntInput
     steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
     rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutHuntInput
   }
 
   export type TreasureHuntUncheckedCreateWithoutArtefactsInput = {
@@ -19226,17 +24770,66 @@ export namespace Prisma {
     startDate?: Date | string | null
     endDate?: Date | string | null
     location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
     status?: $Enums.HuntStatus
     createdAt?: Date | string
     updatedAt?: Date | string
     participants?: ParticipationUncheckedCreateNestedManyWithoutTreasureHuntInput
     steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
     rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutHuntInput
   }
 
   export type TreasureHuntCreateOrConnectWithoutArtefactsInput = {
     where: TreasureHuntWhereUniqueInput
     create: XOR<TreasureHuntCreateWithoutArtefactsInput, TreasureHuntUncheckedCreateWithoutArtefactsInput>
+  }
+
+  export type CraftCreateWithoutResultInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutCraftInput
+    materials?: CraftMaterialCreateNestedManyWithoutCraftInput
+  }
+
+  export type CraftUncheckedCreateWithoutResultInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+    materials?: CraftMaterialUncheckedCreateNestedManyWithoutCraftInput
+  }
+
+  export type CraftCreateOrConnectWithoutResultInput = {
+    where: CraftWhereUniqueInput
+    create: XOR<CraftCreateWithoutResultInput, CraftUncheckedCreateWithoutResultInput>
+  }
+
+  export type CraftCreateManyResultInputEnvelope = {
+    data: CraftCreateManyResultInput | CraftCreateManyResultInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CraftMaterialCreateWithoutArtefactInput = {
+    id?: string
+    craft: CraftCreateNestedOneWithoutMaterialsInput
+  }
+
+  export type CraftMaterialUncheckedCreateWithoutArtefactInput = {
+    id?: string
+    craftId: string
+  }
+
+  export type CraftMaterialCreateOrConnectWithoutArtefactInput = {
+    where: CraftMaterialWhereUniqueInput
+    create: XOR<CraftMaterialCreateWithoutArtefactInput, CraftMaterialUncheckedCreateWithoutArtefactInput>
+  }
+
+  export type CraftMaterialCreateManyArtefactInputEnvelope = {
+    data: CraftMaterialCreateManyArtefactInput | CraftMaterialCreateManyArtefactInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutCollectedArtefactsInput = {
@@ -19259,12 +24852,17 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     participations?: ParticipationUpdateManyWithoutUserNestedInput
     createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
     virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
     transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
+    Craft?: CraftUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCollectedArtefactsInput = {
@@ -19276,12 +24874,17 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
     createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
     virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
     transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TreasureHuntUpsertWithoutArtefactsInput = {
@@ -19302,6 +24905,10 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19309,6 +24916,7 @@ export namespace Prisma {
     participants?: ParticipationUpdateManyWithoutTreasureHuntNestedInput
     steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
     rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateWithoutArtefactsInput = {
@@ -19319,12 +24927,58 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     participants?: ParticipationUncheckedUpdateManyWithoutTreasureHuntNestedInput
     steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
     rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutHuntNestedInput
+  }
+
+  export type CraftUpsertWithWhereUniqueWithoutResultInput = {
+    where: CraftWhereUniqueInput
+    update: XOR<CraftUpdateWithoutResultInput, CraftUncheckedUpdateWithoutResultInput>
+    create: XOR<CraftCreateWithoutResultInput, CraftUncheckedCreateWithoutResultInput>
+  }
+
+  export type CraftUpdateWithWhereUniqueWithoutResultInput = {
+    where: CraftWhereUniqueInput
+    data: XOR<CraftUpdateWithoutResultInput, CraftUncheckedUpdateWithoutResultInput>
+  }
+
+  export type CraftUpdateManyWithWhereWithoutResultInput = {
+    where: CraftScalarWhereInput
+    data: XOR<CraftUpdateManyMutationInput, CraftUncheckedUpdateManyWithoutResultInput>
+  }
+
+  export type CraftMaterialUpsertWithWhereUniqueWithoutArtefactInput = {
+    where: CraftMaterialWhereUniqueInput
+    update: XOR<CraftMaterialUpdateWithoutArtefactInput, CraftMaterialUncheckedUpdateWithoutArtefactInput>
+    create: XOR<CraftMaterialCreateWithoutArtefactInput, CraftMaterialUncheckedCreateWithoutArtefactInput>
+  }
+
+  export type CraftMaterialUpdateWithWhereUniqueWithoutArtefactInput = {
+    where: CraftMaterialWhereUniqueInput
+    data: XOR<CraftMaterialUpdateWithoutArtefactInput, CraftMaterialUncheckedUpdateWithoutArtefactInput>
+  }
+
+  export type CraftMaterialUpdateManyWithWhereWithoutArtefactInput = {
+    where: CraftMaterialScalarWhereInput
+    data: XOR<CraftMaterialUpdateManyMutationInput, CraftMaterialUncheckedUpdateManyWithoutArtefactInput>
+  }
+
+  export type CraftMaterialScalarWhereInput = {
+    AND?: CraftMaterialScalarWhereInput | CraftMaterialScalarWhereInput[]
+    OR?: CraftMaterialScalarWhereInput[]
+    NOT?: CraftMaterialScalarWhereInput | CraftMaterialScalarWhereInput[]
+    id?: StringFilter<"CraftMaterial"> | string
+    craftId?: StringFilter<"CraftMaterial"> | string
+    artefactId?: StringFilter<"CraftMaterial"> | string
   }
 
   export type TreasureHuntCreateWithoutStepsInput = {
@@ -19334,6 +24988,10 @@ export namespace Prisma {
     startDate?: Date | string | null
     endDate?: Date | string | null
     location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
     status?: $Enums.HuntStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19341,6 +24999,7 @@ export namespace Prisma {
     participants?: ParticipationCreateNestedManyWithoutTreasureHuntInput
     rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactCreateNestedManyWithoutHuntInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutHuntInput
   }
 
   export type TreasureHuntUncheckedCreateWithoutStepsInput = {
@@ -19351,12 +25010,17 @@ export namespace Prisma {
     startDate?: Date | string | null
     endDate?: Date | string | null
     location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
     status?: $Enums.HuntStatus
     createdAt?: Date | string
     updatedAt?: Date | string
     participants?: ParticipationUncheckedCreateNestedManyWithoutTreasureHuntInput
     rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutHuntInput
   }
 
   export type TreasureHuntCreateOrConnectWithoutStepsInput = {
@@ -19382,6 +25046,10 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19389,6 +25057,7 @@ export namespace Prisma {
     participants?: ParticipationUpdateManyWithoutTreasureHuntNestedInput
     rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateWithoutStepsInput = {
@@ -19399,12 +25068,17 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     participants?: ParticipationUncheckedUpdateManyWithoutTreasureHuntNestedInput
     rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutHuntNestedInput
   }
 
   export type TreasureHuntCreateWithoutRewardsInput = {
@@ -19414,6 +25088,10 @@ export namespace Prisma {
     startDate?: Date | string | null
     endDate?: Date | string | null
     location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
     status?: $Enums.HuntStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19421,6 +25099,7 @@ export namespace Prisma {
     participants?: ParticipationCreateNestedManyWithoutTreasureHuntInput
     steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactCreateNestedManyWithoutHuntInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutHuntInput
   }
 
   export type TreasureHuntUncheckedCreateWithoutRewardsInput = {
@@ -19431,12 +25110,17 @@ export namespace Prisma {
     startDate?: Date | string | null
     endDate?: Date | string | null
     location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
     status?: $Enums.HuntStatus
     createdAt?: Date | string
     updatedAt?: Date | string
     participants?: ParticipationUncheckedCreateNestedManyWithoutTreasureHuntInput
     steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutHuntInput
   }
 
   export type TreasureHuntCreateOrConnectWithoutRewardsInput = {
@@ -19462,6 +25146,10 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19469,6 +25157,7 @@ export namespace Prisma {
     participants?: ParticipationUpdateManyWithoutTreasureHuntNestedInput
     steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateWithoutRewardsInput = {
@@ -19479,12 +25168,17 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     participants?: ParticipationUncheckedUpdateManyWithoutTreasureHuntNestedInput
     steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutHuntNestedInput
   }
 
   export type UserCreateWithoutVirtualCurrencyInput = {
@@ -19496,12 +25190,17 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     participations?: ParticipationCreateNestedManyWithoutUserInput
     createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
     collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
     transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
+    Craft?: CraftCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVirtualCurrencyInput = {
@@ -19513,12 +25212,17 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
     createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
     collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
     transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
+    Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVirtualCurrencyInput = {
@@ -19578,12 +25282,17 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     participations?: ParticipationUpdateManyWithoutUserNestedInput
     createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
     collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
     transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
+    Craft?: CraftUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVirtualCurrencyInput = {
@@ -19595,12 +25304,17 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
     createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
     collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
     transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TransactionHistoryUpsertWithWhereUniqueWithoutVirtualCurrencyInput = {
@@ -19622,6 +25336,7 @@ export namespace Prisma {
   export type VirtualCurrencyCreateWithoutTransactionHistoryInput = {
     id?: string
     amount: number
+    type?: $Enums.CurrencySourceType
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutVirtualCurrencyInput
@@ -19631,6 +25346,7 @@ export namespace Prisma {
     id?: string
     userId: string
     amount: number
+    type?: $Enums.CurrencySourceType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -19649,12 +25365,17 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     participations?: ParticipationCreateNestedManyWithoutUserInput
     createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
     collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
     virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
+    Craft?: CraftCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTransactionHistoryInput = {
@@ -19666,12 +25387,17 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
     createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
     collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
     virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
+    Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTransactionHistoryInput = {
@@ -19693,6 +25419,7 @@ export namespace Prisma {
   export type VirtualCurrencyUpdateWithoutTransactionHistoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
+    type?: EnumCurrencySourceTypeFieldUpdateOperationsInput | $Enums.CurrencySourceType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutVirtualCurrencyNestedInput
@@ -19702,6 +25429,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
+    type?: EnumCurrencySourceTypeFieldUpdateOperationsInput | $Enums.CurrencySourceType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19726,12 +25454,17 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     participations?: ParticipationUpdateManyWithoutUserNestedInput
     createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
     collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
     virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
+    Craft?: CraftUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTransactionHistoryInput = {
@@ -19743,12 +25476,549 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
     createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
     collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
     virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
+    Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutCraftInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    participations?: ParticipationCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCraftInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCraftInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCraftInput, UserUncheckedCreateWithoutCraftInput>
+  }
+
+  export type ArtefactCreateWithoutCraftInput = {
+    id?: string
+    name: string
+    rarity: $Enums.ArtefactRarity
+    description?: string | null
+    imageUrl?: string | null
+    isHidden?: boolean
+    source: $Enums.ArtefactSource
+    foundAt?: Date | string
+    user: UserCreateNestedOneWithoutCollectedArtefactsInput
+    hunt?: TreasureHuntCreateNestedOneWithoutArtefactsInput
+    CraftMaterial?: CraftMaterialCreateNestedManyWithoutArtefactInput
+  }
+
+  export type ArtefactUncheckedCreateWithoutCraftInput = {
+    id?: string
+    name: string
+    rarity: $Enums.ArtefactRarity
+    description?: string | null
+    imageUrl?: string | null
+    isHidden?: boolean
+    source: $Enums.ArtefactSource
+    userId: string
+    huntId?: string | null
+    foundAt?: Date | string
+    CraftMaterial?: CraftMaterialUncheckedCreateNestedManyWithoutArtefactInput
+  }
+
+  export type ArtefactCreateOrConnectWithoutCraftInput = {
+    where: ArtefactWhereUniqueInput
+    create: XOR<ArtefactCreateWithoutCraftInput, ArtefactUncheckedCreateWithoutCraftInput>
+  }
+
+  export type CraftMaterialCreateWithoutCraftInput = {
+    id?: string
+    artefact: ArtefactCreateNestedOneWithoutCraftMaterialInput
+  }
+
+  export type CraftMaterialUncheckedCreateWithoutCraftInput = {
+    id?: string
+    artefactId: string
+  }
+
+  export type CraftMaterialCreateOrConnectWithoutCraftInput = {
+    where: CraftMaterialWhereUniqueInput
+    create: XOR<CraftMaterialCreateWithoutCraftInput, CraftMaterialUncheckedCreateWithoutCraftInput>
+  }
+
+  export type CraftMaterialCreateManyCraftInputEnvelope = {
+    data: CraftMaterialCreateManyCraftInput | CraftMaterialCreateManyCraftInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutCraftInput = {
+    update: XOR<UserUpdateWithoutCraftInput, UserUncheckedUpdateWithoutCraftInput>
+    create: XOR<UserCreateWithoutCraftInput, UserUncheckedCreateWithoutCraftInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCraftInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCraftInput, UserUncheckedUpdateWithoutCraftInput>
+  }
+
+  export type UserUpdateWithoutCraftInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCraftInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ArtefactUpsertWithoutCraftInput = {
+    update: XOR<ArtefactUpdateWithoutCraftInput, ArtefactUncheckedUpdateWithoutCraftInput>
+    create: XOR<ArtefactCreateWithoutCraftInput, ArtefactUncheckedCreateWithoutCraftInput>
+    where?: ArtefactWhereInput
+  }
+
+  export type ArtefactUpdateToOneWithWhereWithoutCraftInput = {
+    where?: ArtefactWhereInput
+    data: XOR<ArtefactUpdateWithoutCraftInput, ArtefactUncheckedUpdateWithoutCraftInput>
+  }
+
+  export type ArtefactUpdateWithoutCraftInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    source?: EnumArtefactSourceFieldUpdateOperationsInput | $Enums.ArtefactSource
+    foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCollectedArtefactsNestedInput
+    hunt?: TreasureHuntUpdateOneWithoutArtefactsNestedInput
+    CraftMaterial?: CraftMaterialUpdateManyWithoutArtefactNestedInput
+  }
+
+  export type ArtefactUncheckedUpdateWithoutCraftInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    source?: EnumArtefactSourceFieldUpdateOperationsInput | $Enums.ArtefactSource
+    userId?: StringFieldUpdateOperationsInput | string
+    huntId?: NullableStringFieldUpdateOperationsInput | string | null
+    foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CraftMaterial?: CraftMaterialUncheckedUpdateManyWithoutArtefactNestedInput
+  }
+
+  export type CraftMaterialUpsertWithWhereUniqueWithoutCraftInput = {
+    where: CraftMaterialWhereUniqueInput
+    update: XOR<CraftMaterialUpdateWithoutCraftInput, CraftMaterialUncheckedUpdateWithoutCraftInput>
+    create: XOR<CraftMaterialCreateWithoutCraftInput, CraftMaterialUncheckedCreateWithoutCraftInput>
+  }
+
+  export type CraftMaterialUpdateWithWhereUniqueWithoutCraftInput = {
+    where: CraftMaterialWhereUniqueInput
+    data: XOR<CraftMaterialUpdateWithoutCraftInput, CraftMaterialUncheckedUpdateWithoutCraftInput>
+  }
+
+  export type CraftMaterialUpdateManyWithWhereWithoutCraftInput = {
+    where: CraftMaterialScalarWhereInput
+    data: XOR<CraftMaterialUpdateManyMutationInput, CraftMaterialUncheckedUpdateManyWithoutCraftInput>
+  }
+
+  export type CraftCreateWithoutMaterialsInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutCraftInput
+    result: ArtefactCreateNestedOneWithoutCraftInput
+  }
+
+  export type CraftUncheckedCreateWithoutMaterialsInput = {
+    id?: string
+    userId: string
+    resultId: string
+    createdAt?: Date | string
+  }
+
+  export type CraftCreateOrConnectWithoutMaterialsInput = {
+    where: CraftWhereUniqueInput
+    create: XOR<CraftCreateWithoutMaterialsInput, CraftUncheckedCreateWithoutMaterialsInput>
+  }
+
+  export type ArtefactCreateWithoutCraftMaterialInput = {
+    id?: string
+    name: string
+    rarity: $Enums.ArtefactRarity
+    description?: string | null
+    imageUrl?: string | null
+    isHidden?: boolean
+    source: $Enums.ArtefactSource
+    foundAt?: Date | string
+    user: UserCreateNestedOneWithoutCollectedArtefactsInput
+    hunt?: TreasureHuntCreateNestedOneWithoutArtefactsInput
+    Craft?: CraftCreateNestedManyWithoutResultInput
+  }
+
+  export type ArtefactUncheckedCreateWithoutCraftMaterialInput = {
+    id?: string
+    name: string
+    rarity: $Enums.ArtefactRarity
+    description?: string | null
+    imageUrl?: string | null
+    isHidden?: boolean
+    source: $Enums.ArtefactSource
+    userId: string
+    huntId?: string | null
+    foundAt?: Date | string
+    Craft?: CraftUncheckedCreateNestedManyWithoutResultInput
+  }
+
+  export type ArtefactCreateOrConnectWithoutCraftMaterialInput = {
+    where: ArtefactWhereUniqueInput
+    create: XOR<ArtefactCreateWithoutCraftMaterialInput, ArtefactUncheckedCreateWithoutCraftMaterialInput>
+  }
+
+  export type CraftUpsertWithoutMaterialsInput = {
+    update: XOR<CraftUpdateWithoutMaterialsInput, CraftUncheckedUpdateWithoutMaterialsInput>
+    create: XOR<CraftCreateWithoutMaterialsInput, CraftUncheckedCreateWithoutMaterialsInput>
+    where?: CraftWhereInput
+  }
+
+  export type CraftUpdateToOneWithWhereWithoutMaterialsInput = {
+    where?: CraftWhereInput
+    data: XOR<CraftUpdateWithoutMaterialsInput, CraftUncheckedUpdateWithoutMaterialsInput>
+  }
+
+  export type CraftUpdateWithoutMaterialsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCraftNestedInput
+    result?: ArtefactUpdateOneRequiredWithoutCraftNestedInput
+  }
+
+  export type CraftUncheckedUpdateWithoutMaterialsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    resultId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ArtefactUpsertWithoutCraftMaterialInput = {
+    update: XOR<ArtefactUpdateWithoutCraftMaterialInput, ArtefactUncheckedUpdateWithoutCraftMaterialInput>
+    create: XOR<ArtefactCreateWithoutCraftMaterialInput, ArtefactUncheckedCreateWithoutCraftMaterialInput>
+    where?: ArtefactWhereInput
+  }
+
+  export type ArtefactUpdateToOneWithWhereWithoutCraftMaterialInput = {
+    where?: ArtefactWhereInput
+    data: XOR<ArtefactUpdateWithoutCraftMaterialInput, ArtefactUncheckedUpdateWithoutCraftMaterialInput>
+  }
+
+  export type ArtefactUpdateWithoutCraftMaterialInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    source?: EnumArtefactSourceFieldUpdateOperationsInput | $Enums.ArtefactSource
+    foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCollectedArtefactsNestedInput
+    hunt?: TreasureHuntUpdateOneWithoutArtefactsNestedInput
+    Craft?: CraftUpdateManyWithoutResultNestedInput
+  }
+
+  export type ArtefactUncheckedUpdateWithoutCraftMaterialInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    source?: EnumArtefactSourceFieldUpdateOperationsInput | $Enums.ArtefactSource
+    userId?: StringFieldUpdateOperationsInput | string
+    huntId?: NullableStringFieldUpdateOperationsInput | string | null
+    foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Craft?: CraftUncheckedUpdateManyWithoutResultNestedInput
+  }
+
+  export type UserCreateWithoutLeaderboardEntryInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    participations?: ParticipationCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
+    Craft?: CraftCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutLeaderboardEntryInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
+    Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutLeaderboardEntryInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutLeaderboardEntryInput, UserUncheckedCreateWithoutLeaderboardEntryInput>
+  }
+
+  export type TreasureHuntCreateWithoutLeaderboardEntryInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedChassesInput
+    participants?: ParticipationCreateNestedManyWithoutTreasureHuntInput
+    steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
+    rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
+    artefacts?: ArtefactCreateNestedManyWithoutHuntInput
+  }
+
+  export type TreasureHuntUncheckedCreateWithoutLeaderboardEntryInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdById: string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    participants?: ParticipationUncheckedCreateNestedManyWithoutTreasureHuntInput
+    steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
+    rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
+    artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
+  }
+
+  export type TreasureHuntCreateOrConnectWithoutLeaderboardEntryInput = {
+    where: TreasureHuntWhereUniqueInput
+    create: XOR<TreasureHuntCreateWithoutLeaderboardEntryInput, TreasureHuntUncheckedCreateWithoutLeaderboardEntryInput>
+  }
+
+  export type UserUpsertWithoutLeaderboardEntryInput = {
+    update: XOR<UserUpdateWithoutLeaderboardEntryInput, UserUncheckedUpdateWithoutLeaderboardEntryInput>
+    create: XOR<UserCreateWithoutLeaderboardEntryInput, UserUncheckedCreateWithoutLeaderboardEntryInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutLeaderboardEntryInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutLeaderboardEntryInput, UserUncheckedUpdateWithoutLeaderboardEntryInput>
+  }
+
+  export type UserUpdateWithoutLeaderboardEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
+    Craft?: CraftUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutLeaderboardEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type TreasureHuntUpsertWithoutLeaderboardEntryInput = {
+    update: XOR<TreasureHuntUpdateWithoutLeaderboardEntryInput, TreasureHuntUncheckedUpdateWithoutLeaderboardEntryInput>
+    create: XOR<TreasureHuntCreateWithoutLeaderboardEntryInput, TreasureHuntUncheckedCreateWithoutLeaderboardEntryInput>
+    where?: TreasureHuntWhereInput
+  }
+
+  export type TreasureHuntUpdateToOneWithWhereWithoutLeaderboardEntryInput = {
+    where?: TreasureHuntWhereInput
+    data: XOR<TreasureHuntUpdateWithoutLeaderboardEntryInput, TreasureHuntUncheckedUpdateWithoutLeaderboardEntryInput>
+  }
+
+  export type TreasureHuntUpdateWithoutLeaderboardEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedChassesNestedInput
+    participants?: ParticipationUpdateManyWithoutTreasureHuntNestedInput
+    steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
+    rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
+    artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
+  }
+
+  export type TreasureHuntUncheckedUpdateWithoutLeaderboardEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    participants?: ParticipationUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
   }
 
   export type SessionCreateManyUserInput = {
@@ -19790,6 +26060,10 @@ export namespace Prisma {
     startDate?: Date | string | null
     endDate?: Date | string | null
     location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
     status?: $Enums.HuntStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19801,6 +26075,8 @@ export namespace Prisma {
     rarity: $Enums.ArtefactRarity
     description?: string | null
     imageUrl?: string | null
+    isHidden?: boolean
+    source: $Enums.ArtefactSource
     huntId?: string | null
     foundAt?: Date | string
   }
@@ -19808,6 +26084,7 @@ export namespace Prisma {
   export type VirtualCurrencyCreateManyUserInput = {
     id?: string
     amount: number
+    type?: $Enums.CurrencySourceType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -19821,6 +26098,20 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     virtualCurrencyId: string
+  }
+
+  export type CraftCreateManyUserInput = {
+    id?: string
+    resultId: string
+    createdAt?: Date | string
+  }
+
+  export type LeaderboardEntryCreateManyUserInput = {
+    id?: string
+    huntId: string
+    rank: number
+    score: number
+    completedAt: Date | string
   }
 
   export type SessionUpdateWithoutUserInput = {
@@ -19926,6 +26217,10 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19933,6 +26228,7 @@ export namespace Prisma {
     steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
     rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateWithoutCreatedByInput = {
@@ -19942,6 +26238,10 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19949,6 +26249,7 @@ export namespace Prisma {
     steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
     rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateManyWithoutCreatedByInput = {
@@ -19958,6 +26259,10 @@ export namespace Prisma {
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19969,8 +26274,12 @@ export namespace Prisma {
     rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    source?: EnumArtefactSourceFieldUpdateOperationsInput | $Enums.ArtefactSource
     foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
     hunt?: TreasureHuntUpdateOneWithoutArtefactsNestedInput
+    Craft?: CraftUpdateManyWithoutResultNestedInput
+    CraftMaterial?: CraftMaterialUpdateManyWithoutArtefactNestedInput
   }
 
   export type ArtefactUncheckedUpdateWithoutUserInput = {
@@ -19979,8 +26288,12 @@ export namespace Prisma {
     rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    source?: EnumArtefactSourceFieldUpdateOperationsInput | $Enums.ArtefactSource
     huntId?: NullableStringFieldUpdateOperationsInput | string | null
     foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Craft?: CraftUncheckedUpdateManyWithoutResultNestedInput
+    CraftMaterial?: CraftMaterialUncheckedUpdateManyWithoutArtefactNestedInput
   }
 
   export type ArtefactUncheckedUpdateManyWithoutUserInput = {
@@ -19989,6 +26302,8 @@ export namespace Prisma {
     rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    source?: EnumArtefactSourceFieldUpdateOperationsInput | $Enums.ArtefactSource
     huntId?: NullableStringFieldUpdateOperationsInput | string | null
     foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19996,6 +26311,7 @@ export namespace Prisma {
   export type VirtualCurrencyUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
+    type?: EnumCurrencySourceTypeFieldUpdateOperationsInput | $Enums.CurrencySourceType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transactionHistory?: TransactionHistoryUpdateManyWithoutVirtualCurrencyNestedInput
@@ -20004,6 +26320,7 @@ export namespace Prisma {
   export type VirtualCurrencyUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
+    type?: EnumCurrencySourceTypeFieldUpdateOperationsInput | $Enums.CurrencySourceType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutVirtualCurrencyNestedInput
@@ -20012,6 +26329,7 @@ export namespace Prisma {
   export type VirtualCurrencyUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
+    type?: EnumCurrencySourceTypeFieldUpdateOperationsInput | $Enums.CurrencySourceType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20049,6 +26367,50 @@ export namespace Prisma {
     virtualCurrencyId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type CraftUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    result?: ArtefactUpdateOneRequiredWithoutCraftNestedInput
+    materials?: CraftMaterialUpdateManyWithoutCraftNestedInput
+  }
+
+  export type CraftUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    resultId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    materials?: CraftMaterialUncheckedUpdateManyWithoutCraftNestedInput
+  }
+
+  export type CraftUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    resultId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeaderboardEntryUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hunt?: TreasureHuntUpdateOneRequiredWithoutLeaderboardEntryNestedInput
+  }
+
+  export type LeaderboardEntryUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    huntId?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeaderboardEntryUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    huntId?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ParticipationCreateManyTreasureHuntInput = {
     id?: string
     userId: string
@@ -20076,8 +26438,18 @@ export namespace Prisma {
     rarity: $Enums.ArtefactRarity
     description?: string | null
     imageUrl?: string | null
+    isHidden?: boolean
+    source: $Enums.ArtefactSource
     userId: string
     foundAt?: Date | string
+  }
+
+  export type LeaderboardEntryCreateManyHuntInput = {
+    id?: string
+    userId: string
+    rank: number
+    score: number
+    completedAt: Date | string
   }
 
   export type ParticipationUpdateWithoutTreasureHuntInput = {
@@ -20149,8 +26521,12 @@ export namespace Prisma {
     rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    source?: EnumArtefactSourceFieldUpdateOperationsInput | $Enums.ArtefactSource
     foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCollectedArtefactsNestedInput
+    Craft?: CraftUpdateManyWithoutResultNestedInput
+    CraftMaterial?: CraftMaterialUpdateManyWithoutArtefactNestedInput
   }
 
   export type ArtefactUncheckedUpdateWithoutHuntInput = {
@@ -20159,8 +26535,12 @@ export namespace Prisma {
     rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    source?: EnumArtefactSourceFieldUpdateOperationsInput | $Enums.ArtefactSource
     userId?: StringFieldUpdateOperationsInput | string
     foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Craft?: CraftUncheckedUpdateManyWithoutResultNestedInput
+    CraftMaterial?: CraftMaterialUncheckedUpdateManyWithoutArtefactNestedInput
   }
 
   export type ArtefactUncheckedUpdateManyWithoutHuntInput = {
@@ -20169,8 +26549,80 @@ export namespace Prisma {
     rarity?: EnumArtefactRarityFieldUpdateOperationsInput | $Enums.ArtefactRarity
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    source?: EnumArtefactSourceFieldUpdateOperationsInput | $Enums.ArtefactSource
     userId?: StringFieldUpdateOperationsInput | string
     foundAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeaderboardEntryUpdateWithoutHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutLeaderboardEntryNestedInput
+  }
+
+  export type LeaderboardEntryUncheckedUpdateWithoutHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeaderboardEntryUncheckedUpdateManyWithoutHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CraftCreateManyResultInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type CraftMaterialCreateManyArtefactInput = {
+    id?: string
+    craftId: string
+  }
+
+  export type CraftUpdateWithoutResultInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCraftNestedInput
+    materials?: CraftMaterialUpdateManyWithoutCraftNestedInput
+  }
+
+  export type CraftUncheckedUpdateWithoutResultInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    materials?: CraftMaterialUncheckedUpdateManyWithoutCraftNestedInput
+  }
+
+  export type CraftUncheckedUpdateManyWithoutResultInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CraftMaterialUpdateWithoutArtefactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    craft?: CraftUpdateOneRequiredWithoutMaterialsNestedInput
+  }
+
+  export type CraftMaterialUncheckedUpdateWithoutArtefactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    craftId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CraftMaterialUncheckedUpdateManyWithoutArtefactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    craftId?: StringFieldUpdateOperationsInput | string
   }
 
   export type TransactionHistoryCreateManyVirtualCurrencyInput = {
@@ -20215,6 +26667,26 @@ export namespace Prisma {
     transactionType?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CraftMaterialCreateManyCraftInput = {
+    id?: string
+    artefactId: string
+  }
+
+  export type CraftMaterialUpdateWithoutCraftInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    artefact?: ArtefactUpdateOneRequiredWithoutCraftMaterialNestedInput
+  }
+
+  export type CraftMaterialUncheckedUpdateWithoutCraftInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    artefactId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CraftMaterialUncheckedUpdateManyWithoutCraftInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    artefactId?: StringFieldUpdateOperationsInput | string
   }
 
 
