@@ -5,6 +5,7 @@ import {
   ArrowUpCircleIcon,
   BarChartIcon,
   CameraIcon,
+  Candy,
   ClipboardListIcon,
   Coins,
   DatabaseIcon,
@@ -17,7 +18,6 @@ import {
   ListIcon,
   SearchIcon,
   SettingsIcon,
-  UsersIcon,
 } from "lucide-react";
 
 import {
@@ -34,6 +34,7 @@ import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
 import { authClient } from "@/lib/auth-client";
 import { User } from "better-auth";
+import { CurrencyTracker } from "../context/common/currency-tracker";
 
 const data = {
   navMain: [
@@ -46,6 +47,11 @@ const data = {
       title: "Payments",
       url: "/dashboard/payment",
       icon: Coins,
+    },
+    {
+      title: "Hunts",
+      url: "/dashboard/hunts",
+      icon: Candy,
     },
   ],
   navClouds: [
@@ -156,6 +162,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
+        <CurrencyTracker />
         <NavUser user={session?.user as User} />
       </SidebarFooter>
     </Sidebar>

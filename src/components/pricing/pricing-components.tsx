@@ -91,7 +91,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                 hoveredCard === pack.id && "scale-105 shadow-xl",
                 hoveredCard === pack.id &&
                   pack.popular &&
-                  "shadow-purple-500/30"
+                  "shadow-purple-500/30",
               )}
               onMouseEnter={() => setHoveredCard(pack.id)}
               onMouseLeave={() => setHoveredCard(null)}
@@ -99,7 +99,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
               <div
                 className={cn(
                   "absolute inset-0 opacity-0 transition-opacity duration-300",
-                  hoveredCard === pack.id && "opacity-100"
+                  hoveredCard === pack.id && "opacity-100",
                 )}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent blur-sm"></div>
@@ -118,7 +118,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                     pack.popular
                       ? "bg-purple-900/50 border border-purple-500/30"
                       : "bg-gray-800/50 border border-gray-700/30",
-                    hoveredCard === pack.id && "scale-110"
+                    hoveredCard === pack.id && "scale-110",
                   )}
                 >
                   {getIconForPack(index)}
@@ -137,7 +137,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                     className={cn(
                       "text-6xl font-extrabold transition-all duration-300",
                       pack.popular ? "text-purple-300" : "text-white",
-                      hoveredCard === pack.id && "scale-110"
+                      hoveredCard === pack.id && "scale-110",
                     )}
                   >
                     {pack.artefacts}
@@ -150,7 +150,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                     <div
                       className={cn(
                         "flex items-center justify-center w-5 h-5 rounded-full mr-2",
-                        pack.popular ? "bg-purple-500" : "bg-green-500"
+                        pack.popular ? "bg-purple-500" : "bg-green-500",
                       )}
                     >
                       <Check className="h-3 w-3 text-white" />
@@ -161,7 +161,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                     <div
                       className={cn(
                         "flex items-center justify-center w-5 h-5 rounded-full mr-2",
-                        pack.popular ? "bg-purple-500" : "bg-green-500"
+                        pack.popular ? "bg-purple-500" : "bg-green-500",
                       )}
                     >
                       <Check className="h-3 w-3 text-white" />
@@ -185,7 +185,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                     "w-full py-6 text-lg font-bold transition-all duration-300 relative overflow-hidden group",
                     pack.popular
                       ? "bg-gradient-to-r from-purple-600 to-purple-400 hover:from-purple-500 hover:to-purple-300 text-white"
-                      : "bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500 text-white"
+                      : "bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500 text-white",
                   )}
                   onClick={() => handleBuy(pack.id, pack.artefacts)}
                 >
