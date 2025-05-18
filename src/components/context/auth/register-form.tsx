@@ -74,7 +74,7 @@ export function RegisterForm() {
               message: ctx.error.message,
             });
           },
-        }
+        },
       );
     } catch (err: any) {
       toast.error("Une erreur est survenue.");

@@ -17,33 +17,33 @@ const huntSchema = z.object({
   steps: z.array(
     z.object({
       description: z.string(),
-      stepOrder: z.number().int().min(1)
-    })
-  )
+      stepOrder: z.number().int().min(1),
+    }),
+  ),
 });
 
 export async function POST(req: Request) {
   try {
     // Vérification de l'authentification
     const session = await auth.api.getSession({ headers: await headers() });
-    
+
     if (!session?.user) {
       return NextResponse.json(
         { error: "Authentication required" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
     // Vérification des permissions
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { role: true }
+      select: { role: true },
     });
 
     if (!user || (user.role !== "ORGANIZER" && user.role !== "ADMIN")) {
       return NextResponse.json(
         { error: "Insufficient permissions" },
-        { status: 403 }
+        { status: 403 },
       );
     }
 
@@ -54,12 +54,12 @@ export async function POST(req: Request) {
     if (!validatedData.success) {
       return NextResponse.json(
         { error: validatedData.error.errors },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const data = validatedData.data;
-    
+
     // Création de la chasse en transaction
     const hunt = await prisma.$transaction(async (tx) => {
       // Création de la chasse
@@ -81,11 +81,11 @@ export async function POST(req: Request) {
       // Création des étapes
       if (data.steps && data.steps.length > 0) {
         await tx.huntStep.createMany({
-          data: data.steps.map(step => ({
+          data: data.steps.map((step) => ({
             description: step.description,
             huntId: newHunt.id,
             stepOrder: step.stepOrder,
-          }))
+          })),
         });
       }
 
@@ -93,12 +93,11 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json(hunt, { status: 201 });
-    
   } catch (error) {
     console.error("Error creating treasure hunt:", error);
     return NextResponse.json(
       { error: "Failed to create treasure hunt" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -106,24 +105,24 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
   try {
     const session = await auth.api.getSession({ headers: await headers() });
-    
+
     if (!session?.user) {
       return NextResponse.json(
         { error: "Authentication required" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
     const { searchParams } = new URL(req.url);
-    const status = searchParams.get('status');
-    const userOnly = searchParams.get('userOnly') === 'true';
-    
+    const status = searchParams.get("status");
+    const userOnly = searchParams.get("userOnly") === "true";
+
     const filters: any = {};
-    
+
     if (status) {
       filters.status = status;
     }
-    
+
     if (userOnly) {
       filters.createdById = session.user.id;
     }
@@ -134,13 +133,13 @@ export async function GET(req: Request) {
         steps: true,
         _count: {
           select: {
-            participants: true
-          }
-        }
+            participants: true,
+          },
+        },
       },
       orderBy: {
-        createdAt: 'desc'
-      }
+        createdAt: "desc",
+      },
     });
 
     return NextResponse.json(hunts);
@@ -148,7 +147,7 @@ export async function GET(req: Request) {
     console.error("Error fetching hunts:", error);
     return NextResponse.json(
       { error: "Failed to fetch hunts" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -59,15 +59,21 @@ export async function POST(req: Request) {
   return NextResponse.json({ message: "Received" }, { status: 200 });
 }
 
-async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) {
-  if (!session.customer || !session.metadata?.userId || !session.metadata?.currencyAmount) {
+async function handleCheckoutSessionCompleted(
+  session: Stripe.Checkout.Session,
+) {
+  if (
+    !session.customer ||
+    !session.metadata?.userId ||
+    !session.metadata?.currencyAmount
+  ) {
     console.error("Missing required metadata in checkout session");
     return;
   }
 
   const userId = session.metadata.userId;
   const currencyAmount = parseInt(session.metadata.currencyAmount, 10);
-  
+
   if (isNaN(currencyAmount)) {
     console.error("Invalid currency amount:", session.metadata.currencyAmount);
     return;
@@ -75,20 +81,20 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
 
   try {
     let virtualCurrency = await prisma.virtualCurrency.findFirst({
-      where: { userId }
+      where: { userId },
     });
-    
+
     if (!virtualCurrency) {
       virtualCurrency = await prisma.virtualCurrency.create({
         data: {
           userId,
-          amount: currencyAmount
-        }
+          amount: currencyAmount,
+        },
       });
     } else {
       virtualCurrency = await prisma.virtualCurrency.update({
         where: { id: virtualCurrency.id },
-        data: { amount: virtualCurrency.amount + currencyAmount }
+        data: { amount: virtualCurrency.amount + currencyAmount },
       });
     }
 
@@ -99,8 +105,8 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
         amount: currencyAmount,
         transactionType: "BOUGHT",
         stripeSessionId: session.id,
-        description: `Purchased ${currencyAmount} currency units`
-      }
+        description: `Purchased ${currencyAmount} currency units`,
+      },
     });
   } catch (error) {
     console.error("Failed to update virtual currency:", error);
@@ -108,35 +114,43 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
   }
 }
 
-async function handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent) {
-  if (!paymentIntent.metadata?.userId || !paymentIntent.metadata?.currencyAmount) {
+async function handlePaymentIntentSucceeded(
+  paymentIntent: Stripe.PaymentIntent,
+) {
+  if (
+    !paymentIntent.metadata?.userId ||
+    !paymentIntent.metadata?.currencyAmount
+  ) {
     return;
   }
 
   const userId = paymentIntent.metadata.userId;
   const currencyAmount = parseInt(paymentIntent.metadata.currencyAmount, 10);
-  
+
   if (isNaN(currencyAmount)) {
-    console.error("Invalid currency amount:", paymentIntent.metadata.currencyAmount);
+    console.error(
+      "Invalid currency amount:",
+      paymentIntent.metadata.currencyAmount,
+    );
     return;
   }
 
   try {
     let virtualCurrency = await prisma.virtualCurrency.findFirst({
-      where: { userId }
+      where: { userId },
     });
-    
+
     if (!virtualCurrency) {
       virtualCurrency = await prisma.virtualCurrency.create({
         data: {
           userId,
-          amount: currencyAmount
-        }
+          amount: currencyAmount,
+        },
       });
     } else {
       virtualCurrency = await prisma.virtualCurrency.update({
         where: { id: virtualCurrency.id },
-        data: { amount: virtualCurrency.amount + currencyAmount }
+        data: { amount: virtualCurrency.amount + currencyAmount },
       });
     }
 
@@ -146,8 +160,8 @@ async function handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent)
         virtualCurrencyId: virtualCurrency.id,
         amount: currencyAmount,
         transactionType: "BOUGHT",
-        description: `Purchased ${currencyAmount} currency units via PaymentIntent`
-      }
+        description: `Purchased ${currencyAmount} currency units via PaymentIntent`,
+      },
     });
   } catch (error) {
     console.error("Failed to update virtual currency:", error);

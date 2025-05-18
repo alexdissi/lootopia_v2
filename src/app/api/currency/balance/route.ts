@@ -6,11 +6,11 @@ import { headers } from "next/headers";
 export async function GET() {
   try {
     const session = await auth.api.getSession({ headers: await headers() });
-    
+
     if (!session?.user) {
       return NextResponse.json(
         { error: "Authentication required" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -20,27 +20,26 @@ export async function GET() {
       where: { userId },
       select: {
         amount: true,
-        updatedAt: true
-      }
+        updatedAt: true,
+      },
     });
 
     if (!virtualCurrency) {
       return NextResponse.json({
         amount: 0,
-        updatedAt: new Date().toISOString()
+        updatedAt: new Date().toISOString(),
       });
     }
 
     return NextResponse.json({
       amount: virtualCurrency.amount,
-      updatedAt: virtualCurrency.updatedAt.toISOString()
+      updatedAt: virtualCurrency.updatedAt.toISOString(),
     });
-    
   } catch (error) {
     console.error("Error fetching currency balance:", error);
     return NextResponse.json(
       { error: "Failed to fetch currency data" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

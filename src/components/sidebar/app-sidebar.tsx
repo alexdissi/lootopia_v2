@@ -5,6 +5,7 @@ import {
   ArrowUpCircleIcon,
   BarChartIcon,
   CameraIcon,
+  Candy,
   ClipboardListIcon,
   Coins,
   DatabaseIcon,
@@ -17,7 +18,6 @@ import {
   ListIcon,
   SearchIcon,
   SettingsIcon,
-  UsersIcon,
 } from "lucide-react";
 
 import {
@@ -47,6 +47,11 @@ const data = {
       title: "Payments",
       url: "/dashboard/payment",
       icon: Coins,
+    },
+    {
+      title: "Hunts",
+      url: "/dashboard/hunts",
+      icon: Candy,
     },
   ],
   navClouds: [

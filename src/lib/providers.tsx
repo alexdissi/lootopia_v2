@@ -18,7 +18,7 @@ export function Providers({ children }: ProvidersProps) {
             staleTime: 60 * 1000,
           },
         },
-      })
+      }),
   );
 
   return (

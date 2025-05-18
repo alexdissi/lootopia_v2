@@ -64,7 +64,7 @@ export function LoginForm() {
               message: ctx.error.message,
             });
           },
-        }
+        },
       );
     } catch (error) {
       console.error("Erreur de connexion :", error);

@@ -3,14 +3,17 @@ import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
 import { headers } from "next/headers";
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(
+  req: Request,
+  { params }: { params: { id: string } },
+) {
   try {
     const session = await auth.api.getSession({ headers: await headers() });
-    
+
     if (!session?.user) {
       return NextResponse.json(
         { error: "Authentication required" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -18,20 +21,17 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
       where: { id: params.id },
       include: {
         steps: {
-          orderBy: { stepOrder: 'asc' }
+          orderBy: { stepOrder: "asc" },
         },
         participants: true,
         createdBy: {
-          select: { name: true, email: true }
-        }
-      }
+          select: { name: true, email: true },
+        },
+      },
     });
 
     if (!hunt) {
-      return NextResponse.json(
-        { error: "Hunt not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Hunt not found" }, { status: 404 });
     }
 
     return NextResponse.json(hunt);
@@ -39,49 +39,49 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     console.error("Error fetching hunt:", error);
     return NextResponse.json(
       { error: "Failed to fetch hunt details" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(
+  req: Request,
+  { params }: { params: { id: string } },
+) {
   try {
     const session = await auth.api.getSession({ headers: await headers() });
-    
+
     if (!session?.user) {
       return NextResponse.json(
         { error: "Authentication required" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
     // Vérifier que l'utilisateur est le créateur ou admin
     const hunt = await prisma.treasureHunt.findUnique({
       where: { id: params.id },
-      select: { createdById: true }
+      select: { createdById: true },
     });
 
     if (!hunt) {
-      return NextResponse.json(
-        { error: "Hunt not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Hunt not found" }, { status: 404 });
     }
 
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { role: true }
+      select: { role: true },
     });
 
     if (hunt.createdById !== session.user.id && user?.role !== "ADMIN") {
       return NextResponse.json(
         { error: "Insufficient permissions" },
-        { status: 403 }
+        { status: 403 },
       );
     }
 
     const body = await req.json();
-    
+
     // Transaction pour mettre à jour la chasse et ses étapes
     await prisma.$transaction(async (tx) => {
       // Mettre à jour la chasse
@@ -97,23 +97,23 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
           fee: body.fee,
           mapStyle: body.mapStyle,
           status: body.status,
-        }
+        },
       });
 
       // Mettre à jour les étapes
       if (body.steps) {
         // Supprimer les étapes existantes
         await tx.huntStep.deleteMany({
-          where: { huntId: params.id }
+          where: { huntId: params.id },
         });
-        
+
         // Créer les nouvelles étapes
         await tx.huntStep.createMany({
           data: body.steps.map((step: any) => ({
             description: step.description,
             huntId: params.id,
-            stepOrder: step.stepOrder
-          }))
+            stepOrder: step.stepOrder,
+          })),
         });
       }
     });
@@ -123,9 +123,9 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
       where: { id: params.id },
       include: {
         steps: {
-          orderBy: { stepOrder: 'asc' }
-        }
-      }
+          orderBy: { stepOrder: "asc" },
+        },
+      },
     });
 
     return NextResponse.json(updatedHunt);
@@ -133,44 +133,44 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
     console.error("Error updating hunt:", error);
     return NextResponse.json(
       { error: "Failed to update hunt" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(
+  req: Request,
+  { params }: { params: { id: string } },
+) {
   try {
     const session = await auth.api.getSession({ headers: await headers() });
-    
+
     if (!session?.user) {
       return NextResponse.json(
         { error: "Authentication required" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
     // Vérifier que l'utilisateur est le créateur ou admin
     const hunt = await prisma.treasureHunt.findUnique({
       where: { id: params.id },
-      select: { createdById: true }
+      select: { createdById: true },
     });
 
     if (!hunt) {
-      return NextResponse.json(
-        { error: "Hunt not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Hunt not found" }, { status: 404 });
     }
 
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { role: true }
+      select: { role: true },
     });
 
     if (hunt.createdById !== session.user.id && user?.role !== "ADMIN") {
       return NextResponse.json(
         { error: "Insufficient permissions" },
-        { status: 403 }
+        { status: 403 },
       );
     }
 
@@ -178,7 +178,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     await prisma.$transaction([
       prisma.huntStep.deleteMany({ where: { huntId: params.id } }),
       prisma.participation.deleteMany({ where: { huntId: params.id } }),
-      prisma.treasureHunt.delete({ where: { id: params.id } })
+      prisma.treasureHunt.delete({ where: { id: params.id } }),
     ]);
 
     return NextResponse.json({ success: true });
@@ -186,7 +186,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     console.error("Error deleting hunt:", error);
     return NextResponse.json(
       { error: "Failed to delete hunt" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

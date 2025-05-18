@@ -5,7 +5,12 @@ export async function middleware(request: NextRequest) {
   const cookies = getSessionCookie(request);
   const pathname = request.nextUrl.pathname;
 
-  const publicPaths = ["/auth/login", "/auth/register", "/auth/forgot-password", "/auth/reset-password"];
+  const publicPaths = [
+    "/auth/login",
+    "/auth/register",
+    "/auth/forgot-password",
+    "/auth/reset-password",
+  ];
   const isPublic = publicPaths.some((path) => pathname.startsWith(path));
 
   if (pathname === "/" || pathname === "") {
