@@ -10,9 +10,17 @@ import { HuntStatusSection } from "./hunt-status-section";
 import { HuntStepsList } from "./hunt-steps-list";
 import { HuntShareDialog } from "./hunt-share-dialog";
 import { HuntDeleteDialog } from "./hunt-delete-dialog";
+import { HuntJoinButton } from "./hunt-join-button";
 import { authClient } from "@/lib/auth-client";
 import { Hunt } from "@/interfaces/hunt";
 import HuntMapView from "./hunt-map-view";
+
+interface Participant {
+  userId: string;
+  huntId: string;
+  status?: string;
+  [key: string]: any;
+}
 
 export function HuntDetails({ huntId }: { huntId: string }) {
   const [activeTab, setActiveTab] = useState("details");
@@ -31,7 +39,7 @@ export function HuntDetails({ huntId }: { huntId: string }) {
     queryFn: async () => {
       const res = await fetch(`/api/hunt/${huntId}`);
       if (!res.ok) throw new Error("Failed to fetch hunt details");
-      return res.json() as Promise<Hunt>;
+      return res.json() as Promise<Hunt & { participants?: Participant[] }>;
     },
   });
 
@@ -54,6 +62,11 @@ export function HuntDetails({ huntId }: { huntId: string }) {
 
   const isCreator = hunt?.createdBy?.email === session?.data?.user?.email;
 
+  const isParticipant = Boolean(
+    session?.data?.user?.id &&
+      hunt.participants?.some((p) => p.userId === session?.data?.user.id),
+  );
+
   return (
     <>
       <HuntHeader
@@ -66,6 +79,16 @@ export function HuntDetails({ huntId }: { huntId: string }) {
       />
 
       <div className="container py-6">
+        {!isCreator && !isParticipant && hunt.status !== "COMPLETED" && (
+          <div className="mb-6">
+            <HuntJoinButton
+              huntId={hunt.id}
+              fee={hunt.fee}
+              className="w-full sm:w-auto"
+            />
+          </div>
+        )}
+
         <Tabs
           defaultValue="details"
           value={activeTab}
@@ -82,6 +105,33 @@ export function HuntDetails({ huntId }: { huntId: string }) {
 
           <TabsContent value="details" className="space-y-6">
             <HuntInfoCard hunt={hunt} />
+
+            {!isCreator && !isParticipant && hunt.status !== "COMPLETED" && (
+              <div className="mt-6 p-6 border rounded-lg bg-muted/5">
+                <h3 className="text-lg font-medium mb-2">
+                  Rejoindre cette aventure
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  {hunt.fee && hunt.fee > 0
+                    ? `La participation à cette chasse coûte ${hunt.fee} pièces.`
+                    : "Cette chasse au trésor est gratuite !"}
+                </p>
+                <HuntJoinButton
+                  huntId={hunt.id}
+                  fee={hunt.fee}
+                  className="w-full sm:w-auto"
+                />
+              </div>
+            )}
+
+            {isParticipant && (
+              <div className="mt-4 p-4 border rounded-lg bg-primary/5">
+                <p className="text-sm font-medium text-primary">
+                  Vous participez déjà à cette chasse au trésor !
+                </p>
+              </div>
+            )}
+
             {isCreator && (
               <HuntStatusSection
                 hunt={hunt}

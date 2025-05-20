@@ -22,6 +22,9 @@ export interface Hunt {
   _count: {
     participants: number;
   };
+  participants?: {
+    userId: string;
+  }[];
 }
 
 export interface LocationType {
