@@ -127,7 +127,7 @@ model Participation {
   huntId       String
   status       ParticipationStatus @default(ONGOING)
   joinDate     DateTime            @default(now())
-  user         User                @relation(fields: [userId], references: [id])
+  user         User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   treasureHunt TreasureHunt        @relation(fields: [huntId], references: [id])
 }
 
@@ -146,7 +146,7 @@ model Artefact {
   isHidden      Boolean         @default(false)
   source        ArtefactSource
   userId        String
-  user          User            @relation("CollectedByUser", fields: [userId], references: [id])
+  user          User            @relation("CollectedByUser", fields: [userId], references: [id], onDelete: Cascade)
   huntId        String?
   hunt          TreasureHunt?   @relation(fields: [huntId], references: [id])
   foundAt       DateTime        @default(now())
@@ -198,7 +198,7 @@ model VirtualCurrency {
   userId             String
   amount             Int
   type               CurrencySourceType   @default(EARNED)
-  user               User                 @relation(fields: [userId], references: [id])
+  user               User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
   transactionHistory TransactionHistory[]
@@ -220,8 +220,8 @@ model TransactionHistory {
   description       String?
   createdAt         DateTime        @default(now())
   virtualCurrencyId String
-  virtualCurrency   VirtualCurrency @relation(fields: [virtualCurrencyId], references: [id])
-  user              User            @relation(fields: [userId], references: [id])
+  virtualCurrency   VirtualCurrency @relation(fields: [virtualCurrencyId], references: [id], onDelete: Cascade)
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum TransactionType {
@@ -233,10 +233,10 @@ enum TransactionType {
 model Craft {
   id        String   @id @default(cuid())
   userId    String
-  resultId  String // Artefact créé
+  resultId  String
   createdAt DateTime @default(now())
 
-  user   User     @relation(fields: [userId], references: [id])
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   result Artefact @relation(fields: [resultId], references: [id])
 
   materials CraftMaterial[]
@@ -259,6 +259,6 @@ model LeaderboardEntry {
   score       Int
   completedAt DateTime
 
-  user User         @relation(fields: [userId], references: [id])
+  user User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   hunt TreasureHunt @relation(fields: [huntId], references: [id])
 }
