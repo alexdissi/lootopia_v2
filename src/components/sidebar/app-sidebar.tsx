@@ -62,12 +62,12 @@ const data = {
   navAdmin: [
     {
       title: "Utilisateurs",
-      url: "dashboard/admin",
+      url: "/dashboard/admin",
       icon: UsersIcon,
     },
     {
       title: "Paramètres",
-      url: "dashboard/admin/settings",
+      url: "/dashboard/admin/settings",
       icon: SettingsIcon,
     },
   ],
