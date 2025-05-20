@@ -53,7 +53,6 @@ export function HuntDetails({ huntId }: { huntId: string }) {
     queryFn: async () => {
       const res = await fetch(`/api/hunt/${huntId}`);
       if (!res.ok) throw new Error("Failed to fetch hunt details");
-      // Utilisation du type spécifique pour la réponse de l'API
       return res.json() as Promise<HuntWithParticipants>;
     },
   });
