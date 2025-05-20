@@ -68,13 +68,13 @@ export function UsersTable({
       items.push(
         <PaginationItem key="1">
           <PaginationLink onClick={() => onPageChange(1)}>1</PaginationLink>
-        </PaginationItem>
+        </PaginationItem>,
       );
       if (startPage > 2) {
         items.push(
           <PaginationItem key="ellipsis-1">
             <PaginationEllipsis />
-          </PaginationItem>
+          </PaginationItem>,
         );
       }
     }
@@ -88,7 +88,7 @@ export function UsersTable({
           >
             {i}
           </PaginationLink>
-        </PaginationItem>
+        </PaginationItem>,
       );
     }
 
@@ -97,7 +97,7 @@ export function UsersTable({
         items.push(
           <PaginationItem key="ellipsis-2">
             <PaginationEllipsis />
-          </PaginationItem>
+          </PaginationItem>,
         );
       }
       items.push(
@@ -105,7 +105,7 @@ export function UsersTable({
           <PaginationLink onClick={() => onPageChange(totalPages)}>
             {totalPages}
           </PaginationLink>
-        </PaginationItem>
+        </PaginationItem>,
       );
     }
 

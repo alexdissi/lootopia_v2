@@ -77,7 +77,9 @@ export function UsersAdminUI({
     },
     onMutate: ({ userId, role }) => {
       setUsers((prevUsers) =>
-        prevUsers.map((user) => (user.id === userId ? { ...user, role } : user))
+        prevUsers.map((user) =>
+          user.id === userId ? { ...user, role } : user,
+        ),
       );
     },
     onSuccess: () => {

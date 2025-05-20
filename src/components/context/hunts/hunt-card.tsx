@@ -47,7 +47,7 @@ export function HuntCard({ hunt, showEditButton }: HuntCardProps) {
           {hunt.location ? (
             <div className="flex items-center text-muted-foreground">
               <MapPin className="h-3.5 w-3.5 mr-1" />
-              <span className="line-clamp-1">{hunt.location}</span>
+              <span className="line-clamp-1">{String(hunt.location)}</span>
             </div>
           ) : (
             <div />
