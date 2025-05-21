@@ -105,7 +105,7 @@ async function handleCheckoutSessionCompleted(
         amount: currencyAmount,
         transactionType: "BOUGHT",
         stripeSessionId: session.id,
-        description: `Purchased ${currencyAmount} currency units`,
+        description: `Achat de ${currencyAmount} courones via Stripe`,
       },
     });
   } catch (error) {

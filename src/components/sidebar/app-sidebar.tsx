@@ -16,6 +16,7 @@ import {
   SearchIcon,
   SettingsIcon,
   ShieldIcon,
+  ShoppingBag,
   UserIcon,
   UsersIcon,
 } from "lucide-react";
@@ -53,6 +54,11 @@ const data = {
       title: "Chasses",
       url: "/dashboard/hunts",
       icon: Candy,
+    },
+    {
+      title: "Magasin",
+      url: "/dashboard/shop",
+      icon: ShoppingBag,
     },
     {
       title: "Paiements",
