@@ -170,6 +170,16 @@ exports.Prisma.VerificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ReviewScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  huntId: 'huntId',
+  comment: 'comment',
+  score: 'score',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.TreasureHuntScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -372,6 +382,7 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
+  Review: 'Review',
   TreasureHunt: 'TreasureHunt',
   Participation: 'Participation',
   Artefact: 'Artefact',

@@ -34,6 +34,11 @@ export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
  */
 export type Verification = $Result.DefaultSelection<Prisma.$VerificationPayload>
 /**
+ * Model Review
+ * 
+ */
+export type Review = $Result.DefaultSelection<Prisma.$ReviewPayload>
+/**
  * Model TreasureHunt
  * 
  */
@@ -397,6 +402,16 @@ export class PrismaClient<
     * ```
     */
   get verification(): Prisma.VerificationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.review`: Exposes CRUD operations for the **Review** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Reviews
+    * const reviews = await prisma.review.findMany()
+    * ```
+    */
+  get review(): Prisma.ReviewDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.treasureHunt`: Exposes CRUD operations for the **TreasureHunt** model.
@@ -961,6 +976,7 @@ export namespace Prisma {
     Session: 'Session',
     Account: 'Account',
     Verification: 'Verification',
+    Review: 'Review',
     TreasureHunt: 'TreasureHunt',
     Participation: 'Participation',
     Artefact: 'Artefact',
@@ -991,7 +1007,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification" | "treasureHunt" | "participation" | "artefact" | "huntStep" | "reward" | "virtualCurrency" | "transactionHistory" | "craft" | "craftMaterial" | "leaderboardEntry" | "shopItem" | "userItem"
+      modelProps: "user" | "session" | "account" | "verification" | "review" | "treasureHunt" | "participation" | "artefact" | "huntStep" | "reward" | "virtualCurrency" | "transactionHistory" | "craft" | "craftMaterial" | "leaderboardEntry" | "shopItem" | "userItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1288,6 +1304,80 @@ export namespace Prisma {
           count: {
             args: Prisma.VerificationCountArgs<ExtArgs>
             result: $Utils.Optional<VerificationCountAggregateOutputType> | number
+          }
+        }
+      }
+      Review: {
+        payload: Prisma.$ReviewPayload<ExtArgs>
+        fields: Prisma.ReviewFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReviewFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReviewFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
+          }
+          findFirst: {
+            args: Prisma.ReviewFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReviewFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
+          }
+          findMany: {
+            args: Prisma.ReviewFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
+          }
+          create: {
+            args: Prisma.ReviewCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
+          }
+          createMany: {
+            args: Prisma.ReviewCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReviewCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
+          }
+          delete: {
+            args: Prisma.ReviewDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
+          }
+          update: {
+            args: Prisma.ReviewUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
+          }
+          deleteMany: {
+            args: Prisma.ReviewDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReviewUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReviewUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
+          }
+          upsert: {
+            args: Prisma.ReviewUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
+          }
+          aggregate: {
+            args: Prisma.ReviewAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReview>
+          }
+          groupBy: {
+            args: Prisma.ReviewGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReviewGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ReviewCountArgs<ExtArgs>
+            result: $Utils.Optional<ReviewCountAggregateOutputType> | number
           }
         }
       }
@@ -2267,6 +2357,7 @@ export namespace Prisma {
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
+    review?: ReviewOmit
     treasureHunt?: TreasureHuntOmit
     participation?: ParticipationOmit
     artefact?: ArtefactOmit
@@ -2383,6 +2474,7 @@ export namespace Prisma {
     Craft: number
     LeaderboardEntry: number
     items: number
+    reviews: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2396,6 +2488,7 @@ export namespace Prisma {
     Craft?: boolean | UserCountOutputTypeCountCraftArgs
     LeaderboardEntry?: boolean | UserCountOutputTypeCountLeaderboardEntryArgs
     items?: boolean | UserCountOutputTypeCountItemsArgs
+    reviews?: boolean | UserCountOutputTypeCountReviewsArgs
   }
 
   // Custom InputTypes
@@ -2479,6 +2572,13 @@ export namespace Prisma {
     where?: UserItemWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReviewWhereInput
+  }
+
 
   /**
    * Count Type TreasureHuntCountOutputType
@@ -2490,6 +2590,7 @@ export namespace Prisma {
     rewards: number
     artefacts: number
     LeaderboardEntry: number
+    reviews: number
   }
 
   export type TreasureHuntCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2498,6 +2599,7 @@ export namespace Prisma {
     rewards?: boolean | TreasureHuntCountOutputTypeCountRewardsArgs
     artefacts?: boolean | TreasureHuntCountOutputTypeCountArtefactsArgs
     LeaderboardEntry?: boolean | TreasureHuntCountOutputTypeCountLeaderboardEntryArgs
+    reviews?: boolean | TreasureHuntCountOutputTypeCountReviewsArgs
   }
 
   // Custom InputTypes
@@ -2544,6 +2646,13 @@ export namespace Prisma {
    */
   export type TreasureHuntCountOutputTypeCountLeaderboardEntryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LeaderboardEntryWhereInput
+  }
+
+  /**
+   * TreasureHuntCountOutputType without action
+   */
+  export type TreasureHuntCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReviewWhereInput
   }
 
 
@@ -2906,6 +3015,7 @@ export namespace Prisma {
     Craft?: boolean | User$CraftArgs<ExtArgs>
     LeaderboardEntry?: boolean | User$LeaderboardEntryArgs<ExtArgs>
     items?: boolean | User$itemsArgs<ExtArgs>
+    reviews?: boolean | User$reviewsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2963,6 +3073,7 @@ export namespace Prisma {
     Craft?: boolean | User$CraftArgs<ExtArgs>
     LeaderboardEntry?: boolean | User$LeaderboardEntryArgs<ExtArgs>
     items?: boolean | User$itemsArgs<ExtArgs>
+    reviews?: boolean | User$reviewsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2981,6 +3092,7 @@ export namespace Prisma {
       Craft: Prisma.$CraftPayload<ExtArgs>[]
       LeaderboardEntry: Prisma.$LeaderboardEntryPayload<ExtArgs>[]
       items: Prisma.$UserItemPayload<ExtArgs>[]
+      reviews: Prisma.$ReviewPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3398,6 +3510,7 @@ export namespace Prisma {
     Craft<T extends User$CraftArgs<ExtArgs> = {}>(args?: Subset<T, User$CraftArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     LeaderboardEntry<T extends User$LeaderboardEntryArgs<ExtArgs> = {}>(args?: Subset<T, User$LeaderboardEntryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     items<T extends User$itemsArgs<ExtArgs> = {}>(args?: Subset<T, User$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reviews<T extends User$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4063,6 +4176,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserItemScalarFieldEnum | UserItemScalarFieldEnum[]
+  }
+
+  /**
+   * User.reviews
+   */
+  export type User$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    where?: ReviewWhereInput
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
+    cursor?: ReviewWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
   }
 
   /**
@@ -7352,6 +7489,1132 @@ export namespace Prisma {
 
 
   /**
+   * Model Review
+   */
+
+  export type AggregateReview = {
+    _count: ReviewCountAggregateOutputType | null
+    _avg: ReviewAvgAggregateOutputType | null
+    _sum: ReviewSumAggregateOutputType | null
+    _min: ReviewMinAggregateOutputType | null
+    _max: ReviewMaxAggregateOutputType | null
+  }
+
+  export type ReviewAvgAggregateOutputType = {
+    score: number | null
+  }
+
+  export type ReviewSumAggregateOutputType = {
+    score: number | null
+  }
+
+  export type ReviewMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    huntId: string | null
+    comment: string | null
+    score: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ReviewMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    huntId: string | null
+    comment: string | null
+    score: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ReviewCountAggregateOutputType = {
+    id: number
+    userId: number
+    huntId: number
+    comment: number
+    score: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ReviewAvgAggregateInputType = {
+    score?: true
+  }
+
+  export type ReviewSumAggregateInputType = {
+    score?: true
+  }
+
+  export type ReviewMinAggregateInputType = {
+    id?: true
+    userId?: true
+    huntId?: true
+    comment?: true
+    score?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ReviewMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    huntId?: true
+    comment?: true
+    score?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ReviewCountAggregateInputType = {
+    id?: true
+    userId?: true
+    huntId?: true
+    comment?: true
+    score?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ReviewAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Review to aggregate.
+     */
+    where?: ReviewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Reviews to fetch.
+     */
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReviewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Reviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Reviews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Reviews
+    **/
+    _count?: true | ReviewCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ReviewAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ReviewSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReviewMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReviewMaxAggregateInputType
+  }
+
+  export type GetReviewAggregateType<T extends ReviewAggregateArgs> = {
+        [P in keyof T & keyof AggregateReview]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReview[P]>
+      : GetScalarType<T[P], AggregateReview[P]>
+  }
+
+
+
+
+  export type ReviewGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReviewWhereInput
+    orderBy?: ReviewOrderByWithAggregationInput | ReviewOrderByWithAggregationInput[]
+    by: ReviewScalarFieldEnum[] | ReviewScalarFieldEnum
+    having?: ReviewScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReviewCountAggregateInputType | true
+    _avg?: ReviewAvgAggregateInputType
+    _sum?: ReviewSumAggregateInputType
+    _min?: ReviewMinAggregateInputType
+    _max?: ReviewMaxAggregateInputType
+  }
+
+  export type ReviewGroupByOutputType = {
+    id: string
+    userId: string
+    huntId: string
+    comment: string
+    score: number
+    createdAt: Date
+    updatedAt: Date
+    _count: ReviewCountAggregateOutputType | null
+    _avg: ReviewAvgAggregateOutputType | null
+    _sum: ReviewSumAggregateOutputType | null
+    _min: ReviewMinAggregateOutputType | null
+    _max: ReviewMaxAggregateOutputType | null
+  }
+
+  type GetReviewGroupByPayload<T extends ReviewGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReviewGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReviewGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReviewGroupByOutputType[P]>
+            : GetScalarType<T[P], ReviewGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReviewSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    huntId?: boolean
+    comment?: boolean
+    score?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["review"]>
+
+  export type ReviewSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    huntId?: boolean
+    comment?: boolean
+    score?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["review"]>
+
+  export type ReviewSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    huntId?: boolean
+    comment?: boolean
+    score?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["review"]>
+
+  export type ReviewSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    huntId?: boolean
+    comment?: boolean
+    score?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "huntId" | "comment" | "score" | "createdAt" | "updatedAt", ExtArgs["result"]["review"]>
+  export type ReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+  export type ReviewIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+  export type ReviewIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    treasureHunt?: boolean | TreasureHuntDefaultArgs<ExtArgs>
+  }
+
+  export type $ReviewPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Review"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      treasureHunt: Prisma.$TreasureHuntPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      huntId: string
+      comment: string
+      score: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["review"]>
+    composites: {}
+  }
+
+  type ReviewGetPayload<S extends boolean | null | undefined | ReviewDefaultArgs> = $Result.GetResult<Prisma.$ReviewPayload, S>
+
+  type ReviewCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ReviewFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReviewCountAggregateInputType | true
+    }
+
+  export interface ReviewDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Review'], meta: { name: 'Review' } }
+    /**
+     * Find zero or one Review that matches the filter.
+     * @param {ReviewFindUniqueArgs} args - Arguments to find a Review
+     * @example
+     * // Get one Review
+     * const review = await prisma.review.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ReviewFindUniqueArgs>(args: SelectSubset<T, ReviewFindUniqueArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Review that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ReviewFindUniqueOrThrowArgs} args - Arguments to find a Review
+     * @example
+     * // Get one Review
+     * const review = await prisma.review.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ReviewFindUniqueOrThrowArgs>(args: SelectSubset<T, ReviewFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Review that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewFindFirstArgs} args - Arguments to find a Review
+     * @example
+     * // Get one Review
+     * const review = await prisma.review.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ReviewFindFirstArgs>(args?: SelectSubset<T, ReviewFindFirstArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Review that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewFindFirstOrThrowArgs} args - Arguments to find a Review
+     * @example
+     * // Get one Review
+     * const review = await prisma.review.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ReviewFindFirstOrThrowArgs>(args?: SelectSubset<T, ReviewFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Reviews that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Reviews
+     * const reviews = await prisma.review.findMany()
+     * 
+     * // Get first 10 Reviews
+     * const reviews = await prisma.review.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const reviewWithIdOnly = await prisma.review.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ReviewFindManyArgs>(args?: SelectSubset<T, ReviewFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Review.
+     * @param {ReviewCreateArgs} args - Arguments to create a Review.
+     * @example
+     * // Create one Review
+     * const Review = await prisma.review.create({
+     *   data: {
+     *     // ... data to create a Review
+     *   }
+     * })
+     * 
+     */
+    create<T extends ReviewCreateArgs>(args: SelectSubset<T, ReviewCreateArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Reviews.
+     * @param {ReviewCreateManyArgs} args - Arguments to create many Reviews.
+     * @example
+     * // Create many Reviews
+     * const review = await prisma.review.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ReviewCreateManyArgs>(args?: SelectSubset<T, ReviewCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Reviews and returns the data saved in the database.
+     * @param {ReviewCreateManyAndReturnArgs} args - Arguments to create many Reviews.
+     * @example
+     * // Create many Reviews
+     * const review = await prisma.review.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Reviews and only return the `id`
+     * const reviewWithIdOnly = await prisma.review.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ReviewCreateManyAndReturnArgs>(args?: SelectSubset<T, ReviewCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Review.
+     * @param {ReviewDeleteArgs} args - Arguments to delete one Review.
+     * @example
+     * // Delete one Review
+     * const Review = await prisma.review.delete({
+     *   where: {
+     *     // ... filter to delete one Review
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ReviewDeleteArgs>(args: SelectSubset<T, ReviewDeleteArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Review.
+     * @param {ReviewUpdateArgs} args - Arguments to update one Review.
+     * @example
+     * // Update one Review
+     * const review = await prisma.review.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ReviewUpdateArgs>(args: SelectSubset<T, ReviewUpdateArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Reviews.
+     * @param {ReviewDeleteManyArgs} args - Arguments to filter Reviews to delete.
+     * @example
+     * // Delete a few Reviews
+     * const { count } = await prisma.review.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ReviewDeleteManyArgs>(args?: SelectSubset<T, ReviewDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Reviews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Reviews
+     * const review = await prisma.review.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ReviewUpdateManyArgs>(args: SelectSubset<T, ReviewUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Reviews and returns the data updated in the database.
+     * @param {ReviewUpdateManyAndReturnArgs} args - Arguments to update many Reviews.
+     * @example
+     * // Update many Reviews
+     * const review = await prisma.review.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Reviews and only return the `id`
+     * const reviewWithIdOnly = await prisma.review.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ReviewUpdateManyAndReturnArgs>(args: SelectSubset<T, ReviewUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Review.
+     * @param {ReviewUpsertArgs} args - Arguments to update or create a Review.
+     * @example
+     * // Update or create a Review
+     * const review = await prisma.review.upsert({
+     *   create: {
+     *     // ... data to create a Review
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Review we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ReviewUpsertArgs>(args: SelectSubset<T, ReviewUpsertArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Reviews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewCountArgs} args - Arguments to filter Reviews to count.
+     * @example
+     * // Count the number of Reviews
+     * const count = await prisma.review.count({
+     *   where: {
+     *     // ... the filter for the Reviews we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReviewCountArgs>(
+      args?: Subset<T, ReviewCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReviewCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Review.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReviewAggregateArgs>(args: Subset<T, ReviewAggregateArgs>): Prisma.PrismaPromise<GetReviewAggregateType<T>>
+
+    /**
+     * Group by Review.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReviewGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReviewGroupByArgs['orderBy'] }
+        : { orderBy?: ReviewGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReviewGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReviewGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Review model
+   */
+  readonly fields: ReviewFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Review.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReviewClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    treasureHunt<T extends TreasureHuntDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHuntDefaultArgs<ExtArgs>>): Prisma__TreasureHuntClient<$Result.GetResult<Prisma.$TreasureHuntPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Review model
+   */
+  interface ReviewFieldRefs {
+    readonly id: FieldRef<"Review", 'String'>
+    readonly userId: FieldRef<"Review", 'String'>
+    readonly huntId: FieldRef<"Review", 'String'>
+    readonly comment: FieldRef<"Review", 'String'>
+    readonly score: FieldRef<"Review", 'Int'>
+    readonly createdAt: FieldRef<"Review", 'DateTime'>
+    readonly updatedAt: FieldRef<"Review", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Review findUnique
+   */
+  export type ReviewFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which Review to fetch.
+     */
+    where: ReviewWhereUniqueInput
+  }
+
+  /**
+   * Review findUniqueOrThrow
+   */
+  export type ReviewFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which Review to fetch.
+     */
+    where: ReviewWhereUniqueInput
+  }
+
+  /**
+   * Review findFirst
+   */
+  export type ReviewFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which Review to fetch.
+     */
+    where?: ReviewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Reviews to fetch.
+     */
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Reviews.
+     */
+    cursor?: ReviewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Reviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Reviews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Reviews.
+     */
+    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
+  }
+
+  /**
+   * Review findFirstOrThrow
+   */
+  export type ReviewFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which Review to fetch.
+     */
+    where?: ReviewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Reviews to fetch.
+     */
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Reviews.
+     */
+    cursor?: ReviewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Reviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Reviews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Reviews.
+     */
+    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
+  }
+
+  /**
+   * Review findMany
+   */
+  export type ReviewFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which Reviews to fetch.
+     */
+    where?: ReviewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Reviews to fetch.
+     */
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Reviews.
+     */
+    cursor?: ReviewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Reviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Reviews.
+     */
+    skip?: number
+    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
+  }
+
+  /**
+   * Review create
+   */
+  export type ReviewCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Review.
+     */
+    data: XOR<ReviewCreateInput, ReviewUncheckedCreateInput>
+  }
+
+  /**
+   * Review createMany
+   */
+  export type ReviewCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Reviews.
+     */
+    data: ReviewCreateManyInput | ReviewCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Review createManyAndReturn
+   */
+  export type ReviewCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * The data used to create many Reviews.
+     */
+    data: ReviewCreateManyInput | ReviewCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Review update
+   */
+  export type ReviewUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Review.
+     */
+    data: XOR<ReviewUpdateInput, ReviewUncheckedUpdateInput>
+    /**
+     * Choose, which Review to update.
+     */
+    where: ReviewWhereUniqueInput
+  }
+
+  /**
+   * Review updateMany
+   */
+  export type ReviewUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Reviews.
+     */
+    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyInput>
+    /**
+     * Filter which Reviews to update
+     */
+    where?: ReviewWhereInput
+    /**
+     * Limit how many Reviews to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Review updateManyAndReturn
+   */
+  export type ReviewUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * The data used to update Reviews.
+     */
+    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyInput>
+    /**
+     * Filter which Reviews to update
+     */
+    where?: ReviewWhereInput
+    /**
+     * Limit how many Reviews to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Review upsert
+   */
+  export type ReviewUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Review to update in case it exists.
+     */
+    where: ReviewWhereUniqueInput
+    /**
+     * In case the Review found by the `where` argument doesn't exist, create a new Review with this data.
+     */
+    create: XOR<ReviewCreateInput, ReviewUncheckedCreateInput>
+    /**
+     * In case the Review was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReviewUpdateInput, ReviewUncheckedUpdateInput>
+  }
+
+  /**
+   * Review delete
+   */
+  export type ReviewDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    /**
+     * Filter which Review to delete.
+     */
+    where: ReviewWhereUniqueInput
+  }
+
+  /**
+   * Review deleteMany
+   */
+  export type ReviewDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Reviews to delete
+     */
+    where?: ReviewWhereInput
+    /**
+     * Limit how many Reviews to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Review without action
+   */
+  export type ReviewDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model TreasureHunt
    */
 
@@ -7627,6 +8890,7 @@ export namespace Prisma {
     rewards?: boolean | TreasureHunt$rewardsArgs<ExtArgs>
     artefacts?: boolean | TreasureHunt$artefactsArgs<ExtArgs>
     LeaderboardEntry?: boolean | TreasureHunt$LeaderboardEntryArgs<ExtArgs>
+    reviews?: boolean | TreasureHunt$reviewsArgs<ExtArgs>
     _count?: boolean | TreasureHuntCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["treasureHunt"]>
 
@@ -7691,6 +8955,7 @@ export namespace Prisma {
     rewards?: boolean | TreasureHunt$rewardsArgs<ExtArgs>
     artefacts?: boolean | TreasureHunt$artefactsArgs<ExtArgs>
     LeaderboardEntry?: boolean | TreasureHunt$LeaderboardEntryArgs<ExtArgs>
+    reviews?: boolean | TreasureHunt$reviewsArgs<ExtArgs>
     _count?: boolean | TreasureHuntCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TreasureHuntIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7709,6 +8974,7 @@ export namespace Prisma {
       rewards: Prisma.$RewardPayload<ExtArgs>[]
       artefacts: Prisma.$ArtefactPayload<ExtArgs>[]
       LeaderboardEntry: Prisma.$LeaderboardEntryPayload<ExtArgs>[]
+      reviews: Prisma.$ReviewPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8125,6 +9391,7 @@ export namespace Prisma {
     rewards<T extends TreasureHunt$rewardsArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHunt$rewardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RewardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     artefacts<T extends TreasureHunt$artefactsArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHunt$artefactsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArtefactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     LeaderboardEntry<T extends TreasureHunt$LeaderboardEntryArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHunt$LeaderboardEntryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeaderboardEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reviews<T extends TreasureHunt$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, TreasureHunt$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8681,6 +9948,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: LeaderboardEntryScalarFieldEnum | LeaderboardEntryScalarFieldEnum[]
+  }
+
+  /**
+   * TreasureHunt.reviews
+   */
+  export type TreasureHunt$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    where?: ReviewWhereInput
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
+    cursor?: ReviewWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
   }
 
   /**
@@ -21045,6 +22336,19 @@ export namespace Prisma {
   export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+  export const ReviewScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    huntId: 'huntId',
+    comment: 'comment',
+    score: 'score',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
   export const TreasureHuntScalarFieldEnum: {
     id: 'id',
     title: 'title',
@@ -21279,20 +22583,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'HuntMode'
-   */
-  export type EnumHuntModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HuntMode'>
-    
-
-
-  /**
-   * Reference to a field of type 'HuntMode[]'
-   */
-  export type ListEnumHuntModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HuntMode[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -21303,6 +22593,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'HuntMode'
+   */
+  export type EnumHuntModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HuntMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'HuntMode[]'
+   */
+  export type ListEnumHuntModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HuntMode[]'>
     
 
 
@@ -21460,6 +22764,7 @@ export namespace Prisma {
     Craft?: CraftListRelationFilter
     LeaderboardEntry?: LeaderboardEntryListRelationFilter
     items?: UserItemListRelationFilter
+    reviews?: ReviewListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -21484,6 +22789,7 @@ export namespace Prisma {
     Craft?: CraftOrderByRelationAggregateInput
     LeaderboardEntry?: LeaderboardEntryOrderByRelationAggregateInput
     items?: UserItemOrderByRelationAggregateInput
+    reviews?: ReviewOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -21511,6 +22817,7 @@ export namespace Prisma {
     Craft?: CraftListRelationFilter
     LeaderboardEntry?: LeaderboardEntryListRelationFilter
     items?: UserItemListRelationFilter
+    reviews?: ReviewListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -21769,6 +23076,76 @@ export namespace Prisma {
     updatedAt?: DateTimeNullableWithAggregatesFilter<"Verification"> | Date | string | null
   }
 
+  export type ReviewWhereInput = {
+    AND?: ReviewWhereInput | ReviewWhereInput[]
+    OR?: ReviewWhereInput[]
+    NOT?: ReviewWhereInput | ReviewWhereInput[]
+    id?: StringFilter<"Review"> | string
+    userId?: StringFilter<"Review"> | string
+    huntId?: StringFilter<"Review"> | string
+    comment?: StringFilter<"Review"> | string
+    score?: IntFilter<"Review"> | number
+    createdAt?: DateTimeFilter<"Review"> | Date | string
+    updatedAt?: DateTimeFilter<"Review"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    treasureHunt?: XOR<TreasureHuntScalarRelationFilter, TreasureHuntWhereInput>
+  }
+
+  export type ReviewOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    comment?: SortOrder
+    score?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    treasureHunt?: TreasureHuntOrderByWithRelationInput
+  }
+
+  export type ReviewWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ReviewWhereInput | ReviewWhereInput[]
+    OR?: ReviewWhereInput[]
+    NOT?: ReviewWhereInput | ReviewWhereInput[]
+    userId?: StringFilter<"Review"> | string
+    huntId?: StringFilter<"Review"> | string
+    comment?: StringFilter<"Review"> | string
+    score?: IntFilter<"Review"> | number
+    createdAt?: DateTimeFilter<"Review"> | Date | string
+    updatedAt?: DateTimeFilter<"Review"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    treasureHunt?: XOR<TreasureHuntScalarRelationFilter, TreasureHuntWhereInput>
+  }, "id">
+
+  export type ReviewOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    comment?: SortOrder
+    score?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ReviewCountOrderByAggregateInput
+    _avg?: ReviewAvgOrderByAggregateInput
+    _max?: ReviewMaxOrderByAggregateInput
+    _min?: ReviewMinOrderByAggregateInput
+    _sum?: ReviewSumOrderByAggregateInput
+  }
+
+  export type ReviewScalarWhereWithAggregatesInput = {
+    AND?: ReviewScalarWhereWithAggregatesInput | ReviewScalarWhereWithAggregatesInput[]
+    OR?: ReviewScalarWhereWithAggregatesInput[]
+    NOT?: ReviewScalarWhereWithAggregatesInput | ReviewScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Review"> | string
+    userId?: StringWithAggregatesFilter<"Review"> | string
+    huntId?: StringWithAggregatesFilter<"Review"> | string
+    comment?: StringWithAggregatesFilter<"Review"> | string
+    score?: IntWithAggregatesFilter<"Review"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Review"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Review"> | Date | string
+  }
+
   export type TreasureHuntWhereInput = {
     AND?: TreasureHuntWhereInput | TreasureHuntWhereInput[]
     OR?: TreasureHuntWhereInput[]
@@ -21793,6 +23170,7 @@ export namespace Prisma {
     rewards?: RewardListRelationFilter
     artefacts?: ArtefactListRelationFilter
     LeaderboardEntry?: LeaderboardEntryListRelationFilter
+    reviews?: ReviewListRelationFilter
   }
 
   export type TreasureHuntOrderByWithRelationInput = {
@@ -21816,6 +23194,7 @@ export namespace Prisma {
     rewards?: RewardOrderByRelationAggregateInput
     artefacts?: ArtefactOrderByRelationAggregateInput
     LeaderboardEntry?: LeaderboardEntryOrderByRelationAggregateInput
+    reviews?: ReviewOrderByRelationAggregateInput
   }
 
   export type TreasureHuntWhereUniqueInput = Prisma.AtLeast<{
@@ -21842,6 +23221,7 @@ export namespace Prisma {
     rewards?: RewardListRelationFilter
     artefacts?: ArtefactListRelationFilter
     LeaderboardEntry?: LeaderboardEntryListRelationFilter
+    reviews?: ReviewListRelationFilter
   }, "id">
 
   export type TreasureHuntOrderByWithAggregationInput = {
@@ -22630,6 +24010,7 @@ export namespace Prisma {
     Craft?: CraftCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
     items?: UserItemCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -22654,6 +24035,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
     items?: UserItemUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -22678,6 +24060,7 @@ export namespace Prisma {
     Craft?: CraftUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
     items?: UserItemUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -22702,6 +24085,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
     items?: UserItemUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -22996,6 +24380,74 @@ export namespace Prisma {
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type ReviewCreateInput = {
+    id?: string
+    comment: string
+    score: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutReviewsInput
+    treasureHunt: TreasureHuntCreateNestedOneWithoutReviewsInput
+  }
+
+  export type ReviewUncheckedCreateInput = {
+    id?: string
+    userId: string
+    huntId: string
+    comment: string
+    score: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReviewUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutReviewsNestedInput
+    treasureHunt?: TreasureHuntUpdateOneRequiredWithoutReviewsNestedInput
+  }
+
+  export type ReviewUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    huntId?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewCreateManyInput = {
+    id?: string
+    userId: string
+    huntId: string
+    comment: string
+    score: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReviewUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    huntId?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type TreasureHuntCreateInput = {
     id?: string
     title: string
@@ -23016,6 +24468,7 @@ export namespace Prisma {
     rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactCreateNestedManyWithoutHuntInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutHuntInput
+    reviews?: ReviewCreateNestedManyWithoutTreasureHuntInput
   }
 
   export type TreasureHuntUncheckedCreateInput = {
@@ -23038,6 +24491,7 @@ export namespace Prisma {
     rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutHuntInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutTreasureHuntInput
   }
 
   export type TreasureHuntUpdateInput = {
@@ -23060,6 +24514,7 @@ export namespace Prisma {
     rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutHuntNestedInput
+    reviews?: ReviewUpdateManyWithoutTreasureHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateInput = {
@@ -23082,6 +24537,7 @@ export namespace Prisma {
     rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutHuntNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutTreasureHuntNestedInput
   }
 
   export type TreasureHuntCreateManyInput = {
@@ -23964,6 +25420,12 @@ export namespace Prisma {
     none?: UserItemWhereInput
   }
 
+  export type ReviewListRelationFilter = {
+    every?: ReviewWhereInput
+    some?: ReviewWhereInput
+    none?: ReviewWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -24006,6 +25468,10 @@ export namespace Prisma {
   }
 
   export type UserItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ReviewOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -24257,6 +25723,76 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type TreasureHuntScalarRelationFilter = {
+    is?: TreasureHuntWhereInput
+    isNot?: TreasureHuntWhereInput
+  }
+
+  export type ReviewCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    comment?: SortOrder
+    score?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ReviewAvgOrderByAggregateInput = {
+    score?: SortOrder
+  }
+
+  export type ReviewMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    comment?: SortOrder
+    score?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ReviewMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    huntId?: SortOrder
+    comment?: SortOrder
+    score?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ReviewSumOrderByAggregateInput = {
+    score?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type EnumHuntModeFilter<$PrismaModel = never> = {
     equals?: $Enums.HuntMode | EnumHuntModeFieldRefInput<$PrismaModel>
     in?: $Enums.HuntMode[] | ListEnumHuntModeFieldRefInput<$PrismaModel>
@@ -24404,11 +25940,6 @@ export namespace Prisma {
     not?: NestedEnumParticipationStatusFilter<$PrismaModel> | $Enums.ParticipationStatus
   }
 
-  export type TreasureHuntScalarRelationFilter = {
-    is?: TreasureHuntWhereInput
-    isNot?: TreasureHuntWhereInput
-  }
-
   export type ParticipationCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -24531,17 +26062,6 @@ export namespace Prisma {
     _max?: NestedEnumArtefactSourceFilter<$PrismaModel>
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type HuntStepCountOrderByAggregateInput = {
     id?: SortOrder
     description?: SortOrder
@@ -24572,22 +26092,6 @@ export namespace Prisma {
 
   export type HuntStepSumOrderByAggregateInput = {
     stepOrder?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type EnumRewardTypeFilter<$PrismaModel = never> = {
@@ -25017,6 +26521,13 @@ export namespace Prisma {
     connect?: UserItemWhereUniqueInput | UserItemWhereUniqueInput[]
   }
 
+  export type ReviewCreateNestedManyWithoutUserInput = {
+    create?: XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput> | ReviewCreateWithoutUserInput[] | ReviewUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutUserInput | ReviewCreateOrConnectWithoutUserInput[]
+    createMany?: ReviewCreateManyUserInputEnvelope
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+  }
+
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -25085,6 +26596,13 @@ export namespace Prisma {
     connectOrCreate?: UserItemCreateOrConnectWithoutUserInput | UserItemCreateOrConnectWithoutUserInput[]
     createMany?: UserItemCreateManyUserInputEnvelope
     connect?: UserItemWhereUniqueInput | UserItemWhereUniqueInput[]
+  }
+
+  export type ReviewUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput> | ReviewCreateWithoutUserInput[] | ReviewUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutUserInput | ReviewCreateOrConnectWithoutUserInput[]
+    createMany?: ReviewCreateManyUserInputEnvelope
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -25247,6 +26765,20 @@ export namespace Prisma {
     deleteMany?: UserItemScalarWhereInput | UserItemScalarWhereInput[]
   }
 
+  export type ReviewUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput> | ReviewCreateWithoutUserInput[] | ReviewUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutUserInput | ReviewCreateOrConnectWithoutUserInput[]
+    upsert?: ReviewUpsertWithWhereUniqueWithoutUserInput | ReviewUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ReviewCreateManyUserInputEnvelope
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    update?: ReviewUpdateWithWhereUniqueWithoutUserInput | ReviewUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ReviewUpdateManyWithWhereWithoutUserInput | ReviewUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
+  }
+
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -25387,6 +26919,20 @@ export namespace Prisma {
     deleteMany?: UserItemScalarWhereInput | UserItemScalarWhereInput[]
   }
 
+  export type ReviewUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput> | ReviewCreateWithoutUserInput[] | ReviewUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutUserInput | ReviewCreateOrConnectWithoutUserInput[]
+    upsert?: ReviewUpsertWithWhereUniqueWithoutUserInput | ReviewUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ReviewCreateManyUserInputEnvelope
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    update?: ReviewUpdateWithWhereUniqueWithoutUserInput | ReviewUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ReviewUpdateManyWithWhereWithoutUserInput | ReviewUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutSessionsInput = {
     create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
@@ -25417,6 +26963,42 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutAccountsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAccountsInput, UserUpdateWithoutAccountsInput>, UserUncheckedUpdateWithoutAccountsInput>
+  }
+
+  export type UserCreateNestedOneWithoutReviewsInput = {
+    create?: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type TreasureHuntCreateNestedOneWithoutReviewsInput = {
+    create?: XOR<TreasureHuntCreateWithoutReviewsInput, TreasureHuntUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutReviewsInput
+    connect?: TreasureHuntWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
+    create?: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewsInput
+    upsert?: UserUpsertWithoutReviewsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewsInput, UserUpdateWithoutReviewsInput>, UserUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type TreasureHuntUpdateOneRequiredWithoutReviewsNestedInput = {
+    create?: XOR<TreasureHuntCreateWithoutReviewsInput, TreasureHuntUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: TreasureHuntCreateOrConnectWithoutReviewsInput
+    upsert?: TreasureHuntUpsertWithoutReviewsInput
+    connect?: TreasureHuntWhereUniqueInput
+    update?: XOR<XOR<TreasureHuntUpdateToOneWithWhereWithoutReviewsInput, TreasureHuntUpdateWithoutReviewsInput>, TreasureHuntUncheckedUpdateWithoutReviewsInput>
   }
 
   export type UserCreateNestedOneWithoutCreatedChassesInput = {
@@ -25460,6 +27042,13 @@ export namespace Prisma {
     connect?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
   }
 
+  export type ReviewCreateNestedManyWithoutTreasureHuntInput = {
+    create?: XOR<ReviewCreateWithoutTreasureHuntInput, ReviewUncheckedCreateWithoutTreasureHuntInput> | ReviewCreateWithoutTreasureHuntInput[] | ReviewUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutTreasureHuntInput | ReviewCreateOrConnectWithoutTreasureHuntInput[]
+    createMany?: ReviewCreateManyTreasureHuntInputEnvelope
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+  }
+
   export type ParticipationUncheckedCreateNestedManyWithoutTreasureHuntInput = {
     create?: XOR<ParticipationCreateWithoutTreasureHuntInput, ParticipationUncheckedCreateWithoutTreasureHuntInput> | ParticipationCreateWithoutTreasureHuntInput[] | ParticipationUncheckedCreateWithoutTreasureHuntInput[]
     connectOrCreate?: ParticipationCreateOrConnectWithoutTreasureHuntInput | ParticipationCreateOrConnectWithoutTreasureHuntInput[]
@@ -25493,6 +27082,13 @@ export namespace Prisma {
     connectOrCreate?: LeaderboardEntryCreateOrConnectWithoutHuntInput | LeaderboardEntryCreateOrConnectWithoutHuntInput[]
     createMany?: LeaderboardEntryCreateManyHuntInputEnvelope
     connect?: LeaderboardEntryWhereUniqueInput | LeaderboardEntryWhereUniqueInput[]
+  }
+
+  export type ReviewUncheckedCreateNestedManyWithoutTreasureHuntInput = {
+    create?: XOR<ReviewCreateWithoutTreasureHuntInput, ReviewUncheckedCreateWithoutTreasureHuntInput> | ReviewCreateWithoutTreasureHuntInput[] | ReviewUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutTreasureHuntInput | ReviewCreateOrConnectWithoutTreasureHuntInput[]
+    createMany?: ReviewCreateManyTreasureHuntInputEnvelope
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
   }
 
   export type EnumHuntModeFieldUpdateOperationsInput = {
@@ -25589,6 +27185,20 @@ export namespace Prisma {
     deleteMany?: LeaderboardEntryScalarWhereInput | LeaderboardEntryScalarWhereInput[]
   }
 
+  export type ReviewUpdateManyWithoutTreasureHuntNestedInput = {
+    create?: XOR<ReviewCreateWithoutTreasureHuntInput, ReviewUncheckedCreateWithoutTreasureHuntInput> | ReviewCreateWithoutTreasureHuntInput[] | ReviewUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutTreasureHuntInput | ReviewCreateOrConnectWithoutTreasureHuntInput[]
+    upsert?: ReviewUpsertWithWhereUniqueWithoutTreasureHuntInput | ReviewUpsertWithWhereUniqueWithoutTreasureHuntInput[]
+    createMany?: ReviewCreateManyTreasureHuntInputEnvelope
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    update?: ReviewUpdateWithWhereUniqueWithoutTreasureHuntInput | ReviewUpdateWithWhereUniqueWithoutTreasureHuntInput[]
+    updateMany?: ReviewUpdateManyWithWhereWithoutTreasureHuntInput | ReviewUpdateManyWithWhereWithoutTreasureHuntInput[]
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
+  }
+
   export type ParticipationUncheckedUpdateManyWithoutTreasureHuntNestedInput = {
     create?: XOR<ParticipationCreateWithoutTreasureHuntInput, ParticipationUncheckedCreateWithoutTreasureHuntInput> | ParticipationCreateWithoutTreasureHuntInput[] | ParticipationUncheckedCreateWithoutTreasureHuntInput[]
     connectOrCreate?: ParticipationCreateOrConnectWithoutTreasureHuntInput | ParticipationCreateOrConnectWithoutTreasureHuntInput[]
@@ -25657,6 +27267,20 @@ export namespace Prisma {
     update?: LeaderboardEntryUpdateWithWhereUniqueWithoutHuntInput | LeaderboardEntryUpdateWithWhereUniqueWithoutHuntInput[]
     updateMany?: LeaderboardEntryUpdateManyWithWhereWithoutHuntInput | LeaderboardEntryUpdateManyWithWhereWithoutHuntInput[]
     deleteMany?: LeaderboardEntryScalarWhereInput | LeaderboardEntryScalarWhereInput[]
+  }
+
+  export type ReviewUncheckedUpdateManyWithoutTreasureHuntNestedInput = {
+    create?: XOR<ReviewCreateWithoutTreasureHuntInput, ReviewUncheckedCreateWithoutTreasureHuntInput> | ReviewCreateWithoutTreasureHuntInput[] | ReviewUncheckedCreateWithoutTreasureHuntInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutTreasureHuntInput | ReviewCreateOrConnectWithoutTreasureHuntInput[]
+    upsert?: ReviewUpsertWithWhereUniqueWithoutTreasureHuntInput | ReviewUpsertWithWhereUniqueWithoutTreasureHuntInput[]
+    createMany?: ReviewCreateManyTreasureHuntInputEnvelope
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    update?: ReviewUpdateWithWhereUniqueWithoutTreasureHuntInput | ReviewUpdateWithWhereUniqueWithoutTreasureHuntInput[]
+    updateMany?: ReviewUpdateManyWithWhereWithoutTreasureHuntInput | ReviewUpdateManyWithWhereWithoutTreasureHuntInput[]
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutParticipationsInput = {
@@ -25817,14 +27441,6 @@ export namespace Prisma {
     create?: XOR<TreasureHuntCreateWithoutStepsInput, TreasureHuntUncheckedCreateWithoutStepsInput>
     connectOrCreate?: TreasureHuntCreateOrConnectWithoutStepsInput
     connect?: TreasureHuntWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type TreasureHuntUpdateOneRequiredWithoutStepsNestedInput = {
@@ -26309,6 +27925,33 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedEnumHuntModeFilter<$PrismaModel = never> = {
     equals?: $Enums.HuntMode | EnumHuntModeFieldRefInput<$PrismaModel>
     in?: $Enums.HuntMode[] | ListEnumHuntModeFieldRefInput<$PrismaModel>
@@ -26419,33 +28062,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumArtefactSourceFilter<$PrismaModel>
     _max?: NestedEnumArtefactSourceFilter<$PrismaModel>
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedEnumRewardTypeFilter<$PrismaModel = never> = {
@@ -26629,6 +28245,7 @@ export namespace Prisma {
     rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactCreateNestedManyWithoutHuntInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutHuntInput
+    reviews?: ReviewCreateNestedManyWithoutTreasureHuntInput
   }
 
   export type TreasureHuntUncheckedCreateWithoutCreatedByInput = {
@@ -26650,6 +28267,7 @@ export namespace Prisma {
     rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutHuntInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutTreasureHuntInput
   }
 
   export type TreasureHuntCreateOrConnectWithoutCreatedByInput = {
@@ -26835,6 +28453,34 @@ export namespace Prisma {
 
   export type UserItemCreateManyUserInputEnvelope = {
     data: UserItemCreateManyUserInput | UserItemCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ReviewCreateWithoutUserInput = {
+    id?: string
+    comment: string
+    score: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    treasureHunt: TreasureHuntCreateNestedOneWithoutReviewsInput
+  }
+
+  export type ReviewUncheckedCreateWithoutUserInput = {
+    id?: string
+    huntId: string
+    comment: string
+    score: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReviewCreateOrConnectWithoutUserInput = {
+    where: ReviewWhereUniqueInput
+    create: XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReviewCreateManyUserInputEnvelope = {
+    data: ReviewCreateManyUserInput | ReviewCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -27140,6 +28786,35 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"UserItem"> | Date | string
   }
 
+  export type ReviewUpsertWithWhereUniqueWithoutUserInput = {
+    where: ReviewWhereUniqueInput
+    update: XOR<ReviewUpdateWithoutUserInput, ReviewUncheckedUpdateWithoutUserInput>
+    create: XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReviewUpdateWithWhereUniqueWithoutUserInput = {
+    where: ReviewWhereUniqueInput
+    data: XOR<ReviewUpdateWithoutUserInput, ReviewUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ReviewUpdateManyWithWhereWithoutUserInput = {
+    where: ReviewScalarWhereInput
+    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ReviewScalarWhereInput = {
+    AND?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
+    OR?: ReviewScalarWhereInput[]
+    NOT?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
+    id?: StringFilter<"Review"> | string
+    userId?: StringFilter<"Review"> | string
+    huntId?: StringFilter<"Review"> | string
+    comment?: StringFilter<"Review"> | string
+    score?: IntFilter<"Review"> | number
+    createdAt?: DateTimeFilter<"Review"> | Date | string
+    updatedAt?: DateTimeFilter<"Review"> | Date | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id?: string
     name?: string | null
@@ -27161,6 +28836,7 @@ export namespace Prisma {
     Craft?: CraftCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
     items?: UserItemCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -27184,6 +28860,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
     items?: UserItemUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -27223,6 +28900,7 @@ export namespace Prisma {
     Craft?: CraftUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
     items?: UserItemUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -27246,6 +28924,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
     items?: UserItemUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -27269,6 +28948,7 @@ export namespace Prisma {
     Craft?: CraftCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
     items?: UserItemCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -27292,6 +28972,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
     items?: UserItemUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -27331,6 +29012,7 @@ export namespace Prisma {
     Craft?: CraftUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
     items?: UserItemUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -27354,6 +29036,223 @@ export namespace Prisma {
     Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
     items?: UserItemUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutReviewsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    participations?: ParticipationCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
+    Craft?: CraftCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
+    items?: UserItemCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutReviewsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    stripeCustomerId?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    nickname?: string | null
+    role?: $Enums.UserRole
+    isMfaEnabled?: boolean
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    participations?: ParticipationUncheckedCreateNestedManyWithoutUserInput
+    createdChasses?: TreasureHuntUncheckedCreateNestedManyWithoutCreatedByInput
+    collectedArtefacts?: ArtefactUncheckedCreateNestedManyWithoutUserInput
+    virtualCurrency?: VirtualCurrencyUncheckedCreateNestedManyWithoutUserInput
+    transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
+    Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+    items?: UserItemUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutReviewsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
+  }
+
+  export type TreasureHuntCreateWithoutReviewsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedChassesInput
+    participants?: ParticipationCreateNestedManyWithoutTreasureHuntInput
+    steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
+    rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
+    artefacts?: ArtefactCreateNestedManyWithoutHuntInput
+    LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutHuntInput
+  }
+
+  export type TreasureHuntUncheckedCreateWithoutReviewsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdById: string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    location?: string | null
+    mode?: $Enums.HuntMode
+    fee?: number | null
+    mapStyle?: string | null
+    isFinished?: boolean
+    status?: $Enums.HuntStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    participants?: ParticipationUncheckedCreateNestedManyWithoutTreasureHuntInput
+    steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
+    rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
+    artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutHuntInput
+  }
+
+  export type TreasureHuntCreateOrConnectWithoutReviewsInput = {
+    where: TreasureHuntWhereUniqueInput
+    create: XOR<TreasureHuntCreateWithoutReviewsInput, TreasureHuntUncheckedCreateWithoutReviewsInput>
+  }
+
+  export type UserUpsertWithoutReviewsInput = {
+    update: XOR<UserUpdateWithoutReviewsInput, UserUncheckedUpdateWithoutReviewsInput>
+    create: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReviewsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReviewsInput, UserUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type UserUpdateWithoutReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
+    Craft?: CraftUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
+    items?: UserItemUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isMfaEnabled?: BoolFieldUpdateOperationsInput | boolean
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    participations?: ParticipationUncheckedUpdateManyWithoutUserNestedInput
+    createdChasses?: TreasureHuntUncheckedUpdateManyWithoutCreatedByNestedInput
+    collectedArtefacts?: ArtefactUncheckedUpdateManyWithoutUserNestedInput
+    virtualCurrency?: VirtualCurrencyUncheckedUpdateManyWithoutUserNestedInput
+    transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+    items?: UserItemUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type TreasureHuntUpsertWithoutReviewsInput = {
+    update: XOR<TreasureHuntUpdateWithoutReviewsInput, TreasureHuntUncheckedUpdateWithoutReviewsInput>
+    create: XOR<TreasureHuntCreateWithoutReviewsInput, TreasureHuntUncheckedCreateWithoutReviewsInput>
+    where?: TreasureHuntWhereInput
+  }
+
+  export type TreasureHuntUpdateToOneWithWhereWithoutReviewsInput = {
+    where?: TreasureHuntWhereInput
+    data: XOR<TreasureHuntUpdateWithoutReviewsInput, TreasureHuntUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type TreasureHuntUpdateWithoutReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedChassesNestedInput
+    participants?: ParticipationUpdateManyWithoutTreasureHuntNestedInput
+    steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
+    rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
+    artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
+    LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutHuntNestedInput
+  }
+
+  export type TreasureHuntUncheckedUpdateWithoutReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: EnumHuntModeFieldUpdateOperationsInput | $Enums.HuntMode
+    fee?: NullableIntFieldUpdateOperationsInput | number | null
+    mapStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumHuntStatusFieldUpdateOperationsInput | $Enums.HuntStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    participants?: ParticipationUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
+    artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
+    LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutHuntNestedInput
   }
 
   export type UserCreateWithoutCreatedChassesInput = {
@@ -27377,6 +29276,7 @@ export namespace Prisma {
     Craft?: CraftCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
     items?: UserItemCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedChassesInput = {
@@ -27400,6 +29300,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
     items?: UserItemUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedChassesInput = {
@@ -27543,6 +29444,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ReviewCreateWithoutTreasureHuntInput = {
+    id?: string
+    comment: string
+    score: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutReviewsInput
+  }
+
+  export type ReviewUncheckedCreateWithoutTreasureHuntInput = {
+    id?: string
+    userId: string
+    comment: string
+    score: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReviewCreateOrConnectWithoutTreasureHuntInput = {
+    where: ReviewWhereUniqueInput
+    create: XOR<ReviewCreateWithoutTreasureHuntInput, ReviewUncheckedCreateWithoutTreasureHuntInput>
+  }
+
+  export type ReviewCreateManyTreasureHuntInputEnvelope = {
+    data: ReviewCreateManyTreasureHuntInput | ReviewCreateManyTreasureHuntInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutCreatedChassesInput = {
     update: XOR<UserUpdateWithoutCreatedChassesInput, UserUncheckedUpdateWithoutCreatedChassesInput>
     create: XOR<UserCreateWithoutCreatedChassesInput, UserUncheckedCreateWithoutCreatedChassesInput>
@@ -27575,6 +29504,7 @@ export namespace Prisma {
     Craft?: CraftUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
     items?: UserItemUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedChassesInput = {
@@ -27598,6 +29528,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
     items?: UserItemUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ParticipationUpsertWithWhereUniqueWithoutTreasureHuntInput = {
@@ -27702,6 +29633,22 @@ export namespace Prisma {
     data: XOR<LeaderboardEntryUpdateManyMutationInput, LeaderboardEntryUncheckedUpdateManyWithoutHuntInput>
   }
 
+  export type ReviewUpsertWithWhereUniqueWithoutTreasureHuntInput = {
+    where: ReviewWhereUniqueInput
+    update: XOR<ReviewUpdateWithoutTreasureHuntInput, ReviewUncheckedUpdateWithoutTreasureHuntInput>
+    create: XOR<ReviewCreateWithoutTreasureHuntInput, ReviewUncheckedCreateWithoutTreasureHuntInput>
+  }
+
+  export type ReviewUpdateWithWhereUniqueWithoutTreasureHuntInput = {
+    where: ReviewWhereUniqueInput
+    data: XOR<ReviewUpdateWithoutTreasureHuntInput, ReviewUncheckedUpdateWithoutTreasureHuntInput>
+  }
+
+  export type ReviewUpdateManyWithWhereWithoutTreasureHuntInput = {
+    where: ReviewScalarWhereInput
+    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyWithoutTreasureHuntInput>
+  }
+
   export type UserCreateWithoutParticipationsInput = {
     id?: string
     name?: string | null
@@ -27723,6 +29670,7 @@ export namespace Prisma {
     Craft?: CraftCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
     items?: UserItemCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutParticipationsInput = {
@@ -27746,6 +29694,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
     items?: UserItemUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutParticipationsInput = {
@@ -27772,6 +29721,7 @@ export namespace Prisma {
     rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactCreateNestedManyWithoutHuntInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutHuntInput
+    reviews?: ReviewCreateNestedManyWithoutTreasureHuntInput
   }
 
   export type TreasureHuntUncheckedCreateWithoutParticipantsInput = {
@@ -27793,6 +29743,7 @@ export namespace Prisma {
     rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutHuntInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutTreasureHuntInput
   }
 
   export type TreasureHuntCreateOrConnectWithoutParticipantsInput = {
@@ -27832,6 +29783,7 @@ export namespace Prisma {
     Craft?: CraftUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
     items?: UserItemUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutParticipationsInput = {
@@ -27855,6 +29807,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
     items?: UserItemUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TreasureHuntUpsertWithoutParticipantsInput = {
@@ -27887,6 +29840,7 @@ export namespace Prisma {
     rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutHuntNestedInput
+    reviews?: ReviewUpdateManyWithoutTreasureHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateWithoutParticipantsInput = {
@@ -27908,6 +29862,7 @@ export namespace Prisma {
     rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutHuntNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutTreasureHuntNestedInput
   }
 
   export type UserCreateWithoutCollectedArtefactsInput = {
@@ -27931,6 +29886,7 @@ export namespace Prisma {
     Craft?: CraftCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
     items?: UserItemCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCollectedArtefactsInput = {
@@ -27954,6 +29910,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
     items?: UserItemUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCollectedArtefactsInput = {
@@ -27980,6 +29937,7 @@ export namespace Prisma {
     steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
     rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutHuntInput
+    reviews?: ReviewCreateNestedManyWithoutTreasureHuntInput
   }
 
   export type TreasureHuntUncheckedCreateWithoutArtefactsInput = {
@@ -28001,6 +29959,7 @@ export namespace Prisma {
     steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
     rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutHuntInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutTreasureHuntInput
   }
 
   export type TreasureHuntCreateOrConnectWithoutArtefactsInput = {
@@ -28084,6 +30043,7 @@ export namespace Prisma {
     Craft?: CraftUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
     items?: UserItemUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCollectedArtefactsInput = {
@@ -28107,6 +30067,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
     items?: UserItemUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TreasureHuntUpsertWithoutArtefactsInput = {
@@ -28139,6 +30100,7 @@ export namespace Prisma {
     steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
     rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutHuntNestedInput
+    reviews?: ReviewUpdateManyWithoutTreasureHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateWithoutArtefactsInput = {
@@ -28160,6 +30122,7 @@ export namespace Prisma {
     steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
     rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutHuntNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutTreasureHuntNestedInput
   }
 
   export type CraftUpsertWithWhereUniqueWithoutResultInput = {
@@ -28222,6 +30185,7 @@ export namespace Prisma {
     rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactCreateNestedManyWithoutHuntInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutHuntInput
+    reviews?: ReviewCreateNestedManyWithoutTreasureHuntInput
   }
 
   export type TreasureHuntUncheckedCreateWithoutStepsInput = {
@@ -28243,6 +30207,7 @@ export namespace Prisma {
     rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutHuntInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutTreasureHuntInput
   }
 
   export type TreasureHuntCreateOrConnectWithoutStepsInput = {
@@ -28280,6 +30245,7 @@ export namespace Prisma {
     rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutHuntNestedInput
+    reviews?: ReviewUpdateManyWithoutTreasureHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateWithoutStepsInput = {
@@ -28301,6 +30267,7 @@ export namespace Prisma {
     rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutHuntNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutTreasureHuntNestedInput
   }
 
   export type TreasureHuntCreateWithoutRewardsInput = {
@@ -28322,6 +30289,7 @@ export namespace Prisma {
     steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactCreateNestedManyWithoutHuntInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutHuntInput
+    reviews?: ReviewCreateNestedManyWithoutTreasureHuntInput
   }
 
   export type TreasureHuntUncheckedCreateWithoutRewardsInput = {
@@ -28343,6 +30311,7 @@ export namespace Prisma {
     steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutHuntInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutTreasureHuntInput
   }
 
   export type TreasureHuntCreateOrConnectWithoutRewardsInput = {
@@ -28380,6 +30349,7 @@ export namespace Prisma {
     steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutHuntNestedInput
+    reviews?: ReviewUpdateManyWithoutTreasureHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateWithoutRewardsInput = {
@@ -28401,6 +30371,7 @@ export namespace Prisma {
     steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutHuntNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutTreasureHuntNestedInput
   }
 
   export type UserCreateWithoutVirtualCurrencyInput = {
@@ -28424,6 +30395,7 @@ export namespace Prisma {
     Craft?: CraftCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
     items?: UserItemCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVirtualCurrencyInput = {
@@ -28447,6 +30419,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
     items?: UserItemUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVirtualCurrencyInput = {
@@ -28518,6 +30491,7 @@ export namespace Prisma {
     Craft?: CraftUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
     items?: UserItemUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVirtualCurrencyInput = {
@@ -28541,6 +30515,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
     items?: UserItemUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TransactionHistoryUpsertWithWhereUniqueWithoutVirtualCurrencyInput = {
@@ -28603,6 +30578,7 @@ export namespace Prisma {
     Craft?: CraftCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
     items?: UserItemCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTransactionHistoryInput = {
@@ -28626,6 +30602,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
     items?: UserItemUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTransactionHistoryInput = {
@@ -28694,6 +30671,7 @@ export namespace Prisma {
     Craft?: CraftUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
     items?: UserItemUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTransactionHistoryInput = {
@@ -28717,6 +30695,7 @@ export namespace Prisma {
     Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
     items?: UserItemUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCraftInput = {
@@ -28740,6 +30719,7 @@ export namespace Prisma {
     transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
     items?: UserItemCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCraftInput = {
@@ -28763,6 +30743,7 @@ export namespace Prisma {
     transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
     items?: UserItemUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCraftInput = {
@@ -28855,6 +30836,7 @@ export namespace Prisma {
     transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
     items?: UserItemUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCraftInput = {
@@ -28878,6 +30860,7 @@ export namespace Prisma {
     transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
     items?: UserItemUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ArtefactUpsertWithoutCraftInput = {
@@ -29072,6 +31055,7 @@ export namespace Prisma {
     transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
     Craft?: CraftCreateNestedManyWithoutUserInput
     items?: UserItemCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLeaderboardEntryInput = {
@@ -29095,6 +31079,7 @@ export namespace Prisma {
     transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
     Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
     items?: UserItemUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLeaderboardEntryInput = {
@@ -29121,6 +31106,7 @@ export namespace Prisma {
     steps?: HuntStepCreateNestedManyWithoutTreasureHuntInput
     rewards?: RewardCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactCreateNestedManyWithoutHuntInput
+    reviews?: ReviewCreateNestedManyWithoutTreasureHuntInput
   }
 
   export type TreasureHuntUncheckedCreateWithoutLeaderboardEntryInput = {
@@ -29142,6 +31128,7 @@ export namespace Prisma {
     steps?: HuntStepUncheckedCreateNestedManyWithoutTreasureHuntInput
     rewards?: RewardUncheckedCreateNestedManyWithoutTreasureHuntInput
     artefacts?: ArtefactUncheckedCreateNestedManyWithoutHuntInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutTreasureHuntInput
   }
 
   export type TreasureHuntCreateOrConnectWithoutLeaderboardEntryInput = {
@@ -29181,6 +31168,7 @@ export namespace Prisma {
     transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
     Craft?: CraftUpdateManyWithoutUserNestedInput
     items?: UserItemUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLeaderboardEntryInput = {
@@ -29204,6 +31192,7 @@ export namespace Prisma {
     transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
     Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
     items?: UserItemUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TreasureHuntUpsertWithoutLeaderboardEntryInput = {
@@ -29236,6 +31225,7 @@ export namespace Prisma {
     steps?: HuntStepUpdateManyWithoutTreasureHuntNestedInput
     rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
+    reviews?: ReviewUpdateManyWithoutTreasureHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateWithoutLeaderboardEntryInput = {
@@ -29257,6 +31247,7 @@ export namespace Prisma {
     steps?: HuntStepUncheckedUpdateManyWithoutTreasureHuntNestedInput
     rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutTreasureHuntNestedInput
   }
 
   export type UserItemCreateWithoutItemInput = {
@@ -29324,6 +31315,7 @@ export namespace Prisma {
     transactionHistory?: TransactionHistoryCreateNestedManyWithoutUserInput
     Craft?: CraftCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutItemsInput = {
@@ -29347,6 +31339,7 @@ export namespace Prisma {
     transactionHistory?: TransactionHistoryUncheckedCreateNestedManyWithoutUserInput
     Craft?: CraftUncheckedCreateNestedManyWithoutUserInput
     LeaderboardEntry?: LeaderboardEntryUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutItemsInput = {
@@ -29415,6 +31408,7 @@ export namespace Prisma {
     transactionHistory?: TransactionHistoryUpdateManyWithoutUserNestedInput
     Craft?: CraftUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutItemsInput = {
@@ -29438,6 +31432,7 @@ export namespace Prisma {
     transactionHistory?: TransactionHistoryUncheckedUpdateManyWithoutUserNestedInput
     Craft?: CraftUncheckedUpdateManyWithoutUserNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ShopItemUpsertWithoutPurchasesInput = {
@@ -29577,6 +31572,15 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type ReviewCreateManyUserInput = {
+    id?: string
+    huntId: string
+    comment: string
+    score: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type SessionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29692,6 +31696,7 @@ export namespace Prisma {
     rewards?: RewardUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUpdateManyWithoutHuntNestedInput
     LeaderboardEntry?: LeaderboardEntryUpdateManyWithoutHuntNestedInput
+    reviews?: ReviewUpdateManyWithoutTreasureHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateWithoutCreatedByInput = {
@@ -29713,6 +31718,7 @@ export namespace Prisma {
     rewards?: RewardUncheckedUpdateManyWithoutTreasureHuntNestedInput
     artefacts?: ArtefactUncheckedUpdateManyWithoutHuntNestedInput
     LeaderboardEntry?: LeaderboardEntryUncheckedUpdateManyWithoutHuntNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutTreasureHuntNestedInput
   }
 
   export type TreasureHuntUncheckedUpdateManyWithoutCreatedByInput = {
@@ -29901,6 +31907,33 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ReviewUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    treasureHunt?: TreasureHuntUpdateOneRequiredWithoutReviewsNestedInput
+  }
+
+  export type ReviewUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    huntId?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    huntId?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ParticipationCreateManyTreasureHuntInput = {
     id?: string
     userId: string
@@ -29940,6 +31973,15 @@ export namespace Prisma {
     rank: number
     score: number
     completedAt: Date | string
+  }
+
+  export type ReviewCreateManyTreasureHuntInput = {
+    id?: string
+    userId: string
+    comment: string
+    score: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ParticipationUpdateWithoutTreasureHuntInput = {
@@ -30067,6 +32109,33 @@ export namespace Prisma {
     rank?: IntFieldUpdateOperationsInput | number
     score?: IntFieldUpdateOperationsInput | number
     completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewUpdateWithoutTreasureHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutReviewsNestedInput
+  }
+
+  export type ReviewUncheckedUpdateWithoutTreasureHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewUncheckedUpdateManyWithoutTreasureHuntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CraftCreateManyResultInput = {
