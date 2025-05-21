@@ -158,7 +158,6 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 py-16 px-4 overflow-hidden">
-      {/* Background effects */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
         <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-700 blur-3xl"></div>
         <div className="absolute top-1/3 -right-24 w-96 h-96 rounded-full bg-amber-500 blur-3xl"></div>
@@ -177,7 +176,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
           >
             Achetez des{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-purple-500 to-rose-400">
-              Artefacts
+              Couronnes
             </span>
           </motion.h2>
           <motion.p

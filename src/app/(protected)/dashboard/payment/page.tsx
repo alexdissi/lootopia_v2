@@ -1,6 +1,14 @@
+import { Suspense } from "react";
 import PricingComponent from "@/components/pricing/pricing-components";
+import { PaymentModalWrapper } from "@/components/pricing/payment-modal";
 
-export default function PricingPage() {
+export default function PricingPage({
+  searchParams,
+}: {
+  searchParams: { payment?: string };
+}) {
+  const paymentStatus = searchParams.payment as "success" | "cancel" | null;
+
   const packs = [
     {
       id: "price_1RR6xvHvWY7Zh28WVP63Kfgn",
@@ -40,5 +48,12 @@ export default function PricingPage() {
     },
   ];
 
-  return <PricingComponent packs={packs} />;
+  return (
+    <>
+      <PricingComponent packs={packs} />
+      <Suspense fallback={null}>
+        {paymentStatus && <PaymentModalWrapper paymentStatus={paymentStatus} />}
+      </Suspense>
+    </>
+  );
 }
