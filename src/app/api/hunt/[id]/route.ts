@@ -10,6 +10,7 @@ export async function GET(
   try {
     const headersList = await headers();
     const session = await auth.api.getSession({ headers: headersList });
+    const {id} = await params;
 
     if (!session?.user) {
       return NextResponse.json(
@@ -19,7 +20,7 @@ export async function GET(
     }
 
     const hunt = await prisma.treasureHunt.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         steps: {
           orderBy: { stepOrder: "asc" },

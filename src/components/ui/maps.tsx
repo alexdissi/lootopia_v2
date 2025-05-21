@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
 import { Loader2, MapPin, Maximize2, Minimize2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import "leaflet/dist/leaflet.css";
+
+type LeafletType = typeof import("leaflet");
+let L: LeafletType;
 
 interface MapViewProps {
   location: string;
@@ -24,16 +26,26 @@ export function MapView({
   interactive = true,
 }: MapViewProps) {
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<L.Map | null>(null);
-  const markerRef = useRef<L.Marker | null>(null);
+  const mapInstanceRef = useRef<any | null>(null);
+  const markerRef = useRef<any | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  const [isClientReady, setIsClientReady] = useState(false);
 
   useEffect(() => {
-    if (!mapRef.current) return;
+    if (typeof window !== "undefined") {
+      import("leaflet").then((leaflet) => {
+        L = leaflet.default || leaflet;
+        setIsClientReady(true);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isClientReady || !mapRef.current) return;
 
     if (!mapInstanceRef.current) {
       mapInstanceRef.current = L.map(mapRef.current, {
@@ -51,7 +63,7 @@ export function MapView({
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
           subdomains: "abcd",
           maxZoom: 20,
-        },
+        }
       ).addTo(mapInstanceRef.current);
 
       const icon = L.divIcon({
@@ -66,9 +78,8 @@ export function MapView({
         iconAnchor: [15, 42],
       });
 
-      // Créer un marqueur avec l'icône personnalisée
       markerRef.current = L.marker([0, 0], { icon }).addTo(
-        mapInstanceRef.current,
+        mapInstanceRef.current
       );
     }
 
@@ -78,7 +89,7 @@ export function MapView({
 
       try {
         const response = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}&limit=1`,
+          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}&limit=1`
         );
 
         const data = await response.json();
@@ -89,19 +100,19 @@ export function MapView({
 
           if (mapInstanceRef.current) {
             mapInstanceRef.current.setView(
-              coordinates as L.LatLngExpression,
-              zoom,
+              coordinates as [number, number],
+              zoom
             );
 
             if (markerRef.current) {
-              markerRef.current.setLatLng(coordinates as L.LatLngExpression);
+              markerRef.current.setLatLng(coordinates as [number, number]);
 
               markerRef.current
                 .bindPopup(
                   `<div class="p-1">
                   <div class="font-semibold mb-1">${location}</div>
                   <div class="text-xs text-gray-500">${display_name}</div>
-                </div>`,
+                </div>`
                 )
                 .openPopup();
             }
@@ -129,7 +140,7 @@ export function MapView({
         mapInstanceRef.current = null;
       }
     };
-  }, [location, zoom, interactive, isMobile]);
+  }, [location, zoom, interactive, isMobile, isClientReady]);
 
   const handleRecenter = () => {
     if (mapInstanceRef.current && markerRef.current) {
@@ -157,7 +168,7 @@ export function MapView({
       className={cn(
         "relative rounded-xl overflow-hidden transition-all duration-300 ease-in-out",
         isFullscreen ? "fixed inset-0 z-50 rounded-none" : "",
-        className,
+        className
       )}
     >
       {!location && (
