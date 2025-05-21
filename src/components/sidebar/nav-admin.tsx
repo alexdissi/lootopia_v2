@@ -4,28 +4,20 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuBadge,
 } from "@/components/ui/sidebar";
 import type { NavItem } from "./app-sidebar";
 import { renderIcon } from "@/lib/icon-map";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-export function NavMain({ items }: { items: NavItem[] }) {
+export function NavAdmin({ items }: { items: NavItem[] }) {
   const pathname = usePathname();
 
   return (
     <SidebarMenu>
       {items.map((item) => {
-        let isActive = false;
-
-        if (item.url === "/dashboard") {
-          isActive = pathname === "/dashboard";
-        } else {
-          isActive =
-            pathname === item.url ||
-            (pathname.startsWith(item.url + "/") && item.url !== "/dashboard");
-        }
+        const isActive =
+          pathname === item.url || pathname.startsWith(`${item.url}/`);
 
         return (
           <SidebarMenuItem key={item.title}>
@@ -33,12 +25,6 @@ export function NavMain({ items }: { items: NavItem[] }) {
               <Link href={item.url} className="transition-all duration-200">
                 {renderIcon(item.icon, "size-4")}
                 <span>{item.title}</span>
-
-                {item.title === "Chasses" && (
-                  <SidebarMenuBadge className="bg-primary/10 text-primary">
-                    3
-                  </SidebarMenuBadge>
-                )}
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

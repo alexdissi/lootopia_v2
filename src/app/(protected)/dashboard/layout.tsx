@@ -5,6 +5,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { CurrencyTracker } from "@/components/context/common/currency-tracker";
 
 export const metadata: Metadata = {
   title: "Lootopia",
@@ -21,7 +22,11 @@ export default async function DashboardLayout({
       <AppSidebar />
       <SidebarInset>
         <main className="p-4">
-          <SidebarTrigger />
+          <div className="flex items-center justify-between">
+            <SidebarTrigger />
+            <CurrencyTracker />
+          </div>
+
           {children}
         </main>
       </SidebarInset>

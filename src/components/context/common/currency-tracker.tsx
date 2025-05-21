@@ -18,7 +18,7 @@ const fetchCurrencyBalance = async (): Promise<CurrencyData> => {
 };
 
 export function CurrencyTracker() {
-  const { data, isLoading, error } = useQuery<CurrencyData>({
+  const { data, isLoading } = useQuery<CurrencyData>({
     queryKey: ["currencyBalance"],
     queryFn: fetchCurrencyBalance,
     refetchInterval: 60000,
