@@ -166,7 +166,6 @@ export function UserTransactionsTab({ userId }: { userId: string }) {
                     <TableRow key={transaction.id}>
                       <TableCell>
                         <div className="flex items-center gap-2">
-                          {getTransactionIcon(transaction.transactionType)}
                           {getTransactionBadge(transaction.transactionType)}
                         </div>
                       </TableCell>
@@ -194,7 +193,7 @@ export function UserTransactionsTab({ userId }: { userId: string }) {
                             year: "numeric",
                             hour: "2-digit",
                             minute: "2-digit",
-                          },
+                          }
                         )}
                       </TableCell>
                       <TableCell className="text-right">
