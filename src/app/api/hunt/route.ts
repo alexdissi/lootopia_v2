@@ -4,7 +4,6 @@ import prisma from "@/lib/db";
 import { headers } from "next/headers";
 import { z } from "zod";
 
-// Schéma de validation avec zod
 const huntSchema = z.object({
   title: z.string().min(3, "Le titre doit contenir au moins 3 caractères"),
   description: z.string().optional(),
@@ -111,7 +110,7 @@ export async function GET(req: Request) {
     const status = searchParams.get("status");
     const userOnly = searchParams.get("userOnly") === "true";
 
-    const filters: any = {};
+    let filters: any = {};
 
     if (status) {
       filters.status = status;
@@ -119,6 +118,29 @@ export async function GET(req: Request) {
 
     if (userOnly) {
       filters.createdById = session.user.id;
+    } else {
+      filters = {
+        OR: [
+          {
+            status: "PENDING",
+            createdById: session.user.id
+          },
+          {
+            status: {
+              not: "PENDING"
+            }
+          }
+        ]
+      };
+
+      if (status) {
+        filters = {
+          AND: [
+            { status },
+            filters
+          ]
+        };
+      }
     }
 
     const hunts = await prisma.treasureHunt.findMany({

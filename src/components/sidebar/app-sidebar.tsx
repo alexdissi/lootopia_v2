@@ -50,17 +50,17 @@ const data = {
       icon: LayoutDashboardIcon,
     },
     {
-      title: "Payments",
-      url: "/dashboard/payment",
-      icon: Coins,
-    },
-    {
-      title: "Hunts",
+      title: "Chasses",
       url: "/dashboard/hunts",
       icon: Candy,
     },
     {
-      title: "Profile",
+      title: "Paiements",
+      url: "/dashboard/payment",
+      icon: Coins,
+    },
+    {
+      title: "Mon Profil",
       url: "/dashboard/profile",
       icon: UserIcon,
     },
