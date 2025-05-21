@@ -193,7 +193,7 @@ export function UserTransactionsTab({ userId }: { userId: string }) {
                             year: "numeric",
                             hour: "2-digit",
                             minute: "2-digit",
-                          }
+                          },
                         )}
                       </TableCell>
                       <TableCell className="text-right">
