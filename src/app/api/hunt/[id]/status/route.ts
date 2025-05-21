@@ -5,7 +5,7 @@ import prisma from "@/lib/db";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   try {
     const headersList = await headers();
@@ -14,17 +14,14 @@ export async function PATCH(
     if (!session?.user) {
       return NextResponse.json(
         { error: "Authentification requise" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
     const { status } = await req.json();
 
     if (!["PENDING", "IN_PROGRESS", "COMPLETED"].includes(status)) {
-      return NextResponse.json(
-        { error: "Statut invalide" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Statut invalide" }, { status: 400 });
     }
 
     const hunt = await prisma.treasureHunt.findUnique({
@@ -35,14 +32,14 @@ export async function PATCH(
     if (!hunt) {
       return NextResponse.json(
         { error: "Chasse au trésor introuvable" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
     if (hunt.createdBy?.email !== session.user.email) {
       return NextResponse.json(
         { error: "Vous n'êtes pas autorisé à modifier cette chasse" },
-        { status: 403 }
+        { status: 403 },
       );
     }
 
@@ -59,7 +56,7 @@ export async function PATCH(
     console.error("Erreur lors de la mise à jour du statut :", error);
     return NextResponse.json(
       { error: "Erreur lors de la mise à jour du statut" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

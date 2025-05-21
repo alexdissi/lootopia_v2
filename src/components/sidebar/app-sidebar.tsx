@@ -16,6 +16,7 @@ import {
   SearchIcon,
   SettingsIcon,
   ShieldIcon,
+  UserIcon,
   UsersIcon,
 } from "lucide-react";
 
@@ -57,6 +58,11 @@ const data = {
       title: "Hunts",
       url: "/dashboard/hunts",
       icon: Candy,
+    },
+    {
+      title: "Profile",
+      url: "/dashboard/profile",
+      icon: UserIcon,
     },
   ],
   navAdmin: [

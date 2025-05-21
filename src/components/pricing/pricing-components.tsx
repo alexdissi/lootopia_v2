@@ -77,7 +77,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
 
   const getGradientForPack = (
     index: number,
-    isPopular: boolean | undefined
+    isPopular: boolean | undefined,
   ) => {
     if (isPopular)
       return "from-purple-900/80 to-purple-950/90 shadow-lg shadow-purple-500/20";
@@ -218,7 +218,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                   hoveredCard === pack.id && "scale-105 shadow-xl z-10",
                   hoveredCard === pack.id &&
                     pack.popular &&
-                    "shadow-purple-500/30"
+                    "shadow-purple-500/30",
                 )}
                 onMouseEnter={() => setHoveredCard(pack.id)}
                 onMouseLeave={() => setHoveredCard(null)}
@@ -227,7 +227,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                 <div
                   className={cn(
                     "absolute inset-0 opacity-0 transition-opacity duration-300",
-                    hoveredCard === pack.id && "opacity-100"
+                    hoveredCard === pack.id && "opacity-100",
                   )}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent blur-sm"></div>
@@ -245,7 +245,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                     className={cn(
                       "mx-auto p-4 rounded-full w-20 h-20 flex items-center justify-center mb-4 transition-all duration-300",
                       getIconBgColor(index, pack.popular),
-                      hoveredCard === pack.id && "scale-110"
+                      hoveredCard === pack.id && "scale-110",
                     )}
                   >
                     {getIconForPack(index)}
@@ -264,7 +264,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                       className={cn(
                         "text-5xl font-extrabold transition-all duration-300",
                         pack.popular ? "text-purple-300" : "text-white",
-                        hoveredCard === pack.id && "scale-110"
+                        hoveredCard === pack.id && "scale-110",
                       )}
                     >
                       {pack.artefacts}
@@ -279,7 +279,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                       <div
                         className={cn(
                           "flex items-center justify-center w-5 h-5 rounded-full mr-2",
-                          getCheckColor(index, pack.popular)
+                          getCheckColor(index, pack.popular),
                         )}
                       >
                         <Check className="h-3 w-3 text-white" />
@@ -290,7 +290,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                       <div
                         className={cn(
                           "flex items-center justify-center w-5 h-5 rounded-full mr-2",
-                          getCheckColor(index, pack.popular)
+                          getCheckColor(index, pack.popular),
                         )}
                       >
                         <Check className="h-3 w-3 text-white" />
@@ -302,7 +302,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                         <div
                           className={cn(
                             "flex items-center justify-center w-5 h-5 rounded-full mr-2",
-                            getCheckColor(index, pack.popular)
+                            getCheckColor(index, pack.popular),
                           )}
                         >
                           <Check className="h-3 w-3 text-white" />
@@ -330,7 +330,7 @@ export default function PricingComponent({ packs }: { packs: Pack[] }) {
                   <Button
                     className={cn(
                       "w-full py-5 text-base font-bold transition-all duration-300 relative overflow-hidden group",
-                      getButtonGradient(index, pack.popular)
+                      getButtonGradient(index, pack.popular),
                     )}
                     onClick={() => handleBuy(pack.id, pack.artefacts)}
                   >

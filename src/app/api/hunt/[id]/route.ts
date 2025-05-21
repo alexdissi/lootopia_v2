@@ -3,7 +3,10 @@ import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
 import { headers } from "next/headers";
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(
+  req: Request,
+  { params }: { params: { id: string } },
+) {
   try {
     const headersList = await headers();
     const session = await auth.api.getSession({ headers: headersList });
@@ -24,14 +27,14 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
         participants: {
           include: {
             user: {
-              select: { 
-                id: true, 
-                name: true, 
-                email: true, 
-                image: true 
-              }
-            }
-          }
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                image: true,
+              },
+            },
+          },
         },
         createdBy: {
           select: { name: true, email: true },

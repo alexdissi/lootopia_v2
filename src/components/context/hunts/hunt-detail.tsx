@@ -77,7 +77,7 @@ export function HuntDetails({ huntId }: { huntId: string }) {
   const isCreator = hunt?.createdBy?.email === session?.data?.user?.email;
   const isParticipant = Boolean(
     session?.data?.user?.id &&
-      hunt.participants?.some((p) => p.userId === session?.data?.user?.id)
+      hunt.participants?.some((p) => p.userId === session?.data?.user?.id),
   );
 
   return (
@@ -219,7 +219,7 @@ export function HuntDetails({ huntId }: { huntId: string }) {
                                 </Badge>
                               </div>
                             );
-                          }
+                          },
                         )}
                       </div>
                     ) : (
