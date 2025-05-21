@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, CheckCircle2 } from "lucide-react";
-import { HuntType } from "@/types/hunt";
 import { toast } from "sonner";
 import {
   Dialog,
@@ -21,6 +20,22 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+
+interface HuntType {
+  id: string;
+  title: string;
+  description?: string | null;
+  status: string;
+  createdBy?: {
+    name?: string | null;
+    email?: string | null;
+  } | null;
+  startDate?: string | Date | null;
+  endDate?: string | Date | null;
+  fee?: number | null;
+  steps?: Array<any>;
+  [key: string]: any;
+}
 
 interface HuntStatusSectionProps {
   hunt: HuntType;

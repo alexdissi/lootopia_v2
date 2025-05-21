@@ -8,16 +8,52 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { HuntType } from "@/types/hunt";
 import { Badge } from "@/components/ui/badge";
+import { Hunt } from "@/interfaces/hunt";
 
-export function HuntInfoCard({ hunt }: { hunt: HuntType }) {
+interface LocationType {
+  address?: string;
+  latitude?: number;
+  longitude?: number;
+}
+
+interface Participant {
+  userId: string;
+  huntId: string;
+  status?: string;
+}
+
+interface HuntInfoCardProps {
+  hunt: Hunt & {
+    participants?: Participant[];
+    tags?: string[];
+  };
+}
+
+export function HuntInfoCard({ hunt }: HuntInfoCardProps) {
+  const getLocationAddress = () => {
+    if (!hunt.location) return "Non spécifiée";
+
+    if (typeof hunt.location === "string") {
+      try {
+        const locationObj = JSON.parse(hunt.location);
+        return locationObj.address || "Non spécifiée";
+      } catch {
+        return hunt.location;
+      }
+    } else if (typeof hunt.location === "object") {
+      return hunt.location.address || "Non spécifiée";
+    }
+
+    return "Non spécifiée";
+  };
+
   return (
     <Card>
       <CardHeader className="pb-2">
         <CardTitle>{hunt.title}</CardTitle>
         <CardDescription className="mt-1 text-muted-foreground">
-          {hunt.description}
+          {hunt.description || ""} {/* Ajout d'une valeur par défaut */}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -62,7 +98,7 @@ export function HuntInfoCard({ hunt }: { hunt: HuntType }) {
             <div>
               <p className="text-sm font-medium">Localisation</p>
               <p className="text-sm text-muted-foreground">
-                {hunt.location?.address || "Non spécifiée"}
+                {getLocationAddress()}
               </p>
             </div>
           </div>
@@ -72,13 +108,13 @@ export function HuntInfoCard({ hunt }: { hunt: HuntType }) {
             <div>
               <p className="text-sm font-medium">Participants</p>
               <p className="text-sm text-muted-foreground">
-                {hunt.participantCount || 0} participants
+                {hunt.participants?.length || 0} participants
               </p>
             </div>
           </div>
         </div>
 
-        {hunt.tags?.length > 0 && (
+        {hunt.tags && hunt.tags.length > 0 && (
           <div className="pt-2">
             <p className="text-sm font-medium mb-2">Catégories</p>
             <div className="flex flex-wrap gap-1.5">

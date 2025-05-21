@@ -44,8 +44,8 @@ export async function POST(req: NextRequest) {
     customer: user.stripeCustomerId ?? undefined,
     payment_method_types: ["card", "revolut_pay"],
     line_items: [{ price: priceId, quantity: 1 }],
-    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`,
-    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/payment`,
+    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/payment?payment=success`,
+    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/payment?payment=cancel`,
     metadata: {
       userId: user.id ?? "",
       email: user.email ?? undefined,
