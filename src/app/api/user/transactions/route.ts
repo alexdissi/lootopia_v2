@@ -12,21 +12,16 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Non authentifié" }, { status: 401 });
     }
 
-    // Récupérer le filtre depuis les paramètres de la requête
     const searchParams = request.nextUrl.searchParams;
     const filter = searchParams.get("filter");
-
-    // Construire la requête en fonction du filtre
-    const whereClause: any = {
+    const whereClause: any = {  
       userId: session.user.id,
     };
 
-    // Ajouter le filtre de type de transaction s'il est spécifié et différent de "ALL"
     if (filter && filter !== "ALL") {
       whereClause.transactionType = filter;
     }
 
-    // Récupérer les transactions
     const transactions = await prisma.transactionHistory.findMany({
       where: whereClause,
       orderBy: {
@@ -42,13 +37,11 @@ export async function GET(request: NextRequest) {
       take: 50,
     });
 
-    // Récupérer l'utilisateur pour son ID Stripe
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
       select: { stripeCustomerId: true },
     });
 
-    // Si l'utilisateur a un ID Stripe, récupérer ses factures
     let invoiceMap = new Map();
     if (user?.stripeCustomerId) {
       try {
@@ -57,7 +50,6 @@ export async function GET(request: NextRequest) {
           limit: 100,
         });
 
-        // Créer une carte des factures par date de création pour faciliter la correspondance
         invoices.data.forEach((invoice) => {
           invoiceMap.set(
             new Date(invoice.created * 1000).toISOString().split("T")[0],
@@ -72,11 +64,9 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // Enrichir les transactions avec les IDs de facture si possible
     const enrichedTransactions = transactions.map((transaction) => {
       let invoiceId = undefined;
 
-      // Si c'est un achat, essayer de faire correspondre par date
       if (transaction.transactionType === "BOUGHT") {
         const transactionDate = new Date(transaction.createdAt)
           .toISOString()
