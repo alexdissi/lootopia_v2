@@ -8,7 +8,8 @@ export async function GET(
   { params }: { params: { id: string } },
 ) {
   try {
-    const session = await auth.api.getSession({ headers: await headers() });
+    const headersList = await headers();
+    const session = await auth.api.getSession({ headers: headersList });
 
     if (!session?.user) {
       return NextResponse.json(
@@ -49,7 +50,9 @@ export async function PATCH(
   { params }: { params: { id: string } },
 ) {
   try {
-    const session = await auth.api.getSession({ headers: await headers() });
+    const headersList = await headers();
+    const session = await auth.api.getSession({ headers: headersList });
+    const body = await req.json();
 
     if (!session?.user) {
       return NextResponse.json(
@@ -78,8 +81,6 @@ export async function PATCH(
         { status: 403 },
       );
     }
-
-    const body = await req.json();
 
     await prisma.$transaction(async (tx) => {
       await tx.treasureHunt.update({
@@ -136,7 +137,8 @@ export async function DELETE(
   { params }: { params: { id: string } },
 ) {
   try {
-    const session = await auth.api.getSession({ headers: await headers() });
+    const headersList = await headers();
+    const session = await auth.api.getSession({ headers: headersList });
 
     if (!session?.user) {
       return NextResponse.json(

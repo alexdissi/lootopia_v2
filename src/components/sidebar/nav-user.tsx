@@ -24,11 +24,11 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { User } from "better-auth";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { User } from "better-auth";
 
-export function NavUser({ user }: { user: User }) {
+export function NavUser({ user }: { user: User | null }) {
   const { isMobile } = useSidebar();
   const router = useRouter();
 

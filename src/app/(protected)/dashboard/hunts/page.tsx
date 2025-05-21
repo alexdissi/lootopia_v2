@@ -8,7 +8,7 @@ import { HuntsTabs } from "@/components/context/hunts/hunt-tabs";
 import { Metadata } from "next";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { UserRole } from "@/interfaces/user";
+import { UserRole } from "../../../../../generated/prisma";
 
 export const metadata: Metadata = {
   title: "Chasses au trésor",

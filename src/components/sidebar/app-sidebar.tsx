@@ -3,7 +3,6 @@
 import * as React from "react";
 import {
   ArrowUpCircleIcon,
-  BarChartIcon,
   CameraIcon,
   Candy,
   ClipboardListIcon,
@@ -12,12 +11,12 @@ import {
   FileCodeIcon,
   FileIcon,
   FileTextIcon,
-  FolderIcon,
   HelpCircleIcon,
   LayoutDashboardIcon,
-  ListIcon,
   SearchIcon,
   SettingsIcon,
+  ShieldIcon,
+  UsersIcon,
 } from "lucide-react";
 
 import {
@@ -34,7 +33,13 @@ import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
 import { authClient } from "@/lib/auth-client";
 import { User } from "better-auth";
+
 import { CurrencyTracker } from "../context/common/currency-tracker";
+import { UserRole } from "../../../generated/prisma";
+
+interface ExtendedUser extends User {
+  role?: UserRole;
+}
 
 const data = {
   navMain: [
@@ -52,6 +57,18 @@ const data = {
       title: "Hunts",
       url: "/dashboard/hunts",
       icon: Candy,
+    },
+  ],
+  navAdmin: [
+    {
+      title: "Utilisateurs",
+      url: "/dashboard/admin",
+      icon: UsersIcon,
+    },
+    {
+      title: "Paramètres",
+      url: "/dashboard/admin/settings",
+      icon: SettingsIcon,
     },
   ],
   navClouds: [
@@ -137,9 +154,32 @@ const data = {
     },
   ],
 };
+function NavAdmin({ items }: { items: typeof data.navAdmin }) {
+  return (
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <SidebarMenuButton className="font-semibold text-xs uppercase tracking-wider text-muted-foreground">
+          <ShieldIcon className="h-4 w-4 mr-1" />
+          Administration
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+      {items.map((item) => (
+        <SidebarMenuItem key={item.title}>
+          <SidebarMenuButton asChild>
+            <a href={item.url}>
+              {item.icon && <item.icon className="h-4 w-4" />}
+              <span>{item.title}</span>
+            </a>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      ))}
+    </SidebarMenu>
+  );
+}
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data: session } = authClient.useSession();
+  const session = authClient.useSession();
+  const isAdmin = (session?.data?.user as ExtendedUser)?.role === "ADMIN";
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -160,10 +200,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
+
+        {isAdmin && <NavAdmin items={data.navAdmin} />}
       </SidebarContent>
       <SidebarFooter>
         <CurrencyTracker />
-        <NavUser user={session?.user as User} />
+        <NavUser user={session?.data?.user ?? null} />
       </SidebarFooter>
     </Sidebar>
   );

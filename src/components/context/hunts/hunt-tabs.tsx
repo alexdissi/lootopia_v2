@@ -6,7 +6,7 @@ import { useHunts } from "@/hooks/use-hunts";
 import { HuntsFilters } from "./hunt-filters";
 import { HuntsList } from "./hunt-list";
 import { authClient } from "@/lib/auth-client";
-import { UserRole } from "@/interfaces/user";
+import { UserRole } from "../../../../generated/prisma";
 
 export function HuntsTabs() {
   const [activeTab, setActiveTab] = useState("all");
