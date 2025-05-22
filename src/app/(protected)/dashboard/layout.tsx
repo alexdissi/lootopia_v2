@@ -5,6 +5,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { DashboardToolbar } from "@/components/ui/dashboard-toolbar";
 
 export const metadata: Metadata = {
   title: "Lootopia",
@@ -20,6 +21,7 @@ export default async function DashboardLayout({
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
+        <DashboardToolbar />
         <main className="p-4">
           <SidebarTrigger />
           {children}
