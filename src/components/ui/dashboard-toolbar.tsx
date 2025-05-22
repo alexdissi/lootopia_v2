@@ -1,10 +1,10 @@
 "use client";
 
-import * as React from "react";
 import { Bell, Menu, Search } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import * as React from "react";
+import { CurrencyTracker } from "@/components/context/common/currency-tracker";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,20 +13,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { Badge } from "@/components/ui/badge";
-import { CurrencyTracker } from "@/components/context/common/currency-tracker";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export function DashboardToolbar() {
-  const [notifications, setNotifications] = React.useState(3);
-
+  const notifications = 3;
   return (
     <div className="flex items-center justify-between p-4 border-b border-border bg-background">
       <div className="flex items-center gap-2 lg:gap-4">
         <SidebarTrigger className="lg:hidden">
           <Menu className="h-5 w-5" />
         </SidebarTrigger>
-        
+
         <div className="relative max-w-md hidden sm:flex items-center">
           <Search className="absolute left-2.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -89,4 +88,3 @@ export function DashboardToolbar() {
     </div>
   );
 }
-
