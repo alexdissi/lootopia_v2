@@ -22,6 +22,7 @@ export default async function DashboardLayout({
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
+        <DashboardToolbar />
         <main className="p-4">
           <div className="flex items-center justify-between">
             <SidebarTrigger />

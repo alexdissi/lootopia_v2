@@ -26,13 +26,14 @@ export async function PATCH(
     }
 
     const body = await request.json();
-    const { name, email, image } = body;
+    const { name, email,nickname, image } = body;
 
     const updatedUser = await prisma.user.update({
       where: { id },
       data: {
         name,
         email,
+        nickname,
         image,
       },
     });
