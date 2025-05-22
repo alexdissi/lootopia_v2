@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { SignInWithProviderButton } from "@/components/ui/buttons";
 import {
   Form,
   FormControl,
@@ -17,7 +17,7 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
-import { SignInWithProviderButton } from "@/components/ui/buttons";
+import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 
 const loginSchema = z.object({
@@ -57,7 +57,9 @@ export function LoginForm() {
           onError: (ctx) => {
             toast.error(ctx.error.message);
             if (ctx.error.status === 403) {
-              alert("Please verify your email address");
+              toast.error(
+                "Votre compte n'est pas encore validé. Veuillez vérifier votre email.",
+              );
             }
             form.setError("email", {
               type: "manual",
@@ -66,8 +68,7 @@ export function LoginForm() {
           },
         },
       );
-    } catch (error) {
-      console.error("Erreur de connexion :", error);
+    } catch {
       toast.error("Une erreur est survenue.");
     } finally {
       setIsLoading(false);

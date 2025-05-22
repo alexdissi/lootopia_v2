@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import PricingComponent from "@/components/pricing/pricing-components";
 import { PaymentModalWrapper } from "@/components/pricing/payment-modal";
+import PricingComponent from "@/components/pricing/pricing-components";
 
 export default function PricingPage({
   searchParams,

@@ -1,5 +1,5 @@
-import { RegisterForm } from "@/components/context/auth/register-form";
 import type { Metadata } from "next";
+import { RegisterForm } from "@/components/context/auth/register-form";
 
 export const metadata: Metadata = {
   title: "Connexion",

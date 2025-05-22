@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import {
   Command,
   CommandEmpty,
@@ -11,11 +10,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 interface LocationSearchProps {
@@ -88,13 +83,14 @@ export function LocationSearch({
   };
 
   // Nettoyer le timeout lors du démontage
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
-    };
-  }, []);
+    },
+    [],
+  );
 
   const handleSelect = (location: string) => {
     setInputValue(location);
@@ -112,8 +108,7 @@ export function LocationSearch({
         placeholder={placeholder}
         onClick={() => inputValue.length >= 3 && setOpen(true)}
         onFocus={() => inputValue.length >= 3 && setOpen(true)}
-        onBlur={(e) => {
-          // Ne pas fermer le popover si on clique à l'intérieur
+        onBlur={() => {
           setTimeout(() => {
             if (onBlur) onBlur();
             onChange(inputValue);

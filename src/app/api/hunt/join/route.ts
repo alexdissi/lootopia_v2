@@ -1,7 +1,7 @@
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
-import { headers } from "next/headers";
 import { ParticipationStatus } from "../../../../../generated/prisma";
 
 export async function POST(req: Request) {
@@ -18,12 +18,12 @@ export async function POST(req: Request) {
       );
     }
 
-    // Vérifier si la chasse existe
     const hunt = await prisma.treasureHunt.findUnique({
       where: { id: huntId },
       select: {
         id: true,
         fee: true,
+        title: true,
         status: true,
         participants: {
           where: { userId: session.user.id },
@@ -35,7 +35,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Hunt not found" }, { status: 404 });
     }
 
-    // Vérifier si l'utilisateur n'est pas déjà participant
     if (hunt.participants.length > 0) {
       return NextResponse.json(
         { error: "You are already participating in this hunt" },
@@ -43,7 +42,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Vérifier si la chasse est en statut PENDING ou IN_PROGRESS
     if (hunt.status !== "PENDING" && hunt.status !== "IN_PROGRESS") {
       return NextResponse.json(
         { error: "This hunt is no longer open for participation" },
@@ -51,9 +49,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // Vérification et retrait de la monnaie virtuelle si la chasse est payante
     if (hunt.fee && hunt.fee > 0) {
-      // Récupérer la monnaie virtuelle de l'utilisateur
       const virtualCurrency = await prisma.virtualCurrency.findFirst({
         where: {
           userId: session.user.id,
@@ -70,29 +66,17 @@ export async function POST(req: Request) {
         );
       }
 
-      // Effectuer la transaction dans un bloc transactionnel
       await prisma.$transaction(async (tx) => {
-        // 1. Mettre à jour la monnaie virtuelle
-        const updatedCurrency = await tx.virtualCurrency.update({
-          where: { id: virtualCurrency.id },
-          data: {
-            amount: virtualCurrency.amount - (hunt.fee ?? 0),
-            updatedAt: new Date(),
-          },
-        });
-
-        // 2. Créer un enregistrement de transaction
         await tx.transactionHistory.create({
           data: {
             userId: session.user.id,
             amount: hunt.fee ?? 0,
             transactionType: "SPENT",
-            description: `Joined treasure hunt: ${huntId}`,
+            description: `Vous avez rejoins la chasse: ${hunt.title}`,
             virtualCurrencyId: virtualCurrency.id,
           },
         });
 
-        // 3. Créer la participation
         await tx.participation.create({
           data: {
             userId: session.user.id,
@@ -102,7 +86,6 @@ export async function POST(req: Request) {
         });
       });
     } else {
-      // Pour les chasses gratuites, créer simplement la participation
       await prisma.participation.create({
         data: {
           userId: session.user.id,
@@ -112,7 +95,6 @@ export async function POST(req: Request) {
       });
     }
 
-    // Récupérer les détails de la participation créée
     const participation = await prisma.participation.findFirst({
       where: {
         userId: session.user.id,

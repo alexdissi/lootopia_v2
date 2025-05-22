@@ -1,5 +1,5 @@
-import { LoaderPage } from "@/components/ui/loader";
 import { Suspense } from "react";
+import { LoaderPage } from "@/components/ui/loader";
 
 export default function Page() {
   return (

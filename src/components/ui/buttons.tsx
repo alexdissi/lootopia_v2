@@ -1,8 +1,8 @@
 "use client";
 
-import { authClient } from "@/lib/auth-client";
-import { Button } from "@/components/ui/button";
 import clsx from "clsx";
+import { Button } from "@/components/ui/button";
+import { authClient } from "@/lib/auth-client";
 
 type SignInWithProviderButtonProps = {
   provider: "github" | "google";

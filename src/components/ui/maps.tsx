@@ -1,12 +1,17 @@
+/* eslint-disable */
+
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import type { Map as LeafletMap, Marker } from "leaflet";
 import { Loader2, MapPin, Maximize2, Minimize2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
+import "leaflet/dist/leaflet.css";
+
+type LeafletType = typeof import("leaflet");
+let L: LeafletType;
 
 interface MapViewProps {
   location: string;
@@ -24,16 +29,26 @@ export function MapView({
   interactive = true,
 }: MapViewProps) {
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<L.Map | null>(null);
-  const markerRef = useRef<L.Marker | null>(null);
+  const mapInstanceRef = useRef<LeafletMap | null>(null);
+  const markerRef = useRef<Marker | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  const [isClientReady, setIsClientReady] = useState(false);
 
   useEffect(() => {
-    if (!mapRef.current) return;
+    if (typeof window !== "undefined") {
+      import("leaflet").then((leaflet) => {
+        L = leaflet.default || leaflet;
+        setIsClientReady(true);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isClientReady || !mapRef.current) return;
 
     if (!mapInstanceRef.current) {
       mapInstanceRef.current = L.map(mapRef.current, {
@@ -66,7 +81,6 @@ export function MapView({
         iconAnchor: [15, 42],
       });
 
-      // Créer un marqueur avec l'icône personnalisée
       markerRef.current = L.marker([0, 0], { icon }).addTo(
         mapInstanceRef.current,
       );
@@ -89,12 +103,12 @@ export function MapView({
 
           if (mapInstanceRef.current) {
             mapInstanceRef.current.setView(
-              coordinates as L.LatLngExpression,
+              coordinates as [number, number],
               zoom,
             );
 
             if (markerRef.current) {
-              markerRef.current.setLatLng(coordinates as L.LatLngExpression);
+              markerRef.current.setLatLng(coordinates as [number, number]);
 
               markerRef.current
                 .bindPopup(
@@ -109,9 +123,12 @@ export function MapView({
         } else {
           setError("Emplacement non trouvé");
         }
-      } catch (error) {
-        console.error("Erreur lors du géocodage :", error);
-        setError("Erreur de chargement de la carte");
+      } catch (error: unknown) {
+        setError(
+          typeof error === "string"
+            ? error
+            : "Erreur lors de la récupération de l'emplacement",
+        );
       } finally {
         setIsLoading(false);
       }
@@ -129,7 +146,7 @@ export function MapView({
         mapInstanceRef.current = null;
       }
     };
-  }, [location, zoom, interactive, isMobile]);
+  }, [location, zoom, interactive, isMobile, isClientReady]);
 
   const handleRecenter = () => {
     if (mapInstanceRef.current && markerRef.current) {

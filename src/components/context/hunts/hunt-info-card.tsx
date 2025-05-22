@@ -1,6 +1,7 @@
-import { CalendarIcon, Clock, MapPin, Users } from "lucide-react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { CalendarIcon, Clock, MapPin, Users } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -8,14 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Hunt } from "@/interfaces/hunt";
-
-interface LocationType {
-  address?: string;
-  latitude?: number;
-  longitude?: number;
-}
 
 interface Participant {
   userId: string;

@@ -1,4 +1,7 @@
+import { Copy, Facebook, Linkedin, Twitter } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -7,11 +10,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Copy, Facebook, Linkedin, Twitter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { HuntType } from "@/types/hunt";
-import { toast } from "sonner";
 
 interface HuntShareDialogProps {
   isOpen: boolean;

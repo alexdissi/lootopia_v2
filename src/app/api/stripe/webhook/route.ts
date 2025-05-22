@@ -1,7 +1,7 @@
-import type { Stripe } from "stripe";
 import { NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import type { Stripe } from "stripe";
 import prisma from "@/lib/db";
+import { stripe } from "@/lib/stripe";
 
 export async function POST(req: Request) {
   let event: Stripe.Event;
@@ -105,7 +105,7 @@ async function handleCheckoutSessionCompleted(
         amount: currencyAmount,
         transactionType: "BOUGHT",
         stripeSessionId: session.id,
-        description: `Purchased ${currencyAmount} currency units`,
+        description: `Achat de ${currencyAmount} courones via Stripe`,
       },
     });
   } catch (error) {

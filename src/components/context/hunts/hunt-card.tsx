@@ -1,10 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { MapPin, Users } from "lucide-react";
+import Link from "next/link";
 
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -12,8 +14,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import type { Hunt } from "@/interfaces/hunt";
 
 interface HuntCardProps {

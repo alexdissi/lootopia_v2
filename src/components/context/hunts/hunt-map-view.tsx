@@ -1,8 +1,8 @@
 "use client";
 
+import { MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapView } from "@/components/ui/maps";
-import { MapPin } from "lucide-react";
 import { Hunt } from "@/interfaces/hunt";
 
 export default function HuntMapView({ hunt }: { hunt: Hunt }) {
@@ -16,7 +16,7 @@ export default function HuntMapView({ hunt }: { hunt: Hunt }) {
             </div>
             <h3 className="text-lg font-medium mb-2">Aucune localisation</h3>
             <p className="text-muted-foreground text-center max-w-md">
-              Cette chasse au trésor n'a pas de localisation définie.
+              Cette chasse au trésor n&apos;'a pas de localisation définie.
             </p>
           </div>
         </CardContent>
@@ -54,7 +54,7 @@ export default function HuntMapView({ hunt }: { hunt: Hunt }) {
         />
       </div>
     );
-  } catch (error) {
+  } catch {
     return (
       <Card className="overflow-hidden border-none shadow-md">
         <CardContent className="p-4">

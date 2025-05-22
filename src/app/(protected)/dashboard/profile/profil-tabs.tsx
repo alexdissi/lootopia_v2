@@ -1,9 +1,10 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UserTransactionsTab } from "@/components/context/users/user-transaction-history";
 import { Suspense } from "react";
+import { UserTransactionsTab } from "@/components/context/users/user-transaction-history";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { UserProfileForm } from "@/components/context/users/user-info";
 
 interface ProfileTabsProps {
   defaultTab: string;
@@ -27,7 +28,7 @@ export function ProfileTabs({ defaultTab, userId }: ProfileTabsProps) {
       </TabsList>
 
       <TabsContent value="info">
-        <p>Informations utilisateur...</p>
+        <UserProfileForm userId={userId} />
       </TabsContent>
 
       <TabsContent value="transactions">

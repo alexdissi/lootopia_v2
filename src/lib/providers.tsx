@@ -1,9 +1,8 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState, type ReactNode } from "react";
 import { ThemeProvider } from "next-themes";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { useState, type ReactNode } from "react";
 
 interface ProvidersProps {
   children: ReactNode;

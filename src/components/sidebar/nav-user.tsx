@@ -1,5 +1,6 @@
 "use client";
 
+import { User } from "better-auth";
 import {
   BellIcon,
   CreditCardIcon,
@@ -8,6 +9,7 @@ import {
   UserCircleIcon,
 } from "lucide-react";
 
+import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -25,8 +27,6 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
-import { User } from "better-auth";
 
 export function NavUser({ user }: { user: User | null }) {
   const { isMobile } = useSidebar();

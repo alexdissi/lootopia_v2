@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { Plus } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { HuntCard } from "./hunt-card";
 import { HuntsListSkeleton } from "./hunt-skeleton";

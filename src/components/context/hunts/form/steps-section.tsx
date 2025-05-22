@@ -1,8 +1,9 @@
 "use client";
 
-import type { Control, UseFormRegister } from "react-hook-form";
 import { PlusCircle, Trash2 } from "lucide-react";
+import type { Control, UseFormRegister } from "react-hook-form";
 
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -18,7 +19,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import { FormValues } from "@/schemas/hunt-schema";
 
 interface StepsSectionProps {

@@ -1,0 +1,6 @@
+# Ignorer tout sauf le dossier src
+/*
+!/src/
+
+# Également ignorer certains dossiers spécifiques à l'intérieur de src si nécessaire
+/src/generated/**

@@ -1,56 +1,49 @@
 "use client";
 
-import { MailIcon, PlusCircleIcon, type LucideIcon } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
-  SidebarGroup,
-  SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuBadge,
 } from "@/components/ui/sidebar";
-import Link from "next/link";
+import { renderIcon } from "@/lib/icon-map";
+import type { NavItem } from "./app-sidebar";
 
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string;
-    url: string;
-    icon?: LucideIcon;
-  }[];
-}) {
+export function NavMain({ items }: { items: NavItem[] }) {
+  const pathname = usePathname();
+
   return (
-    <SidebarGroup>
-      <SidebarGroupContent className="flex flex-col gap-2">
-        <SidebarMenu>
-          <SidebarMenuItem className="flex items-center gap-2">
-            <SidebarMenuButton
-              tooltip="Quick Create"
-              className="min-w-8 bg-primary text-primary-foreground duration-200 ease-linear hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground"
-            >
-              <PlusCircleIcon />
-              <span>Quick Create</span>
+    <SidebarMenu>
+      {items.map((item) => {
+        let isActive = false;
+
+        if (item.url === "/dashboard") {
+          isActive = pathname === "/dashboard";
+        } else {
+          isActive =
+            pathname === item.url ||
+            (pathname.startsWith(item.url + "/") && item.url !== "/dashboard");
+        }
+
+        return (
+          <SidebarMenuItem key={item.title}>
+            <SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
+              <Link href={item.url} className="transition-all duration-200">
+                {renderIcon(item.icon, "size-4")}
+                <span>{item.title}</span>
+
+                {item.title === "Chasses" && (
+                  <SidebarMenuBadge className="bg-primary/10 text-primary">
+                    3
+                  </SidebarMenuBadge>
+                )}
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
-        </SidebarMenu>
-        <SidebarMenu>
-          {items.map((item) => (
-            <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton tooltip={item.title}>
-                {item.icon && <item.icon />}
-                <Link
-                  href={item.url}
-                  className="flex items-center gap-2 text-sm font-medium leading-none text-muted-foreground"
-                >
-                  {item.title}
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-      </SidebarGroupContent>
-    </SidebarGroup>
+        );
+      })}
+    </SidebarMenu>
   );
 }

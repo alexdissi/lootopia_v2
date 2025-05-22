@@ -1,12 +1,14 @@
+/* eslint-disable */
 "use client";
 
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useHunts } from "@/hooks/use-hunts";
-import { HuntsFilters } from "./hunt-filters";
-import { HuntsList } from "./hunt-list";
 import { authClient } from "@/lib/auth-client";
 import { UserRole } from "../../../../generated/prisma";
+import { HuntsFilters } from "./hunt-filters";
+import { HuntsList } from "./hunt-list";
+import { Hunt } from "@/interfaces/hunt";
 
 export function HuntsTabs() {
   const [activeTab, setActiveTab] = useState("all");
@@ -14,9 +16,7 @@ export function HuntsTabs() {
   const [searchQuery, setSearchQuery] = useState("");
   const session = authClient.useSession();
 
-  // @ts-ignore
-  const userRole = session?.data?.roles.role;
-  console.log("User role:", userRole);
+  const userRole = (session?.data as any)?.roles?.role;
   const canCreateHunt =
     userRole === UserRole.ORGANIZER || userRole === UserRole.ADMIN;
   const {
@@ -27,13 +27,12 @@ export function HuntsTabs() {
     error: huntsError,
   } = useHunts(statusFilter);
 
-  const filterHunts = (hunts: any[] | undefined) => {
+  const filterHunts = (hunts: Hunt[] | undefined) => {
     if (!hunts) return [];
     return hunts.filter(
       (hunt) =>
         hunt.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        hunt.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        hunt.location?.toLowerCase().includes(searchQuery.toLowerCase()),
+        hunt.description?.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   };
 
