@@ -6,7 +6,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import ToggleTheme from "@/components/ui/toggle-theme";
+import { DashboardToolbar } from "@/components/ui/dashboard-toolbar";
 
 export const metadata: Metadata = {
   title: "Lootopia",
@@ -26,7 +26,7 @@ export default async function DashboardLayout({
           <div className="flex items-center justify-between">
             <SidebarTrigger />
             <div className="flex items-center gap-4">
-              <ToggleTheme />
+              <DashboardToolbar />
               <CurrencyTracker />
             </div>
           </div>
