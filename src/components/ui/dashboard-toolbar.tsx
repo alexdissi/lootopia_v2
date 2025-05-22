@@ -21,14 +21,13 @@ export function DashboardToolbar() {
   const session = authClient.useSession();
   const [notifications, setNotifications] = React.useState(3);
 
-
   return (
     <div className="flex items-center justify-between p-4 border-b border-border bg-background">
       <div className="flex items-center gap-2 lg:gap-4">
         <SidebarTrigger className="lg:hidden">
           <Menu className="h-5 w-5" />
         </SidebarTrigger>
-
+        
         <div className="relative max-w-md hidden sm:flex items-center">
           <Search className="absolute left-2.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -36,6 +35,13 @@ export function DashboardToolbar() {
             placeholder="Rechercher..."
             className="pl-8 w-[200px] md:w-[300px] lg:w-[400px] bg-muted/40"
           />
+        </div>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1 bg-amber-100 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 px-3 py-1 rounded-full">
+          <Crown className="h-4 w-4" />
+          <span className="text-sm font-medium">{session?.data?.user?.virtualCurrency || 0}</span>
         </div>
 
         <DropdownMenu>
@@ -73,15 +79,6 @@ export function DashboardToolbar() {
                 <p className="text-xs text-muted-foreground">
                   La chasse "Énigmes de Lyon" commence demain
                 </p>
-                <p className="text-xs text-muted-foreground">La chasse "Trésor de Paris" vient d'être publiée</p>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="flex flex-col items-start">
-                <p className="font-medium">Félicitations !</p>
-                <p className="text-xs text-muted-foreground">Vous avez gagné 50 couronnes</p>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="flex flex-col items-start">
-                <p className="font-medium">Rappel</p>
-                <p className="text-xs text-muted-foreground">La chasse "Énigmes de Lyon" commence demain</p>
               </DropdownMenuItem>
             </div>
             <DropdownMenuSeparator />
