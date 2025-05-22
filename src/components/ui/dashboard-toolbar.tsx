@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Bell, Crown, Menu, Search } from "lucide-react";
+import { Bell, Menu, Search } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,12 +15,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Badge } from "@/components/ui/badge";
-import { authClient } from "@/lib/auth-client";
+import { CurrencyTracker } from "@/components/context/common/currency-tracker";
 
 export function DashboardToolbar() {
-  const session = authClient.useSession();
   const [notifications, setNotifications] = React.useState(3);
-
 
   return (
     <div className="flex items-center justify-between p-4 border-b border-border bg-background">
@@ -28,7 +26,7 @@ export function DashboardToolbar() {
         <SidebarTrigger className="lg:hidden">
           <Menu className="h-5 w-5" />
         </SidebarTrigger>
-
+        
         <div className="relative max-w-md hidden sm:flex items-center">
           <Search className="absolute left-2.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -37,6 +35,10 @@ export function DashboardToolbar() {
             className="pl-8 w-[200px] md:w-[300px] lg:w-[400px] bg-muted/40"
           />
         </div>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <CurrencyTracker />
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -73,15 +75,6 @@ export function DashboardToolbar() {
                 <p className="text-xs text-muted-foreground">
                   La chasse "Énigmes de Lyon" commence demain
                 </p>
-                <p className="text-xs text-muted-foreground">La chasse "Trésor de Paris" vient d'être publiée</p>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="flex flex-col items-start">
-                <p className="font-medium">Félicitations !</p>
-                <p className="text-xs text-muted-foreground">Vous avez gagné 50 couronnes</p>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="flex flex-col items-start">
-                <p className="font-medium">Rappel</p>
-                <p className="text-xs text-muted-foreground">La chasse "Énigmes de Lyon" commence demain</p>
               </DropdownMenuItem>
             </div>
             <DropdownMenuSeparator />
