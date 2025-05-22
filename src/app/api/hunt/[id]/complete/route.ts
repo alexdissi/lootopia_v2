@@ -5,10 +5,10 @@ import prisma from "@/lib/db";
 
 export async function POST(
   req: Request,
-  { params }: { params: { id: string } },
+  { params } : { params: Promise<{ id: string }> }
 ) {
   try {
-    const huntId = params.id;
+    const { id: huntId } = await params;
 
     const session = await auth.api.getSession({ headers: await headers() });
 
@@ -71,9 +71,6 @@ export async function POST(
         },
       });
 
-      // Générer des entrées de classement pour les participants qui ont terminé
-      // Ceci est un exemple simple, vous pourriez avoir une logique plus complexe
-      // pour calculer les scores basés sur le temps ou d'autres facteurs
       const participants = await tx.participation.findMany({
         where: {
           huntId: huntId,

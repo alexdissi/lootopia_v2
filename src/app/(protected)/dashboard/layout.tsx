@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
+import { DashboardToolbar } from "@/components/ui/dashboard-toolbar";
 import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar";
-import { DashboardToolbar } from "@/components/ui/dashboard-toolbar";
 
 export const metadata: Metadata = {
   title: "Lootopia",

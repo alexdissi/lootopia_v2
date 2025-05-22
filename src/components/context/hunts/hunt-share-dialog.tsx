@@ -11,12 +11,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { HuntType } from "@/types/hunt";
+import {Hunt} from "@/interfaces/hunt";
 
 interface HuntShareDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  hunt: HuntType;
+  hunt: Hunt;
 }
 
 export function HuntShareDialog({

@@ -1,10 +1,11 @@
 import { headers } from "next/headers";
-import { NextResponse } from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 
-export async function GET({ params }: { params: { id: string } }) {
+export async function GET(  request: NextRequest,
+                            { params } : { params: Promise<{ id: string }> }) {
   try {
     const session = await auth.api.getSession({ headers: await headers() });
 
@@ -12,7 +13,7 @@ export async function GET({ params }: { params: { id: string } }) {
       return NextResponse.json({ error: "Non authentifié" }, { status: 401 });
     }
 
-    const invoiceId = params.id;
+    const { id: invoiceId } = await params;
 
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },

@@ -5,11 +5,12 @@ import prisma from "@/lib/db";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } },
+  { params } : { params: Promise<{ id: string }> }
 ) {
   try {
     const headersList = await headers();
     const session = await auth.api.getSession({ headers: headersList });
+    const { id } = await params;
 
     if (!session?.user) {
       return NextResponse.json(
@@ -25,7 +26,7 @@ export async function PATCH(
     }
 
     const hunt = await prisma.treasureHunt.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: { createdBy: true },
     });
 
@@ -44,7 +45,7 @@ export async function PATCH(
     }
 
     const updatedHunt = await prisma.treasureHunt.update({
-      where: { id: params.id },
+      where: { id },
       data: { status },
     });
 

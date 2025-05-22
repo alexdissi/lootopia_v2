@@ -21,7 +21,7 @@ import { useEffect } from "react";
 export interface UserFormValues {
   name: string;
   email: string;
-  nickname?: string; 
+  nickname?: string;
   image?: string;
 }
 
@@ -38,11 +38,11 @@ export function UserProfileForm({ userId, initialData }: UserProfileFormProps) {
     defaultValues: {
       name: "",
       email: "",
-      nickname: "", 
+      nickname: "",
       image: "",
     },
   });
-  
+
 
   useEffect(() => {
     if (session?.user) {

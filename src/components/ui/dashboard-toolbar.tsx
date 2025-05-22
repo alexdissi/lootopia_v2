@@ -60,21 +60,15 @@ export function DashboardToolbar() {
             <div className="max-h-[300px] overflow-auto">
               <DropdownMenuItem className="flex flex-col items-start">
                 <p className="font-medium">Nouvelle chasse disponible !</p>
-                <p className="text-xs text-muted-foreground">
-                  La chasse "Trésor de Paris" vient d'être publiée
-                </p>
+                <p className="text-xs text-muted-foreground">La chasse "Trésor de Paris" vient d'être publiée</p>
               </DropdownMenuItem>
               <DropdownMenuItem className="flex flex-col items-start">
                 <p className="font-medium">Félicitations !</p>
-                <p className="text-xs text-muted-foreground">
-                  Vous avez gagné 50 couronnes
-                </p>
+                <p className="text-xs text-muted-foreground">Vous avez gagné 50 couronnes</p>
               </DropdownMenuItem>
               <DropdownMenuItem className="flex flex-col items-start">
                 <p className="font-medium">Rappel</p>
-                <p className="text-xs text-muted-foreground">
-                  La chasse "Énigmes de Lyon" commence demain
-                </p>
+                <p className="text-xs text-muted-foreground">La chasse "Énigmes de Lyon" commence demain</p>
               </DropdownMenuItem>
             </div>
             <DropdownMenuSeparator />
