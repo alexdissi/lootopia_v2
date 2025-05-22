@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Bell, Crown, Menu, Search } from "lucide-react";
+import { Bell, Menu, Search } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,10 +15,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Badge } from "@/components/ui/badge";
-import { authClient } from "@/lib/auth-client";
+import { CurrencyTracker } from "@/components/context/common/currency-tracker";
 
 export function DashboardToolbar() {
-  const session = authClient.useSession();
   const [notifications, setNotifications] = React.useState(3);
 
   return (
@@ -39,10 +38,7 @@ export function DashboardToolbar() {
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="flex items-center gap-1 bg-amber-100 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 px-3 py-1 rounded-full">
-          <Crown className="h-4 w-4" />
-          <span className="text-sm font-medium">{session?.data?.user?.virtualCurrency || 0}</span>
-        </div>
+        <CurrencyTracker />
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
