@@ -15,13 +15,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useForm, useWatch } from "react-hook-form";
-import { UserRole } from "../../../../generated/prisma";
 import { authClient } from "@/lib/auth-client";
 import { useEffect } from "react";
 
 export interface UserFormValues {
   name: string;
   email: string;
+  nickname?: string; 
   image?: string;
 }
 
@@ -38,16 +38,19 @@ export function UserProfileForm({ userId, initialData }: UserProfileFormProps) {
     defaultValues: {
       name: "",
       email: "",
+      nickname: "", 
       image: "",
     },
   });
+  console.log("session", session?.user);
+  
 
-  // Update form values when session data is available
   useEffect(() => {
     if (session?.user) {
       form.reset({
         name: session.user.name || "",
         email: session.user.email || "",
+        nickname: session.user.nickname || "",
         image: session.user.image || "",
       });
     }
@@ -103,6 +106,7 @@ export function UserProfileForm({ userId, initialData }: UserProfileFormProps) {
       <form
         className="space-y-6 max-w-md"
         onSubmit={form.handleSubmit(onSubmit)}
+        noValidate
       >
         <FormField
           control={form.control}
@@ -126,6 +130,20 @@ export function UserProfileForm({ userId, initialData }: UserProfileFormProps) {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input type="email" placeholder="Email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="nickname"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Nom d'utilisateur</FormLabel>
+              <FormControl>
+                <Input placeholder="Nom d'utilisateur" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

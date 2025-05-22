@@ -64,11 +64,20 @@ export const auth = betterAuth({
           role: true,
         },
       });
+      const userSession = await prisma.user.findFirst({
+        where: {
+          id: user.id,
+        },
+        select: {
+          nickname: true,
+        },
+      });
       return {
         roles,
         user: {
           ...user,
           role: roles?.role,
+          nickname: userSession?.nickname,
         },
         session,
       };
