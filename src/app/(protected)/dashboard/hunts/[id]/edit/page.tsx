@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
 import {
   ArrowLeft,
   CalendarIcon,
@@ -10,19 +11,19 @@ import {
   PlusCircle,
   Trash2,
 } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState, useEffect, use } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
 import { toast } from "sonner";
+import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -36,14 +37,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -52,7 +51,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   title: z.string().min(3, "Le titre doit contenir au moins 3 caractères"),
@@ -71,7 +70,7 @@ const formSchema = z.object({
           .string()
           .min(3, "La description doit contenir au moins 3 caractères"),
         stepOrder: z.number().int().min(1),
-      }),
+      })
     )
     .min(1, "Au moins une étape est requise"),
 });
@@ -135,7 +134,7 @@ export default function EditHuntPage({
         const error = await res.json();
         throw new Error(
           error.message ||
-            "Une erreur s'est produite lors de la récupération des données",
+            "Une erreur s'est produite lors de la récupération des données"
         );
       }
       return res.json() as Promise<HuntDetails>;
@@ -165,7 +164,7 @@ export default function EditHuntPage({
           id: step.id,
           description: step.description,
           stepOrder: step.stepOrder,
-        })),
+        }))
       );
     }
   }, [hunt, form]);
@@ -212,17 +211,11 @@ export default function EditHuntPage({
   const onSubmit = (data: FormValues) => {
     updateHuntMutation.mutate(data, {
       onSuccess: () => {
-        toast.success("Chasse mise à jour", {
-          description: "La chasse au trésor a été mise à jour avec succès.",
-        });
+        toast.success("Chasse mise à jour avec succès");
         router.push(`/dashboard/hunts/${huntId}`);
       },
       onError: (error: any) => {
-        toast.error("Erreur", {
-          description:
-            error.message ||
-            "Une erreur s'est produite lors de la mise à jour.",
-        });
+        toast.error(error | "Une erreur s'est produite lors de la mise à jour");
       },
     });
   };

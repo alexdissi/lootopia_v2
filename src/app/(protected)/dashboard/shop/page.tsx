@@ -1,20 +1,19 @@
-import { Suspense } from "react";
-import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Suspense } from "react";
+import { ShopHeader } from "@/components/context/shop/shop-header";
+import { ShopItemsContainer } from "@/components/context/shop/shop-items-container";
+import { UserInventory } from "@/components/context/shop/shop-items-inventory";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { auth } from "@/lib/auth";
+
 import prisma from "@/lib/db";
-import { ShopItemsContainer } from "@/components/context/shop/shop-items-container";
-import { UserInventory } from "@/components/context/shop/shop-items-inventory";
-import { ShopHeader } from "@/components/context/shop/shop-header";
 
 export default async function ShopPage() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -34,7 +33,7 @@ export default async function ShopPage() {
     <div className="container py-10">
       <Card className="mb-6">
         <CardHeader className="pb-4">
-          <CardTitle className="text-2xl">Boutique d'Objets</CardTitle>
+          <CardTitle className="text-2xl">Boutique d'&apos;Objets</CardTitle>
           <CardDescription>
             Utilisez vos couronnes pour acheter des avantages et des objets
             spéciaux

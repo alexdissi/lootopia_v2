@@ -1,8 +1,8 @@
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
+import { z } from "zod";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
-import { z } from "zod";
-import { headers } from "next/headers";
 
 const roleSchema = z.object({
   role: z.enum(["PLAYER", "ORGANIZER", "ADMIN"] as const),
@@ -54,8 +54,7 @@ export async function PATCH(
     });
 
     return NextResponse.json(updatedUser);
-  } catch (error) {
-    console.error("Error updating user role:", error);
+  } catch {
     return NextResponse.json(
       { error: "Failed to update user role" },
       { status: 500 },

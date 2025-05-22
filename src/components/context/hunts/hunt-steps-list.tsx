@@ -1,3 +1,5 @@
+import { MapPin } from "lucide-react";
+import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -5,8 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { MapPin } from "lucide-react";
-import Image from "next/image";
 
 interface LocationType {
   latitude: number;
@@ -33,7 +33,7 @@ export function HuntStepsList({ steps }: HuntStepsListProps) {
     return (
       <div className="text-center py-12">
         <p className="text-muted-foreground">
-          Aucune étape n'a été définie pour cette chasse au trésor.
+          Aucune étape n&apos;'a été définie pour cette chasse au trésor.
         </p>
       </div>
     );
@@ -60,7 +60,7 @@ export function HuntStepsList({ steps }: HuntStepsListProps) {
                 <CardHeader className="pb-2">
                   <CardTitle className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="inline-block bg-primary/10 text-primary rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium">
+                      <span className="bg-primary/10 text-primary rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium">
                         {index + 1}
                       </span>
                       {step.title || `Étape ${index + 1}`}

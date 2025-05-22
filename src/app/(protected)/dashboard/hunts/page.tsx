@@ -1,13 +1,13 @@
-import { Suspense } from "react";
-import Link from "next/link";
 import { Plus } from "lucide-react";
+import { Metadata } from "next";
+import { headers } from "next/headers";
+import Link from "next/link";
+import { Suspense } from "react";
 
-import { Button } from "@/components/ui/button";
 import { HuntsTabsSkeleton } from "@/components/context/hunts/hunt-skeleton";
 import { HuntsTabs } from "@/components/context/hunts/hunt-tabs";
-import { Metadata } from "next";
+import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 import { UserRole } from "../../../../../generated/prisma";
 
 export const metadata: Metadata = {

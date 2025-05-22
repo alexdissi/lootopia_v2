@@ -1,14 +1,14 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import type { NavItem } from "./app-sidebar";
 import { renderIcon } from "@/lib/icon-map";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import type { NavItem } from "./app-sidebar";
 
 export function NavAdmin({ items }: { items: NavItem[] }) {
   const pathname = usePathname();

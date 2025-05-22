@@ -1,7 +1,7 @@
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
-import { headers } from "next/headers";
 
 export async function GET(
   req: Request,
@@ -10,7 +10,7 @@ export async function GET(
   try {
     const headersList = await headers();
     const session = await auth.api.getSession({ headers: headersList });
-    const {id} = await params;
+    const { id } = await params;
 
     if (!session?.user) {
       return NextResponse.json(
@@ -48,8 +48,7 @@ export async function GET(
     }
 
     return NextResponse.json(hunt);
-  } catch (error) {
-    console.error("Error fetching hunt:", error);
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch hunt details" },
       { status: 500 },
@@ -135,8 +134,7 @@ export async function PATCH(
     });
 
     return NextResponse.json(updatedHunt);
-  } catch (error) {
-    console.error("Error updating hunt:", error);
+  } catch {
     return NextResponse.json(
       { error: "Failed to update hunt" },
       { status: 500 },
@@ -187,8 +185,7 @@ export async function DELETE(
     ]);
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("Error deleting hunt:", error);
+  } catch {
     return NextResponse.json(
       { error: "Failed to delete hunt" },
       { status: 500 },

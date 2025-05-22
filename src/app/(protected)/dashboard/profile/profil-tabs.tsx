@@ -1,9 +1,9 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UserTransactionsTab } from "@/components/context/users/user-transaction-history";
 import { Suspense } from "react";
+import { UserTransactionsTab } from "@/components/context/users/user-transaction-history";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface ProfileTabsProps {
   defaultTab: string;

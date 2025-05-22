@@ -1,5 +1,6 @@
-import * as React from "react";
 import { ArrowUpCircle } from "lucide-react";
+import { headers } from "next/headers";
+import * as React from "react";
 
 import {
   Sidebar,
@@ -14,13 +15,11 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { NavMain } from "./nav-main";
-import { NavAdmin } from "./nav-admin";
-import { NavUser } from "./nav-user";
-import { CurrencyTracker } from "../context/common/currency-tracker";
-import { UserRole } from "../../../generated/prisma";
 import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { UserRole } from "../../../generated/prisma";
+import { NavAdmin } from "./nav-admin";
+import { NavMain } from "./nav-main";
+import { NavUser } from "./nav-user";
 
 export type NavItem = {
   title: string;

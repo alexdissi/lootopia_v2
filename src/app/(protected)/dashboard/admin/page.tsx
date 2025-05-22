@@ -1,9 +1,9 @@
-import { auth } from "@/lib/auth";
-import prisma from "@/lib/db";
-import { redirect } from "next/navigation";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { UsersAdminUI } from "@/components/context/users/user-admin";
 import { User } from "@/interfaces/user";
+import { auth } from "@/lib/auth";
+import prisma from "@/lib/db";
 
 export default async function Page({
   searchParams,

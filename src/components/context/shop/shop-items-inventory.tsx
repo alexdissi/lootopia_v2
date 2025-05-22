@@ -3,9 +3,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Sparkles, Award, Key, Crown, Clock } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface UserItem {
   id: string;
@@ -85,7 +85,7 @@ export function UserInventory({ userId }: UserInventoryProps) {
     return (
       <div className="text-center py-10">
         <p className="text-muted-foreground">
-          Vous n'avez aucun objet dans votre inventaire
+          Vous n&apos;'avez aucun objet dans votre inventaire
         </p>
       </div>
     );

@@ -1,8 +1,8 @@
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
+import { z } from "zod";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
-import { headers } from "next/headers";
-import { z } from "zod";
 
 const huntSchema = z.object({
   title: z.string().min(3, "Le titre doit contenir au moins 3 caractères"),
@@ -123,22 +123,19 @@ export async function GET(req: Request) {
         OR: [
           {
             status: "PENDING",
-            createdById: session.user.id
+            createdById: session.user.id,
           },
           {
             status: {
-              not: "PENDING"
-            }
-          }
-        ]
+              not: "PENDING",
+            },
+          },
+        ],
       };
 
       if (status) {
         filters = {
-          AND: [
-            { status },
-            filters
-          ]
+          AND: [{ status }, filters],
         };
       }
     }
@@ -159,8 +156,7 @@ export async function GET(req: Request) {
     });
 
     return NextResponse.json(hunts);
-  } catch (error) {
-    console.error("Error fetching hunts:", error);
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch hunts" },
       { status: 500 },

@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
-import { LoaderPage } from "@/components/ui/loader";
 import LiquidChrome from "@/components/ui/liquid";
+import { LoaderPage } from "@/components/ui/loader";
 
 export default function AuthLayout({
   children,

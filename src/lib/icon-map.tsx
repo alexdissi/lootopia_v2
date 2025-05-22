@@ -16,10 +16,8 @@ import {
   ShoppingBag,
   User,
   Users,
-  LucideProps,
 } from "lucide-react";
 
-// Map des identifiants d'icônes aux composants d'icônes
 export const iconMap = {
   "arrow-up-circle": ArrowUpCircle,
   camera: Camera,
@@ -40,12 +38,10 @@ export const iconMap = {
   users: Users,
 };
 
-// Fonction pour rendre l'icône à partir de son identifiant
 export function renderIcon(iconName: string, className: string = "h-5 w-5") {
   const IconComponent = iconMap[iconName as keyof typeof iconMap];
 
   if (!IconComponent) {
-    console.warn(`Icon "${iconName}" not found in iconMap`);
     return null;
   }
 

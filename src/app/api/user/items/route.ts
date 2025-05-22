@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
+import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
-import { headers } from "next/headers";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const session = await auth.api.getSession({ headers: await headers() });
 
@@ -12,13 +12,10 @@ export async function GET(req: NextRequest) {
     }
 
     const userItems = await prisma.userItem.findMany({
-      where: { 
+      where: {
         userId: session.user.id,
         isActive: true,
-        OR: [
-          { expiresAt: null },
-          { expiresAt: { gt: new Date() } }
-        ]
+        OR: [{ expiresAt: null }, { expiresAt: { gt: new Date() } }],
       },
       include: {
         item: {
@@ -27,35 +24,36 @@ export async function GET(req: NextRequest) {
             name: true,
             description: true,
             type: true,
-            imageUrl: true
-          }
-        }
+            imageUrl: true,
+          },
+        },
       },
-      orderBy: [
-        { item: { type: 'asc' } },
-        { createdAt: 'desc' }
-      ],
+      orderBy: [{ item: { type: "asc" } }, { createdAt: "desc" }],
     });
 
     const now = new Date();
     const expiredItems = userItems.filter(
-      item => item.expiresAt && new Date(item.expiresAt) < now && item.isActive
+      (item) =>
+        item.expiresAt && new Date(item.expiresAt) < now && item.isActive,
     );
 
     if (expiredItems.length > 0) {
       Promise.all(
-        expiredItems.map(item => 
+        expiredItems.map((item) =>
           prisma.userItem.update({
             where: { id: item.id },
-            data: { isActive: false }
-          })
-        )
-      ).catch(err => 
-        console.error("Erreur lors de la désactivation des objets expirés:", err)
+            data: { isActive: false },
+          }),
+        ),
+      ).catch((err) =>
+        console.error(
+          "Erreur lors de la désactivation des objets expirés:",
+          err,
+        ),
       );
     }
 
-    const formattedUserItems = userItems.map(item => ({
+    const formattedUserItems = userItems.map((item) => ({
       id: item.id,
       quantity: item.quantity,
       isActive: item.isActive,
@@ -66,15 +64,17 @@ export async function GET(req: NextRequest) {
         name: item.item.name,
         description: item.item.description,
         type: item.item.type,
-        imageUrl: item.item.imageUrl
-      }
+        imageUrl: item.item.imageUrl,
+      },
     }));
 
     return NextResponse.json(formattedUserItems);
-  } catch (error) {
-    console.error("Erreur lors de la récupération des articles de l'utilisateur:", error);
+  } catch {
     return NextResponse.json(
-      { error: "Une erreur s'est produite lors de la récupération de vos articles" },
+      {
+        error:
+          "Une erreur s'est produite lors de la récupération de vos articles",
+      },
       { status: 500 },
     );
   }

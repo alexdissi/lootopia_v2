@@ -1,8 +1,8 @@
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
-import { stripe } from "@/lib/stripe";
 import prisma from "@/lib/db";
+import { stripe } from "@/lib/stripe";
 
 export async function GET(request: NextRequest) {
   try {
@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
       select: { stripeCustomerId: true },
     });
 
-    let invoiceMap = new Map();
+    const invoiceMap = new Map();
     if (user?.stripeCustomerId) {
       try {
         const invoices = await stripe.invoices.list({
@@ -57,9 +57,11 @@ export async function GET(request: NextRequest) {
           );
         });
       } catch (stripeError) {
-        console.error(
-          "Erreur lors de la récupération des factures Stripe:",
-          stripeError,
+        return NextResponse.json(
+          {
+            error: stripeError instanceof Error,
+          },
+          { status: 500 },
         );
       }
     }

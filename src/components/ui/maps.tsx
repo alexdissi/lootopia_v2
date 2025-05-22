@@ -1,10 +1,13 @@
+/* eslint-disable */
+
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import type { Map as LeafletMap, Marker } from "leaflet";
 import { Loader2, MapPin, Maximize2, Minimize2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 import "leaflet/dist/leaflet.css";
 
 type LeafletType = typeof import("leaflet");
@@ -26,8 +29,8 @@ export function MapView({
   interactive = true,
 }: MapViewProps) {
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<any | null>(null);
-  const markerRef = useRef<any | null>(null);
+  const mapInstanceRef = useRef<LeafletMap | null>(null);
+  const markerRef = useRef<Marker | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -63,7 +66,7 @@ export function MapView({
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
           subdomains: "abcd",
           maxZoom: 20,
-        }
+        },
       ).addTo(mapInstanceRef.current);
 
       const icon = L.divIcon({
@@ -79,7 +82,7 @@ export function MapView({
       });
 
       markerRef.current = L.marker([0, 0], { icon }).addTo(
-        mapInstanceRef.current
+        mapInstanceRef.current,
       );
     }
 
@@ -89,7 +92,7 @@ export function MapView({
 
       try {
         const response = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}&limit=1`
+          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}&limit=1`,
         );
 
         const data = await response.json();
@@ -101,7 +104,7 @@ export function MapView({
           if (mapInstanceRef.current) {
             mapInstanceRef.current.setView(
               coordinates as [number, number],
-              zoom
+              zoom,
             );
 
             if (markerRef.current) {
@@ -112,7 +115,7 @@ export function MapView({
                   `<div class="p-1">
                   <div class="font-semibold mb-1">${location}</div>
                   <div class="text-xs text-gray-500">${display_name}</div>
-                </div>`
+                </div>`,
                 )
                 .openPopup();
             }
@@ -120,9 +123,12 @@ export function MapView({
         } else {
           setError("Emplacement non trouvé");
         }
-      } catch (error) {
-        console.error("Erreur lors du géocodage :", error);
-        setError("Erreur de chargement de la carte");
+      } catch (error: unknown) {
+        setError(
+          typeof error === "string"
+            ? error
+            : "Erreur lors de la récupération de l'emplacement",
+        );
       } finally {
         setIsLoading(false);
       }
@@ -168,7 +174,7 @@ export function MapView({
       className={cn(
         "relative rounded-xl overflow-hidden transition-all duration-300 ease-in-out",
         isFullscreen ? "fixed inset-0 z-50 rounded-none" : "",
-        className
+        className,
       )}
     >
       {!location && (

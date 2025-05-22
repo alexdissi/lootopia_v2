@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { SignInWithProviderButton } from "@/components/ui/buttons";
 import {
   Form,
   FormControl,
@@ -17,7 +17,7 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
-import { SignInWithProviderButton } from "@/components/ui/buttons";
+import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 
 const registerSchema = z.object({
@@ -76,9 +76,8 @@ export function RegisterForm() {
           },
         },
       );
-    } catch (err: any) {
+    } catch {
       toast.error("Une erreur est survenue.");
-      console.error(err);
     } finally {
       setIsLoading(false);
     }

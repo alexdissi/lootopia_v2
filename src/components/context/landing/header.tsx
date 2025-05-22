@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
 import { Map } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -60,7 +60,7 @@ const Header = () => {
             <Link href="/auth/login">Se connecter</Link>
           </Button>
           <Button className="bg-lootopia-gold hover:bg-lootopia-gold/80 text-lootopia-navy">
-            <Link href="/auth/register">S'inscrire</Link>
+            <Link href="/auth/register">S&apos;'inscrire</Link>
           </Button>
         </div>
       </div>

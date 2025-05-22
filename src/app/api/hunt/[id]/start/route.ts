@@ -1,7 +1,7 @@
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
-import { headers } from "next/headers";
 
 export async function POST(
   req: Request,
@@ -61,8 +61,7 @@ export async function POST(
     });
 
     return NextResponse.json(updatedHunt);
-  } catch (error) {
-    console.error("Error starting hunt:", error);
+  } catch {
     return NextResponse.json(
       { error: "Failed to start treasure hunt" },
       { status: 500 },

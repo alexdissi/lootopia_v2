@@ -26,13 +26,17 @@ export function CurrencyTracker() {
   });
 
   return (
-    <div className="flex items-center gap-2 px-3 py-1.5 rounded-ful">
-      <Coins className="h-4 w-4 text-amber-400" />
+    <div className="flex items-center gap-2 bg-gradient-to-r from-amber-900/30 to-amber-700/30 px-4 py-2 rounded-full border border-amber-500/20 shadow-inner">
+      <div className="relative">
+        <Coins className="h-5 w-5 text-amber-400" />
+        <div className="absolute -top-1 -right-1 w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
+      </div>
       {isLoading ? (
-        <Skeleton className="h-4 w-16" />
+        <Skeleton className="h-5 w-24" />
       ) : (
         <span className="text-sm font-medium text-amber-100">
-          {data?.amount?.toLocaleString() ?? "0"} Couronnes
+          {data?.amount?.toLocaleString() ?? "0"}{" "}
+          <span className="hidden sm:inline">Couronnes</span>
         </span>
       )}
     </div>

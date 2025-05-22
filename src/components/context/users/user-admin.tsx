@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Input } from "@/components/ui/input";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
-import { UsersTable } from "./user-table";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
 import { User } from "@/interfaces/user";
 import { UserRole } from "../../../../generated/prisma";
+import { UsersTable } from "./user-table";
 
 interface UsersAdminUIProps {
   initialUsers: User[];

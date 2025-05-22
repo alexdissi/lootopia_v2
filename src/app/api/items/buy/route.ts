@@ -1,8 +1,8 @@
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
-import { headers } from "next/headers";
-import { z } from "zod";
 
 const purchaseSchema = z.object({
   itemId: z.string(),
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     if (!validatedData.success) {
       return NextResponse.json(
         { error: validatedData.error.errors },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     if (!shopItem) {
       return NextResponse.json(
         { error: "Article non disponible" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -48,10 +48,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (!userCurrency || userCurrency.amount < totalPrice) {
-      return NextResponse.json(
-        { error: "Solde insuffisant" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Solde insuffisant" }, { status: 400 });
     }
 
     const result = await prisma.$transaction(async (tx) => {
@@ -92,7 +89,7 @@ export async function POST(req: NextRequest) {
     console.error("Erreur lors de l'achat:", error);
     return NextResponse.json(
       { error: "Une erreur s'est produite lors de l'achat" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

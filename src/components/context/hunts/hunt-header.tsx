@@ -1,13 +1,13 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import Link from "next/link";
 import { ArrowLeft, Bookmark, BookmarkCheck, Edit, Share2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { HuntStatusBadge } from "./hunt-status-badge";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { useRef, useState, useEffect } from "react";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import { Hunt } from "@/interfaces/hunt";
+import { cn } from "@/lib/utils";
+import { HuntStatusBadge } from "./hunt-status-badge";
 
 interface HuntHeaderProps {
   hunt: Hunt;
@@ -24,7 +24,6 @@ export function HuntHeader({
   isBookmarked,
   setIsBookmarked,
   onShare,
-  onDelete,
 }: HuntHeaderProps) {
   const headerRef = useRef<HTMLDivElement>(null);
   const [headerVisible, setHeaderVisible] = useState(true);

@@ -1,22 +1,22 @@
 "use client";
 
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Hunt } from "@/interfaces/hunt";
+import { authClient } from "@/lib/auth-client";
+import { HuntDeleteDialog } from "./hunt-delete-dialog";
 import { HuntDetailsSkeleton } from "./hunt-detail-skeleton";
 import { HuntHeader } from "./hunt-header";
 import { HuntInfoCard } from "./hunt-info-card";
+import { HuntJoinButton } from "./hunt-join-button";
+import HuntMapView from "./hunt-map-view";
+import { HuntShareDialog } from "./hunt-share-dialog";
 import { HuntStatusSection } from "./hunt-status-section";
 import { HuntStepsList } from "./hunt-steps-list";
-import { HuntShareDialog } from "./hunt-share-dialog";
-import { HuntDeleteDialog } from "./hunt-delete-dialog";
-import { HuntJoinButton } from "./hunt-join-button";
-import { authClient } from "@/lib/auth-client";
-import { Hunt } from "@/interfaces/hunt";
-import HuntMapView from "./hunt-map-view";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 
 type ParticipantUser = {
   id?: string;

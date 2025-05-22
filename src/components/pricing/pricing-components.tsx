@@ -1,6 +1,9 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Check, Coins, Crown, Sparkles, Star, Zap, Shield } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,10 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 import { AvatarCircles } from "../magicui/avatar-circles";
 
 type Pack = {

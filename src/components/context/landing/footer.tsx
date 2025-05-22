@@ -223,7 +223,7 @@ const Footer = () => {
               href="#"
               className="text-white/50 hover:text-lootopia-gold transition-colors text-sm"
             >
-              Conditions d'utilisation
+              Conditions d&apos;'utilisation
             </a>
             <a
               href="#"

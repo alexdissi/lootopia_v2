@@ -1,14 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  DollarSignIcon,
-  DownloadCloud,
-  FileText,
-} from "lucide-react";
+import { DownloadCloud } from "lucide-react";
+import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -16,7 +12,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   Select,
   SelectContent,
@@ -24,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -32,8 +28,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -61,19 +55,6 @@ export function UserTransactionsTab({ userId }: { userId: string }) {
       return response.json();
     },
   });
-
-  const getTransactionIcon = (type: string) => {
-    switch (type) {
-      case "EARNED":
-        return <ArrowUpIcon className="h-4 w-4 text-green-500" />;
-      case "SPENT":
-        return <ArrowDownIcon className="h-4 w-4 text-red-500" />;
-      case "BOUGHT":
-        return <DollarSignIcon className="h-4 w-4 text-blue-500" />;
-      default:
-        return null;
-    }
-  };
 
   const getTransactionBadge = (type: string) => {
     switch (type) {
@@ -193,7 +174,7 @@ export function UserTransactionsTab({ userId }: { userId: string }) {
                             year: "numeric",
                             hour: "2-digit",
                             minute: "2-digit",
-                          }
+                          },
                         )}
                       </TableCell>
                       <TableCell className="text-right">

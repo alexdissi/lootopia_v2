@@ -1,22 +1,11 @@
 "use client";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { UserRoleSelector } from "./user-role-selector";
-import { User } from "@/interfaces/user";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Trash2 } from "lucide-react";
-import { useState } from "react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { DeleteUserModal } from "./user-delete-modal";
+import { Trash2 } from "lucide-react";
+import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -26,7 +15,18 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { User } from "@/interfaces/user";
 import { UserRole } from "../../../../generated/prisma";
+import { DeleteUserModal } from "./user-delete-modal";
+import { UserRoleSelector } from "./user-role-selector";
 
 interface UsersTableProps {
   users: User[];
@@ -49,16 +49,15 @@ export function UsersTable({
 }: UsersTableProps) {
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
 
-  const formatDate = (dateString: string) => {
-    return format(new Date(dateString), "PPP à HH:mm", { locale: fr });
-  };
+  const formatDate = (dateString: string) =>
+    format(new Date(dateString), "PPP à HH:mm", { locale: fr });
 
   const renderPaginationItems = () => {
     const items = [];
     const maxVisiblePages = 5;
 
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
     if (endPage - startPage + 1 < maxVisiblePages) {
       startPage = Math.max(1, endPage - maxVisiblePages + 1);
@@ -212,7 +211,7 @@ export function UsersTable({
 
       <DeleteUserModal
         user={userToDelete}
-        isOpen={!!userToDelete}
+        isOpen={Boolean(userToDelete)}
         onClose={() => setUserToDelete(null)}
         onConfirm={() => {
           if (userToDelete) {

@@ -1,13 +1,13 @@
-import { Suspense } from "react";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
-import { auth } from "@/lib/auth";
+import { Suspense } from "react";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
 import { ProfileTabs } from "./profil-tabs";
 
 export default async function ProfilePage({

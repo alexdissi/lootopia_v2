@@ -1,7 +1,7 @@
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
-import { headers } from "next/headers";
 
 export async function GET() {
   try {
@@ -35,8 +35,7 @@ export async function GET() {
       amount: virtualCurrency.amount,
       updatedAt: virtualCurrency.updatedAt.toISOString(),
     });
-  } catch (error) {
-    console.error("Error fetching currency balance:", error);
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch currency data" },
       { status: 500 },

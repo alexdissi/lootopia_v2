@@ -1,7 +1,7 @@
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
-import { headers } from "next/headers";
 import { ParticipationStatus } from "../../../../../generated/prisma";
 
 export async function POST(req: Request) {
@@ -67,14 +67,6 @@ export async function POST(req: Request) {
       }
 
       await prisma.$transaction(async (tx) => {
-        const updatedCurrency = await tx.virtualCurrency.update({
-          where: { id: virtualCurrency.id },
-          data: {
-            amount: virtualCurrency.amount - (hunt.fee ?? 0),
-            updatedAt: new Date(),
-          },
-        });
-
         await tx.transactionHistory.create({
           data: {
             userId: session.user.id,

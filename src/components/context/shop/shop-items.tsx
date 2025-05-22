@@ -1,17 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Crown, Sparkles, Key, Award } from "lucide-react";
+import { toast } from "sonner";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,8 +14,16 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { toast } from "sonner";
-import { Crown, Sparkles, Image, Key, Award } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 interface ShopItemProps {
   item: {
@@ -38,11 +37,10 @@ interface ShopItemProps {
   userId: string;
 }
 
-export function ShopItem({ item, userId }: ShopItemProps) {
-  const [purchaseQuantity, setPurchaseQuantity] = useState(1);
+export function ShopItem({ item }: ShopItemProps) {
+  const purchaseQuantity = 1;
   const queryClient = useQueryClient();
 
-  // Mutation pour l'achat d'un article
   const { mutate: purchaseItem, isPending } = useMutation({
     mutationFn: async () => {
       const response = await fetch("/api/items/buy", {
@@ -88,11 +86,11 @@ export function ShopItem({ item, userId }: ShopItemProps) {
       case "SPECIAL_ACCESS":
         return <Crown className="h-6 w-6 text-green-500" />;
       default:
-        return <Image className="h-6 w-6 text-gray-500" />;
+        return null;
     }
   };
 
-  // Badge en fonction du type d'article
+  // Badge en fonction du type d'<articl></articl>e
   const getItemBadge = () => {
     switch (item.type) {
       case "BOOST":
@@ -162,7 +160,7 @@ export function ShopItem({ item, userId }: ShopItemProps) {
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Confirmer l'achat</AlertDialogTitle>
+              <AlertDialogTitle>Confirmer l&apos;'achat</AlertDialogTitle>
               <AlertDialogDescription>
                 Voulez-vous vraiment acheter {item.name} pour {item.price}{" "}
                 couronnes ?

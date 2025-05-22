@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { CheckCircle, XCircle, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,7 +11,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 
 export function PaymentModalWrapper({
   paymentStatus,
@@ -25,7 +25,7 @@ function PaymentModal({
 }: {
   initialStatus: "success" | "cancel" | null;
 }) {
-  const [open, setOpen] = useState(!!initialStatus);
+  const [open, setOpen] = useState(Boolean(initialStatus));
   const router = useRouter();
 
   const handleClose = () => {
@@ -79,7 +79,7 @@ function PaymentModal({
                 ajoutés à votre compte.
               </p>
               <Button className="w-full" onClick={handleGoHome}>
-                Continuer l'aventure
+                Continuer l&apos;'aventure
               </Button>
             </div>
           ) : (
@@ -88,8 +88,8 @@ function PaymentModal({
                 <XCircle className="h-12 w-12 text-red-600" />
               </div>
               <p className="text-center text-sm text-gray-600">
-                Votre paiement n'a pas pu être traité. Aucun montant n'a été
-                débité.
+                Votre paiement n&apos;'a pas pu être traité. Aucun montant
+                n&apos;'a été débité.
               </p>
               <Button
                 variant="outline"
