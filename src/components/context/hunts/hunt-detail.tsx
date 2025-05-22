@@ -17,6 +17,7 @@ import HuntMapView from "./hunt-map-view";
 import { HuntShareDialog } from "./hunt-share-dialog";
 import { HuntStatusSection } from "./hunt-status-section";
 import { HuntStepsList } from "./hunt-steps-list";
+import { ReviewForm } from "./hunt-review-form";
 
 type ParticipantUser = {
   id?: string;
@@ -108,16 +109,22 @@ export function HuntDetails({ huntId }: { huntId: string }) {
           onValueChange={setActiveTab}
           className="w-full"
         >
-          <TabsList className="grid grid-cols-3 mb-6 w-full">
+        <TabsList className="grid grid-cols-4 mb-6 w-full">
             <TabsTrigger value="details">Détails</TabsTrigger>
             <TabsTrigger value="steps">
               Étapes ({hunt.steps?.length || 0})
             </TabsTrigger>
             <TabsTrigger value="map">Carte</TabsTrigger>
+            <TabsTrigger value="reviews">Avis</TabsTrigger>
           </TabsList>
 
           <TabsContent value="details" className="space-y-6">
             <HuntInfoCard hunt={hunt as any} />
+            
+
+            {session?.data?.user && hunt.status === "COMPLETED" && (
+              <ReviewForm huntId={hunt.id} onSuccess={refetch} />
+            )}
 
             {!isCreator && !isParticipant && hunt.status !== "COMPLETED" && (
               <div className="mt-6 p-6 border rounded-lg bg-muted/5">
@@ -161,10 +168,8 @@ export function HuntDetails({ huntId }: { huntId: string }) {
                   <CardContent>
                     {hunt.participants && hunt.participants.length > 0 ? (
                       <div className="space-y-4">
-                        {/* Utiliser TypeScript correctement avec la liste des participants */}
                         {(hunt.participants as Participant[]).map(
                           (participant) => {
-                            // Extraire les valeurs en toute sécurité
                             const participantStatus =
                               participant.status || "PENDING";
                             const user = participant.user || {};
@@ -182,9 +187,7 @@ export function HuntDetails({ huntId }: { huntId: string }) {
                                     />
                                     <AvatarFallback>
                                       {user.name
-                                        ? user.name
-                                            .substring(0, 1)
-                                            .toUpperCase()
+                                        ? user.name.substring(0, 1).toUpperCase()
                                         : "P"}
                                     </AvatarFallback>
                                   </Avatar>
@@ -207,15 +210,15 @@ export function HuntDetails({ huntId }: { huntId: string }) {
                                     participantStatus === "COMPLETED"
                                       ? "bg-green-100 text-green-800"
                                       : participantStatus === "ONGOING"
-                                        ? "bg-blue-100 text-blue-800"
-                                        : ""
+                                      ? "bg-blue-100 text-blue-800"
+                                      : ""
                                   }
                                 >
                                   {participantStatus === "COMPLETED"
                                     ? "Terminé"
                                     : participantStatus === "ONGOING"
-                                      ? "En cours"
-                                      : "Inscrit"}
+                                    ? "En cours"
+                                    : "Inscrit"}
                                 </Badge>
                               </div>
                             );
@@ -257,3 +260,8 @@ export function HuntDetails({ huntId }: { huntId: string }) {
     </>
   );
 }
+
+
+
+
+
