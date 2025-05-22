@@ -1,10 +1,7 @@
 import { Metadata } from "next";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { DashboardToolbar } from "@/components/ui/dashboard-toolbar";
-import {
-  SidebarInset,
-  SidebarProvider,
-} from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 export const metadata: Metadata = {
   title: "Lootopia",
@@ -21,9 +18,7 @@ export default async function DashboardLayout({
       <AppSidebar />
       <SidebarInset>
         <DashboardToolbar />
-        <main className="p-4">
-          {children}
-        </main>
+        <main className="p-4">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );

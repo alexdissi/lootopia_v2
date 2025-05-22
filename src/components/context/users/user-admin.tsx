@@ -29,11 +29,15 @@ export function UsersAdminUI({
 
   const activePage = currentPage || 1;
   const activeSearch = searchTerm || "";
-  const filteredUsers = useMemo(() => users.filter(
-      (user) =>
-        user.name?.toLowerCase().includes(activeSearch.toLowerCase()) ||
-        user.email?.toLowerCase().includes(activeSearch.toLowerCase()),
-    ), [users, activeSearch]);
+  const filteredUsers = useMemo(
+    () =>
+      users.filter(
+        (user) =>
+          user.name?.toLowerCase().includes(activeSearch.toLowerCase()) ||
+          user.email?.toLowerCase().includes(activeSearch.toLowerCase()),
+      ),
+    [users, activeSearch],
+  );
 
   const totalFilteredUsers = filteredUsers.length;
   const totalPages = Math.ceil(totalFilteredUsers / itemsPerPage);

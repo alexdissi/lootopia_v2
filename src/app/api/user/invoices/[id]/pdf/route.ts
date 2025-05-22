@@ -1,11 +1,13 @@
 import { headers } from "next/headers";
-import {NextRequest, NextResponse} from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 
-export async function GET(  request: NextRequest,
-                            { params } : { params: Promise<{ id: string }> }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
     const session = await auth.api.getSession({ headers: await headers() });
 

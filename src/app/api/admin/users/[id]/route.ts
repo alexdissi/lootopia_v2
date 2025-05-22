@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
-import {NextResponse} from "next/server";
-import {z} from "zod";
+import { NextResponse } from "next/server";
+import { z } from "zod";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
 
@@ -9,15 +9,15 @@ const roleSchema = z.object({
 });
 
 export async function PATCH(
-    req: Request,
-    { params } : { params: Promise<{ id: string }> }
+  req: Request,
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const session = await auth.api.getSession({ headers: await headers() });
     if (!session?.user || session.user.role !== "ADMIN") {
       return NextResponse.json(
-          { error: "Admin privileges required" },
-          { status: 403 },
+        { error: "Admin privileges required" },
+        { status: 403 },
       );
     }
 
@@ -27,8 +27,8 @@ export async function PATCH(
     const validatedData = roleSchema.safeParse(body);
     if (!validatedData.success) {
       return NextResponse.json(
-          { error: "Invalid role provided" },
-          { status: 400 },
+        { error: "Invalid role provided" },
+        { status: 400 },
       );
     }
 
@@ -36,8 +36,8 @@ export async function PATCH(
 
     if (id === session.user.id && role !== "ADMIN") {
       return NextResponse.json(
-          { error: "You cannot demote yourself from admin" },
-          { status: 400 },
+        { error: "You cannot demote yourself from admin" },
+        { status: 400 },
       );
     }
 
@@ -55,16 +55,15 @@ export async function PATCH(
     return NextResponse.json(updatedUser);
   } catch {
     return NextResponse.json(
-        { error: "Failed to update user role" },
-        { status: 500 },
+      { error: "Failed to update user role" },
+      { status: 500 },
     );
   }
 }
 
-
 export async function DELETE(
-    req: Request,
-    { params } : { params: Promise<{ id: string }> }
+  req: Request,
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const session = await auth.api.getSession({ headers: await headers() });
@@ -76,8 +75,7 @@ export async function DELETE(
       );
     }
 
-
-   const { id } = await params;
+    const { id } = await params;
 
     if (id === session.user.id) {
       return NextResponse.json(

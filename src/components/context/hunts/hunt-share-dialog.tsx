@@ -11,7 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import {Hunt} from "@/interfaces/hunt";
+import { Hunt } from "@/interfaces/hunt";
 
 interface HuntShareDialogProps {
   isOpen: boolean;

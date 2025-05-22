@@ -6,8 +6,8 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { PasswordInput } from "@/components/ui/password-input";
 import { authClient } from "@/lib/auth-client";
 
 export default function ResetPasswordForm() {
@@ -43,7 +43,8 @@ export default function ResetPasswordForm() {
         <div className="grid w-full items-center gap-2">
           <div className="flex flex-col space-y-1.5">
             <Label htmlFor="email">New password</Label>
-            <PasswordInput
+            <Input
+                type="password"
               id="password"
               value={password}
               onChange={(e: any) => setPassword(e.target.value)}
@@ -53,7 +54,8 @@ export default function ResetPasswordForm() {
           </div>
           <div className="flex flex-col space-y-1.5">
             <Label htmlFor="email">Confirm password</Label>
-            <PasswordInput
+            <Input
+                type="password"
               id="password"
               value={confirmPassword}
               onChange={(e: any) => setConfirmPassword(e.target.value)}

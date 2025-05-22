@@ -5,10 +5,11 @@ import PricingComponent from "@/components/pricing/pricing-components";
 export default async function PricingPage({
   searchParams,
 }: {
-  searchParams: Promise<{payment: string}>;
+  searchParams: Promise<{ payment: string }>;
 }) {
-    const { payment } = await searchParams;
-    const paymentStatus = payment === "success" ? "success" : payment === "cancel" ? "cancel" : null;
+  const { payment } = await searchParams;
+  const paymentStatus =
+    payment === "success" ? "success" : payment === "cancel" ? "cancel" : null;
   const packs = [
     {
       id: "price_1RR6xvHvWY7Zh28WVP63Kfgn",

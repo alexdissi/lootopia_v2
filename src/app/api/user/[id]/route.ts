@@ -5,7 +5,7 @@ import prisma from "@/lib/db";
 
 export async function PATCH(
   request: NextRequest,
-  { params } : { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const session = await auth.api.getSession({ headers: await headers() });
@@ -26,7 +26,7 @@ export async function PATCH(
     }
 
     const body = await request.json();
-    const { name, email,nickname, image } = body;
+    const { name, email, nickname, image } = body;
 
     const updatedUser = await prisma.user.update({
       where: { id },
