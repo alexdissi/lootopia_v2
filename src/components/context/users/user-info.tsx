@@ -42,7 +42,6 @@ export function UserProfileForm({ userId, initialData }: UserProfileFormProps) {
       image: "",
     },
   });
-  console.log("session", session?.user);
   
 
   useEffect(() => {
