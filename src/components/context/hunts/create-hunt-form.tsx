@@ -53,9 +53,10 @@ export function CreateHuntForm() {
   });
 
   const addStep = () => {
+    const currentSteps = form.getValues("steps") || [];
     const newSteps = [
-      ...steps,
-      { description: "", stepOrder: steps.length + 1 },
+      ...currentSteps,
+      { description: "", stepOrder: currentSteps.length + 1 },
     ];
     setSteps(newSteps);
     form.setValue("steps", newSteps);
@@ -63,10 +64,10 @@ export function CreateHuntForm() {
 
   const removeStep = (index: number) => {
     if (steps.length === 1) {
-      return; // Keep at least one step
+      return;
     }
-
-    const newSteps = steps
+    const currentSteps = form.getValues("steps");
+    const newSteps = currentSteps
       .filter((_, i) => i !== index)
       .map((step, i) => ({ ...step, stepOrder: i + 1 }));
 
@@ -83,7 +84,7 @@ export function CreateHuntForm() {
       },
       onError: (error: any) => {
         toast.error(
-          error.message || "Une erreur s'est produite lors de la création.",
+          error.message || "Une erreur s'est produite lors de la création."
         );
       },
     });

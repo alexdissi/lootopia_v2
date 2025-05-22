@@ -2,13 +2,13 @@ import { z } from "zod";
 
 export const formSchema = z.object({
   title: z.string().min(3, "Le titre doit contenir au moins 3 caractères"),
-  description: z.string().optional().default(""),
+  description: z.string().optional(),
   startDate: z.date().optional().nullable(),
   endDate: z.date().optional().nullable(),
-  location: z.string().optional().default(""),
+  location: z.string().optional(),
   mode: z.enum(["PUBLIC", "PRIVATE"]),
-  fee: z.coerce.number().min(0).optional().default(0),
-  mapStyle: z.string().optional().default(""),
+  fee: z.coerce.number().min(0).optional(),
+  mapStyle: z.string().optional(),
   steps: z
     .array(
       z.object({

@@ -2,9 +2,9 @@
 
 import { useRouter, usePathname } from "next/navigation";
 import { Suspense } from "react";
+import { UserProfileForm } from "@/components/context/users/user-info";
 import { UserTransactionsTab } from "@/components/context/users/user-transaction-history";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UserProfileForm } from "@/components/context/users/user-info";
 
 interface ProfileTabsProps {
   defaultTab: string;

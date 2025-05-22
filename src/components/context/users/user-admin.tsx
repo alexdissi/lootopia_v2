@@ -1,8 +1,9 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useQueryState } from "nuqs";
+import { useEffect, useState, useMemo } from "react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { User } from "@/interfaces/user";
@@ -12,50 +13,48 @@ import { UsersTable } from "./user-table";
 interface UsersAdminUIProps {
   initialUsers: User[];
   currentUserId: string;
-  initialSearch: string;
-  totalUsers: number;
-  totalPages: number;
-  currentPage: number;
 }
 
 export function UsersAdminUI({
   initialUsers,
   currentUserId,
-  initialSearch,
-  totalUsers,
-  totalPages,
-  currentPage,
 }: UsersAdminUIProps) {
-  const [users, setUsers] = useState(initialUsers);
-  const [searchTerm, setSearchTerm] = useState(initialSearch);
+  const [users, setUsers] = useState<User[]>(initialUsers);
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const [searchTerm, setSearchTerm] = useQueryState("search");
+  const [currentPage, setCurrentPage] = useQueryState("page", {
+    parse: (value) => parseInt(value, 10),
+  });
+  const itemsPerPage = 10;
+
+  const activePage = currentPage || 1;
+  const activeSearch = searchTerm || "";
+  const filteredUsers = useMemo(
+    () =>
+      users.filter(
+        (user) =>
+          user.name?.toLowerCase().includes(activeSearch.toLowerCase()) ||
+          user.email?.toLowerCase().includes(activeSearch.toLowerCase()),
+      ),
+    [users, activeSearch],
+  );
+
+  const totalFilteredUsers = filteredUsers.length;
+  const totalPages = Math.ceil(totalFilteredUsers / itemsPerPage);
+
+  const currentUsers = useMemo(() => {
+    const startIndex = (activePage - 1) * itemsPerPage;
+    return filteredUsers.slice(startIndex, startIndex + itemsPerPage);
+  }, [filteredUsers, activePage]);
 
   useEffect(() => {
-    setUsers(initialUsers);
-  }, [initialUsers]);
-
-  useEffect(() => {
-    const search = searchParams.get("search") || "";
-    setSearchTerm(search);
-  }, [searchParams]);
+    if (activeSearch && activePage !== 1) {
+      setCurrentPage(1);
+    }
+  }, [activeSearch, activePage, setCurrentPage]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    const timeoutId = setTimeout(() => {
-      const params = new URLSearchParams(searchParams.toString());
-      if (value) {
-        params.set("search", value);
-      } else {
-        params.delete("search");
-      }
-
-      params.set("page", "1");
-      router.push(`?${params.toString()}`, { scroll: false });
-    }, 300);
-
-    return () => clearTimeout(timeoutId);
+    setSearchTerm(e.target.value || null);
   };
 
   const updateUserRole = useMutation({
@@ -66,7 +65,7 @@ export function UsersAdminUI({
       userId: string;
       role: UserRole;
     }) => {
-      const res = await fetch(`/api/admin/users/${userId}/role`, {
+      const res = await fetch(`/api/admin/users/${userId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role }),
@@ -108,7 +107,7 @@ export function UsersAdminUI({
     },
     onError: () => {
       toast.error("Erreur lors de la suppression de l'utilisateur");
-      router.refresh(); // Refresh to get the actual state
+      router.refresh();
     },
   });
 
@@ -121,9 +120,7 @@ export function UsersAdminUI({
   };
 
   const handlePageChange = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", page.toString());
-    router.push(`?${params.toString()}`, { scroll: false });
+    setCurrentPage(page);
   };
 
   return (
@@ -131,22 +128,23 @@ export function UsersAdminUI({
       <div className="flex justify-between items-center">
         <Input
           placeholder="Rechercher par nom ou email"
-          value={searchTerm}
+          value={activeSearch}
           onChange={handleSearch}
           className="max-w-sm"
         />
         <div className="text-sm text-muted-foreground">
-          {totalUsers} utilisateur{totalUsers > 1 ? "s" : ""} au total
+          {totalFilteredUsers} utilisateur{totalFilteredUsers > 1 ? "s" : ""} au
+          total
         </div>
       </div>
 
       <UsersTable
-        users={users}
+        users={currentUsers}
         currentUserId={currentUserId}
         onRoleChange={handleRoleChange}
         onDeleteUser={handleDeleteUser}
         totalPages={totalPages}
-        currentPage={currentPage}
+        currentPage={activePage}
         onPageChange={handlePageChange}
       />
     </div>

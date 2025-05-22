@@ -1,10 +1,10 @@
 "use client";
 
+import { Bell, Menu, Search } from "lucide-react";
 import * as React from "react";
-import { Bell, Crown, Menu, Search } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { CurrencyTracker } from "@/components/context/common/currency-tracker";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,21 +13,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { Badge } from "@/components/ui/badge";
-import { authClient } from "@/lib/auth-client";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export function DashboardToolbar() {
-  const session = authClient.useSession();
-  const [notifications, setNotifications] = React.useState(3); // Nombre fictif de notifications
-
+  const notifications = 3;
   return (
     <div className="flex items-center justify-between p-4 border-b border-border bg-background">
       <div className="flex items-center gap-2 lg:gap-4">
         <SidebarTrigger className="lg:hidden">
           <Menu className="h-5 w-5" />
         </SidebarTrigger>
-        
+
         <div className="relative max-w-md hidden sm:flex items-center">
           <Search className="absolute left-2.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -38,11 +36,8 @@ export function DashboardToolbar() {
         </div>
       </div>
 
-      <div className="flex items-center gap-2">
-        <div className="flex items-center gap-1 bg-amber-100 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 px-3 py-1 rounded-full">
-          <Crown className="h-4 w-4" />
-          <span className="text-sm font-medium">{session?.data?.user?.virtualCurrency || 0}</span>
-        </div>
+      <div className="flex items-center gap-3">
+        <CurrencyTracker />
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -64,15 +59,21 @@ export function DashboardToolbar() {
             <div className="max-h-[300px] overflow-auto">
               <DropdownMenuItem className="flex flex-col items-start">
                 <p className="font-medium">Nouvelle chasse disponible !</p>
-                <p className="text-xs text-muted-foreground">La chasse "Trésor de Paris" vient d'être publiée</p>
+                <p className="text-xs text-muted-foreground">
+                  La chasse "Trésor de Paris" vient d'être publiée
+                </p>
               </DropdownMenuItem>
               <DropdownMenuItem className="flex flex-col items-start">
                 <p className="font-medium">Félicitations !</p>
-                <p className="text-xs text-muted-foreground">Vous avez gagné 50 couronnes</p>
+                <p className="text-xs text-muted-foreground">
+                  Vous avez gagné 50 couronnes
+                </p>
               </DropdownMenuItem>
               <DropdownMenuItem className="flex flex-col items-start">
                 <p className="font-medium">Rappel</p>
-                <p className="text-xs text-muted-foreground">La chasse "Énigmes de Lyon" commence demain</p>
+                <p className="text-xs text-muted-foreground">
+                  La chasse "Énigmes de Lyon" commence demain
+                </p>
               </DropdownMenuItem>
             </div>
             <DropdownMenuSeparator />

@@ -1,11 +1,12 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormField,
@@ -14,14 +15,13 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import { useForm, useWatch } from "react-hook-form";
+import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
-import { useEffect } from "react";
 
 export interface UserFormValues {
   name: string;
   email: string;
-  nickname?: string; 
+  nickname?: string;
   image?: string;
 }
 
@@ -30,26 +30,25 @@ interface UserProfileFormProps {
   initialData?: Partial<UserFormValues>;
 }
 
-export function UserProfileForm({ userId, initialData }: UserProfileFormProps) {
+export function UserProfileForm({ userId }: UserProfileFormProps) {
   const router = useRouter();
-  const { data: session, isLoading } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
 
   const form = useForm<UserFormValues>({
     defaultValues: {
       name: "",
       email: "",
-      nickname: "", 
+      nickname: "",
       image: "",
     },
   });
-  
 
   useEffect(() => {
     if (session?.user) {
       form.reset({
         name: session.user.name || "",
         email: session.user.email || "",
-        nickname: session.user.nickname || "",
+        nickname: (session.user as any).nickname || "",
         image: session.user.image || "",
       });
     }
@@ -92,7 +91,7 @@ export function UserProfileForm({ userId, initialData }: UserProfileFormProps) {
     mutation.mutate(data);
   };
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <div className="flex justify-center items-center py-8">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />

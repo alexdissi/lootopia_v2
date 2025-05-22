@@ -5,7 +5,7 @@ import prisma from "@/lib/db";
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const headersList = await headers();
@@ -58,12 +58,13 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const headersList = await headers();
     const session = await auth.api.getSession({ headers: headersList });
     const body = await req.json();
+    const { id } = await params;
 
     if (!session?.user) {
       return NextResponse.json(
@@ -73,7 +74,7 @@ export async function PATCH(
     }
 
     const hunt = await prisma.treasureHunt.findUnique({
-      where: { id: params.id },
+      where: { id },
       select: { createdById: true },
     });
 
@@ -95,7 +96,7 @@ export async function PATCH(
 
     await prisma.$transaction(async (tx) => {
       await tx.treasureHunt.update({
-        where: { id: params.id },
+        where: { id },
         data: {
           title: body.title,
           description: body.description,
@@ -111,13 +112,13 @@ export async function PATCH(
 
       if (body.steps) {
         await tx.huntStep.deleteMany({
-          where: { huntId: params.id },
+          where: { huntId: id },
         });
 
         await tx.huntStep.createMany({
           data: body.steps.map((step: any) => ({
             description: step.description,
-            huntId: params.id,
+            huntId: id,
             stepOrder: step.stepOrder,
           })),
         });
@@ -125,7 +126,7 @@ export async function PATCH(
     });
 
     const updatedHunt = await prisma.treasureHunt.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         steps: {
           orderBy: { stepOrder: "asc" },
@@ -144,11 +145,12 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const headersList = await headers();
     const session = await auth.api.getSession({ headers: headersList });
+    const { id } = await params;
 
     if (!session?.user) {
       return NextResponse.json(
@@ -158,7 +160,7 @@ export async function DELETE(
     }
 
     const hunt = await prisma.treasureHunt.findUnique({
-      where: { id: params.id },
+      where: { id },
       select: { createdById: true },
     });
 
@@ -179,9 +181,9 @@ export async function DELETE(
     }
 
     await prisma.$transaction([
-      prisma.huntStep.deleteMany({ where: { huntId: params.id } }),
-      prisma.participation.deleteMany({ where: { huntId: params.id } }),
-      prisma.treasureHunt.delete({ where: { id: params.id } }),
+      prisma.huntStep.deleteMany({ where: { huntId: id } }),
+      prisma.participation.deleteMany({ where: { huntId: id } }),
+      prisma.treasureHunt.delete({ where: { id: id } }),
     ]);
 
     return NextResponse.json({ success: true });
