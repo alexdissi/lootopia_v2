@@ -17,7 +17,8 @@ import HuntMapView from "./hunt-map-view";
 import { HuntShareDialog } from "./hunt-share-dialog";
 import { HuntStatusSection } from "./hunt-status-section";
 import { HuntStepsList } from "./hunt-steps-list";
-import { ReviewForm } from "./hunt-review-form";
+import { ReviewForm } from "./form/hunt-review-form";
+import { ReviewList } from "@/components/review/review-list";
 
 type ParticipantUser = {
   id?: string;
@@ -122,9 +123,7 @@ export function HuntDetails({ huntId }: { huntId: string }) {
             <HuntInfoCard hunt={hunt as any} />
             
 
-            {session?.data?.user && hunt.status === "COMPLETED" && (
-              <ReviewForm huntId={hunt.id} onSuccess={refetch} />
-            )}
+         
 
             {!isCreator && !isParticipant && hunt.status !== "COMPLETED" && (
               <div className="mt-6 p-6 border rounded-lg bg-muted/5">
@@ -243,6 +242,17 @@ export function HuntDetails({ huntId }: { huntId: string }) {
           <TabsContent value="map">
             <HuntMapView hunt={hunt} />
           </TabsContent>
+          <TabsContent value="reviews">
+ 
+  <div className="space-y-6">
+  {session?.data?.user && (
+    <ReviewForm huntId={hunt.id} />
+  )}
+
+    <ReviewList huntId={hunt.id} />
+  </div>
+</TabsContent>
+
         </Tabs>
       </div>
 
