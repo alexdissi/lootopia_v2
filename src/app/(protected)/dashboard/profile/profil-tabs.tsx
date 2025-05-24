@@ -5,6 +5,10 @@ import { Suspense } from "react";
 import { UserProfileForm } from "@/components/context/users/user-info";
 import { UserTransactionsTab } from "@/components/context/users/user-transaction-history";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+<<<<<<< HEAD
+=======
+import { UserProfileForm } from "@/components/context/users/user-info";
+>>>>>>> 3993606 (.)
 
 interface ProfileTabsProps {
   defaultTab: string;

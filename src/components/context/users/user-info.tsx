@@ -2,7 +2,21 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
+<<<<<<< HEAD
 import { useRouter } from "next/navigation";
+=======
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
+import { useForm, useWatch } from "react-hook-form";
+import { UserRole } from "../../../../generated/prisma";
+import { authClient } from "@/lib/auth-client";
+>>>>>>> 3993606 (.)
 import { useEffect } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
@@ -21,7 +35,10 @@ import { authClient } from "@/lib/auth-client";
 export interface UserFormValues {
   name: string;
   email: string;
+<<<<<<< HEAD
   nickname?: string;
+=======
+>>>>>>> 3993606 (.)
   image?: string;
 }
 
@@ -30,25 +47,41 @@ interface UserProfileFormProps {
   initialData?: Partial<UserFormValues>;
 }
 
+<<<<<<< HEAD
 export function UserProfileForm({ userId }: UserProfileFormProps) {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
+=======
+export function UserProfileForm({ userId, initialData }: UserProfileFormProps) {
+  const router = useRouter();
+  const { data: session, isLoading } = authClient.useSession();
+>>>>>>> 3993606 (.)
 
   const form = useForm<UserFormValues>({
     defaultValues: {
       name: "",
       email: "",
+<<<<<<< HEAD
       nickname: "",
+=======
+>>>>>>> 3993606 (.)
       image: "",
     },
   });
 
+<<<<<<< HEAD
+=======
+  // Update form values when session data is available
+>>>>>>> 3993606 (.)
   useEffect(() => {
     if (session?.user) {
       form.reset({
         name: session.user.name || "",
         email: session.user.email || "",
+<<<<<<< HEAD
         nickname: (session.user as any).nickname || "",
+=======
+>>>>>>> 3993606 (.)
         image: session.user.image || "",
       });
     }
@@ -91,7 +124,11 @@ export function UserProfileForm({ userId }: UserProfileFormProps) {
     mutation.mutate(data);
   };
 
+<<<<<<< HEAD
   if (isPending) {
+=======
+  if (isLoading) {
+>>>>>>> 3993606 (.)
     return (
       <div className="flex justify-center items-center py-8">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -104,7 +141,10 @@ export function UserProfileForm({ userId }: UserProfileFormProps) {
       <form
         className="space-y-6 max-w-md"
         onSubmit={form.handleSubmit(onSubmit)}
+<<<<<<< HEAD
         noValidate
+=======
+>>>>>>> 3993606 (.)
       >
         <FormField
           control={form.control}
@@ -136,6 +176,7 @@ export function UserProfileForm({ userId }: UserProfileFormProps) {
 
         <FormField
           control={form.control}
+<<<<<<< HEAD
           name="nickname"
           render={({ field }) => (
             <FormItem>
@@ -150,6 +191,8 @@ export function UserProfileForm({ userId }: UserProfileFormProps) {
 
         <FormField
           control={form.control}
+=======
+>>>>>>> 3993606 (.)
           name="image"
           render={({ field }) => (
             <FormItem>
