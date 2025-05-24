@@ -2,16 +2,15 @@
 
 "use client";
 
-import type { Map as LeafletMap, Marker } from "leaflet";
 import { Loader2, MapPin, Maximize2, Minimize2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
-import "leaflet/dist/leaflet.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 
-type LeafletType = typeof import("leaflet");
-let L: LeafletType;
+type MapboxType = typeof import("mapbox-gl");
+let mapboxgl: MapboxType;
 
 interface MapViewProps {
   location: string;
@@ -19,7 +18,10 @@ interface MapViewProps {
   zoom?: number;
   className?: string;
   interactive?: boolean;
+  mapStyle?: string;
 }
+
+const MAPBOX_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
 export function MapView({
   location,
@@ -27,21 +29,24 @@ export function MapView({
   zoom = 13,
   className,
   interactive = true,
+  mapStyle = "mapbox://styles/mapbox/streets-v12",
 }: MapViewProps) {
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<LeafletMap | null>(null);
-  const markerRef = useRef<Marker | null>(null);
+  const mapInstanceRef = useRef<mapboxgl.Map | null>(null);
+  const markerRef = useRef<mapboxgl.Marker | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const [isClientReady, setIsClientReady] = useState(false);
+  const [coordinates, setCoordinates] = useState<[number, number] | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      import("leaflet").then((leaflet) => {
-        L = leaflet.default || leaflet;
+      import("mapbox-gl").then((mapbox) => {
+        mapboxgl = mapbox.default || mapbox;
+        mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
         setIsClientReady(true);
       });
     }
@@ -50,74 +55,132 @@ export function MapView({
   useEffect(() => {
     if (!isClientReady || !mapRef.current) return;
 
-    if (!mapInstanceRef.current) {
-      mapInstanceRef.current = L.map(mapRef.current, {
-        zoomControl: interactive && !isMobile,
-        dragging: interactive,
-        scrollWheelZoom: interactive,
-        doubleClickZoom: interactive,
-        touchZoom: interactive,
-      }).setView([0, 0], zoom);
+    const initializeMap = () => {
+      if (mapInstanceRef.current) return;
 
-      L.tileLayer(
-        "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-        {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          subdomains: "abcd",
-          maxZoom: 20,
-        },
-      ).addTo(mapInstanceRef.current);
-
-      const icon = L.divIcon({
-        html: `<div class="flex items-center justify-center w-10 h-10">
-                <div class="absolute w-6 h-6 bg-foreground/70 rounded-full opacity-30 animate-ping"></div>
-                <div class="relative flex items-center justify-center w-8 h-8 bg-foreground text-background rounded-full shadow-lg">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                </div>
-              </div>`,
-        className: "custom-div-icon",
-        iconSize: [30, 42],
-        iconAnchor: [15, 42],
+      mapInstanceRef.current = new mapboxgl.Map({
+        container: mapRef.current,
+        style: mapStyle,
+        center: [0, 0],
+        zoom: zoom,
+        pitch: 45, // Inclinaison pour un effet 3D
+        bearing: 0,
+        antialias: true, // Pour un meilleur rendu
+        interactive: interactive,
       });
 
-      markerRef.current = L.marker([0, 0], { icon }).addTo(
-        mapInstanceRef.current,
+      mapInstanceRef.current.addControl(
+        new mapboxgl.NavigationControl({
+          showCompass: true,
+          visualizePitch: true,
+        }),
+        "bottom-right",
       );
-    }
 
+      // Activer les bâtiments 3D et l'extrusion de terrain quand la carte est chargée
+      mapInstanceRef.current.on("load", () => {
+        // Ajouter les bâtiments 3D
+        if (!mapInstanceRef.current?.getLayer("3d-buildings")) {
+          mapInstanceRef.current?.addLayer({
+            id: "3d-buildings",
+            source: "composite",
+            "source-layer": "building",
+            filter: ["==", "extrude", "true"],
+            type: "fill-extrusion",
+            minzoom: 15,
+            paint: {
+              "fill-extrusion-color": "#aaa",
+              "fill-extrusion-height": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                15,
+                0,
+                15.05,
+                ["get", "height"],
+              ],
+              "fill-extrusion-base": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                15,
+                0,
+                15.05,
+                ["get", "min_height"],
+              ],
+              "fill-extrusion-opacity": 0.6,
+            },
+          });
+        }
+      });
+
+      // Ajouter un effet lightbox pour l'effet d'ombrage 3D
+      mapInstanceRef.current.on("load", () => {
+        mapInstanceRef.current?.setLight({
+          anchor: "viewport",
+          color: "white",
+          intensity: 0.4,
+          position: [1, 3, 2],
+        });
+      });
+    };
+
+    initializeMap();
+
+    // Geocoding avec Mapbox Geocoding API
     const geocodeAddress = async () => {
       setIsLoading(true);
       setError(null);
 
       try {
         const response = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}&limit=1`,
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(location)}.json?access_token=${MAPBOX_ACCESS_TOKEN}&limit=1`,
         );
 
         const data = await response.json();
 
-        if (data && data.length > 0) {
-          const { lat, lon, display_name } = data[0];
-          const coordinates = [Number.parseFloat(lat), Number.parseFloat(lon)];
+        if (data && data.features && data.features.length > 0) {
+          const feature = data.features[0];
+          const [lon, lat] = feature.center;
+          setCoordinates([lon, lat]);
 
           if (mapInstanceRef.current) {
-            mapInstanceRef.current.setView(
-              coordinates as [number, number],
-              zoom,
-            );
+            mapInstanceRef.current.flyTo({
+              center: [lon, lat],
+              zoom: zoom,
+              essential: true,
+              duration: 1500,
+            });
 
-            if (markerRef.current) {
-              markerRef.current.setLatLng(coordinates as [number, number]);
+            // Créer un nouveau marqueur s'il n'existe pas ou mettre à jour celui existant
+            if (!markerRef.current) {
+              // Créer un élément DOM personnalisé pour le marqueur
+              const el = document.createElement("div");
+              el.className = "custom-marker";
+              el.innerHTML = `
+                <div class="flex items-center justify-center w-10 h-10">
+                  <div class="absolute w-6 h-6 bg-foreground/70 rounded-full opacity-30 animate-ping"></div>
+                  <div class="relative flex items-center justify-center w-8 h-8 bg-foreground text-background rounded-full shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  </div>
+                </div>
+              `;
 
-              markerRef.current
-                .bindPopup(
-                  `<div class="p-1">
-                  <div class="font-semibold mb-1">${location}</div>
-                  <div class="text-xs text-gray-500">${display_name}</div>
-                </div>`,
-                )
-                .openPopup();
+              markerRef.current = new mapboxgl.Marker(el)
+                .setLngLat([lon, lat])
+                .addTo(mapInstanceRef.current);
+
+              // Ajouter une popup
+              const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
+                  <div class="p-2">
+                    <div class="font-semibold mb-1">${location}</div>
+                    <div class="text-xs text-gray-500">${feature.place_name}</div>
+                  </div>
+                `);
+
+              markerRef.current.setPopup(popup);
+            } else {
+              markerRef.current.setLngLat([lon, lat]);
             }
           }
         } else {
@@ -146,11 +209,17 @@ export function MapView({
         mapInstanceRef.current = null;
       }
     };
-  }, [location, zoom, interactive, isMobile, isClientReady]);
+  }, [location, zoom, interactive, isMobile, isClientReady, mapStyle]);
 
   const handleRecenter = () => {
-    if (mapInstanceRef.current && markerRef.current) {
-      mapInstanceRef.current.setView(markerRef.current.getLatLng(), zoom);
+    if (mapInstanceRef.current && coordinates) {
+      mapInstanceRef.current.flyTo({
+        center: coordinates,
+        zoom: zoom,
+        pitch: 45,
+        bearing: 0,
+        duration: 1000,
+      });
     }
   };
 
@@ -159,13 +228,43 @@ export function MapView({
 
     setTimeout(() => {
       if (mapInstanceRef.current) {
-        mapInstanceRef.current.invalidateSize();
+        mapInstanceRef.current.resize();
 
-        if (markerRef.current) {
-          mapInstanceRef.current.setView(markerRef.current.getLatLng(), zoom);
+        if (coordinates) {
+          mapInstanceRef.current.flyTo({
+            center: coordinates,
+            duration: 500,
+          });
         }
       }
     }, 100);
+  };
+
+  // Fonction pour animier la rotation de la carte
+  const animateMap = () => {
+    if (!mapInstanceRef.current || !coordinates) return;
+
+    // Effectuer une rotation de 360 degrés
+    const rotationDuration = 12000; // 12 secondes
+    const startBearing = 0;
+    const endBearing = 360;
+    const start = Date.now();
+
+    function rotate() {
+      if (!mapInstanceRef.current) return;
+
+      const elapsed = Date.now() - start;
+      const progress = Math.min(elapsed / rotationDuration, 1);
+      const bearing = startBearing + progress * (endBearing - startBearing);
+
+      mapInstanceRef.current.setBearing(bearing % 360);
+
+      if (progress < 1) {
+        requestAnimationFrame(rotate);
+      }
+    }
+
+    rotate();
   };
 
   return (
@@ -187,7 +286,7 @@ export function MapView({
       {isLoading && location && (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/80 z-10 backdrop-blur-sm">
           <Loader2 className="h-8 w-8 animate-spin text-foreground/70 mb-2" />
-          <p className="text-sm">Chargement de la carte...</p>
+          <p className="text-sm">Chargement de la carte 3D...</p>
         </div>
       )}
 
@@ -236,6 +335,32 @@ export function MapView({
           >
             <MapPin className="h-4 w-4" />
           </Button>
+
+          {isFullscreen && (
+            <Button
+              variant="secondary"
+              size="icon"
+              className="h-10 w-10 rounded-full shadow-lg bg-background/80 backdrop-blur-sm hover:bg-background transition-all duration-300 ease-in-out"
+              onClick={animateMap}
+              title="Faire pivoter la carte"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 2v6h-6"></path>
+                <path d="M3 12a9 9 0 0 1 15-6.7l3-3"></path>
+                <path d="M3 12a9 9 0 0 0 15 6.7l3 3"></path>
+              </svg>
+            </Button>
+          )}
         </div>
       )}
 
@@ -249,32 +374,6 @@ export function MapView({
           >
             Fermer
           </Button>
-        </div>
-      )}
-
-      {location && !isFullscreen && (
-        <div className="absolute bottom-0 left-0 right-0 px-3 py-2 text-xs text-center bg-background/80 backdrop-blur-sm border-t border-muted/30 z-10 transition-all duration-300 ease-in-out">
-          <a
-            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-foreground hover:underline inline-flex items-center transition-colors duration-200"
-          >
-            <span>Voir sur Google Maps</span>
-            <svg
-              className="h-3 w-3 ml-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              />
-            </svg>
-          </a>
         </div>
       )}
     </div>
