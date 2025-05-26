@@ -70,6 +70,7 @@ export const auth = betterAuth({
         },
         select: {
           nickname: true,
+          twoFactorEnabled: true,
         },
       });
       return {
@@ -78,6 +79,7 @@ export const auth = betterAuth({
           ...user,
           role: roles?.role,
           nickname: userSession?.nickname,
+          twoFactorEnabled: userSession?.twoFactorEnabled,
         },
         session,
       };

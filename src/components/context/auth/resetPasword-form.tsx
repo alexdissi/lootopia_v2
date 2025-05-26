@@ -6,7 +6,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
 
@@ -44,7 +44,7 @@ export default function ResetPasswordForm() {
           <div className="flex flex-col space-y-1.5">
             <Label htmlFor="email">New password</Label>
             <Input
-                type="password"
+              type="password"
               id="password"
               value={password}
               onChange={(e: any) => setPassword(e.target.value)}
@@ -55,7 +55,7 @@ export default function ResetPasswordForm() {
           <div className="flex flex-col space-y-1.5">
             <Label htmlFor="email">Confirm password</Label>
             <Input
-                type="password"
+              type="password"
               id="password"
               value={confirmPassword}
               onChange={(e: any) => setConfirmPassword(e.target.value)}

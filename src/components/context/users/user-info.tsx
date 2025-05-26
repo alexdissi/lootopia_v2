@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
+import { TwoFactorSetup } from "./2fa/two-factor-setup";
 
 export interface UserFormValues {
   name: string;
@@ -100,89 +101,92 @@ export function UserProfileForm({ userId }: UserProfileFormProps) {
   }
 
   return (
-    <Form {...form}>
-      <form
-        className="space-y-6 max-w-md"
-        onSubmit={form.handleSubmit(onSubmit)}
-        noValidate
-      >
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Nom complet</FormLabel>
-              <FormControl>
-                <Input placeholder="Nom complet" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+    <>
+      <Form {...form}>
+        <form
+          className="space-y-6 max-w-md"
+          onSubmit={form.handleSubmit(onSubmit)}
+          noValidate
+        >
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nom complet</FormLabel>
+                <FormControl>
+                  <Input placeholder="Nom complet" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input type="email" placeholder="Email" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input type="email" placeholder="Email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="nickname"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Nom d'utilisateur</FormLabel>
-              <FormControl>
-                <Input placeholder="Nom d'utilisateur" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="nickname"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nom d'utilisateur</FormLabel>
+                <FormControl>
+                  <Input placeholder="Nom d'utilisateur" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="image"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>URL de l'image de profil</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="https://example.com/avatar.jpg"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-              {image && (
-                <img
-                  src={image}
-                  alt="Aperçu de l'image"
-                  className="mt-2 w-32 h-32 object-cover rounded-md border"
-                />
-              )}
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="image"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>URL de l'image de profil</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="https://example.com/avatar.jpg"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+                {image && (
+                  <img
+                    src={image}
+                    alt="Aperçu de l'image"
+                    className="mt-2 w-32 h-32 object-cover rounded-md border"
+                  />
+                )}
+              </FormItem>
+            )}
+          />
 
-        <Button type="submit" disabled={mutation.isPending}>
-          {mutation.isPending ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Sauvegarde en cours...
-            </>
-          ) : (
-            "Sauvegarder"
-          )}
-        </Button>
-      </form>
-    </Form>
+          <Button type="submit" disabled={mutation.isPending}>
+            {mutation.isPending ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Sauvegarde en cours...
+              </>
+            ) : (
+              "Sauvegarder"
+            )}
+          </Button>
+        </form>
+      </Form>
+      <TwoFactorSetup />
+    </>
   );
 }
