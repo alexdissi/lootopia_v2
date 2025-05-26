@@ -74,7 +74,7 @@ export function RegisterForm() {
               message: ctx.error.message,
             });
           },
-        },
+        }
       );
     } catch {
       toast.error("Une erreur est survenue.");
@@ -127,7 +127,7 @@ export function RegisterForm() {
               <FormItem>
                 <FormLabel>Mot de passe</FormLabel>
                 <FormControl>
-                  <Input type="password" {...field} />
+                  <Input placeholder="*******" type="password" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -144,9 +144,7 @@ export function RegisterForm() {
           <div className="w-full border-t border-gray-600" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-[#1a1f2e] px-2 text-gray-400">
-            OU CONTINUER AVEC
-          </span>
+          OU CONTINUER AVEC
         </div>
       </div>
 

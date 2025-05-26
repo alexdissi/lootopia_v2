@@ -58,7 +58,7 @@ export function LoginForm() {
             toast.error(ctx.error.message);
             if (ctx.error.status === 403) {
               toast.error(
-                "Votre compte n'est pas encore validé. Veuillez vérifier votre email.",
+                "Votre compte n'est pas encore validé. Veuillez vérifier votre email."
               );
             }
             form.setError("email", {
@@ -66,7 +66,7 @@ export function LoginForm() {
               message: ctx.error.message,
             });
           },
-        },
+        }
       );
     } catch {
       toast.error("Une erreur est survenue.");
@@ -114,7 +114,7 @@ export function LoginForm() {
                   </Link>
                 </div>
                 <FormControl>
-                  <Input type="password" {...field} />
+                  <Input placeholder="*******" type="password" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -131,9 +131,7 @@ export function LoginForm() {
           <div className="w-full border-t border-gray-600"></div>
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-[#1a1f2e] px-2 text-gray-400">
-            OU CONTINUER AVEC
-          </span>
+          OU CONTINUER AVEC
         </div>
       </div>
 
