@@ -1,9 +1,11 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { AlertDialogCancel } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormField,
@@ -13,8 +15,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { AlertDialogCancel } from "@/components/ui/alert-dialog";
 import { authClient } from "@/lib/auth-client";
 
 export function PasswordStep({

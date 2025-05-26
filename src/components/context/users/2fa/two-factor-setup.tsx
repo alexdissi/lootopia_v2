@@ -1,19 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
   AlertDialogTrigger,
   AlertDialogContent,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { DisableStep } from "./disable-step";
 import { PasswordStep } from "./password-step";
 import { QRCodeStep } from "./qr-code-step";
-import { VerifyStep } from "./verify-code";
 import { SuccessStep } from "./success-step";
+import { VerifyStep } from "./verify-code";
 
 type Step = "password" | "qrcode" | "verify" | "success" | "disable";
 

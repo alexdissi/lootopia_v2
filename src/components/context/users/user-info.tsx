@@ -83,7 +83,7 @@ export function UserProfileForm({ userId }: UserProfileFormProps) {
     },
     onError: (error: Error) => {
       toast.error(
-        error.message || "Une erreur s'est produite lors de la mise à jour"
+        error.message || "Une erreur s'est produite lors de la mise à jour",
       );
     },
   });

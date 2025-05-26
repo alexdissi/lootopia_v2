@@ -84,7 +84,7 @@ export function CreateHuntForm() {
       },
       onError: (error: any) => {
         toast.error(
-          error.message || "Une erreur s'est produite lors de la création."
+          error.message || "Une erreur s'est produite lors de la création.",
         );
       },
     });
