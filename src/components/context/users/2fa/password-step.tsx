@@ -41,7 +41,9 @@ export function PasswordStep({
       return response.data;
     },
     onSuccess: (data) => {
-      const qrCode = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.totpURI)}`;
+      const qrCode = data
+        ? `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.totpURI)}`
+        : "";
       const secret = data
         ? new URL(data.totpURI).searchParams.get("secret") || ""
         : "";
