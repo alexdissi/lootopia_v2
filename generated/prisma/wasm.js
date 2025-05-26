@@ -130,8 +130,8 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   nickname: 'nickname',
-  role: 'role',
-  isMfaEnabled: 'isMfaEnabled'
+  twoFactorEnabled: 'twoFactorEnabled',
+  role: 'role'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -289,6 +289,13 @@ exports.Prisma.UserItemScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.TwoFactorScalarFieldEnum = {
+  id: 'id',
+  secret: 'secret',
+  backupCodes: 'backupCodes',
+  userId: 'userId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -383,7 +390,8 @@ exports.Prisma.ModelName = {
   CraftMaterial: 'CraftMaterial',
   LeaderboardEntry: 'LeaderboardEntry',
   ShopItem: 'ShopItem',
-  UserItem: 'UserItem'
+  UserItem: 'UserItem',
+  TwoFactor: 'TwoFactor'
 };
 
 /**

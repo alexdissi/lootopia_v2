@@ -21,8 +21,8 @@ model User {
   sessions           Session[]
   accounts           Account[]
   nickname           String?
+  twoFactorEnabled   Boolean              @default(false)
   role               UserRole             @default(PLAYER)
-  isMfaEnabled       Boolean              @default(false)
   participations     Participation[]
   createdChasses     TreasureHunt[]       @relation("CreatedByUser")
   collectedArtefacts Artefact[]           @relation("CollectedByUser")
@@ -31,6 +31,7 @@ model User {
   Craft              Craft[]
   LeaderboardEntry   LeaderboardEntry[]
   items              UserItem[]
+  twoFactor          TwoFactor[]
 
   @@unique([email])
   @@map("user")
@@ -90,7 +91,7 @@ model TreasureHunt {
   id          String    @id @default(cuid())
   title       String
   description String?
-  createdBy   User      @relation("CreatedByUser", fields: [createdById], references: [id])
+  createdBy   User      @relation("CreatedByUser", fields: [createdById], references: [id], onDelete: Cascade)
   createdById String
   startDate   DateTime?
   endDate     DateTime?
@@ -294,4 +295,14 @@ model UserItem {
   createdAt DateTime  @default(now())
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   item      ShopItem  @relation(fields: [itemId], references: [id])
+}
+
+model TwoFactor {
+  id          String @id @default(cuid())
+  secret      String
+  backupCodes String
+  userId      String
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("twoFactor")
 }
