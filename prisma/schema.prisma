@@ -32,6 +32,7 @@ model User {
   LeaderboardEntry   LeaderboardEntry[]
   items              UserItem[]
   twoFactor          TwoFactor[]
+  reviews            Review[]
 
   @@unique([email])
   @@map("user")
@@ -87,6 +88,22 @@ model Verification {
   @@map("verification")
 }
 
+model Review {
+  id           String       @id @default(cuid())
+  userId       String
+  huntId       String
+  comment      String
+  score        Int          
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  treasureHunt TreasureHunt @relation(fields: [huntId], references: [id])
+
+  @@map("review")
+  
+}
+
+
 model TreasureHunt {
   id          String    @id @default(cuid())
   title       String
@@ -109,6 +126,7 @@ model TreasureHunt {
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   LeaderboardEntry LeaderboardEntry[]
+  reviews           Review[]
 }
 
 enum HuntMode {
