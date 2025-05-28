@@ -22,6 +22,7 @@ import { Badge } from "@/components/ui/badge";
 
 interface ReviewFormProps {
   huntId: string;
+  userRole: string; 
 }
 
 interface ReviewFormValues {
@@ -37,9 +38,19 @@ const scoreLabels = {
   5: "Excellent",
 };
 
-export function ReviewForm({ huntId }: ReviewFormProps) {
+export function ReviewForm({ huntId, userRole }: ReviewFormProps) {
   const router = useRouter();
   const [hoveredStar, setHoveredStar] = useState<number | null>(null);
+
+  if (userRole !== "user") {
+    return (
+      <Card className="w-full max-w-2xl mx-auto text-center p-8">
+        <p className="text-lg text-muted-foreground">
+          Vous devez être un utilisateur pour publier un avis.
+        </p>
+      </Card>
+    );
+  }
 
   const form = useForm<ReviewFormValues>({
     defaultValues: {
@@ -148,7 +159,6 @@ export function ReviewForm({ huntId }: ReviewFormProps) {
       <CardContent className="space-y-6">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {/* Rating */}
             <FormField
               control={form.control}
               name="score"
@@ -159,10 +169,7 @@ export function ReviewForm({ huntId }: ReviewFormProps) {
                   </FormLabel>
                   <FormControl>
                     <div className="flex justify-center py-4">
-                      <StarRating
-                        value={field.value}
-                        onChange={field.onChange}
-                      />
+                      <StarRating value={field.value} onChange={field.onChange} />
                     </div>
                   </FormControl>
                   <FormMessage />
@@ -170,7 +177,6 @@ export function ReviewForm({ huntId }: ReviewFormProps) {
               )}
             />
 
-            {/* Comment */}
             <FormField
               control={form.control}
               name="comment"
@@ -194,7 +200,6 @@ export function ReviewForm({ huntId }: ReviewFormProps) {
               )}
             />
 
-            {/* Submit Button */}
             <div className="flex justify-center pt-4">
               <Button
                 type="submit"
@@ -218,7 +223,6 @@ export function ReviewForm({ huntId }: ReviewFormProps) {
           </form>
         </Form>
 
-        {/* Success State Preview */}
         {mutation.isSuccess && (
           <div className="text-center py-6 space-y-3 animate-in fade-in-50 duration-500">
             <div className="mx-auto h-16 w-16 rounded-full bg-green-100 flex items-center justify-center">
