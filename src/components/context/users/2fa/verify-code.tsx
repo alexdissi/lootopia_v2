@@ -26,7 +26,8 @@ export function VerifyStep({
   const form = useForm<{ code: string }>({ defaultValues: { code: "" } });
 
   const verifyMutation = useMutation({
-    mutationFn: async ({ code }: { code: string }) => authClient.twoFactor.verifyTotp({ code }),
+    mutationFn: async ({ code }: { code: string }) =>
+      authClient.twoFactor.verifyTotp({ code }),
     onSuccess: () => {
       toast.success("2FA activé !");
       setStep("success");

@@ -24,7 +24,8 @@ export function DisableStep({ onSuccess }: { onSuccess: () => void }) {
   console.log("DisableStep session", session);
 
   const disable2FA = useMutation({
-    mutationFn: async ({ password }: { password: string }) => authClient.twoFactor.disable({ password }),
+    mutationFn: async ({ password }: { password: string }) =>
+      authClient.twoFactor.disable({ password }),
     onSuccess: () => {
       toast.success("2FA désactivé");
       authClient.updateUser();

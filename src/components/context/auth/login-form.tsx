@@ -58,7 +58,7 @@ export function LoginForm() {
             toast.error(ctx.error.message);
             if (ctx.error.status === 403) {
               toast.error(
-                "Votre compte n'est pas encore validé. Veuillez vérifier votre email."
+                "Votre compte n'est pas encore validé. Veuillez vérifier votre email.",
               );
             }
             form.setError("email", {
@@ -66,7 +66,7 @@ export function LoginForm() {
               message: ctx.error.message,
             });
           },
-        }
+        },
       );
     } catch {
       toast.error("Une erreur est survenue.");

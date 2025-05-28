@@ -1,6 +1,6 @@
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 import prisma from "@/lib/db";
 
 export async function GET(
@@ -26,7 +26,7 @@ export async function GET(
 
     return NextResponse.json(reviews);
   } catch (error) {
-    console.error("[GET] Error:", error);
+    console.error(error);
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
@@ -61,6 +61,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ message: "Avis créé", review: newReview });
   } catch (error) {
+    console.error(error);
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
@@ -105,7 +106,7 @@ export async function PATCH(request: NextRequest) {
       review: updatedReview,
     });
   } catch (error) {
-    console.error("PATCH /api/reviews error:", error);
+    console.error(error);
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
@@ -139,7 +140,7 @@ export async function DELETE(request: NextRequest) {
 
     return NextResponse.json({ message: "Avis supprimé" });
   } catch (error) {
-    console.error("DELETE /api/reviews error:", error);
+    console.error(error);
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }

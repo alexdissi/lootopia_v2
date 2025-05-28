@@ -3,9 +3,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { Loader2, Star, Send, MessageSquare } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
   FormField,
@@ -15,14 +18,11 @@ import {
   FormMessage,
   FormDescription,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 interface ReviewFormProps {
   huntId: string;
-  userRole: string; 
+  userRole: string;
 }
 
 interface ReviewFormValues {
@@ -42,24 +42,12 @@ export function ReviewForm({ huntId, userRole }: ReviewFormProps) {
   const router = useRouter();
   const [hoveredStar, setHoveredStar] = useState<number | null>(null);
 
-  if (userRole !== "user") {
-    return (
-      <Card className="w-full max-w-2xl mx-auto text-center p-8">
-        <p className="text-lg text-muted-foreground">
-          Vous devez être un utilisateur pour publier un avis.
-        </p>
-      </Card>
-    );
-  }
-
   const form = useForm<ReviewFormValues>({
     defaultValues: {
       comment: "",
       score: 5,
     },
   });
-
-  const watchedScore = form.watch("score");
 
   const mutation = useMutation({
     mutationFn: async (data: ReviewFormValues) => {
@@ -106,41 +94,49 @@ export function ReviewForm({ huntId, userRole }: ReviewFormProps) {
   }: {
     value: number;
     onChange: (value: number) => void;
-  }) => {
-    return (
-      <div className="flex flex-col gap-3">
-        <div className="flex items-center gap-1">
-          {[1, 2, 3, 4, 5].map((star) => {
-            const isActive = star <= (hoveredStar ?? value);
-            return (
-              <button
-                key={star}
-                type="button"
-                className={`transition-all duration-200 hover:scale-110 ${
-                  isActive ? "text-yellow-400" : "text-muted-foreground/30"
-                }`}
-                onMouseEnter={() => setHoveredStar(star)}
-                onMouseLeave={() => setHoveredStar(null)}
-                onClick={() => onChange(star)}
-              >
-                <Star className={`h-8 w-8 ${isActive ? "fill-current" : ""}`} />
-              </button>
-            );
-          })}
-        </div>
-        <div className="flex items-center gap-2">
-          <Badge variant="secondary" className="text-sm">
-            {hoveredStar
-              ? scoreLabels[hoveredStar as keyof typeof scoreLabels]
-              : scoreLabels[value as keyof typeof scoreLabels]}
-          </Badge>
-          <span className="text-sm text-muted-foreground">
-            {hoveredStar ?? value}/5 étoiles
-          </span>
-        </div>
+  }) => (
+    <div className="flex flex-col gap-3">
+      <div className="flex items-center gap-1">
+        {[1, 2, 3, 4, 5].map((star) => {
+          const isActive = star <= (hoveredStar ?? value);
+          return (
+            <button
+              key={star}
+              type="button"
+              className={`transition-all duration-200 hover:scale-110 ${
+                isActive ? "text-yellow-400" : "text-muted-foreground/30"
+              }`}
+              onMouseEnter={() => setHoveredStar(star)}
+              onMouseLeave={() => setHoveredStar(null)}
+              onClick={() => onChange(star)}
+            >
+              <Star className={`h-8 w-8 ${isActive ? "fill-current" : ""}`} />
+            </button>
+          );
+        })}
       </div>
+      <div className="flex items-center gap-2">
+        <Badge variant="secondary" className="text-sm">
+          {hoveredStar
+            ? scoreLabels[hoveredStar as keyof typeof scoreLabels]
+            : scoreLabels[value as keyof typeof scoreLabels]}
+        </Badge>
+        <span className="text-sm text-muted-foreground">
+          {hoveredStar ?? value}/5 étoiles
+        </span>
+      </div>
+    </div>
+  );
+
+  if (userRole !== "user") {
+    return (
+      <Card className="w-full max-w-2xl mx-auto text-center p-8">
+        <p className="text-lg text-muted-foreground">
+          Vous devez être un utilisateur pour publier un avis.
+        </p>
+      </Card>
     );
-  };
+  }
 
   return (
     <Card className="w-full max-w-2xl mx-auto shadow-lg border-0 bg-gradient-to-br from-background to-muted/20">
@@ -169,7 +165,10 @@ export function ReviewForm({ huntId, userRole }: ReviewFormProps) {
                   </FormLabel>
                   <FormControl>
                     <div className="flex justify-center py-4">
-                      <StarRating value={field.value} onChange={field.onChange} />
+                      <StarRating
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
                     </div>
                   </FormControl>
                   <FormMessage />
