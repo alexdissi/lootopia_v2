@@ -2,12 +2,14 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { ReviewList } from "@/components/review/review-list";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Hunt } from "@/interfaces/hunt";
 import { authClient } from "@/lib/auth-client";
+import { ReviewForm } from "./form/hunt-review-form";
 import { HuntDeleteDialog } from "./hunt-delete-dialog";
 import { HuntDetailsSkeleton } from "./hunt-detail-skeleton";
 import { HuntHeader } from "./hunt-header";
@@ -108,12 +110,13 @@ export function HuntDetails({ huntId }: { huntId: string }) {
           onValueChange={setActiveTab}
           className="w-full"
         >
-          <TabsList className="grid grid-cols-3 mb-6 w-full">
+          <TabsList className="grid grid-cols-4 mb-6 w-full">
             <TabsTrigger value="details">Détails</TabsTrigger>
             <TabsTrigger value="steps">
               Étapes ({hunt.steps?.length || 0})
             </TabsTrigger>
             <TabsTrigger value="map">Carte</TabsTrigger>
+            <TabsTrigger value="reviews">Avis</TabsTrigger>
           </TabsList>
 
           <TabsContent value="details" className="space-y-6">
@@ -161,10 +164,8 @@ export function HuntDetails({ huntId }: { huntId: string }) {
                   <CardContent>
                     {hunt.participants && hunt.participants.length > 0 ? (
                       <div className="space-y-4">
-                        {/* Utiliser TypeScript correctement avec la liste des participants */}
                         {(hunt.participants as Participant[]).map(
                           (participant) => {
-                            // Extraire les valeurs en toute sécurité
                             const participantStatus =
                               participant.status || "PENDING";
                             const user = participant.user || {};
@@ -239,6 +240,13 @@ export function HuntDetails({ huntId }: { huntId: string }) {
 
           <TabsContent value="map">
             <HuntMapView hunt={hunt} />
+          </TabsContent>
+          <TabsContent value="reviews">
+            <div className="space-y-6">
+              {session?.data?.user && <ReviewForm huntId={hunt.id} />}
+
+              <ReviewList huntId={hunt.id} />
+            </div>
           </TabsContent>
         </Tabs>
       </div>
