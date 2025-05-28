@@ -4,13 +4,11 @@ import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
 
 export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } },
+  req: Request,
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const huntId = params.id;
-
-    console.log("[GET] huntId:", huntId);
+    const { id: huntId } = await params;
 
     if (!huntId) {
       return NextResponse.json({ error: "huntId requis" }, { status: 400 });
