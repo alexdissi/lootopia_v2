@@ -19,10 +19,11 @@ import {
   FormDescription,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
+import { User, UserRole } from "../../../../../generated/prisma";
 
 interface ReviewFormProps {
   huntId: string;
-  userRole: string;
+  user: User;
 }
 
 interface ReviewFormValues {
@@ -38,7 +39,7 @@ const scoreLabels = {
   5: "Excellent",
 };
 
-export function ReviewForm({ huntId, userRole }: ReviewFormProps) {
+export function ReviewForm({ huntId, user }: ReviewFormProps) {
   const router = useRouter();
   const [hoveredStar, setHoveredStar] = useState<number | null>(null);
 
@@ -128,7 +129,7 @@ export function ReviewForm({ huntId, userRole }: ReviewFormProps) {
     </div>
   );
 
-  if (userRole !== "user") {
+  if (user.role !== UserRole.PLAYER) {
     return (
       <Card className="w-full max-w-2xl mx-auto text-center p-8">
         <p className="text-lg text-muted-foreground">

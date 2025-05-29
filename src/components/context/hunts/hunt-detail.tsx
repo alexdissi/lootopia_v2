@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Hunt } from "@/interfaces/hunt";
 import { authClient } from "@/lib/auth-client";
+import { User } from "../../../../generated/prisma";
 import { ReviewForm } from "./form/hunt-review-form";
 import { HuntDeleteDialog } from "./hunt-delete-dialog";
 import { HuntDetailsSkeleton } from "./hunt-detail-skeleton";
@@ -243,7 +244,12 @@ export function HuntDetails({ huntId }: { huntId: string }) {
           </TabsContent>
           <TabsContent value="reviews">
             <div className="space-y-6">
-              {session?.data?.user && <ReviewForm huntId={hunt.id} />}
+              {session?.data?.user && (
+                <ReviewForm
+                  huntId={hunt.id}
+                  user={session?.data.user as User}
+                />
+              )}
 
               <ReviewList huntId={hunt.id} />
             </div>
