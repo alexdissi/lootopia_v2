@@ -51,7 +51,7 @@ async function main() {
           updatedAt: new Date(),
           nickname: `nick${i + 1}`,
           role: i < 2 ? UserRole.ADMIN : i < 5 ? UserRole.ORGANIZER : UserRole.PLAYER,
-          isMfaEnabled: i % 3 === 0,
+          twoFactorEnabled: i % 3 === 0,
         },
       })
     )
