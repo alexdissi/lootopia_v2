@@ -1,5 +1,7 @@
 import { CheckCircle2, Loader2, MapPin } from "lucide-react";
 import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,10 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useHuntProgress } from "@/hooks/use-hunt-progress";
-import { Badge } from "@/components/ui/badge";
 
 interface LocationType {
   latitude: number;
@@ -27,17 +27,6 @@ interface HuntStepType {
   stepOrder: number;
   location?: LocationType;
   createdAt?: string;
-}
-
-interface ProgressStepType {
-  id: string;
-  description?: string;
-  stepOrder: number;
-  title?: string;
-  imageUrl?: string;
-  isCompleted: boolean;
-  completedAt: string | null;
-  location?: LocationType;
 }
 
 interface HuntStepsListProps {

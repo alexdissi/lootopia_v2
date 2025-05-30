@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 interface StepProgressData {
   steps: {
@@ -61,7 +61,7 @@ export function useHuntProgress(huntId: string) {
         throw error;
       }
     },
-    enabled: !!huntId,
+    enabled: Boolean(huntId),
   });
 
   // Mutation pour valider/dévalider une étape

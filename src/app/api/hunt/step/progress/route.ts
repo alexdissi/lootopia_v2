@@ -138,58 +138,64 @@ export async function GET(req: Request) {
     });
 
     // MODE DÉVELOPPEMENT: Créer une participation temporaire si l'utilisateur n'est pas participant
-    if (!participation) {
+    if (participation) {
+      return await getProgressForParticipation(
+        participation,
+        huntId,
+        session.user.id,
+      );
+    }
+    
+    console.log(
+      "GET /api/hunt/step/progress - Creating temporary participation for development",
+    );
+
+    // Vérifions d'abord si la chasse existe
+    const hunt = await prisma.treasureHunt.findUnique({
+      where: { id: huntId },
+    });
+
+    if (!hunt) {
+      console.log("GET /api/hunt/step/progress - Hunt not found");
+      return NextResponse.json(
+        { error: "Chasse au trésor introuvable" },
+        { status: 404 },
+      );
+    }
+
+    try {
+      // En mode développement, on crée une participation temporaire pour permettre les tests
+      const tempParticipation = await prisma.participation.create({
+        data: {
+          userId: session.user.id,
+          huntId: huntId,
+          status: "ONGOING",
+        },
+      });
+
       console.log(
-        "GET /api/hunt/step/progress - Creating temporary participation for development",
+        "GET /api/hunt/step/progress - Temporary participation created:",
+        tempParticipation.id,
       );
 
-      try {
-        // Vérifions d'abord si la chasse existe
-        const hunt = await prisma.treasureHunt.findUnique({
-          where: { id: huntId },
-        });
-
-        if (!hunt) {
-          console.log("GET /api/hunt/step/progress - Hunt not found");
-          return NextResponse.json(
-            { error: "Chasse au trésor introuvable" },
-            { status: 404 },
-          );
-        }
-
-        // En mode développement, on crée une participation temporaire pour permettre les tests
-        const tempParticipation = await prisma.participation.create({
-          data: {
-            userId: session.user.id,
-            huntId: huntId,
-            status: "ONGOING",
-          },
-        });
-
-        console.log(
-          "GET /api/hunt/step/progress - Temporary participation created:",
-          tempParticipation.id,
-        );
-
-        // On utilise cette participation temporaire
-        return await getProgressForParticipation(
-          tempParticipation,
-          huntId,
-          session.user.id,
-        );
-      } catch (error) {
-        console.error(
-          "GET /api/hunt/step/progress - Error creating temporary participation:",
-          error,
-        );
-        return NextResponse.json(
-          {
-            error: "Impossible de créer une participation temporaire",
-            details: String(error),
-          },
-          { status: 500 },
-        );
-      }
+      // On utilise cette participation temporaire
+      return await getProgressForParticipation(
+        tempParticipation,
+        huntId,
+        session.user.id,
+      );
+    } catch (error) {
+      console.error(
+        "GET /api/hunt/step/progress - Error creating temporary participation:",
+        error,
+      );
+      return NextResponse.json(
+        {
+          error: "Impossible de créer une participation temporaire",
+          details: String(error),
+        },
+        { status: 500 },
+      );
     }
 
     return await getProgressForParticipation(
