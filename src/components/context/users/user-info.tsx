@@ -1,12 +1,21 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
+import { Camera, Loader2, Mail, Shield, User, UserCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Form,
   FormField,
@@ -14,8 +23,10 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import { authClient } from "@/lib/auth-client";
 import { TwoFactorSetup } from "./2fa/two-factor-setup";
 
@@ -34,6 +45,7 @@ interface UserProfileFormProps {
 export function UserProfileForm({ userId }: UserProfileFormProps) {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
+  const [imagePreview, setImagePreview] = useState<string>("");
 
   const form = useForm<UserFormValues>({
     defaultValues: {
@@ -46,12 +58,14 @@ export function UserProfileForm({ userId }: UserProfileFormProps) {
 
   useEffect(() => {
     if (session?.user) {
-      form.reset({
+      const userData = {
         name: session.user.name || "",
         email: session.user.email || "",
         nickname: (session.user as any).nickname || "",
         image: session.user.image || "",
-      });
+      };
+      form.reset(userData);
+      setImagePreview(userData.image || "");
     }
   }, [session, form]);
 
@@ -59,6 +73,10 @@ export function UserProfileForm({ userId }: UserProfileFormProps) {
     control: form.control,
     name: "image",
   });
+
+  useEffect(() => {
+    setImagePreview(image || "");
+  }, [image]);
 
   const mutation = useMutation({
     mutationFn: async (data: UserFormValues) => {
@@ -94,99 +112,212 @@ export function UserProfileForm({ userId }: UserProfileFormProps) {
 
   if (isPending) {
     return (
-      <div className="flex justify-center items-center py-8">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="flex justify-center items-center py-12">
+        <div className="text-center space-y-4">
+          <Loader2 className="h-8 w-8 animate-spin text-primary mx-auto" />
+          <p className="text-muted-foreground">Chargement du profil...</p>
+        </div>
       </div>
     );
   }
 
+  const is2FAEnabled = session?.user?.twoFactorEnabled;
+
   return (
-    <>
-      <Form {...form}>
-        <form
-          className="space-y-6 max-w-md"
-          onSubmit={form.handleSubmit(onSubmit)}
-          noValidate
-        >
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nom complet</FormLabel>
-                <FormControl>
-                  <Input placeholder="Nom complet" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+    <div className=" space-y-8 ">
+      <div className="grid gap-8 lg:grid-cols-3">
+        <Card className="lg:col-span-1">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Camera className="h-5 w-5" />
+              Photo de profil
+            </CardTitle>
+            <CardDescription>Votre image de profil publique</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex flex-col items-center space-y-4">
+              <Avatar className="h-32 w-32">
+                <AvatarImage
+                  src={imagePreview || "/placeholder.svg"}
+                  alt="Photo de profil"
+                />
+                <AvatarFallback className="text-2xl">
+                  {session?.user?.name?.charAt(0)?.toUpperCase() || "U"}
+                </AvatarFallback>
+              </Avatar>
+              <Form {...form}>
+                <FormField
+                  control={form.control}
+                  name="image"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormControl>
+                        <Input
+                          placeholder="https://example.com/avatar.jpg"
+                          {...field}
+                          className="text-center"
+                        />
+                      </FormControl>
+                      <FormDescription className="text-center">
+                        URL de votre image de profil
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </Form>
+            </div>
+          </CardContent>
+        </Card>
 
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input type="email" placeholder="Email" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="nickname"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nom d'utilisateur</FormLabel>
-                <FormControl>
-                  <Input placeholder="Nom d'utilisateur" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="image"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>URL de l'image de profil</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="https://example.com/avatar.jpg"
-                    {...field}
+        {/* Profile Information Card */}
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <User className="h-5 w-5" />
+              Informations personnelles
+            </CardTitle>
+            <CardDescription>Vos informations de base</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6"
+              >
+                <div className="grid gap-6 md:grid-cols-2">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="flex items-center gap-2">
+                          <UserCheck className="h-4 w-4" />
+                          Nom complet
+                        </FormLabel>
+                        <FormControl>
+                          <Input placeholder="Votre nom complet" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </FormControl>
-                <FormMessage />
-                {image && (
-                  <img
-                    src={image}
-                    alt="Aperçu de l'image"
-                    className="mt-2 w-32 h-32 object-cover rounded-md border"
-                  />
-                )}
-              </FormItem>
-            )}
-          />
 
-          <Button type="submit" disabled={mutation.isPending}>
-            {mutation.isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Sauvegarde en cours...
-              </>
-            ) : (
-              "Sauvegarder"
-            )}
-          </Button>
-        </form>
-      </Form>
-      <TwoFactorSetup />
-    </>
+                  <FormField
+                    control={form.control}
+                    name="nickname"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="flex items-center gap-2">
+                          <User className="h-4 w-4" />
+                          Nom d'utilisateur
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Votre nom d'utilisateur"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="flex items-center gap-2">
+                        <Mail className="h-4 w-4" />
+                        Adresse email
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="votre@email.com"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Cette adresse sera utilisée pour les notifications
+                        importantes
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="flex justify-end">
+                  <Button
+                    type="submit"
+                    disabled={mutation.isPending}
+                    className="min-w-[140px]"
+                  >
+                    {mutation.isPending ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sauvegarde...
+                      </>
+                    ) : (
+                      "Sauvegarder"
+                    )}
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Security Section */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Shield className="h-5 w-5" />
+            Sécurité
+          </CardTitle>
+          <CardDescription>
+            Gérez vos paramètres de sécurité et d'authentification
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="flex items-center justify-between p-4 border rounded-lg">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <h3 className="font-medium">
+                  Authentification à deux facteurs
+                </h3>
+                <Badge
+                  variant={is2FAEnabled ? "default" : "secondary"}
+                  className="text-xs"
+                >
+                  {is2FAEnabled ? "Activé" : "Désactivé"}
+                </Badge>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                {is2FAEnabled
+                  ? "Votre compte est protégé par l'authentification à deux facteurs"
+                  : "Ajoutez une couche de sécurité supplémentaire à votre compte"}
+              </p>
+            </div>
+            <TwoFactorSetup />
+          </div>
+
+          <Separator />
+
+          <div className="flex items-center justify-between p-4 border rounded-lg">
+            <div className="space-y-1">
+              <h3 className="font-medium">Mot de passe</h3>
+              <p className="text-sm text-muted-foreground">
+                Modifiez votre mot de passe de connexion
+              </p>
+            </div>
+            <Button variant="outline">Changer le mot de passe</Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

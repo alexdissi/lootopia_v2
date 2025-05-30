@@ -20,7 +20,6 @@ type Step = "password" | "qrcode" | "verify" | "success" | "disable";
 export function TwoFactorSetup() {
   const session = authClient.useSession();
   const is2FAEnabled = session?.data?.user?.twoFactorEnabled;
-  console.log("TwoFactorSetup is2FAEnabled", is2FAEnabled);
 
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<Step | null>(null);
