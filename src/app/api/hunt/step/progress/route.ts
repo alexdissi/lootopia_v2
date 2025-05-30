@@ -145,7 +145,7 @@ export async function GET(req: Request) {
         session.user.id,
       );
     }
-    
+
     console.log(
       "GET /api/hunt/step/progress - Creating temporary participation for development",
     );
