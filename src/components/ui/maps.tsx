@@ -9,8 +9,8 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-type MapboxType = typeof import("mapbox-gl");
-let mapboxgl: MapboxType;
+// Remove explicit type to avoid type mismatch issues
+let mapboxgl: any;
 
 interface MapViewProps {
   location: string;
@@ -69,60 +69,63 @@ export function MapView({
         interactive: interactive,
       });
 
-      mapInstanceRef.current.addControl(
-        new mapboxgl.NavigationControl({
-          showCompass: true,
-          visualizePitch: true,
-        }),
-        "bottom-right",
-      );
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.addControl(
+          new mapboxgl.NavigationControl({
+            showCompass: true,
+            visualizePitch: true,
+          }),
+          "bottom-right"
+        );
+      }
 
-      // Activer les bâtiments 3D et l'extrusion de terrain quand la carte est chargée
-      mapInstanceRef.current.on("load", () => {
-        // Ajouter les bâtiments 3D
-        if (!mapInstanceRef.current?.getLayer("3d-buildings")) {
-          mapInstanceRef.current?.addLayer({
-            id: "3d-buildings",
-            source: "composite",
-            "source-layer": "building",
-            filter: ["==", "extrude", "true"],
-            type: "fill-extrusion",
-            minzoom: 15,
-            paint: {
-              "fill-extrusion-color": "#aaa",
-              "fill-extrusion-height": [
-                "interpolate",
-                ["linear"],
-                ["zoom"],
-                15,
-                0,
-                15.05,
-                ["get", "height"],
-              ],
-              "fill-extrusion-base": [
-                "interpolate",
-                ["linear"],
-                ["zoom"],
-                15,
-                0,
-                15.05,
-                ["get", "min_height"],
-              ],
-              "fill-extrusion-opacity": 0.6,
-            },
-          });
-        }
-      });
-
-      // Ajouter un effet lightbox pour l'effet d'ombrage 3D
-      mapInstanceRef.current.on("load", () => {
-        mapInstanceRef.current?.setLight({
-          anchor: "viewport",
-          color: "white",
-          intensity: 0.4,
-          position: [1, 3, 2],
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.on("load", () => {
+          if (!mapInstanceRef.current?.getLayer("3d-buildings")) {
+            mapInstanceRef.current?.addLayer({
+              id: "3d-buildings",
+              source: "composite",
+              "source-layer": "building",
+              filter: ["==", "extrude", "true"],
+              type: "fill-extrusion",
+              minzoom: 15,
+              paint: {
+                "fill-extrusion-color": "#aaa",
+                "fill-extrusion-height": [
+                  "interpolate",
+                  ["linear"],
+                  ["zoom"],
+                  15,
+                  0,
+                  15.05,
+                  ["get", "height"],
+                ],
+                "fill-extrusion-base": [
+                  "interpolate",
+                  ["linear"],
+                  ["zoom"],
+                  15,
+                  0,
+                  15.05,
+                  ["get", "min_height"],
+                ],
+                "fill-extrusion-opacity": 0.6,
+              },
+            });
+          }
         });
-      });
+      }
+
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.on("load", () => {
+          mapInstanceRef.current?.setLight({
+            anchor: "viewport",
+            color: "white",
+            intensity: 0.4,
+            position: [1, 3, 2],
+          });
+        });
+      }
     };
 
     initializeMap();
@@ -134,7 +137,7 @@ export function MapView({
 
       try {
         const response = await fetch(
-          `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(location)}.json?access_token=${MAPBOX_ACCESS_TOKEN}&limit=1`,
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(location)}.json?access_token=${MAPBOX_ACCESS_TOKEN}&limit=1`
         );
 
         const data = await response.json();
@@ -178,7 +181,9 @@ export function MapView({
                   </div>
                 `);
 
-              markerRef.current.setPopup(popup);
+              if (markerRef.current) {
+                markerRef.current.setPopup(popup);
+              }
             } else {
               markerRef.current.setLngLat([lon, lat]);
             }
@@ -190,7 +195,7 @@ export function MapView({
         setError(
           typeof error === "string"
             ? error
-            : "Erreur lors de la récupération de l'emplacement",
+            : "Erreur lors de la récupération de l'emplacement"
         );
       } finally {
         setIsLoading(false);
@@ -273,7 +278,7 @@ export function MapView({
       className={cn(
         "relative rounded-xl overflow-hidden transition-all duration-300 ease-in-out",
         isFullscreen ? "fixed inset-0 z-50 rounded-none" : "",
-        className,
+        className
       )}
     >
       {!location && (
