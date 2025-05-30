@@ -46,14 +46,18 @@ interface HuntStepsListProps {
   isParticipant?: boolean;
 }
 
-export function HuntStepsList({ steps, huntId, isParticipant = false }: Readonly<HuntStepsListProps>) {
+export function HuntStepsList({
+  steps,
+  huntId,
+  isParticipant = false,
+}: Readonly<HuntStepsListProps>) {
   // Log pour débogage
-  console.log("HuntStepsList - Props reçues:", { 
-    stepsCount: steps.length, 
-    huntId, 
-    isParticipant 
+  console.log("HuntStepsList - Props reçues:", {
+    stepsCount: steps.length,
+    huntId,
+    isParticipant,
   });
-  
+
   // Si l'utilisateur n'est pas participant, on affiche simplement la liste des étapes
   if (!isParticipant || !huntId) {
     console.log("HuntStepsList - Affichage en mode simple (non participant)");
@@ -129,7 +133,10 @@ function SimpleStepsList({ steps }: Readonly<{ steps: HuntStepType[] }>) {
 }
 
 // Version enrichie pour les participants avec suivi de progression
-function ParticipantStepsList({ steps: initialSteps, huntId }: Readonly<{ steps: HuntStepType[], huntId: string }>) {
+function ParticipantStepsList({
+  steps: initialSteps,
+  huntId,
+}: Readonly<{ steps: HuntStepType[]; huntId: string }>) {
   const {
     steps,
     totalSteps,
@@ -141,32 +148,36 @@ function ParticipantStepsList({ steps: initialSteps, huntId }: Readonly<{ steps:
     error,
     toggleStepCompletion,
   } = useHuntProgress(huntId);
-  
-  console.log("ParticipantStepsList - Progress data:", { 
-    steps, 
-    isLoading, 
-    isError, 
+
+  console.log("ParticipantStepsList - Progress data:", {
+    steps,
+    isLoading,
+    isError,
     error,
-    initialStepsCount: initialSteps.length
+    initialStepsCount: initialSteps.length,
   });
-  
+
   // Si une erreur s'est produite lors du chargement des données de progression
   // mais que nous avons des étapes initiales, utilisons-les pour afficher quand même les étapes
   if (isError && initialSteps.length > 0) {
-    console.log("ParticipantStepsList - Using initialSteps due to API error:", error);
+    console.log(
+      "ParticipantStepsList - Using initialSteps due to API error:",
+      error,
+    );
     return (
       <div className="space-y-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-4">
           <div>
             <h2 className="text-xl font-semibold">Parcours de la chasse</h2>
             <p className="text-muted-foreground text-sm mt-1 text-red-500">
-              Erreur lors du chargement de la progression : {error instanceof Error ? error.message : "Erreur inconnue"}. 
+              Erreur lors du chargement de la progression :{" "}
+              {error instanceof Error ? error.message : "Erreur inconnue"}.
               Veuillez réessayer ultérieurement.
             </p>
           </div>
-          <Button 
-            variant="outline" 
-            size="sm" 
+          <Button
+            variant="outline"
+            size="sm"
             onClick={() => window.location.reload()}
             className="mt-2 md:mt-0"
           >
@@ -174,7 +185,7 @@ function ParticipantStepsList({ steps: initialSteps, huntId }: Readonly<{ steps:
             Recharger la page
           </Button>
         </div>
-        
+
         <div className="space-y-4">
           {initialSteps.map((step, index) => (
             <Card key={step.id} className="overflow-hidden">
@@ -222,7 +233,7 @@ function ParticipantStepsList({ steps: initialSteps, huntId }: Readonly<{ steps:
       </div>
     );
   }
-  
+
   if (isLoading && steps.length === 0) {
     return (
       <div className="space-y-6">
@@ -236,7 +247,7 @@ function ParticipantStepsList({ steps: initialSteps, huntId }: Readonly<{ steps:
       </div>
     );
   }
-  
+
   if (!steps || steps.length === 0) {
     return (
       <div className="text-center py-12">
@@ -262,20 +273,24 @@ function ParticipantStepsList({ steps: initialSteps, huntId }: Readonly<{ steps:
           </Badge>
           <div className="flex flex-col gap-1 w-full md:w-60">
             <div className="flex justify-between text-xs">
-              <span>{completedSteps} / {totalSteps} étapes</span>
+              <span>
+                {completedSteps} / {totalSteps} étapes
+              </span>
               <span>{progressPercentage}%</span>
             </div>
             <Progress value={progressPercentage} className="h-2" />
           </div>
         </div>
       </div>
-      
+
       <div className="space-y-4">
         {steps.map((step) => (
-          <Card 
-            key={step.id} 
+          <Card
+            key={step.id}
             className={`overflow-hidden transition-colors ${
-              step.isCompleted ? "border-green-200 bg-green-50/30 dark:bg-green-950/10 dark:border-green-900/30" : ""
+              step.isCompleted
+                ? "border-green-200 bg-green-50/30 dark:bg-green-950/10 dark:border-green-900/30"
+                : ""
             }`}
           >
             <div className="flex flex-col md:flex-row">
@@ -293,17 +308,22 @@ function ParticipantStepsList({ steps: initialSteps, huntId }: Readonly<{ steps:
                 <CardHeader className="pb-2">
                   <CardTitle className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className={`rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium ${
-                        step.isCompleted 
-                          ? "bg-green-500 text-white" 
-                          : "bg-primary/10 text-primary"
-                      }`}>
+                      <span
+                        className={`rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium ${
+                          step.isCompleted
+                            ? "bg-green-500 text-white"
+                            : "bg-primary/10 text-primary"
+                        }`}
+                      >
                         {step.stepOrder}
                       </span>
                       {step.title ?? `Étape ${step.stepOrder}`}
                     </div>
                     {step.isCompleted && (
-                      <Badge variant="outline" className="bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-400">
+                      <Badge
+                        variant="outline"
+                        className="bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-400"
+                      >
                         Validée
                       </Badge>
                     )}
@@ -319,8 +339,14 @@ function ParticipantStepsList({ steps: initialSteps, huntId }: Readonly<{ steps:
                   <Button
                     variant={step.isCompleted ? "outline" : "default"}
                     size="sm"
-                    className={step.isCompleted ? "border-green-500 text-green-700 hover:bg-green-50 dark:hover:bg-green-950" : ""}
-                    onClick={() => toggleStepCompletion(step.id, step.isCompleted)}
+                    className={
+                      step.isCompleted
+                        ? "border-green-500 text-green-700 hover:bg-green-50 dark:hover:bg-green-950"
+                        : ""
+                    }
+                    onClick={() =>
+                      toggleStepCompletion(step.id, step.isCompleted)
+                    }
                     disabled={isLoading}
                   >
                     {isLoading ? (

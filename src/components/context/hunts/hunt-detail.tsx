@@ -78,32 +78,38 @@ export function HuntDetails({ huntId }: { huntId: string }) {
   }
 
   const isCreator = hunt?.createdBy?.email === session?.data?.user?.email;
-  
+
   // Fonction utilitaire pour vérifier avec plus de détails si l'utilisateur est participant
   const checkParticipation = () => {
     const userId = session?.data?.user?.id;
     const participants = hunt?.participants || [];
-    
+
     console.log("Detailed participation check:", {
       userId,
       participantsCount: participants.length,
-      participantIds: participants.map(p => p.userId),
-      isUserFound: participants.some(p => p.userId === userId)
+      participantIds: participants.map((p) => p.userId),
+      isUserFound: participants.some((p) => p.userId === userId),
     });
-    
+
     // Si l'utilisateur est connecté et a un ID, et que les participants existent et contiennent cet ID
-    return Boolean(userId && participants.length > 0 && participants.some(p => p.userId === userId));
+    return Boolean(
+      userId &&
+        participants.length > 0 &&
+        participants.some((p) => p.userId === userId),
+    );
   };
-  
+
   // Assurons-nous que l'état de participant est correctement calculé
   const isParticipant = checkParticipation();
-  
+
   // Log pour débogage
-  console.log("User participation status:", { 
-    isParticipant, 
+  console.log("User participation status:", {
+    isParticipant,
     userId: session?.data?.user?.id,
     participantsCount: hunt?.participants?.length,
-    hasMatchingParticipant: hunt?.participants?.some((p) => p.userId === session?.data?.user?.id)
+    hasMatchingParticipant: hunt?.participants?.some(
+      (p) => p.userId === session?.data?.user?.id,
+    ),
   });
 
   return (
@@ -259,8 +265,8 @@ export function HuntDetails({ huntId }: { huntId: string }) {
           </TabsContent>
 
           <TabsContent value="steps">
-            <HuntStepsList 
-              steps={hunt.steps || []} 
+            <HuntStepsList
+              steps={hunt.steps || []}
               huntId={hunt.id}
               isParticipant={isParticipant}
             />

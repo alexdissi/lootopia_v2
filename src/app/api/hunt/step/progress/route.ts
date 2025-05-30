@@ -4,7 +4,11 @@ import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
 
 // Fonction utilitaire pour récupérer la progression des étapes
-async function getProgressForParticipation(participation: any, huntId: string, userId: string) {
+async function getProgressForParticipation(
+  participation: any,
+  huntId: string,
+  userId: string,
+) {
   // Récupérer toutes les étapes de la chasse
   const steps = await prisma.huntStep.findMany({
     where: {
@@ -28,7 +32,9 @@ async function getProgressForParticipation(participation: any, huntId: string, u
 
   // Pour chaque étape qui n'a pas d'entrée de progression, créer une entrée par défaut
   const stepIdsWithProgress = progress.map((p) => p.stepId);
-  const stepsWithoutProgress = steps.filter((step) => !stepIdsWithProgress.includes(step.id));
+  const stepsWithoutProgress = steps.filter(
+    (step) => !stepIdsWithProgress.includes(step.id),
+  );
 
   if (stepsWithoutProgress.length > 0) {
     // Créer des entrées de progression pour les étapes sans progression
@@ -56,9 +62,11 @@ async function getProgressForParticipation(participation: any, huntId: string, u
 
     // Utiliser la progression mise à jour
     if (updatedProgress.length > progress.length) {
-      progress.push(...updatedProgress.filter((up) =>
-        !progress.some((p) => p.stepId === up.stepId)
-      ));
+      progress.push(
+        ...updatedProgress.filter(
+          (up) => !progress.some((p) => p.stepId === up.stepId),
+        ),
+      );
     }
   }
 
@@ -67,9 +75,8 @@ async function getProgressForParticipation(participation: any, huntId: string, u
   const totalScore = completedSteps * 10;
 
   // Calculer le pourcentage de progression
-  const progressPercentage = steps.length > 0
-    ? Math.floor((completedSteps / steps.length) * 100)
-    : 0;
+  const progressPercentage =
+    steps.length > 0 ? Math.floor((completedSteps / steps.length) * 100) : 0;
 
   // Enrichir les étapes avec leur statut de progression
   const stepsWithProgress = steps.map((step) => {
@@ -97,21 +104,28 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const huntId = searchParams.get("huntId");
 
-    console.log("GET /api/hunt/step/progress - Request params:", { huntId, userId: session?.user?.id });
+    console.log("GET /api/hunt/step/progress - Request params:", {
+      huntId,
+      userId: session?.user?.id,
+    });
 
     if (!session?.user) {
-      console.log("GET /api/hunt/step/progress - Unauthorized: No session user");
+      console.log(
+        "GET /api/hunt/step/progress - Unauthorized: No session user",
+      );
       return NextResponse.json(
         { error: "Authentification requise" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
     if (!huntId) {
-      console.log("GET /api/hunt/step/progress - Bad request: No huntId provided");
+      console.log(
+        "GET /api/hunt/step/progress - Bad request: No huntId provided",
+      );
       return NextResponse.json(
         { error: "ID de chasse requis" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -125,7 +139,9 @@ export async function GET(req: Request) {
 
     // MODE DÉVELOPPEMENT: Créer une participation temporaire si l'utilisateur n'est pas participant
     if (!participation) {
-      console.log("GET /api/hunt/step/progress - Creating temporary participation for development");
+      console.log(
+        "GET /api/hunt/step/progress - Creating temporary participation for development",
+      );
 
       try {
         // Vérifions d'abord si la chasse existe
@@ -137,7 +153,7 @@ export async function GET(req: Request) {
           console.log("GET /api/hunt/step/progress - Hunt not found");
           return NextResponse.json(
             { error: "Chasse au trésor introuvable" },
-            { status: 404 }
+            { status: 404 },
           );
         }
 
@@ -150,25 +166,42 @@ export async function GET(req: Request) {
           },
         });
 
-        console.log("GET /api/hunt/step/progress - Temporary participation created:", tempParticipation.id);
+        console.log(
+          "GET /api/hunt/step/progress - Temporary participation created:",
+          tempParticipation.id,
+        );
 
         // On utilise cette participation temporaire
-        return await getProgressForParticipation(tempParticipation, huntId, session.user.id);
+        return await getProgressForParticipation(
+          tempParticipation,
+          huntId,
+          session.user.id,
+        );
       } catch (error) {
-        console.error("GET /api/hunt/step/progress - Error creating temporary participation:", error);
+        console.error(
+          "GET /api/hunt/step/progress - Error creating temporary participation:",
+          error,
+        );
         return NextResponse.json(
-          { error: "Impossible de créer une participation temporaire", details: String(error) },
-          { status: 500 }
+          {
+            error: "Impossible de créer une participation temporaire",
+            details: String(error),
+          },
+          { status: 500 },
         );
       }
     }
 
-    return await getProgressForParticipation(participation, huntId, session.user.id);
+    return await getProgressForParticipation(
+      participation,
+      huntId,
+      session.user.id,
+    );
   } catch (error) {
     console.error("Erreur lors de la récupération de la progression:", error);
     return NextResponse.json(
       { error: "Erreur lors de la récupération de la progression" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -181,19 +214,24 @@ export async function POST(req: Request) {
     if (!session?.user) {
       return NextResponse.json(
         { error: "Authentification requise" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
     const body = await req.json();
     const { stepId, huntId, isCompleted } = body;
 
-    console.log("POST /api/hunt/step/progress - Request body:", { stepId, huntId, isCompleted, userId: session.user.id });
+    console.log("POST /api/hunt/step/progress - Request body:", {
+      stepId,
+      huntId,
+      isCompleted,
+      userId: session.user.id,
+    });
 
     if (!stepId || !huntId) {
       return NextResponse.json(
         { error: "ID d'étape et ID de chasse requis" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -208,7 +246,7 @@ export async function POST(req: Request) {
     if (!participation) {
       return NextResponse.json(
         { error: "Vous ne participez pas à cette chasse" },
-        { status: 403 }
+        { status: 403 },
       );
     }
 
@@ -221,10 +259,12 @@ export async function POST(req: Request) {
     });
 
     if (!step) {
-      console.log("POST /api/hunt/step/progress - Step not found for this hunt");
+      console.log(
+        "POST /api/hunt/step/progress - Step not found for this hunt",
+      );
       return NextResponse.json(
         { error: "Étape non trouvée pour cette chasse" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -265,9 +305,8 @@ export async function POST(req: Request) {
     });
 
     // Calculer le pourcentage de progression
-    const progressPercentage = allSteps > 0
-      ? Math.floor((completedSteps / allSteps) * 100)
-      : 0;
+    const progressPercentage =
+      allSteps > 0 ? Math.floor((completedSteps / allSteps) * 100) : 0;
 
     // Calculer le score total (10 points par étape)
     const totalScore = completedSteps * 10;
@@ -292,7 +331,7 @@ export async function POST(req: Request) {
     console.error("Erreur lors de la mise à jour de la progression:", error);
     return NextResponse.json(
       { error: "Erreur lors de la mise à jour de la progression" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

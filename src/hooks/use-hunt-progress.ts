@@ -30,25 +30,29 @@ export function useHuntProgress(huntId: string) {
   const [isLoading, setIsLoading] = useState(false);
 
   // Récupérer la progression des étapes
-  const { 
-    data, 
-    error, 
+  const {
+    data,
+    error,
     isLoading: isFetching,
-    isError 
+    isError,
   } = useQuery<StepProgressData>({
     queryKey: ["huntProgress", huntId],
     queryFn: async () => {
       console.log("useHuntProgress - Fetching progress for hunt:", huntId);
       try {
-        const response = await fetch(`/api/hunt/step/progress?huntId=${huntId}`);
+        const response = await fetch(
+          `/api/hunt/step/progress?huntId=${huntId}`,
+        );
         console.log("useHuntProgress - API response status:", response.status);
-        
+
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
           console.error("useHuntProgress - API error:", errorData);
-          throw new Error(`Erreur lors de la récupération de la progression: ${response.status}`);
+          throw new Error(
+            `Erreur lors de la récupération de la progression: ${response.status}`,
+          );
         }
-        
+
         const data = await response.json();
         console.log("useHuntProgress - Progress data received:", data);
         return data;
@@ -62,7 +66,11 @@ export function useHuntProgress(huntId: string) {
 
   // Mutation pour valider/dévalider une étape
   const mutation = useMutation({
-    mutationFn: async ({ stepId, huntId, isCompleted }: ToggleStepCompletionParams) => {
+    mutationFn: async ({
+      stepId,
+      huntId,
+      isCompleted,
+    }: ToggleStepCompletionParams) => {
       const response = await fetch("/api/hunt/step/progress", {
         method: "POST",
         headers: {
@@ -70,11 +78,11 @@ export function useHuntProgress(huntId: string) {
         },
         body: JSON.stringify({ stepId, huntId, isCompleted }),
       });
-      
+
       if (!response.ok) {
         throw new Error("Erreur lors de la mise à jour de la progression");
       }
-      
+
       return response.json();
     },
     onSuccess: () => {
@@ -84,7 +92,10 @@ export function useHuntProgress(huntId: string) {
   });
 
   // Fonction pour basculer l'état de complétion d'une étape
-  const toggleStepCompletion = async (stepId: string, isCurrentlyCompleted: boolean) => {
+  const toggleStepCompletion = async (
+    stepId: string,
+    isCurrentlyCompleted: boolean,
+  ) => {
     setIsLoading(true);
     try {
       await mutation.mutateAsync({
