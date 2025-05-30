@@ -1,4 +1,3 @@
-// === AUTH CORE ===
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -12,36 +11,29 @@ datasource db {
 model User {
   id                 String               @id @default(cuid())
   name               String?
-  email              String
+  email              String               @unique
   emailVerified      Boolean
   image              String?
-  stripeCustomerId   String?
   createdAt          DateTime
   updatedAt          DateTime
-  sessions           Session[]
-  accounts           Account[]
+  stripeCustomerId   String?
   nickname           String?
-  twoFactorEnabled   Boolean              @default(false)
   role               UserRole             @default(PLAYER)
-  participations     Participation[]
-  createdChasses     TreasureHunt[]       @relation("CreatedByUser")
+  twoFactorEnabled   Boolean              @default(false)
   collectedArtefacts Artefact[]           @relation("CollectedByUser")
-  virtualCurrency    VirtualCurrency[]
-  transactionHistory TransactionHistory[]
   Craft              Craft[]
   LeaderboardEntry   LeaderboardEntry[]
+  participations     Participation[]
+  Review             Review[]
+  transactionHistory TransactionHistory[]
+  createdChasses     TreasureHunt[]       @relation("CreatedByUser")
   items              UserItem[]
+  virtualCurrency    VirtualCurrency[]
+  accounts           Account[]
+  sessions           Session[]
   twoFactor          TwoFactor[]
-  reviews            Review[]
 
-  @@unique([email])
   @@map("user")
-}
-
-enum UserRole {
-  PLAYER
-  ORGANIZER
-  ADMIN
 }
 
 model Session {
@@ -63,7 +55,6 @@ model Account {
   accountId             String
   providerId            String
   userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?
   refreshToken          String?
   idToken               String?
@@ -73,6 +64,7 @@ model Account {
   password              String?
   createdAt             DateTime
   updatedAt             DateTime
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("account")
 }
@@ -88,45 +80,180 @@ model Verification {
   @@map("verification")
 }
 
-model Review {
+model TreasureHunt {
+  id               String             @id @default(cuid())
+  title            String
+  description      String?
+  createdById      String
+  startDate        DateTime?
+  endDate          DateTime?
+  location         String?
+  status           HuntStatus         @default(PENDING)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  fee              Int?
+  isFinished       Boolean            @default(false)
+  mapStyle         String?
+  mode             HuntMode           @default(PUBLIC)
+  artefacts        Artefact[]
+  steps            HuntStep[]
+  LeaderboardEntry LeaderboardEntry[]
+  participants     Participation[]
+  Review           Review[]
+  rewards          Reward[]
+  createdBy        User               @relation("CreatedByUser", fields: [createdById], references: [id], onDelete: Cascade)
+}
+
+model Participation {
+  id           String              @id @default(cuid())
+  userId       String
+  huntId       String
+  status       ParticipationStatus @default(ONGOING)
+  joinDate     DateTime            @default(now())
+  treasureHunt TreasureHunt        @relation(fields: [huntId], references: [id])
+  user         User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Artefact {
+  id            String          @id @default(cuid())
+  name          String
+  rarity        ArtefactRarity
+  description   String?
+  imageUrl      String?
+  userId        String
+  huntId        String?
+  foundAt       DateTime        @default(now())
+  isHidden      Boolean         @default(false)
+  source        ArtefactSource
+  hunt          TreasureHunt?   @relation(fields: [huntId], references: [id])
+  user          User            @relation("CollectedByUser", fields: [userId], references: [id], onDelete: Cascade)
+  Craft         Craft[]
+  CraftMaterial CraftMaterial[]
+}
+
+model HuntStep {
   id           String       @id @default(cuid())
+  description  String
+  huntId       String
+  stepOrder    Int
+  createdAt    DateTime     @default(now())
+  treasureHunt TreasureHunt @relation(fields: [huntId], references: [id])
+}
+
+model Reward {
+  id           String       @id @default(cuid())
+  type         RewardType
+  value        Int
+  description  String?
+  huntId       String
+  treasureHunt TreasureHunt @relation(fields: [huntId], references: [id])
+}
+
+model VirtualCurrency {
+  id                 String               @id @default(cuid())
+  userId             String
+  amount             Int
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  type               CurrencySourceType   @default(EARNED)
+  transactionHistory TransactionHistory[]
+  user               User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model TransactionHistory {
+  id                String          @id @default(cuid())
+  userId            String
+  transactionId     String          @default(cuid())
+  amount            Int
+  transactionType   TransactionType @default(EARNED)
+  description       String?
+  createdAt         DateTime        @default(now())
+  virtualCurrencyId String
+  stripeSessionId   String?         @unique
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  virtualCurrency   VirtualCurrency @relation(fields: [virtualCurrencyId], references: [id], onDelete: Cascade)
+}
+
+model Craft {
+  id        String          @id @default(cuid())
+  userId    String
+  resultId  String
+  createdAt DateTime        @default(now())
+  result    Artefact        @relation(fields: [resultId], references: [id])
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  materials CraftMaterial[]
+}
+
+model CraftMaterial {
+  id         String   @id @default(cuid())
+  craftId    String
+  artefactId String
+  artefact   Artefact @relation(fields: [artefactId], references: [id])
+  craft      Craft    @relation(fields: [craftId], references: [id])
+}
+
+model LeaderboardEntry {
+  id          String       @id @default(cuid())
+  userId      String
+  huntId      String
+  rank        Int
+  score       Int
+  completedAt DateTime
+  hunt        TreasureHunt @relation(fields: [huntId], references: [id])
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ShopItem {
+  id          String       @id @default(cuid())
+  name        String
+  description String
+  price       Int
+  imageUrl    String?
+  type        ShopItemType
+  isActive    Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  purchases   UserItem[]
+}
+
+model UserItem {
+  id        String    @id @default(cuid())
+  userId    String
+  itemId    String
+  quantity  Int       @default(1)
+  isActive  Boolean   @default(true)
+  expiresAt DateTime?
+  createdAt DateTime  @default(now())
+  item      ShopItem  @relation(fields: [itemId], references: [id])
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model TwoFactor {
+  id          String @id @default(cuid())
+  secret      String
+  backupCodes String
+  userId      String
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("twoFactor")
+}
+
+model Review {
+  id           String       @id
   userId       String
   huntId       String
   comment      String
-  score        Int          
+  score        Int
   createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+  updatedAt    DateTime
+  TreasureHunt TreasureHunt @relation(fields: [huntId], references: [id])
   user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  treasureHunt TreasureHunt @relation(fields: [huntId], references: [id])
-
-  @@map("review")
-  
 }
 
-
-model TreasureHunt {
-  id          String    @id @default(cuid())
-  title       String
-  description String?
-  createdBy   User      @relation("CreatedByUser", fields: [createdById], references: [id], onDelete: Cascade)
-  createdById String
-  startDate   DateTime?
-  endDate     DateTime?
-  location    String?
-  mode        HuntMode  @default(PUBLIC)
-  fee         Int?
-  mapStyle    String?
-  isFinished  Boolean   @default(false)
-
-  status           HuntStatus         @default(PENDING)
-  participants     Participation[]
-  steps            HuntStep[]
-  rewards          Reward[]
-  artefacts        Artefact[]
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  LeaderboardEntry LeaderboardEntry[]
-  reviews           Review[]
+enum UserRole {
+  PLAYER
+  ORGANIZER
+  ADMIN
 }
 
 enum HuntMode {
@@ -141,37 +268,10 @@ enum HuntStatus {
   CANCELLED
 }
 
-model Participation {
-  id           String              @id @default(cuid())
-  userId       String
-  huntId       String
-  status       ParticipationStatus @default(ONGOING)
-  joinDate     DateTime            @default(now())
-  user         User                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  treasureHunt TreasureHunt        @relation(fields: [huntId], references: [id])
-}
-
 enum ParticipationStatus {
   ONGOING
   COMPLETED
   ABANDONED
-}
-
-model Artefact {
-  id            String          @id @default(cuid())
-  name          String
-  rarity        ArtefactRarity
-  description   String?
-  imageUrl      String?
-  isHidden      Boolean         @default(false)
-  source        ArtefactSource
-  userId        String
-  user          User            @relation("CollectedByUser", fields: [userId], references: [id], onDelete: Cascade)
-  huntId        String?
-  hunt          TreasureHunt?   @relation(fields: [huntId], references: [id])
-  foundAt       DateTime        @default(now())
-  Craft         Craft[]
-  CraftMaterial CraftMaterial[]
 }
 
 enum ArtefactSource {
@@ -188,40 +288,11 @@ enum ArtefactRarity {
   LEGENDARY
 }
 
-model HuntStep {
-  id           String       @id @default(cuid())
-  description  String
-  huntId       String
-  stepOrder    Int
-  treasureHunt TreasureHunt @relation(fields: [huntId], references: [id])
-  createdAt    DateTime     @default(now())
-}
-
-model Reward {
-  id           String       @id @default(cuid())
-  type         RewardType
-  value        Int
-  description  String?
-  huntId       String
-  treasureHunt TreasureHunt @relation(fields: [huntId], references: [id])
-}
-
 enum RewardType {
   VIRTUAL_CURRENCY
   ARTEFACT
   DISCOUNT
   PHYSICAL_ITEM
-}
-
-model VirtualCurrency {
-  id                 String               @id @default(cuid())
-  userId             String
-  amount             Int
-  type               CurrencySourceType   @default(EARNED)
-  user               User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  transactionHistory TransactionHistory[]
 }
 
 enum CurrencySourceType {
@@ -230,70 +301,10 @@ enum CurrencySourceType {
   GIFTED
 }
 
-model TransactionHistory {
-  id                String          @id @default(cuid())
-  userId            String
-  transactionId     String          @default(cuid())
-  stripeSessionId   String?         @unique
-  amount            Int
-  transactionType   TransactionType @default(EARNED)
-  description       String?
-  createdAt         DateTime        @default(now())
-  virtualCurrencyId String
-  virtualCurrency   VirtualCurrency @relation(fields: [virtualCurrencyId], references: [id], onDelete: Cascade)
-  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
 enum TransactionType {
   EARNED
   SPENT
   BOUGHT
-}
-
-model Craft {
-  id        String   @id @default(cuid())
-  userId    String
-  resultId  String
-  createdAt DateTime @default(now())
-
-  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  result Artefact @relation(fields: [resultId], references: [id])
-
-  materials CraftMaterial[]
-}
-
-model CraftMaterial {
-  id         String @id @default(cuid())
-  craftId    String
-  artefactId String
-
-  craft    Craft    @relation(fields: [craftId], references: [id])
-  artefact Artefact @relation(fields: [artefactId], references: [id])
-}
-
-model LeaderboardEntry {
-  id          String   @id @default(cuid())
-  userId      String
-  huntId      String
-  rank        Int
-  score       Int
-  completedAt DateTime
-
-  user User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  hunt TreasureHunt @relation(fields: [huntId], references: [id])
-}
-
-model ShopItem {
-  id          String       @id @default(cuid())
-  name        String
-  description String
-  price       Int
-  imageUrl    String?
-  type        ShopItemType
-  isActive    Boolean      @default(true)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  purchases   UserItem[]
 }
 
 enum ShopItemType {
@@ -301,26 +312,4 @@ enum ShopItemType {
   COSMETIC
   HINT
   SPECIAL_ACCESS
-}
-
-model UserItem {
-  id        String    @id @default(cuid())
-  userId    String
-  itemId    String
-  quantity  Int       @default(1)
-  isActive  Boolean   @default(true)
-  expiresAt DateTime?
-  createdAt DateTime  @default(now())
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  item      ShopItem  @relation(fields: [itemId], references: [id])
-}
-
-model TwoFactor {
-  id          String @id @default(cuid())
-  secret      String
-  backupCodes String
-  userId      String
-  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("twoFactor")
 }
