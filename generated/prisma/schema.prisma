@@ -102,9 +102,7 @@ model Review {
   treasureHunt TreasureHunt @relation(fields: [huntId], references: [id])
 
   @@map("review")
-
 }
-
 
 model TreasureHunt {
   id          String    @id @default(cuid())
@@ -144,14 +142,14 @@ enum HuntStatus {
 }
 
 model Participation {
-  id             String              @id @default(cuid())
-  userId         String
-  huntId         String
-  status         ParticipationStatus @default(ONGOING)
-  joinDate       DateTime            @default(now())
-  user           User                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  treasureHunt   TreasureHunt        @relation(fields: [huntId], references: [id])
-  stepsProgress  StepProgress[]
+  id            String              @id @default(cuid())
+  userId        String
+  huntId        String
+  status        ParticipationStatus @default(ONGOING)
+  joinDate      DateTime            @default(now())
+  user          User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  treasureHunt  TreasureHunt        @relation(fields: [huntId], references: [id])
+  stepsProgress StepProgress[]
 }
 
 enum ParticipationStatus {
@@ -323,12 +321,12 @@ model UserItem {
 }
 
 model StepProgress {
-  id             String        @id @default(cuid())
-  userId         String
-  stepId         String
+  id              String    @id @default(cuid())
+  userId          String
+  stepId          String
   participationId String
-  isCompleted    Boolean       @default(false)
-  completedAt    DateTime?
+  isCompleted     Boolean   @default(false)
+  completedAt     DateTime?
 
   user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   step          HuntStep      @relation(fields: [stepId], references: [id], onDelete: Cascade)
