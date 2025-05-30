@@ -21,6 +21,7 @@ model User {
   sessions           Session[]
   accounts           Account[]
   nickname           String?
+  twoFactorEnabled   Boolean              @default(false)
   role               UserRole             @default(PLAYER)
   isMfaEnabled       Boolean              @default(false)
   participations     Participation[]
@@ -32,6 +33,8 @@ model User {
   LeaderboardEntry   LeaderboardEntry[]
   items              UserItem[]
   stepProgresses     StepProgress[]
+  twoFactor          TwoFactor[]
+  reviews            Review[]
 
   @@unique([email])
   @@map("user")
@@ -87,11 +90,25 @@ model Verification {
   @@map("verification")
 }
 
+model Review {
+  id           String       @id @default(cuid())
+  userId       String
+  huntId       String
+  comment      String
+  score        Int
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  treasureHunt TreasureHunt @relation(fields: [huntId], references: [id])
+
+  @@map("review")
+}
+
 model TreasureHunt {
   id          String    @id @default(cuid())
   title       String
   description String?
-  createdBy   User      @relation("CreatedByUser", fields: [createdById], references: [id])
+  createdBy   User      @relation("CreatedByUser", fields: [createdById], references: [id], onDelete: Cascade)
   createdById String
   startDate   DateTime?
   endDate     DateTime?
@@ -106,6 +123,7 @@ model TreasureHunt {
   steps            HuntStep[]
   rewards          Reward[]
   artefacts        Artefact[]
+  reviews          Review[]
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   LeaderboardEntry LeaderboardEntry[]
@@ -300,4 +318,29 @@ model UserItem {
   createdAt DateTime  @default(now())
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   item      ShopItem  @relation(fields: [itemId], references: [id])
+}
+
+model StepProgress {
+  id              String    @id @default(cuid())
+  userId          String
+  stepId          String
+  participationId String
+  isCompleted     Boolean   @default(false)
+  completedAt     DateTime?
+
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  step          HuntStep      @relation(fields: [stepId], references: [id], onDelete: Cascade)
+  participation Participation @relation(fields: [participationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, stepId, participationId])
+}
+
+model TwoFactor {
+  id          String @id @default(cuid())
+  secret      String
+  backupCodes String
+  userId      String
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("twoFactor")
 }

@@ -130,6 +130,7 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   nickname: 'nickname',
+  twoFactorEnabled: 'twoFactorEnabled',
   role: 'role',
   isMfaEnabled: 'isMfaEnabled'
 };
@@ -166,6 +167,16 @@ exports.Prisma.VerificationScalarFieldEnum = {
   identifier: 'identifier',
   value: 'value',
   expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReviewScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  huntId: 'huntId',
+  comment: 'comment',
+  score: 'score',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -301,6 +312,13 @@ exports.Prisma.StepProgressScalarFieldEnum = {
   completedAt: 'completedAt'
 };
 
+exports.Prisma.TwoFactorScalarFieldEnum = {
+  id: 'id',
+  secret: 'secret',
+  backupCodes: 'backupCodes',
+  userId: 'userId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -384,6 +402,7 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
+  Review: 'Review',
   TreasureHunt: 'TreasureHunt',
   Participation: 'Participation',
   Artefact: 'Artefact',
@@ -396,7 +415,8 @@ exports.Prisma.ModelName = {
   LeaderboardEntry: 'LeaderboardEntry',
   ShopItem: 'ShopItem',
   UserItem: 'UserItem',
-  StepProgress: 'StepProgress'
+  StepProgress: 'StepProgress',
+  TwoFactor: 'TwoFactor'
 };
 
 /**
