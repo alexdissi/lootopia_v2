@@ -32,6 +32,7 @@ model User {
   accounts           Account[]
   sessions           Session[]
   twoFactor          TwoFactor[]
+  StepDiscovery      StepDiscovery[]
 
   @@map("user")
 }
@@ -132,12 +133,34 @@ model Artefact {
 }
 
 model HuntStep {
-  id           String       @id @default(cuid())
+  id           String          @id @default(cuid())
+  title        String?
   description  String
+  hint         String?
+  imageUrl     String?
   huntId       String
   stepOrder    Int
-  createdAt    DateTime     @default(now())
-  treasureHunt TreasureHunt @relation(fields: [huntId], references: [id])
+  latitude     Float?
+  longitude    Float?
+  radius       Int             @default(1000) // en mètres
+  isCompleted  Boolean         @default(false)
+  createdAt    DateTime        @default(now())
+  treasureHunt TreasureHunt    @relation(fields: [huntId], references: [id])
+  discoveries  StepDiscovery[]
+}
+
+model StepDiscovery {
+  id           String   @id @default(cuid())
+  userId       String
+  stepId       String
+  discoveredAt DateTime @default(now())
+  latitude     Float
+  longitude    Float
+  distance     Int
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  step         HuntStep @relation(fields: [stepId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, stepId])
 }
 
 model Reward {

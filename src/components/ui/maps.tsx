@@ -19,6 +19,7 @@ interface MapViewProps {
   className?: string;
   interactive?: boolean;
   mapStyle?: string;
+  onMapClick?: (coordinates: [number, number]) => void; // 👈 JUSTE AJOUTE ÇA
 }
 
 const MAPBOX_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
@@ -30,6 +31,7 @@ export function MapView({
   className,
   interactive = true,
   mapStyle = "mapbox://styles/mapbox/streets-v12",
+  onMapClick, // 👈 ET ÇA
 }: MapViewProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<mapboxgl.Map | null>(null);
@@ -69,13 +71,35 @@ export function MapView({
         interactive: interactive,
       });
 
+      // 👇 AJOUTE JUSTE ÇA POUR LE CLIC
+      if (mapInstanceRef.current && onMapClick) {
+        mapInstanceRef.current.on("click", (e) => {
+          const { lng, lat } = e.lngLat;
+          console.log("🗺️ Clic sur la carte:", lng, lat);
+          onMapClick([lng, lat]);
+        });
+
+        // Change le curseur pour indiquer qu'on peut cliquer
+        mapInstanceRef.current.on("mouseenter", () => {
+          if (mapInstanceRef.current) {
+            mapInstanceRef.current.getCanvas().style.cursor = "crosshair";
+          }
+        });
+
+        mapInstanceRef.current.on("mouseleave", () => {
+          if (mapInstanceRef.current) {
+            mapInstanceRef.current.getCanvas().style.cursor = "";
+          }
+        });
+      }
+
       if (mapInstanceRef.current) {
         mapInstanceRef.current.addControl(
           new mapboxgl.NavigationControl({
             showCompass: true,
             visualizePitch: true,
           }),
-          "bottom-right",
+          "bottom-right"
         );
       }
 
@@ -137,7 +161,7 @@ export function MapView({
 
       try {
         const response = await fetch(
-          `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(location)}.json?access_token=${MAPBOX_ACCESS_TOKEN}&limit=1`,
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(location)}.json?access_token=${MAPBOX_ACCESS_TOKEN}&limit=1`
         );
 
         const data = await response.json();
@@ -195,7 +219,7 @@ export function MapView({
         setError(
           typeof error === "string"
             ? error
-            : "Erreur lors de la récupération de l'emplacement",
+            : "Erreur lors de la récupération de l'emplacement"
         );
       } finally {
         setIsLoading(false);
@@ -214,7 +238,15 @@ export function MapView({
         mapInstanceRef.current = null;
       }
     };
-  }, [location, zoom, interactive, isMobile, isClientReady, mapStyle]);
+  }, [
+    location,
+    zoom,
+    interactive,
+    isMobile,
+    isClientReady,
+    mapStyle,
+    onMapClick,
+  ]); // 👈 AJOUTE onMapClick dans les deps
 
   const handleRecenter = () => {
     if (mapInstanceRef.current && coordinates) {
@@ -278,7 +310,7 @@ export function MapView({
       className={cn(
         "relative rounded-xl overflow-hidden transition-all duration-300 ease-in-out",
         isFullscreen ? "fixed inset-0 z-50 rounded-none" : "",
-        className,
+        className
       )}
     >
       {!location && (

@@ -16,10 +16,10 @@ import { HuntDetailsSkeleton } from "./hunt-detail-skeleton";
 import { HuntHeader } from "./hunt-header";
 import { HuntInfoCard } from "./hunt-info-card";
 import { HuntJoinButton } from "./hunt-join-button";
-import HuntMapView from "./hunt-map-view";
 import { HuntShareDialog } from "./hunt-share-dialog";
 import { HuntStatusSection } from "./hunt-status-section";
 import { HuntStepsList } from "./hunt-steps-list";
+import { InteractiveMapComponent } from "../maps/interactive-maps-components";
 
 type ParticipantUser = {
   id?: string;
@@ -80,7 +80,7 @@ export function HuntDetails({ huntId }: { huntId: string }) {
   const isCreator = hunt?.createdBy?.email === session?.data?.user?.email;
   const isParticipant = Boolean(
     session?.data?.user?.id &&
-      hunt.participants?.some((p) => p.userId === session?.data?.user?.id),
+      hunt.participants?.some((p) => p.userId === session?.data?.user?.id)
   );
 
   return (
@@ -221,7 +221,7 @@ export function HuntDetails({ huntId }: { huntId: string }) {
                                 </Badge>
                               </div>
                             );
-                          },
+                          }
                         )}
                       </div>
                     ) : (
@@ -240,7 +240,11 @@ export function HuntDetails({ huntId }: { huntId: string }) {
           </TabsContent>
 
           <TabsContent value="map">
-            <HuntMapView hunt={hunt} />
+            <InteractiveMapComponent
+              huntId={huntId}
+              userId={session.data?.user?.id ?? ""}
+              initialLocation="Paris, France"
+            />
           </TabsContent>
           <TabsContent value="reviews">
             <div className="space-y-6">
