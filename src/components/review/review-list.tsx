@@ -69,7 +69,7 @@ export function ReviewList({ huntId }: { huntId: string }) {
     return (
       <div className="text-center py-12">
         <MessageCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-        <p className="text-muted-foreground">Impossible de charger les avis.</p>
+        <p className="text-muted-foreground">Aucun avis pour le moment</p>
       </div>
     );
   }
