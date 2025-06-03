@@ -251,19 +251,20 @@ export async function getUserRanking(userId: string, huntId: string) {
 
 /**
  * Valide ou invalide une étape pour un utilisateur dans une chasse au trésor, et met à jour le classement
- * @param userId ID de l'utilisateur
- * @param huntId ID de la chasse au trésor
- * @param stepId ID de l'étape
- * @param isCompleted Statut de complétion de l'étape
+ * @param params Objet contenant les paramètres : userId, huntId, stepId, isCompleted
  * @returns Détails mis à jour de la progression et du classement
  */
 export async function validateStep(
-  userId: string,
-  huntId: string,
-  stepId: string,
-  isCompleted: boolean,
+  params: {
+    userId: string;
+    huntId: string;
+    stepId: string;
+    isCompleted: boolean;
+  }
 ) {
   try {
+    const { userId, huntId, stepId, isCompleted } = params;
+
     // Vérifier que l'utilisateur participe à cette chasse
     const participation = await prisma.participation.findFirst({
       where: {

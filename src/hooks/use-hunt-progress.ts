@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "@/components/ui/use-toast";
 
@@ -61,7 +61,7 @@ export function useHuntProgress(huntId: string) {
           try {
             const errorData = await response.json();
             errorMessage = errorData.error || errorMessage;
-          } catch (parseError) {
+          } catch {
             // Si on ne peut pas parser la réponse, on utilise le message par défaut
           }
 

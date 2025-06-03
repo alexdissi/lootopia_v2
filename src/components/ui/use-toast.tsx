@@ -3,7 +3,6 @@ import * as React from "react";
 import type { ToastActionElement, ToastProps } from "@/components/ui/toast";
 
 const TOAST_LIMIT = 5;
-const TOAST_REMOVE_DELAY = 1000000;
 
 type ToasterToast = ToastProps & {
   id: string;
@@ -49,8 +48,6 @@ type Action =
 interface State {
   toasts: ToasterToast[];
 }
-
-const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -122,7 +119,8 @@ function dispatch(action: Action) {
   });
 }
 
-interface Toast extends Omit<ToasterToast, "id"> {}
+// Définition du type Toast comme un alias de type plutôt qu'une interface vide
+type Toast = Omit<ToasterToast, "id">;
 
 function toast({ ...props }: Toast) {
   const id = genId();
