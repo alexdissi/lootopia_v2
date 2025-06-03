@@ -5,10 +5,10 @@ import prisma from "@/lib/db";
 
 export async function POST(
   req: Request,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: { huntId: string } },
 ) {
   try {
-    const { id: huntId } = await params;
+    const { huntId } = params;
 
     const session = await auth.api.getSession({ headers: await headers() });
 
@@ -51,58 +51,19 @@ export async function POST(
       );
     }
 
-    const updatedHunt = await prisma.$transaction(async (tx) => {
-      const hunt = await tx.treasureHunt.update({
-        where: { id: huntId },
-        data: {
-          status: "COMPLETED",
-          endDate: new Date(),
-          isFinished: true,
-        },
-      });
-
-      await tx.participation.updateMany({
-        where: {
-          huntId: huntId,
-          status: "ONGOING",
-        },
-        data: {
-          status: "COMPLETED",
-        },
-      });
-
-      const participants = await tx.participation.findMany({
-        where: {
-          huntId: huntId,
-          status: "COMPLETED",
-        },
-        select: {
-          userId: true,
-        },
-        orderBy: {
-          joinDate: "asc",
-        },
-      });
-
-      for (let i = 0; i < participants.length; i++) {
-        await tx.leaderboardEntry.create({
-          data: {
-            userId: participants[i].userId,
-            huntId: huntId,
-            rank: i + 1,
-            score: 100 - i * 10,
-            completedAt: new Date(),
-          },
-        });
-      }
-
-      return hunt;
+    const updatedHunt = await prisma.treasureHunt.update({
+      where: { id: huntId },
+      data: {
+        status: "COMPLETED",
+        isFinished: true,
+      },
     });
 
     return NextResponse.json(updatedHunt);
-  } catch {
+  } catch (error) {
+    console.error("Error completing hunt:", error);
     return NextResponse.json(
-      { error: "Failed to complete treasure hunt" },
+      { error: "Failed to complete hunt" },
       { status: 500 },
     );
   }
