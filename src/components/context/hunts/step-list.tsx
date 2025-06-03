@@ -1,18 +1,4 @@
 import { HuntStep, Participation } from "@prisma/client";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useState, useEffect, useCallback } from "react";
-import { useToast } from "@/components/ui/use-toast";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import {
   Check,
   CheckCircle2,
@@ -22,6 +8,19 @@ import {
   XCircle,
 } from "lucide-react";
 import Image from "next/image";
+import { useState, useEffect, useCallback } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { useToast } from "@/components/ui/use-toast";
 
 interface StepListProps {
   steps: HuntStep[];
@@ -35,8 +34,6 @@ export const StepList = ({
   huntId,
   isParticipant = false,
 }: StepListProps) => {
-  const { toast } = useToast();
-
   // Si l'utilisateur n'est pas participant, on affiche simplement la liste des étapes
   if (!isParticipant || !huntId) {
     return <SimpleStepsList steps={steps} />;
@@ -153,7 +150,8 @@ function DirectParticipantStepsList({
         try {
           const errorData = await response.json();
           errorMessage = errorData.error || errorMessage;
-        } catch (parseError) {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (_error) {
           // Utiliser le message par défaut
         }
         throw new Error(errorMessage);

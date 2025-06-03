@@ -1,7 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { authClient } from "@/lib/auth-client";
 import {
   Crown,
   Medal,
@@ -11,7 +9,9 @@ import {
   TrendingUp,
   User,
 } from "lucide-react";
-import Image from "next/image";
+import { useState, useEffect, useCallback } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -21,8 +21,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Table,
   TableBody,
@@ -32,6 +30,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { authClient } from "@/lib/auth-client";
 
 interface LeaderboardEntryType {
   id: string;
@@ -71,8 +70,8 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Fonction pour charger le classement
-  const fetchLeaderboard = async () => {
+  // Fonction pour charger le classement - définie avec useCallback pour éviter les recréations à chaque rendu
+  const fetchLeaderboard = useCallback(async () => {
     try {
       setIsLoading(true);
       const response = await fetch(`/api/hunt/leaderboard?huntId=${huntId}`);
@@ -94,10 +93,10 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [huntId]);
 
-  // Fonction pour charger le classement de l'utilisateur
-  const fetchUserRanking = async () => {
+  // Fonction pour charger le classement de l'utilisateur - définie avec useCallback pour éviter les recréations à chaque rendu
+  const fetchUserRanking = useCallback(async () => {
     if (!session?.user?.id) return;
 
     try {
@@ -120,7 +119,7 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
       );
       // Ne pas définir d'erreur ici pour ne pas perturber l'affichage du tableau principal
     }
-  };
+  }, [huntId, session?.user?.id]);
 
   // Charger les données au chargement du composant
   useEffect(() => {
@@ -128,7 +127,7 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
     if (session?.user?.id) {
       fetchUserRanking();
     }
-  }, [huntId, session?.user?.id]);
+  }, [huntId, session?.user?.id, fetchLeaderboard, fetchUserRanking]);
 
   // Fonction pour obtenir l'icône de médaille en fonction du rang
   const getRankIcon = (rank: number) => {

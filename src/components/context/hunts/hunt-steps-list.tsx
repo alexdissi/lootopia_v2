@@ -1,5 +1,8 @@
-import { MapPin } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { MapPin, AlertCircle } from "lucide-react";
 import Image from "next/image";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,12 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { StepList } from "./step-list";
-import { useQuery } from "@tanstack/react-query";
 import { authClient } from "@/lib/auth-client";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { StepList } from "./step-list";
 
 interface LocationType {
   latitude: number;
@@ -70,7 +69,7 @@ export function HuntStepsList({ steps, huntId }: HuntStepsListProps) {
         throw error;
       }
     },
-    enabled: !!userId && !!huntId,
+    enabled: Boolean(userId) && Boolean(huntId),
     retry: 1, // Limiter les tentatives de réessai
     retryDelay: 1000, // Attendre 1 seconde avant de réessayer
   });

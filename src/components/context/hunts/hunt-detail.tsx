@@ -16,11 +16,11 @@ import { HuntDetailsSkeleton } from "./hunt-detail-skeleton";
 import { HuntHeader } from "./hunt-header";
 import { HuntInfoCard } from "./hunt-info-card";
 import { HuntJoinButton } from "./hunt-join-button";
+import { HuntLeaderboard } from "./hunt-leaderboard";
 import HuntMapView from "./hunt-map-view";
 import { HuntShareDialog } from "./hunt-share-dialog";
 import { HuntStatusSection } from "./hunt-status-section";
 import { HuntStepsList } from "./hunt-steps-list";
-import { HuntLeaderboard } from "./hunt-leaderboard";
 
 type ParticipantUser = {
   id?: string;
