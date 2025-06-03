@@ -5,12 +5,12 @@ import prisma from "@/lib/db";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: { huntId: string } },
 ) {
   try {
     const headersList = await headers();
     const session = await auth.api.getSession({ headers: headersList });
-    const { id } = await params;
+    const { huntId } = params;
 
     if (!session?.user) {
       return NextResponse.json(
@@ -26,7 +26,7 @@ export async function PATCH(
     }
 
     const hunt = await prisma.treasureHunt.findUnique({
-      where: { id },
+      where: { id: huntId },
       include: { createdBy: true },
     });
 
@@ -45,18 +45,15 @@ export async function PATCH(
     }
 
     const updatedHunt = await prisma.treasureHunt.update({
-      where: { id },
+      where: { id: huntId },
       data: { status },
     });
 
-    if (status === "IN_PROGRESS") {
-    }
-
     return NextResponse.json(updatedHunt);
   } catch (error) {
-    console.error("Erreur lors de la mise à jour du statut :", error);
+    console.error("Erreur de mise à jour du statut:", error);
     return NextResponse.json(
-      { error: "Erreur lors de la mise à jour du statut" },
+      { error: "Erreur serveur lors de la mise à jour du statut" },
       { status: 500 },
     );
   }
