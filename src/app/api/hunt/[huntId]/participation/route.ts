@@ -118,7 +118,10 @@ export async function POST(
 
     if (existingParticipation) {
       return NextResponse.json(
-        { error: "Vous participez déjà à cette chasse", data: existingParticipation },
+        {
+          error: "Vous participez déjà à cette chasse",
+          data: existingParticipation,
+        },
         { status: 200 },
       );
     }
@@ -174,8 +177,8 @@ export async function POST(
               participationId: newParticipation.id,
               isCompleted: false,
             },
-          })
-        )
+          }),
+        ),
       );
     }
 
@@ -191,11 +194,14 @@ export async function POST(
   } catch (error) {
     console.error("Erreur lors de l'inscription à la chasse:", error);
 
-    return NextResponse.json({
-      error: "Erreur lors de l'inscription à la chasse",
-      details: (error as Error).message,
-      success: false,
-    }, { status: 200 });
+    return NextResponse.json(
+      {
+        error: "Erreur lors de l'inscription à la chasse",
+        details: (error as Error).message,
+        success: false,
+      },
+      { status: 200 },
+    );
   }
 }
 
@@ -241,9 +247,10 @@ export async function PUT(
         where: { participationId: participation.id },
       });
 
-      const totalPoints = stepProgresses.reduce((sum, step) =>
-        sum + (step.isCompleted ? step.points : 0)
-      , 0);
+      const totalPoints = stepProgresses.reduce(
+        (sum, step) => sum + (step.isCompleted ? step.points : 0),
+        0,
+      );
 
       // Créer ou mettre à jour l'entrée dans le classement
       await prisma.leaderboardEntry.upsert({
@@ -276,11 +283,14 @@ export async function PUT(
   } catch (error) {
     console.error("Erreur lors de la mise à jour du statut:", error);
 
-    return NextResponse.json({
-      error: "Erreur lors de la mise à jour du statut",
-      details: (error as Error).message,
-      success: false,
-    }, { status: 200 });
+    return NextResponse.json(
+      {
+        error: "Erreur lors de la mise à jour du statut",
+        details: (error as Error).message,
+        success: false,
+      },
+      { status: 200 },
+    );
   }
 }
 
@@ -332,10 +342,13 @@ export async function DELETE(
   } catch (error) {
     console.error("Erreur lors du désistement de la chasse:", error);
 
-    return NextResponse.json({
-      error: "Erreur lors du désistement de la chasse",
-      details: (error as Error).message,
-      success: false,
-    }, { status: 200 });
+    return NextResponse.json(
+      {
+        error: "Erreur lors du désistement de la chasse",
+        details: (error as Error).message,
+        success: false,
+      },
+      { status: 200 },
+    );
   }
 }

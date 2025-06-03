@@ -246,7 +246,11 @@ async function checkHuntCompletion(
   await distributeRewards(huntId, userId, hunt?.title);
 }
 
-async function distributeRewards(huntId: string, userId: string, huntTitle?: string) {
+async function distributeRewards(
+  huntId: string,
+  userId: string,
+  huntTitle?: string,
+) {
   const rewards = await prisma.reward.findMany({
     where: {
       huntId,

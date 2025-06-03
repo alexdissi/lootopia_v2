@@ -254,14 +254,12 @@ export async function getUserRanking(userId: string, huntId: string) {
  * @param params Objet contenant les paramètres : userId, huntId, stepId, isCompleted
  * @returns Détails mis à jour de la progression et du classement
  */
-export async function validateStep(
-  params: {
-    userId: string;
-    huntId: string;
-    stepId: string;
-    isCompleted: boolean;
-  }
-) {
+export async function validateStep(params: {
+  userId: string;
+  huntId: string;
+  stepId: string;
+  isCompleted: boolean;
+}) {
   try {
     const { userId, huntId, stepId, isCompleted } = params;
 

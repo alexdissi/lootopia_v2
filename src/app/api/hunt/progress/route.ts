@@ -82,14 +82,12 @@ export async function POST(req: NextRequest) {
 }
 
 // Fonction pour mettre à jour ou créer la progression d'une étape
-async function updateStepProgress(
-  params: {
-    userId: string;
-    stepId: string;
-    participationId: string;
-    isCompleted: boolean;
-  }
-) {
+async function updateStepProgress(params: {
+  userId: string;
+  stepId: string;
+  participationId: string;
+  isCompleted: boolean;
+}) {
   const { userId, stepId, participationId, isCompleted } = params;
 
   // Trouver ou créer une progression d'étape
@@ -130,14 +128,12 @@ async function updateStepProgress(
 }
 
 // Fonction pour vérifier si toutes les étapes sont complétées et attribuer des récompenses
-async function checkHuntCompletion(
-  params: {
-    userId: string;
-    huntId: string;
-    participationId: string;
-    treasureHunt: any;
-  }
-) {
+async function checkHuntCompletion(params: {
+  userId: string;
+  huntId: string;
+  participationId: string;
+  treasureHunt: any;
+}) {
   const { userId, huntId, participationId, treasureHunt } = params;
 
   // Vérifier si toutes les étapes sont complétées
@@ -180,7 +176,11 @@ async function checkHuntCompletion(
 }
 
 // Fonction pour marquer une chasse comme terminée et distribuer les récompenses
-async function markHuntAsFinished(userId: string, huntId: string, treasureHunt: any) {
+async function markHuntAsFinished(
+  userId: string,
+  huntId: string,
+  treasureHunt: any,
+) {
   // Marquer la chasse comme terminée
   await prisma.treasureHunt.update({
     where: {
@@ -209,7 +209,11 @@ async function markHuntAsFinished(userId: string, huntId: string, treasureHunt: 
 }
 
 // Fonction pour distribuer les récompenses
-async function distributeRewards(userId: string, huntId: string, huntTitle: string) {
+async function distributeRewards(
+  userId: string,
+  huntId: string,
+  huntTitle: string,
+) {
   const rewards = await prisma.reward.findMany({
     where: {
       huntId: huntId,
