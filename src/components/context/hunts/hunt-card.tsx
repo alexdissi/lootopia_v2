@@ -60,7 +60,7 @@ export function HuntCard({ hunt, showEditButton }: HuntCardProps) {
         </div>
       </CardContent>
 
-      <CardFooter className="pt-0 flex gap-2">
+      <CardFooter className="pt-4 flex gap-2">
         <Link
           href={`/dashboard/hunts/${hunt.id}`}
           className={showEditButton ? "flex-1" : "w-full"}

@@ -345,6 +345,68 @@ export async function POST(request: NextRequest) {
           : 0;
       console.log(`DEBUG: Pourcentage de progression: ${progressPercentage}%`);
 
+      // Calculer le score total de l'utilisateur pour cette chasse
+      const userTotalScore = await prisma.stepProgress.aggregate({
+        where: {
+          userId: user.id,
+          participation: {
+            huntId: huntId,
+          },
+          isCompleted: true,
+        },
+        _sum: {
+          points: true,
+        },
+      });
+
+      const totalScore = userTotalScore._sum.points || 0;
+      console.log(`DEBUG: Score total de l'utilisateur: ${totalScore}`);
+
+      // Vérifier si toutes les étapes sont complétées
+      if (isCompleted && completedStepsCount >= totalSteps) {
+        console.log(
+          `DEBUG: Toutes les étapes sont complétées! (${completedStepsCount}/${totalSteps})`,
+        );
+
+        // Mettre à jour le statut de participation à COMPLETED
+        await prisma.participation.update({
+          where: { id: participation.id },
+          data: { status: "COMPLETED" },
+        });
+
+        // Mettre à jour le statut de la chasse au trésor à COMPLETED
+        await prisma.treasureHunt.update({
+          where: { id: huntId },
+          data: {
+            status: "COMPLETED",
+            isFinished: true,
+          },
+        });
+
+        console.log(`DEBUG: Chasse au trésor ${huntId} marquée comme terminée`);
+
+        // Gérer l'entrée de classement en utilisant une fonction auxiliaire
+        await updateOrCreateLeaderboardEntry(user.id, huntId, totalScore);
+
+        // Créer un message de victoire formaté avec la date actuelle
+        const completedDate = new Date();
+        const victoryMessage = formatVictoryMessage(completedDate);
+        console.log(`DEBUG: Message de victoire généré: ${victoryMessage}`);
+
+        // Retourner les données mises à jour avec le message de victoire
+        return NextResponse.json({
+          stepProgress,
+          isCompleted,
+          totalSteps,
+          completedSteps: completedStepsCount,
+          progressPercentage,
+          totalScore,
+          huntCompleted: true,
+          victoryMessage,
+          completedAt: completedDate,
+        });
+      }
+
       // Revalider le chemin pour mettre à jour l'interface utilisateur
       console.log(`DEBUG: Revalidation du chemin pour le huntId: ${huntId}`);
       revalidatePath(`/hunt/${huntId}`);
@@ -359,7 +421,8 @@ export async function POST(request: NextRequest) {
           totalSteps,
           completedSteps: completedStepsCount,
           progressPercentage,
-          totalScore: completedStepsCount * 10,
+          totalScore,
+          huntCompleted: completedStepsCount === totalSteps,
         },
       };
 
@@ -391,4 +454,53 @@ export async function POST(request: NextRequest) {
       { status: 500 },
     );
   }
+}
+
+// Fonction auxiliaire pour gérer l'entrée de classement
+async function updateOrCreateLeaderboardEntry(
+  userId: string,
+  huntId: string,
+  totalScore: number,
+) {
+  const existingEntry = await prisma.leaderboardEntry.findFirst({
+    where: {
+      userId,
+      huntId,
+    },
+  });
+
+  if (existingEntry) {
+    await prisma.leaderboardEntry.update({
+      where: { id: existingEntry.id },
+      data: {
+        score: totalScore,
+        completedAt: new Date(),
+      },
+    });
+  } else {
+    await prisma.leaderboardEntry.create({
+      data: {
+        userId,
+        huntId,
+        score: totalScore,
+        rank: 0, // Le rang sera calculé séparément
+        completedAt: new Date(),
+      },
+    });
+  }
+}
+
+// Fonction auxiliaire pour formater le message de victoire
+function formatVictoryMessage(completedDate: Date): string {
+  const formattedDate = completedDate.toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  const formattedTime = completedDate.toLocaleTimeString("fr-FR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  return `🏆 FÉLICITATIONS ! 🏆 Vous avez gagné cette chasse au trésor le ${formattedDate} à ${formattedTime} !`;
 }
