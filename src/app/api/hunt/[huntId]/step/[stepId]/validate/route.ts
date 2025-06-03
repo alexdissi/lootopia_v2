@@ -190,79 +190,87 @@ async function checkHuntCompletion(
     },
   });
 
-  // Si toutes les étapes sont complétées
-  if (completedSteps === totalSteps) {
-    // Mettre à jour le statut de participation
-    await prisma.participation.update({
-      where: {
-        id: participationId,
-      },
-      data: {
-        status: "COMPLETED",
-      },
-    });
+  // Si toutes les étapes ne sont pas complétées, rien à faire
+  if (completedSteps !== totalSteps) {
+    return;
+  }
 
-    // Vérifier si la chasse est terminée pour la première fois
-    const hunt = await prisma.treasureHunt.findUnique({
-      where: {
-        id: huntId,
-      },
-    });
+  // Mettre à jour le statut de participation
+  await prisma.participation.update({
+    where: {
+      id: participationId,
+    },
+    data: {
+      status: "COMPLETED",
+    },
+  });
 
-    // Si la chasse n'est pas encore marquée comme terminée
-    if (!hunt?.isFinished) {
-      // Marquer la chasse comme terminée
-      await prisma.treasureHunt.update({
-        where: {
-          id: huntId,
-        },
+  // Vérifier si la chasse est terminée pour la première fois
+  const hunt = await prisma.treasureHunt.findUnique({
+    where: {
+      id: huntId,
+    },
+  });
+
+  // Si la chasse est déjà marquée comme terminée, rien à faire
+  if (hunt?.isFinished) {
+    return;
+  }
+
+  // Marquer la chasse comme terminée
+  await prisma.treasureHunt.update({
+    where: {
+      id: huntId,
+    },
+    data: {
+      isFinished: true,
+      status: "COMPLETED",
+    },
+  });
+
+  // Attribuer un artefact spécial au gagnant (premier joueur)
+  await prisma.artefact.create({
+    data: {
+      name: `Trophée de vainqueur - ${hunt?.title || "Chasse au trésor"}`,
+      rarity: "LEGENDARY",
+      description:
+        "Artefact spécial attribué au premier joueur ayant terminé la chasse",
+      imageUrl: "/trophy.png", // Ajustez avec l'URL d'une image appropriée
+      userId,
+      huntId,
+      source: "EVENT",
+    },
+  });
+
+  // Répartir les récompenses définies dans la table Reward
+  await distributeRewards(huntId, userId, hunt?.title);
+}
+
+async function distributeRewards(huntId: string, userId: string, huntTitle?: string) {
+  const rewards = await prisma.reward.findMany({
+    where: {
+      huntId,
+    },
+  });
+
+  // Ajouter des récompenses en fonction du type
+  for (const reward of rewards) {
+    if (reward.type === "CURRENCY") {
+      await prisma.virtualCurrency.create({
         data: {
-          isFinished: true,
-          status: "COMPLETED",
-        },
-      });
-
-      // Attribuer un artefact spécial au gagnant (premier joueur)
-      await prisma.artefact.create({
-        data: {
-          name: `Trophée de vainqueur - ${hunt?.title || "Chasse au trésor"}`,
-          rarity: "LEGENDARY",
-          description:
-            "Artefact spécial attribué au premier joueur ayant terminé la chasse",
-          imageUrl: "/trophy.png", // Ajustez avec l'URL d'une image appropriée
           userId,
-          huntId,
-          source: "EVENT",
-        },
-      });
-
-      // Répartir les récompenses définies dans la table Reward
-      const rewards = await prisma.reward.findMany({
-        where: {
-          huntId,
-        },
-      });
-
-      // Ajouter des couronnes (monnaie virtuelle) en fonction des récompenses
-      for (const reward of rewards) {
-        if (reward.type === "CURRENCY") {
-          await prisma.virtualCurrency.create({
-            data: {
+          amount: reward.value,
+          type: "EARNED",
+          transactionHistory: {
+            create: {
               userId,
               amount: reward.value,
-              type: "EARNED",
-              transactionHistory: {
-                create: {
-                  userId,
-                  amount: reward.value,
-                  transactionType: "EARNED",
-                  description: `Récompense pour avoir complété la chasse: ${hunt?.title || "Chasse au trésor"}`,
-                },
-              },
+              transactionType: "EARNED",
+              description: `Récompense pour avoir complété la chasse: ${huntTitle || "Chasse au trésor"}`,
             },
-          });
-        }
-      }
+          },
+        },
+      });
     }
   }
 }

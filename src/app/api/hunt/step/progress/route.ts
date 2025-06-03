@@ -1,10 +1,10 @@
 "use server";
 
-import { NextRequest, NextResponse } from "next/server";
-import { headers } from "next/headers";
-import prisma from "@/lib/db";
-import { auth } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
+import prisma from "@/lib/db";
 
 // GET /api/hunt/step/progress - Récupérer la progression des étapes
 export async function GET(request: NextRequest) {
