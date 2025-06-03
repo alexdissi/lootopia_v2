@@ -99,7 +99,7 @@ export function MapView({
             showCompass: true,
             visualizePitch: true,
           }),
-          "bottom-right"
+          "bottom-right",
         );
       }
 
@@ -161,7 +161,7 @@ export function MapView({
 
       try {
         const response = await fetch(
-          `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(location)}.json?access_token=${MAPBOX_ACCESS_TOKEN}&limit=1`
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(location)}.json?access_token=${MAPBOX_ACCESS_TOKEN}&limit=1`,
         );
 
         const data = await response.json();
@@ -219,7 +219,7 @@ export function MapView({
         setError(
           typeof error === "string"
             ? error
-            : "Erreur lors de la récupération de l'emplacement"
+            : "Erreur lors de la récupération de l'emplacement",
         );
       } finally {
         setIsLoading(false);
@@ -310,7 +310,7 @@ export function MapView({
       className={cn(
         "relative rounded-xl overflow-hidden transition-all duration-300 ease-in-out",
         isFullscreen ? "fixed inset-0 z-50 rounded-none" : "",
-        className
+        className,
       )}
     >
       {!location && (

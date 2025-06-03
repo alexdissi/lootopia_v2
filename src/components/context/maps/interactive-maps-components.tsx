@@ -3,7 +3,6 @@
 import { MapView } from "@/components/ui/maps";
 
 interface InteractiveMapComponentProps {
-  location: string;
   onMapClick: (coordinates: [number, number]) => void;
   selectedCoordinates: [number, number] | null;
   completedSteps: string[];
@@ -12,7 +11,6 @@ interface InteractiveMapComponentProps {
 }
 
 export function InteractiveMapComponent({
-  location,
   onMapClick,
   selectedCoordinates,
   isLoading,
@@ -20,7 +18,7 @@ export function InteractiveMapComponent({
   return (
     <div className="relative">
       <MapView
-        location={location}
+        location={"Paris, France"}
         height="500px"
         interactive
         className="cursor-crosshair border-2 border-primary/20 rounded-lg"

@@ -1,18 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const session = await auth.api.getSession({ headers: await headers() });
     if (!session?.user) {
       return NextResponse.json(
         { error: "Authentication required" },
-        { status: 401 }
+        { status: 401 },
       );
     }
     const { stepId, latitude, longitude, distance } = await request.json();
@@ -21,15 +21,15 @@ export async function POST(
       where: {
         userId_stepId: {
           userId: session.user.id,
-          stepId
-        }
-      }
+          stepId,
+        },
+      },
     });
 
     if (existingDiscovery) {
       return NextResponse.json({
         success: false,
-        message: "Déjà découvert"
+        message: "Déjà découvert",
       });
     }
 
@@ -39,20 +39,16 @@ export async function POST(
         stepId,
         latitude,
         longitude,
-        distance: Math.round(distance)
-      }
+        distance: Math.round(distance),
+      },
     });
 
     return NextResponse.json({
       success: true,
-      discovery
+      discovery,
     });
-
   } catch (error) {
     console.error(error);
-    return NextResponse.json(
-      { error: "Erreur serveur" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }

@@ -10,16 +10,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Hunt } from "@/interfaces/hunt";
 import { authClient } from "@/lib/auth-client";
 import { User } from "../../../../generated/prisma";
+import { InteractiveHuntMap } from "../maps/interactive-maps";
 import { ReviewForm } from "./form/hunt-review-form";
 import { HuntDeleteDialog } from "./hunt-delete-dialog";
 import { HuntDetailsSkeleton } from "./hunt-detail-skeleton";
 import { HuntHeader } from "./hunt-header";
 import { HuntInfoCard } from "./hunt-info-card";
 import { HuntJoinButton } from "./hunt-join-button";
+import HuntMapView from "./hunt-map-view";
 import { HuntShareDialog } from "./hunt-share-dialog";
 import { HuntStatusSection } from "./hunt-status-section";
 import { HuntStepsList } from "./hunt-steps-list";
-import { InteractiveMapComponent } from "../maps/interactive-maps-components";
 
 type ParticipantUser = {
   id?: string;
@@ -80,7 +81,7 @@ export function HuntDetails({ huntId }: { huntId: string }) {
   const isCreator = hunt?.createdBy?.email === session?.data?.user?.email;
   const isParticipant = Boolean(
     session?.data?.user?.id &&
-      hunt.participants?.some((p) => p.userId === session?.data?.user?.id)
+      hunt.participants?.some((p) => p.userId === session?.data?.user?.id),
   );
 
   return (
@@ -221,7 +222,7 @@ export function HuntDetails({ huntId }: { huntId: string }) {
                                 </Badge>
                               </div>
                             );
-                          }
+                          },
                         )}
                       </div>
                     ) : (
@@ -239,13 +240,12 @@ export function HuntDetails({ huntId }: { huntId: string }) {
             <HuntStepsList steps={hunt.steps || []} />
           </TabsContent>
 
-          <TabsContent value="map">
-            <InteractiveMapComponent
-              huntId={huntId}
-              userId={session.data?.user?.id ?? ""}
-              initialLocation="Paris, France"
-            />
-          </TabsContent>
+          <TabsContent value="map"></TabsContent>
+          <InteractiveHuntMap
+            huntId={hunt.id}
+            userId={session?.data?.user?.id || ""}
+            initialLocation={hunt.location ?? ""}
+          />
           <TabsContent value="reviews">
             <div className="space-y-6">
               {session?.data?.user && (

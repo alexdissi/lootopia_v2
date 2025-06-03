@@ -1,11 +1,11 @@
 "use client";
 
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { Target, Trophy, Eye, EyeOff } from "lucide-react";
 import { useState, useCallback, useEffect } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Target, Trophy, Eye, EyeOff } from "lucide-react";
-import { toast } from "sonner";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { InteractiveMapComponent } from "./interactive-maps-components";
 
 interface StepDiscovery {
@@ -26,6 +26,7 @@ interface HuntStep {
   imageUrl?: string;
   stepOrder: number;
   latitude?: number;
+  location: string;
   longitude?: number;
   radius: number;
   discoveries: StepDiscovery[];
@@ -41,7 +42,7 @@ function calculateDistance(
   lat1: number,
   lon1: number,
   lat2: number,
-  lon2: number
+  lon2: number,
 ): number {
   const R = 6371e3;
   const φ1 = (lat1 * Math.PI) / 180;
@@ -72,12 +73,12 @@ export function InteractiveHuntMap({
     queryKey: ["hunt-steps", huntId],
     queryFn: async () => {
       const response = await fetch(
-        `/api/hunt/${huntId}/steps?userId=${userId}`
+        `/api/hunt/${huntId}/steps?userId=${userId}`,
       );
       if (!response.ok) throw new Error("Erreur lors du chargement");
       return response.json();
     },
-    enabled: !!huntId,
+    enabled: Boolean(huntId),
     staleTime: Infinity,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
@@ -122,61 +123,53 @@ export function InteractiveHuntMap({
   const handleMapClick = useCallback(
     (coordinates: [number, number]) => {
       setSelectedCoordinates(coordinates);
-      if (!steps) return;
+      if (!initialLocation) return;
 
       const [lng, lat] = coordinates;
-      let foundStep: HuntStep | undefined;
-      let minDistance = Infinity;
-      let nearestDistance = Infinity;
 
-      steps.forEach((step) => {
-        if (step.latitude === undefined || step.longitude === undefined) return;
+      fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(initialLocation)}.json?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}&limit=1`,
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.features?.[0]?.center) {
+            const [treasureLng, treasureLat] = data.features[0].center;
 
-        const distance = calculateDistance(
-          lat,
-          lng,
-          step.latitude,
-          step.longitude
-        );
-        if (distance < nearestDistance) nearestDistance = distance;
-        if (
-          distance <= step.radius &&
-          !foundSteps.has(step.id) &&
-          distance < minDistance
-        ) {
-          minDistance = distance;
-          foundStep = step;
-        }
-      });
+            const distance = calculateDistance(
+              lat,
+              lng,
+              treasureLat,
+              treasureLng,
+            );
 
-      if (foundStep) {
-        const stepId = foundStep.id;
-        setFoundSteps((prev) => new Set([...prev, stepId]));
-        toast.success(`🎉 Bravo ! Tu as trouvé "${foundStep.title}" !`, {
-          description: `Distance: ${Math.round(minDistance)}m`,
-          duration: 4000,
+            if (distance <= 500) {
+              toast.success("🎉 Félicitations ! Tu as trouvé le trésor !", {
+                description: `Distance: ${Math.round(distance)}m`,
+                duration: 5000,
+              });
+            } else {
+              let hint = "";
+              if (distance > 5000) hint = "Tu es très loin du trésor ! 🗺️";
+              else if (distance > 2000)
+                hint = "Tu te rapproches du trésor ! 🚶‍♂️";
+              else if (distance > 1000) hint = "Tu es proche du trésor ! 🔍";
+              else hint = "Très proche du trésor ! 🔥";
+
+              toast.error(hint, {
+                description: `Distance: ${Math.round(distance)}m`,
+                duration: 3000,
+              });
+            }
+          } else {
+            toast.error("Impossible de localiser le trésor");
+          }
+        })
+        .catch((error) => {
+          console.error("❌ Erreur geocoding:", error);
+          toast.error("Erreur de géolocalisation");
         });
-        saveDiscovery.mutate({
-          stepId,
-          latitude: lat,
-          longitude: lng,
-          distance: minDistance,
-        });
-      } else {
-        let hint = "";
-        if (nearestDistance > 5000) hint = "Tu es très loin ! 🗺️";
-        else if (nearestDistance > 2000) hint = "Tu te rapproches ! 🚶‍♂️";
-        else if (nearestDistance > 500) hint = "Tu es proche ! 🔍";
-        else if (nearestDistance > 100) hint = "Tu chauffes ! 🔥";
-        else hint = "Très très chaud ! 🌡️";
-
-        toast.error(hint, {
-          description: `Distance la plus proche: ${Math.round(nearestDistance)}m`,
-          duration: 3000,
-        });
-      }
     },
-    [steps, foundSteps, saveDiscovery.mutate]
+    [initialLocation],
   );
 
   if (isLoading) {
@@ -189,10 +182,8 @@ export function InteractiveHuntMap({
 
   if (!steps) return null;
 
-  const totalSteps = steps.filter(
-    (s) => s.latitude !== undefined && s.longitude !== undefined
-  ).length;
-  const progress = totalSteps > 0 ? (foundSteps.size / totalSteps) * 100 : 0;
+  const totalSteps = steps.length;
+  const progress: number = 0; // Pas de progression, juste trouver le trésor
 
   return (
     <div className="space-y-6">
@@ -232,7 +223,6 @@ export function InteractiveHuntMap({
         </CardContent>
       </Card>
       <InteractiveMapComponent
-        location={initialLocation}
         onMapClick={handleMapClick}
         selectedCoordinates={selectedCoordinates}
         completedSteps={[]}
