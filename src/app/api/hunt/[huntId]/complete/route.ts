@@ -5,10 +5,10 @@ import prisma from "@/lib/db";
 
 export async function POST(
   req: Request,
-  { params }: { params: { huntId: string } },
+  context: { params: Promise<{ huntId: string }> },
 ) {
   try {
-    const { huntId } = params;
+    const { huntId } = await context.params;
 
     const session = await auth.api.getSession({ headers: await headers() });
 
