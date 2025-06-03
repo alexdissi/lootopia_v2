@@ -4,7 +4,7 @@ import prisma from "@/lib/db";
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { huntId: string, stepId: string } }
+  { params }: { params: { huntId: string; stepId: string } },
 ) {
   try {
     const session = await auth.getSession();
@@ -26,7 +26,7 @@ export async function POST(
     if (!participation) {
       return NextResponse.json(
         { error: "Vous ne participez pas à cette chasse" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -41,7 +41,7 @@ export async function POST(
     if (!step) {
       return NextResponse.json(
         { error: "Étape non trouvée pour cette chasse" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -90,7 +90,7 @@ export async function POST(
     console.error("Erreur lors de la validation de l'étape:", error);
     return NextResponse.json(
       { error: "Erreur lors de la validation de l'étape" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -114,7 +114,7 @@ async function updateLeaderboard(userId: string, huntId: string) {
 
   // Récupérer tous les scores pour cette chasse et trier par score
   const allScores = await prisma.stepProgress.groupBy({
-    by: ['userId'],
+    by: ["userId"],
     where: {
       step: {
         huntId,
@@ -126,13 +126,13 @@ async function updateLeaderboard(userId: string, huntId: string) {
     },
     orderBy: {
       _sum: {
-        points: 'desc',
+        points: "desc",
       },
     },
   });
 
   // Déterminer le rang de l'utilisateur
-  const rank = allScores.findIndex(s => s.userId === userId) + 1;
+  const rank = allScores.findIndex((s) => s.userId === userId) + 1;
 
   // Mettre à jour ou créer l'entrée du classement
   const existingEntry = await prisma.leaderboardEntry.findFirst({
@@ -166,7 +166,11 @@ async function updateLeaderboard(userId: string, huntId: string) {
   }
 }
 
-async function checkHuntCompletion(huntId: string, userId: string, participationId: string) {
+async function checkHuntCompletion(
+  huntId: string,
+  userId: string,
+  participationId: string,
+) {
   // Compter le nombre total d'étapes dans la chasse
   const totalSteps = await prisma.huntStep.count({
     where: {
@@ -221,9 +225,10 @@ async function checkHuntCompletion(huntId: string, userId: string, participation
       // Attribuer un artefact spécial au gagnant (premier joueur)
       await prisma.artefact.create({
         data: {
-          name: `Trophée de vainqueur - ${hunt?.title || 'Chasse au trésor'}`,
+          name: `Trophée de vainqueur - ${hunt?.title || "Chasse au trésor"}`,
           rarity: "LEGENDARY",
-          description: "Artefact spécial attribué au premier joueur ayant terminé la chasse",
+          description:
+            "Artefact spécial attribué au premier joueur ayant terminé la chasse",
           imageUrl: "/trophy.png", // Ajustez avec l'URL d'une image appropriée
           userId,
           huntId,
@@ -251,9 +256,9 @@ async function checkHuntCompletion(huntId: string, userId: string, participation
                   userId,
                   amount: reward.value,
                   transactionType: "EARNED",
-                  description: `Récompense pour avoir complété la chasse: ${hunt?.title || 'Chasse au trésor'}`,
-                }
-              }
+                  description: `Récompense pour avoir complété la chasse: ${hunt?.title || "Chasse au trésor"}`,
+                },
+              },
             },
           });
         }

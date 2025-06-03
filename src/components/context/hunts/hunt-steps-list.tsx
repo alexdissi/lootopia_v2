@@ -40,21 +40,33 @@ export function HuntStepsList({ steps, huntId }: HuntStepsListProps) {
   const userId = session?.data?.user?.id;
 
   // Récupérer la participation de l'utilisateur pour cette chasse
-  const { data: participation, isLoading: isLoadingParticipation, error: participationError } = useQuery({
+  const {
+    data: participation,
+    isLoading: isLoadingParticipation,
+    error: participationError,
+  } = useQuery({
     queryKey: ["participation", huntId, userId],
     queryFn: async () => {
       if (!userId) return null;
       try {
-        const res = await fetch(`/api/hunt/${huntId}/participation?userId=${userId}`);
+        const res = await fetch(
+          `/api/hunt/${huntId}/participation?userId=${userId}`,
+        );
         if (!res.ok) {
           if (res.status === 404) return null;
           // Récupérer les détails de l'erreur si disponibles
           const errorData = await res.json().catch(() => ({}));
-          throw new Error(errorData.error || "Erreur lors de la vérification de la participation");
+          throw new Error(
+            errorData.error ||
+              "Erreur lors de la vérification de la participation",
+          );
         }
         return res.json();
       } catch (error) {
-        console.error("Erreur lors de la vérification de la participation:", error);
+        console.error(
+          "Erreur lors de la vérification de la participation:",
+          error,
+        );
         throw error;
       }
     },
@@ -107,9 +119,7 @@ export function HuntStepsList({ steps, huntId }: HuntStepsListProps) {
                     </span>
                     {step.title || `Étape ${index + 1}`}
                   </CardTitle>
-                  <CardDescription>
-                    Détails non disponibles
-                  </CardDescription>
+                  <CardDescription>Détails non disponibles</CardDescription>
                 </CardHeader>
               </Card>
             ))}
@@ -124,7 +134,8 @@ export function HuntStepsList({ steps, huntId }: HuntStepsListProps) {
         <Alert variant="warning">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            Vous devez rejoindre cette chasse au trésor pour voir les étapes en détail et suivre votre progression.
+            Vous devez rejoindre cette chasse au trésor pour voir les étapes en
+            détail et suivre votre progression.
           </AlertDescription>
         </Alert>
         <div className="space-y-4">
@@ -150,11 +161,7 @@ export function HuntStepsList({ steps, huntId }: HuntStepsListProps) {
 
   // Si l'utilisateur participe à la chasse, afficher le composant StepList pour validation
   if (participation) {
-    return <StepList
-      steps={steps}
-      huntId={huntId}
-      isParticipant={true}
-    />;
+    return <StepList steps={steps} huntId={huntId} isParticipant={true} />;
   }
 
   // Affichage par défaut (pour les visiteurs non connectés ou l'organisateur)

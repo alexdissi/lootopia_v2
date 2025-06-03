@@ -2,10 +2,24 @@
 
 import { useState, useEffect } from "react";
 import { authClient } from "@/lib/auth-client";
-import { Crown, Medal, Loader2, Award, Trophy, TrendingUp, User } from "lucide-react";
+import {
+  Crown,
+  Medal,
+  Loader2,
+  Award,
+  Trophy,
+  TrendingUp,
+  User,
+} from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -64,7 +78,9 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
       const response = await fetch(`/api/hunt/leaderboard?huntId=${huntId}`);
 
       if (!response.ok) {
-        throw new Error(`Erreur lors du chargement du classement: ${response.status}`);
+        throw new Error(
+          `Erreur lors du chargement du classement: ${response.status}`,
+        );
       }
 
       const data = await response.json();
@@ -72,7 +88,9 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
       setError(null);
     } catch (err) {
       console.error("Erreur lors du chargement du classement:", err);
-      setError("Impossible de charger le classement. Veuillez réessayer ultérieurement.");
+      setError(
+        "Impossible de charger le classement. Veuillez réessayer ultérieurement.",
+      );
     } finally {
       setIsLoading(false);
     }
@@ -83,16 +101,23 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
     if (!session?.user?.id) return;
 
     try {
-      const response = await fetch(`/api/hunt/leaderboard/user?huntId=${huntId}&userId=${session.user.id}`);
+      const response = await fetch(
+        `/api/hunt/leaderboard/user?huntId=${huntId}&userId=${session.user.id}`,
+      );
 
       if (!response.ok) {
-        throw new Error(`Erreur lors du chargement du classement utilisateur: ${response.status}`);
+        throw new Error(
+          `Erreur lors du chargement du classement utilisateur: ${response.status}`,
+        );
       }
 
       const data = await response.json();
       setUserRanking(data);
     } catch (err) {
-      console.error("Erreur lors du chargement du classement utilisateur:", err);
+      console.error(
+        "Erreur lors du chargement du classement utilisateur:",
+        err,
+      );
       // Ne pas définir d'erreur ici pour ne pas perturber l'affichage du tableau principal
     }
   };
@@ -162,9 +187,12 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
         <div className="flex justify-center mb-4">
           <TrendingUp className="h-12 w-12 text-muted-foreground" />
         </div>
-        <h3 className="text-lg font-medium mb-2">Aucun participant dans le classement</h3>
+        <h3 className="text-lg font-medium mb-2">
+          Aucun participant dans le classement
+        </h3>
         <p className="text-muted-foreground mb-6">
-          Soyez le premier à compléter des étapes pour apparaître dans le classement !
+          Soyez le premier à compléter des étapes pour apparaître dans le
+          classement !
         </p>
         {session?.user && (
           <Button onClick={() => window.location.reload()}>
@@ -180,7 +208,9 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
       <Tabs defaultValue="global" className="w-full">
         <TabsList className="mb-4">
           <TabsTrigger value="global">Classement Global</TabsTrigger>
-          {userRanking && <TabsTrigger value="your-progress">Ma Progression</TabsTrigger>}
+          {userRanking && (
+            <TabsTrigger value="your-progress">Ma Progression</TabsTrigger>
+          )}
         </TabsList>
 
         <TabsContent value="global">
@@ -191,7 +221,9 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
                   <TableHead className="w-16 text-center">Rang</TableHead>
                   <TableHead>Participant</TableHead>
                   <TableHead className="text-center">Score</TableHead>
-                  <TableHead className="text-right">Date de complétion</TableHead>
+                  <TableHead className="text-right">
+                    Date de complétion
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -200,7 +232,7 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
                   return (
                     <TableRow
                       key={entry.id}
-                      className={`${getRankRowClass(entry.rank)} ${isCurrentUser ? 'bg-primary/5 dark:bg-primary/10' : ''}`}
+                      className={`${getRankRowClass(entry.rank)} ${isCurrentUser ? "bg-primary/5 dark:bg-primary/10" : ""}`}
                     >
                       <TableCell className="text-center font-medium">
                         <div className="flex items-center justify-center">
@@ -212,7 +244,10 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
                         <div className="flex items-center gap-2">
                           <Avatar className="h-8 w-8">
                             {entry.user.image ? (
-                              <AvatarImage src={entry.user.image} alt={entry.user.name || 'Utilisateur'} />
+                              <AvatarImage
+                                src={entry.user.image}
+                                alt={entry.user.name || "Utilisateur"}
+                              />
                             ) : (
                               <AvatarFallback>
                                 <User className="h-4 w-4" />
@@ -220,8 +255,12 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
                             )}
                           </Avatar>
                           <span className={isCurrentUser ? "font-medium" : ""}>
-                            {entry.user.name || 'Utilisateur anonyme'}
-                            {isCurrentUser && <span className="ml-2 text-xs text-primary">(Vous)</span>}
+                            {entry.user.name || "Utilisateur anonyme"}
+                            {isCurrentUser && (
+                              <span className="ml-2 text-xs text-primary">
+                                (Vous)
+                              </span>
+                            )}
                           </span>
                         </div>
                       </TableCell>
@@ -229,13 +268,16 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
                         {entry.score} pts
                       </TableCell>
                       <TableCell className="text-right text-muted-foreground">
-                        {new Date(entry.completedAt).toLocaleDateString('fr-FR', {
-                          day: 'numeric',
-                          month: 'short',
-                          year: 'numeric',
-                          hour: '2-digit',
-                          minute: '2-digit'
-                        })}
+                        {new Date(entry.completedAt).toLocaleDateString(
+                          "fr-FR",
+                          {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          },
+                        )}
                       </TableCell>
                     </TableRow>
                   );
@@ -254,7 +296,7 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
                   {userRanking.isRanked && (
                     <Badge variant="outline" className="ml-2 px-3 py-1">
                       <Crown className="mr-1 h-3.5 w-3.5 text-yellow-500" />
-                      Rang {userRanking.data?.rank || '-'}
+                      Rang {userRanking.data?.rank || "-"}
                     </Badge>
                   )}
                 </CardTitle>
@@ -269,42 +311,66 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
                       <div className="flex justify-between items-end mb-2">
                         <div>
                           <p className="text-sm font-medium">Score actuel</p>
-                          <p className="text-2xl font-bold">{userRanking.progress.totalScore} points</p>
+                          <p className="text-2xl font-bold">
+                            {userRanking.progress.totalScore} points
+                          </p>
                         </div>
                         <Badge className="px-3 py-1">
-                          {userRanking.progress.completedStepsCount} / {userRanking.progress.totalSteps} étapes
+                          {userRanking.progress.completedStepsCount} /{" "}
+                          {userRanking.progress.totalSteps} étapes
                         </Badge>
                       </div>
                       <div className="space-y-1">
                         <div className="flex justify-between text-xs">
                           <span>Progression</span>
-                          <span>{userRanking.progress.progressPercentage}%</span>
+                          <span>
+                            {userRanking.progress.progressPercentage}%
+                          </span>
                         </div>
-                        <Progress value={userRanking.progress.progressPercentage} className="h-2" />
+                        <Progress
+                          value={userRanking.progress.progressPercentage}
+                          className="h-2"
+                        />
                       </div>
                     </div>
 
                     <div className="pt-4 border-t">
-                      <h4 className="text-sm font-medium mb-2">Détails de complétion</h4>
+                      <h4 className="text-sm font-medium mb-2">
+                        Détails de complétion
+                      </h4>
                       <div className="grid grid-cols-2 gap-4">
                         <div className="rounded-md border p-3">
-                          <p className="text-xs text-muted-foreground">Étapes complétées</p>
-                          <p className="text-lg font-bold">{userRanking.progress.completedStepsCount}</p>
-                        </div>
-                        <div className="rounded-md border p-3">
-                          <p className="text-xs text-muted-foreground">Points par étape</p>
-                          <p className="text-lg font-bold">10 pts</p>
-                        </div>
-                        <div className="rounded-md border p-3">
-                          <p className="text-xs text-muted-foreground">Étapes restantes</p>
+                          <p className="text-xs text-muted-foreground">
+                            Étapes complétées
+                          </p>
                           <p className="text-lg font-bold">
-                            {userRanking.progress.totalSteps - userRanking.progress.completedStepsCount}
+                            {userRanking.progress.completedStepsCount}
                           </p>
                         </div>
                         <div className="rounded-md border p-3">
-                          <p className="text-xs text-muted-foreground">Points potentiels</p>
+                          <p className="text-xs text-muted-foreground">
+                            Points par étape
+                          </p>
+                          <p className="text-lg font-bold">10 pts</p>
+                        </div>
+                        <div className="rounded-md border p-3">
+                          <p className="text-xs text-muted-foreground">
+                            Étapes restantes
+                          </p>
                           <p className="text-lg font-bold">
-                            {(userRanking.progress.totalSteps - userRanking.progress.completedStepsCount) * 10} pts
+                            {userRanking.progress.totalSteps -
+                              userRanking.progress.completedStepsCount}
+                          </p>
+                        </div>
+                        <div className="rounded-md border p-3">
+                          <p className="text-xs text-muted-foreground">
+                            Points potentiels
+                          </p>
+                          <p className="text-lg font-bold">
+                            {(userRanking.progress.totalSteps -
+                              userRanking.progress.completedStepsCount) *
+                              10}{" "}
+                            pts
                           </p>
                         </div>
                       </div>
@@ -313,7 +379,8 @@ export function HuntLeaderboard({ huntId }: HuntLeaderboardProps) {
                 ) : (
                   <div className="text-center py-8">
                     <p className="text-muted-foreground">
-                      Vous n&apos;avez pas encore commencé cette chasse au trésor.
+                      Vous n&apos;avez pas encore commencé cette chasse au
+                      trésor.
                     </p>
                     <Button className="mt-4" size="sm">
                       Commencer la chasse

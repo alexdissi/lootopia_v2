@@ -3,7 +3,7 @@ import prisma from "@/lib/db";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { huntId: string } }
+  { params }: { params: { huntId: string } },
 ) {
   try {
     const huntId = params.huntId;
@@ -24,10 +24,7 @@ export async function GET(
           },
         },
       },
-      orderBy: [
-        { score: "desc" },
-        { completedAt: "asc" },
-      ],
+      orderBy: [{ score: "desc" }, { completedAt: "asc" }],
     });
 
     return NextResponse.json(leaderboard);
@@ -35,7 +32,7 @@ export async function GET(
     console.error("Erreur lors de la récupération du classement:", error);
     return NextResponse.json(
       { error: "Erreur lors de la récupération du classement" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

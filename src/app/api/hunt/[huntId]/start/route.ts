@@ -54,7 +54,8 @@ export async function POST(
 
     const now = new Date();
     const startDate = hunt.startDate || now;
-    const endDate = hunt.endDate || new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // Par défaut : 30 jours à partir de maintenant
+    const endDate =
+      hunt.endDate || new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // Par défaut : 30 jours à partir de maintenant
 
     const updatedHunt = await prisma.treasureHunt.update({
       where: { id: huntId },

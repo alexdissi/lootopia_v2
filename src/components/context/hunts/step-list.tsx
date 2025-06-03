@@ -5,8 +5,22 @@ import { useState, useEffect, useCallback } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check, CheckCircle2, Clock, Loader2, MapPin, XCircle } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Check,
+  CheckCircle2,
+  Clock,
+  Loader2,
+  MapPin,
+  XCircle,
+} from "lucide-react";
 import Image from "next/image";
 
 interface StepListProps {
@@ -16,7 +30,11 @@ interface StepListProps {
   isParticipant?: boolean;
 }
 
-export const StepList = ({ steps, huntId, isParticipant = false }: StepListProps) => {
+export const StepList = ({
+  steps,
+  huntId,
+  isParticipant = false,
+}: StepListProps) => {
   const { toast } = useToast();
 
   // Si l'utilisateur n'est pas participant, on affiche simplement la liste des étapes
@@ -74,8 +92,7 @@ function SimpleStepsList({ steps }: { steps: HuntStep[] }) {
                   <div className="flex items-center gap-1 text-sm text-muted-foreground">
                     <MapPin className="h-3.5 w-3.5" />
                     <span>
-                      {step.address ??
-                        `${step.latitude}, ${step.longitude}`}
+                      {step.address ?? `${step.latitude}, ${step.longitude}`}
                     </span>
                   </div>
                 )}
@@ -96,8 +113,14 @@ function DirectParticipantStepsList({
   steps: HuntStep[];
   huntId: string;
 }) {
-  const [steps, setSteps] = useState<(HuntStep & { isCompleted?: boolean; completedAt?: string | null })[]>(
-    initialSteps.map(step => ({ ...step, isCompleted: false, completedAt: null }))
+  const [steps, setSteps] = useState<
+    (HuntStep & { isCompleted?: boolean; completedAt?: string | null })[]
+  >(
+    initialSteps.map((step) => ({
+      ...step,
+      isCompleted: false,
+      completedAt: null,
+    })),
   );
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -108,7 +131,7 @@ function DirectParticipantStepsList({
     totalSteps: initialSteps.length,
     completedSteps: 0,
     progressPercentage: 0,
-    totalScore: 0
+    totalScore: 0,
   });
 
   // Fonction pour charger les données de progression
@@ -118,15 +141,12 @@ function DirectParticipantStepsList({
     setIsLoading(true);
 
     try {
-      const response = await fetch(
-        `/api/hunt/step/progress?huntId=${huntId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`/api/hunt/step/progress?huntId=${huntId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (!response.ok) {
         let errorMessage = `Erreur HTTP: ${response.status}`;
@@ -147,12 +167,14 @@ function DirectParticipantStepsList({
 
       // Mettre à jour les étapes avec les données de progression
       // Combiner les données initiales avec les données de progression
-      const updatedSteps = initialSteps.map(initialStep => {
-        const progressStep = data.steps.find((s: any) => s.id === initialStep.id);
+      const updatedSteps = initialSteps.map((initialStep) => {
+        const progressStep = data.steps.find(
+          (s: any) => s.id === initialStep.id,
+        );
         return {
           ...initialStep,
           isCompleted: progressStep ? progressStep.isCompleted : false,
-          completedAt: progressStep ? progressStep.completedAt : null
+          completedAt: progressStep ? progressStep.completedAt : null,
         };
       });
 
@@ -163,9 +185,8 @@ function DirectParticipantStepsList({
         totalSteps: data.totalSteps,
         completedSteps: data.completedSteps,
         progressPercentage: data.progressPercentage,
-        totalScore: data.totalScore
+        totalScore: data.totalScore,
       });
-
     } catch (error) {
       console.error("Erreur lors du chargement de la progression:", error);
       setError(error instanceof Error ? error.message : "Erreur inconnue");
@@ -180,43 +201,46 @@ function DirectParticipantStepsList({
   const toggleStepCompletion = async (stepId: string) => {
     if (isLoading) return; // Éviter les clics multiples pendant le chargement
 
-    const stepToToggle = steps.find(step => step.id === stepId);
+    const stepToToggle = steps.find((step) => step.id === stepId);
     if (!stepToToggle) return;
 
     const isCurrentlyCompleted = stepToToggle.isCompleted;
     const updatedIsCompleted = !isCurrentlyCompleted;
 
     // Mettre à jour l'état local immédiatement pour une UX réactive
-    setSteps(prevSteps =>
-      prevSteps.map(step =>
+    setSteps((prevSteps) =>
+      prevSteps.map((step) =>
         step.id === stepId
           ? {
               ...step,
               isCompleted: updatedIsCompleted,
-              completedAt: updatedIsCompleted ? new Date() : null
+              completedAt: updatedIsCompleted ? new Date() : null,
             }
-          : step
-      )
+          : step,
+      ),
     );
 
     // Calculer le nouveau nombre d'étapes complétées
-    const updatedStepsCount = steps.filter(step =>
-      step.id === stepId ? updatedIsCompleted : step.isCompleted
+    const updatedStepsCount = steps.filter((step) =>
+      step.id === stepId ? updatedIsCompleted : step.isCompleted,
     ).length;
 
     // Mettre à jour les stats avant l'appel API
-    setStats(prev => ({
+    setStats((prev) => ({
       ...prev,
       completedSteps: updatedStepsCount,
-      progressPercentage: prev.totalSteps > 0
-        ? Math.round((updatedStepsCount / prev.totalSteps) * 100)
-        : 0
+      progressPercentage:
+        prev.totalSteps > 0
+          ? Math.round((updatedStepsCount / prev.totalSteps) * 100)
+          : 0,
     }));
 
     // Maintenant faire l'appel API
     setIsLoading(true);
 
-    console.log(`Validation de l'étape ${stepId} pour la chasse ${huntId}, nouvel état: ${updatedIsCompleted}`);
+    console.log(
+      `Validation de l'étape ${stepId} pour la chasse ${huntId}, nouvel état: ${updatedIsCompleted}`,
+    );
 
     try {
       const response = await fetch("/api/hunt/step/progress", {
@@ -238,7 +262,9 @@ function DirectParticipantStepsList({
 
       if (!response.ok) {
         console.error("Erreur de réponse:", data);
-        throw new Error(data.error || data.details || `Erreur ${response.status}`);
+        throw new Error(
+          data.error || data.details || `Erreur ${response.status}`,
+        );
       }
 
       console.log("Réponse de validation d'étape:", data);
@@ -249,7 +275,7 @@ function DirectParticipantStepsList({
           totalSteps: data.stats.totalSteps,
           completedSteps: data.stats.completedSteps,
           progressPercentage: data.stats.progressPercentage,
-          totalScore: data.stats.totalScore || 0
+          totalScore: data.stats.totalScore || 0,
         });
       }
 
@@ -261,39 +287,42 @@ function DirectParticipantStepsList({
           : "L'étape a été marquée comme non complétée",
         variant: "default",
       });
-
     } catch (error) {
       console.error("Erreur lors de la validation de l'étape:", error);
 
       // Restaurer l'état précédent de l'étape
-      setSteps(prevSteps =>
-        prevSteps.map(step =>
+      setSteps((prevSteps) =>
+        prevSteps.map((step) =>
           step.id === stepId
             ? {
                 ...step,
                 isCompleted: isCurrentlyCompleted,
-                completedAt: isCurrentlyCompleted ? step.completedAt : null
+                completedAt: isCurrentlyCompleted ? step.completedAt : null,
               }
-            : step
-        )
+            : step,
+        ),
       );
 
       // Restaurer les statistiques précédentes
-      const previousCompletedCount = steps.filter(step => step.isCompleted).length;
-      setStats(prev => ({
+      const previousCompletedCount = steps.filter(
+        (step) => step.isCompleted,
+      ).length;
+      setStats((prev) => ({
         ...prev,
         completedSteps: previousCompletedCount,
-        progressPercentage: prev.totalSteps > 0
-          ? Math.round((previousCompletedCount / prev.totalSteps) * 100)
-          : 0
+        progressPercentage:
+          prev.totalSteps > 0
+            ? Math.round((previousCompletedCount / prev.totalSteps) * 100)
+            : 0,
       }));
 
       // Notification d'erreur
       toast({
         title: "Erreur",
-        description: error instanceof Error
-          ? error.message
-          : "Une erreur est survenue lors de la validation de l'étape",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Une erreur est survenue lors de la validation de l'étape",
         variant: "destructive",
       });
     } finally {
@@ -312,8 +341,8 @@ function DirectParticipantStepsList({
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
           <p className="text-muted-foreground text-sm mt-1 text-red-500">
-            Erreur lors du chargement de la progression : {error}.
-            Les étapes sont affichées avec leur état par défaut.
+            Erreur lors du chargement de la progression : {error}. Les étapes
+            sont affichées avec leur état par défaut.
           </p>
         </div>
         <Button
@@ -343,9 +372,19 @@ function DirectParticipantStepsList({
           <div className="space-y-2 flex-1">
             <h3 className="font-medium">Votre progression</h3>
             <div className="flex items-center gap-3">
-              <Progress value={stats.totalSteps > 0 ? (stats.completedSteps / stats.totalSteps) * 100 : 0} className="h-2" />
+              <Progress
+                value={
+                  stats.totalSteps > 0
+                    ? (stats.completedSteps / stats.totalSteps) * 100
+                    : 0
+                }
+                className="h-2"
+              />
               <span className="text-sm font-medium">
-                {stats.totalSteps > 0 ? Math.round((stats.completedSteps / stats.totalSteps) * 100) : 0}%
+                {stats.totalSteps > 0
+                  ? Math.round((stats.completedSteps / stats.totalSteps) * 100)
+                  : 0}
+                %
               </span>
             </div>
             <p className="text-sm text-muted-foreground">
@@ -366,7 +405,9 @@ function DirectParticipantStepsList({
       {isLoading && (
         <div className="flex items-center justify-center py-2">
           <Loader2 className="h-4 w-4 animate-spin mr-2" />
-          <span className="text-sm text-muted-foreground">Mise à jour en cours...</span>
+          <span className="text-sm text-muted-foreground">
+            Mise à jour en cours...
+          </span>
         </div>
       )}
 
@@ -374,14 +415,16 @@ function DirectParticipantStepsList({
       <div className="space-y-4">
         {steps.map((step) => {
           const isCompleted = step.isCompleted || false;
-          const completedAt = step.completedAt ? new Date(step.completedAt) : null;
+          const completedAt = step.completedAt
+            ? new Date(step.completedAt)
+            : null;
 
           return (
             <Card
               key={step.id}
               className={`overflow-hidden transition-all ${
-                isCompleted 
-                  ? "border-green-200 bg-green-50 dark:bg-green-900/10 dark:border-green-800" 
+                isCompleted
+                  ? "border-green-200 bg-green-50 dark:bg-green-900/10 dark:border-green-800"
                   : ""
               }`}
             >
@@ -405,17 +448,22 @@ function DirectParticipantStepsList({
                   <CardHeader className="pb-2">
                     <div className="flex items-center justify-between">
                       <CardTitle className="flex items-center gap-2">
-                        <span className={`rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium ${
-                          isCompleted 
-                            ? "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300" 
-                            : "bg-primary/10 text-primary"
-                        }`}>
+                        <span
+                          className={`rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium ${
+                            isCompleted
+                              ? "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300"
+                              : "bg-primary/10 text-primary"
+                          }`}
+                        >
                           {step.stepOrder}
                         </span>
                         {step.title ?? `Étape ${step.stepOrder}`}
                       </CardTitle>
                       {isCompleted && (
-                        <Badge variant="outline" className="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 border-green-200 dark:border-green-800">
+                        <Badge
+                          variant="outline"
+                          className="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 border-green-200 dark:border-green-800"
+                        >
                           <Check className="mr-1 h-3 w-3" /> Validée
                         </Badge>
                       )}
@@ -430,12 +478,13 @@ function DirectParticipantStepsList({
                       <div className="flex items-center text-xs text-muted-foreground mb-2">
                         <Clock className="mr-1 h-3 w-3" />
                         <span>
-                          Validée le {completedAt.toLocaleDateString('fr-FR', {
-                            day: '2-digit',
-                            month: 'short',
-                            year: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit'
+                          Validée le{" "}
+                          {completedAt.toLocaleDateString("fr-FR", {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
                           })}
                         </span>
                       </div>
@@ -448,7 +497,11 @@ function DirectParticipantStepsList({
                       size="sm"
                       onClick={() => toggleStepCompletion(step.id)}
                       disabled={isLoading}
-                      className={isCompleted ? "border-green-200 text-green-700 hover:bg-green-100 hover:text-green-800 dark:border-green-800 dark:text-green-400 dark:hover:bg-green-900/20" : ""}
+                      className={
+                        isCompleted
+                          ? "border-green-200 text-green-700 hover:bg-green-100 hover:text-green-800 dark:border-green-800 dark:text-green-400 dark:hover:bg-green-900/20"
+                          : ""
+                      }
                     >
                       {isLoading ? (
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -457,7 +510,9 @@ function DirectParticipantStepsList({
                       ) : (
                         <CheckCircle2 className="mr-2 h-4 w-4" />
                       )}
-                      {isCompleted ? "Annuler validation" : "Valider cette étape"}
+                      {isCompleted
+                        ? "Annuler validation"
+                        : "Valider cette étape"}
                     </Button>
                   </CardFooter>
                 </div>

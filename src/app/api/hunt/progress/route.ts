@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     if (!stepId || !participationId) {
       return NextResponse.json(
         { error: "ID d'étape et ID de participation requis" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     if (!participation) {
       return NextResponse.json(
         { error: "Participation non trouvée" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
     if (!step) {
       return NextResponse.json(
         { error: "Étape non trouvée dans cette chasse" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -134,7 +134,8 @@ export async function POST(req: NextRequest) {
             data: {
               name: `Trophy for ${participation.treasureHunt.title}`,
               rarity: "LEGENDARY",
-              description: "Special trophy for being the first to complete this hunt",
+              description:
+                "Special trophy for being the first to complete this hunt",
               userId: session.user.id,
               huntId: participation.huntId,
               source: "EVENT",
@@ -183,7 +184,7 @@ export async function POST(req: NextRequest) {
     console.error("Erreur lors de la mise à jour de la progression:", error);
     return NextResponse.json(
       { error: "Erreur lors de la mise à jour de la progression" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -201,7 +202,7 @@ export async function GET(req: NextRequest) {
     if (!participationId) {
       return NextResponse.json(
         { error: "ID de participation requis" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -221,7 +222,7 @@ export async function GET(req: NextRequest) {
     console.error("Erreur lors de la récupération de la progression:", error);
     return NextResponse.json(
       { error: "Erreur lors de la récupération de la progression" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

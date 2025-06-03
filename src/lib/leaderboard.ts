@@ -40,7 +40,7 @@ export async function calculateUserScore(userId: string, huntId: string) {
       totalScore,
       completedStepsCount,
       totalSteps,
-      progressPercentage
+      progressPercentage,
     };
   } catch (error) {
     console.error("Erreur lors du calcul du score:", error);
@@ -97,10 +97,7 @@ export async function updateLeaderboard(userId: string, huntId: string) {
       where: {
         huntId: huntId,
       },
-      orderBy: [
-        { score: "desc" },
-        { completedAt: "asc" }
-      ],
+      orderBy: [{ score: "desc" }, { completedAt: "asc" }],
     });
 
     // Mettre à jour les rangs
@@ -134,9 +131,7 @@ export async function getLeaderboard(huntId: string, limit?: number) {
       where: {
         huntId: huntId,
       },
-      orderBy: [
-        { rank: "asc" },
-      ],
+      orderBy: [{ rank: "asc" }],
       take: limit,
       include: {
         user: {
@@ -144,9 +139,9 @@ export async function getLeaderboard(huntId: string, limit?: number) {
             id: true,
             name: true,
             image: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
 
     return { success: true, data: leaderboard };
@@ -246,7 +241,10 @@ export async function getUserRanking(userId: string, huntId: string) {
       ...userScore,
     };
   } catch (error) {
-    console.error("Erreur lors de la récupération du classement utilisateur:", error);
+    console.error(
+      "Erreur lors de la récupération du classement utilisateur:",
+      error,
+    );
     throw error;
   }
 }
@@ -259,7 +257,12 @@ export async function getUserRanking(userId: string, huntId: string) {
  * @param isCompleted Statut de complétion de l'étape
  * @returns Détails mis à jour de la progression et du classement
  */
-export async function validateStep(userId: string, huntId: string, stepId: string, isCompleted: boolean) {
+export async function validateStep(
+  userId: string,
+  huntId: string,
+  stepId: string,
+  isCompleted: boolean,
+) {
   try {
     // Vérifier que l'utilisateur participe à cette chasse
     const participation = await prisma.participation.findFirst({
@@ -311,7 +314,8 @@ export async function validateStep(userId: string, huntId: string, stepId: strin
     await updateLeaderboard(userId, huntId);
 
     // Récupérer les informations mises à jour
-    const { totalScore, completedStepsCount, totalSteps, progressPercentage } = await calculateUserScore(userId, huntId);
+    const { totalScore, completedStepsCount, totalSteps, progressPercentage } =
+      await calculateUserScore(userId, huntId);
 
     // Récupérer la position dans le classement
     const userRanking = await getUserRanking(userId, huntId);
@@ -423,7 +427,8 @@ export async function getStepProgress(userId: string, huntId: string) {
     });
 
     // Calculer le score et la progression globale
-    const { totalScore, completedStepsCount, progressPercentage } = await calculateUserScore(userId, huntId);
+    const { totalScore, completedStepsCount, progressPercentage } =
+      await calculateUserScore(userId, huntId);
 
     return {
       success: true,
@@ -438,4 +443,3 @@ export async function getStepProgress(userId: string, huntId: string) {
     return { success: false, error: String(error) };
   }
 }
-

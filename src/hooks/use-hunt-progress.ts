@@ -52,7 +52,7 @@ export function useHuntProgress(huntId: string) {
             headers: {
               "Content-Type": "application/json",
             },
-          }
+          },
         );
 
         // Si la réponse n'est pas OK, on retourne un objet valide avec un message d'erreur
@@ -116,7 +116,7 @@ export function useHuntProgress(huntId: string) {
   // Mutation pour valider/dévalider une étape
   const toggleStepCompletion = async (
     stepId: string,
-    isCurrentlyCompleted: boolean
+    isCurrentlyCompleted: boolean,
   ) => {
     setIsLoading(true);
     try {

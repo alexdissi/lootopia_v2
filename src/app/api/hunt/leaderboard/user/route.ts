@@ -18,27 +18,33 @@ export async function GET(req: Request) {
     });
 
     if (!huntId) {
-      console.log("GET /api/hunt/leaderboard/user - Bad request: No huntId provided");
+      console.log(
+        "GET /api/hunt/leaderboard/user - Bad request: No huntId provided",
+      );
       return NextResponse.json(
         { error: "ID de chasse requis" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (!userId) {
-      console.log("GET /api/hunt/leaderboard/user - Bad request: No userId provided");
+      console.log(
+        "GET /api/hunt/leaderboard/user - Bad request: No userId provided",
+      );
       return NextResponse.json(
         { error: "ID d'utilisateur requis" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     // Vérifier si l'utilisateur a accès à cette information
     if (!session?.user) {
-      console.log("GET /api/hunt/leaderboard/user - Unauthorized: No session user");
+      console.log(
+        "GET /api/hunt/leaderboard/user - Unauthorized: No session user",
+      );
       return NextResponse.json(
         { error: "Authentification requise" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -50,24 +56,26 @@ export async function GET(req: Request) {
         console.log("GET /api/hunt/leaderboard/user - User ranking not found");
         return NextResponse.json(
           { error: "Classement non trouvé pour cet utilisateur" },
-          { status: 404 }
+          { status: 404 },
         );
       }
 
-      console.log("GET /api/hunt/leaderboard/user - User ranking retrieved successfully");
+      console.log(
+        "GET /api/hunt/leaderboard/user - User ranking retrieved successfully",
+      );
       return NextResponse.json(userRanking);
     } catch (error) {
-      console.error("GET /api/hunt/leaderboard/user - Error retrieving user ranking:", error);
+      console.error(
+        "GET /api/hunt/leaderboard/user - Error retrieving user ranking:",
+        error,
+      );
       return NextResponse.json(
         { error: "Erreur lors de la récupération du classement" },
-        { status: 500 }
+        { status: 500 },
       );
     }
   } catch (error) {
     console.error("GET /api/hunt/leaderboard/user - Server error:", error);
-    return NextResponse.json(
-      { error: "Erreur serveur" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
