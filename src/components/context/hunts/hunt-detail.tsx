@@ -16,6 +16,7 @@ import { HuntDetailsSkeleton } from "./hunt-detail-skeleton";
 import { HuntHeader } from "./hunt-header";
 import { HuntInfoCard } from "./hunt-info-card";
 import { HuntJoinButton } from "./hunt-join-button";
+import { HuntLeaderboard } from "./hunt-leaderboard";
 import HuntMapView from "./hunt-map-view";
 import { HuntShareDialog } from "./hunt-share-dialog";
 import { HuntStatusSection } from "./hunt-status-section";
@@ -111,12 +112,13 @@ export function HuntDetails({ huntId }: { huntId: string }) {
           onValueChange={setActiveTab}
           className="w-full"
         >
-          <TabsList className="grid grid-cols-4 mb-6 w-full">
+          <TabsList className="grid grid-cols-5 mb-6 w-full">
             <TabsTrigger value="details">Détails</TabsTrigger>
             <TabsTrigger value="steps">
               Étapes ({hunt.steps?.length || 0})
             </TabsTrigger>
             <TabsTrigger value="map">Carte</TabsTrigger>
+            <TabsTrigger value="leaderboard">Classement</TabsTrigger>
             <TabsTrigger value="reviews">Avis</TabsTrigger>
           </TabsList>
 
@@ -235,13 +237,18 @@ export function HuntDetails({ huntId }: { huntId: string }) {
             )}
           </TabsContent>
 
-          <TabsContent value="steps">
-            <HuntStepsList steps={hunt.steps || []} />
+          <TabsContent value="steps" className="space-y-6">
+            <HuntStepsList steps={hunt.steps || []} huntId={hunt.id} />
           </TabsContent>
 
           <TabsContent value="map">
             <HuntMapView hunt={hunt} />
           </TabsContent>
+
+          <TabsContent value="leaderboard">
+            <HuntLeaderboard huntId={hunt.id} />
+          </TabsContent>
+
           <TabsContent value="reviews">
             <div className="space-y-6">
               {session?.data?.user && (

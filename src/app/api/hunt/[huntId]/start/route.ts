@@ -5,10 +5,10 @@ import prisma from "@/lib/db";
 
 export async function POST(
   req: Request,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: { huntId: string } },
 ) {
   try {
-    const { id: huntId } = await params;
+    const { huntId } = params;
 
     const session = await auth.api.getSession({ headers: await headers() });
 
@@ -52,18 +52,25 @@ export async function POST(
       );
     }
 
+    const now = new Date();
+    const startDate = hunt.startDate || now;
+    const endDate =
+      hunt.endDate || new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // Par défaut : 30 jours à partir de maintenant
+
     const updatedHunt = await prisma.treasureHunt.update({
       where: { id: huntId },
       data: {
         status: "IN_PROGRESS",
-        startDate: hunt.startDate || new Date(),
+        startDate,
+        endDate,
       },
     });
 
     return NextResponse.json(updatedHunt);
-  } catch {
+  } catch (error) {
+    console.error("Error starting hunt:", error);
     return NextResponse.json(
-      { error: "Failed to start treasure hunt" },
+      { error: "Failed to start hunt" },
       { status: 500 },
     );
   }
