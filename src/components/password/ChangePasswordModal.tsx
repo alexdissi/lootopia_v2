@@ -1,24 +1,29 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 type ChangePasswordModalProps = {
   userId: string;
   onClose: () => void;
 };
 
-export function ChangePasswordModal({ userId, onClose }: ChangePasswordModalProps) {
-  const [oldPassword, setOldPassword] = useState("");  // Ancien mot de passe
-  const [newPassword, setNewPassword] = useState("");  // Nouveau mot de passe
+export function ChangePasswordModal({
+  userId,
+  onClose,
+}: ChangePasswordModalProps) {
+  const [oldPassword, setOldPassword] = useState(""); // Ancien mot de passe
+  const [newPassword, setNewPassword] = useState(""); // Nouveau mot de passe
   const [errorMessage, setErrorMessage] = useState(""); // Message d'erreur
 
   const handlePasswordChange = async () => {
     if (oldPassword === newPassword) {
-      setErrorMessage("Le nouveau mot de passe doit être différent de l'ancien.");
+      setErrorMessage(
+        "Le nouveau mot de passe doit être différent de l'ancien.",
+      );
       return;
     }
 
@@ -36,12 +41,15 @@ export function ChangePasswordModal({ userId, onClose }: ChangePasswordModalProp
 
       if (response.ok) {
         toast.success("Mot de passe changé avec succès !");
-        onClose();  
+        onClose();
       } else {
         const data = await response.json();
-        setErrorMessage(data.error || "Erreur lors du changement de mot de passe");
+        setErrorMessage(
+          data.error || "Erreur lors du changement de mot de passe",
+        );
       }
     } catch (error) {
+      console.error("Erreur lors du changement de mot de passe :", error);
       setErrorMessage("Une erreur est survenue. Veuillez réessayer.");
     }
   };
@@ -49,7 +57,9 @@ export function ChangePasswordModal({ userId, onClose }: ChangePasswordModalProp
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg font-medium">Changer le mot de passe</CardTitle>
+        <CardTitle className="text-lg font-medium">
+          Changer le mot de passe
+        </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <Input

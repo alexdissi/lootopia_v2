@@ -1,8 +1,8 @@
+import bcrypt from "bcrypt";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
-import bcrypt from "bcrypt";
 
 export async function PATCH(
   request: NextRequest,
@@ -19,7 +19,6 @@ export async function PATCH(
     }
 
     const { id } = await params;
-   
 
     if (session.user.id !== id) {
       return NextResponse.json(
@@ -29,8 +28,6 @@ export async function PATCH(
     }
 
     const { oldPassword, newPassword } = await request.json();
-
-    
 
     if (!oldPassword || !newPassword) {
       return NextResponse.json(
@@ -50,7 +47,6 @@ export async function PATCH(
       );
     }
 
-
     if (!user.password) {
       return NextResponse.json(
         { error: "Mot de passe non valide dans la base de données" },
@@ -58,7 +54,10 @@ export async function PATCH(
       );
     }
 
-    const isOldPasswordCorrect = await bcrypt.compare(oldPassword, user.password);
+    const isOldPasswordCorrect = await bcrypt.compare(
+      oldPassword,
+      user.password,
+    );
 
     if (!isOldPasswordCorrect) {
       console.log("L'ancien mot de passe est incorrect.");
@@ -70,11 +69,10 @@ export async function PATCH(
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-
     const updatedUser = await prisma.user.update({
       where: { id },
       data: {
-        password: hashedPassword, 
+        password: hashedPassword,
       },
     });
 
@@ -87,7 +85,9 @@ export async function PATCH(
   } catch (error) {
     console.error("Erreur dans la mise à jour du mot de passe:", error);
     return NextResponse.json(
-      { error: "Une erreur est survenue lors de la mise à jour du mot de passe" },
+      {
+        error: "Une erreur est survenue lors de la mise à jour du mot de passe",
+      },
       { status: 500 },
     );
   }

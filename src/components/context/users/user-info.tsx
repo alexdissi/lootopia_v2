@@ -1,19 +1,41 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { Separator } from "@radix-ui/react-separator";
 import { useMutation } from "@tanstack/react-query";
+import {
+  Camera,
+  User,
+  UserCheck,
+  Mail,
+  Shield,
+  Badge,
+  Loader2,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
+import { ChangePasswordModal } from "@/components/password/ChangePasswordModal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+  FormDescription,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage, FormDescription } from "@/components/ui/form";
-import { Camera, User, UserCheck, Mail, Shield, Badge, Loader2 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
-import { ChangePasswordModal } from "@/components/password/ChangePasswordModal";
-import { Separator } from "@radix-ui/react-separator";
-import { useForm, useWatch } from "react-hook-form";
 import { TwoFactorSetup } from "./2fa/two-factor-setup";
 
 export interface UserFormValues {
@@ -301,7 +323,6 @@ export function UserProfileForm({ userId }: UserProfileFormProps) {
 
           <Separator />
 
-
           <div className="flex items-center justify-between p-4 border rounded-lg">
             <div className="space-y-1">
               <h3 className="font-medium">Mot de passe</h3>
@@ -318,7 +339,10 @@ export function UserProfileForm({ userId }: UserProfileFormProps) {
 
       {/* Modal for password change */}
       {isPasswordModalOpen && (
-        <ChangePasswordModal userId={userId} onClose={closePasswordChangeModal} />
+        <ChangePasswordModal
+          userId={userId}
+          onClose={closePasswordChangeModal}
+        />
       )}
     </div>
   );
