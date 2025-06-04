@@ -1,33 +1,19 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
-import { Camera, Loader2, Mail, Shield, User, UserCheck } from "lucide-react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-  FormDescription,
-} from "@/components/ui/form";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage, FormDescription } from "@/components/ui/form";
+import { Camera, User, UserCheck, Mail, Shield, Badge, Loader2 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { ChangePasswordModal } from "@/components/password/ChangePasswordModal";
+import { Separator } from "@radix-ui/react-separator";
+import { useForm, useWatch } from "react-hook-form";
 import { TwoFactorSetup } from "./2fa/two-factor-setup";
 
 export interface UserFormValues {
@@ -39,13 +25,13 @@ export interface UserFormValues {
 
 interface UserProfileFormProps {
   userId: string;
-  initialData?: Partial<UserFormValues>;
 }
 
 export function UserProfileForm({ userId }: UserProfileFormProps) {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
   const [imagePreview, setImagePreview] = useState<string>("");
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false); // Gestion de l'ouverture de la modale de changement de mot de passe
 
   const form = useForm<UserFormValues>({
     defaultValues: {
@@ -123,8 +109,16 @@ export function UserProfileForm({ userId }: UserProfileFormProps) {
 
   const is2FAEnabled = session?.user?.twoFactorEnabled;
 
+  const handlePasswordChangeModal = () => {
+    setIsPasswordModalOpen(true);
+  };
+
+  const closePasswordChangeModal = () => {
+    setIsPasswordModalOpen(false);
+  };
+
   return (
-    <div className=" space-y-8 ">
+    <div className="space-y-8">
       <div className="grid gap-8 lg:grid-cols-3">
         <Card className="lg:col-span-1">
           <CardHeader>
@@ -307,6 +301,7 @@ export function UserProfileForm({ userId }: UserProfileFormProps) {
 
           <Separator />
 
+
           <div className="flex items-center justify-between p-4 border rounded-lg">
             <div className="space-y-1">
               <h3 className="font-medium">Mot de passe</h3>
@@ -314,10 +309,17 @@ export function UserProfileForm({ userId }: UserProfileFormProps) {
                 Modifiez votre mot de passe de connexion
               </p>
             </div>
-            <Button variant="outline">Changer le mot de passe</Button>
+            <Button variant="outline" onClick={handlePasswordChangeModal}>
+              Changer le mot de passe
+            </Button>
           </div>
         </CardContent>
       </Card>
+
+      {/* Modal for password change */}
+      {isPasswordModalOpen && (
+        <ChangePasswordModal userId={userId} onClose={closePasswordChangeModal} />
+      )}
     </div>
   );
 }

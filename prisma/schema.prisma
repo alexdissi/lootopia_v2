@@ -20,6 +20,7 @@ model User {
   nickname           String?
   role               UserRole             @default(PLAYER)
   twoFactorEnabled   Boolean              @default(false)
+  password           String
   collectedArtefacts Artefact[]           @relation("CollectedByUser")
   Craft              Craft[]
   LeaderboardEntry   LeaderboardEntry[]
