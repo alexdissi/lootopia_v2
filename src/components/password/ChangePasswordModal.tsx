@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -15,9 +13,9 @@ export function ChangePasswordModal({
   userId,
   onClose,
 }: ChangePasswordModalProps) {
-  const [oldPassword, setOldPassword] = useState(""); // Ancien mot de passe
-  const [newPassword, setNewPassword] = useState(""); // Nouveau mot de passe
-  const [errorMessage, setErrorMessage] = useState(""); // Message d'erreur
+  const [oldPassword, setOldPassword] = useState(""); 
+  const [newPassword, setNewPassword] = useState(""); 
+  const [errorMessage, setErrorMessage] = useState(""); 
 
   const handlePasswordChange = async () => {
     if (oldPassword === newPassword) {
@@ -29,13 +27,13 @@ export function ChangePasswordModal({
 
     try {
       const response = await fetch(`/api/user/${userId}/change_password`, {
-        method: "PATCH",
+        method: "PUT", 
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           oldPassword,
-          newPassword,
+          newpassword: newPassword,
         }),
       });
 

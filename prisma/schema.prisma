@@ -20,7 +20,6 @@ model User {
   nickname           String?
   role               UserRole             @default(PLAYER)
   twoFactorEnabled   Boolean              @default(false)
-  password           String
   collectedArtefacts Artefact[]           @relation("CollectedByUser")
   Craft              Craft[]
   LeaderboardEntry   LeaderboardEntry[]
@@ -34,6 +33,8 @@ model User {
   sessions           Session[]
   twoFactor          TwoFactor[]
   stepProgress       StepProgress[]
+  newpassword        String?
+
 
   @@map("user")
 }

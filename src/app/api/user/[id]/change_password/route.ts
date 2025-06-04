@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
 
-export async function PATCH(
+export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
@@ -27,9 +27,9 @@ export async function PATCH(
       );
     }
 
-    const { oldPassword, newPassword } = await request.json();
+    const { oldPassword, newpassword } = await request.json();
 
-    if (!oldPassword || !newPassword) {
+    if (!oldPassword || !newpassword) {
       return NextResponse.json(
         { error: "Veuillez fournir l'ancien et le nouveau mot de passe" },
         { status: 400 },
@@ -47,43 +47,31 @@ export async function PATCH(
       );
     }
 
-    if (!user.password) {
-      return NextResponse.json(
-        { error: "Mot de passe non valide dans la base de données" },
-        { status: 500 },
-      );
-    }
+    const userPassword = user.newpassword ?? "";
 
-    const isOldPasswordCorrect = await bcrypt.compare(
-      oldPassword,
-      user.password,
-    );
+    const isOldPasswordCorrect = await bcrypt.compare(oldPassword, userPassword);
 
     if (!isOldPasswordCorrect) {
-      console.log("L'ancien mot de passe est incorrect.");
       return NextResponse.json(
         { error: "L'ancien mot de passe est incorrect" },
         { status: 400 },
       );
     }
 
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const hashedPassword = await bcrypt.hash(newpassword, 10);
 
     const updatedUser = await prisma.user.update({
       where: { id },
       data: {
-        password: hashedPassword,
+        newpassword: hashedPassword,  
       },
     });
-
-    console.log("Utilisateur mis à jour:", updatedUser);
 
     return NextResponse.json({
       message: "Mot de passe mis à jour avec succès",
       user: updatedUser,
     });
   } catch (error) {
-    console.error("Erreur dans la mise à jour du mot de passe:", error);
     return NextResponse.json(
       {
         error: "Une erreur est survenue lors de la mise à jour du mot de passe",
