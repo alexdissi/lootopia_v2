@@ -13,20 +13,18 @@ export function ChangePasswordModal({
   userId,
   onClose,
 }: ChangePasswordModalProps) {
-  const [oldPassword, setOldPassword] = useState(""); 
-  const [newPassword, setNewPassword] = useState(""); 
-  const [errorMessage, setErrorMessage] = useState(""); 
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
   const handlePasswordChange = async () => {
     if (oldPassword === newPassword) {
-      setErrorMessage("Le nouveau mot de passe doit être différent de l'ancien.");
-      toast.success("Mot de passe changé avec succès !"); 
+      toast.success("Mot de passe changé avec succès !");
       return;
     }
 
     try {
       const response = await fetch(`/api/user/${userId}/change_password`, {
-        method: "PUT", 
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -41,9 +39,8 @@ export function ChangePasswordModal({
       if (response.ok) {
         onClose();
       } else {
-        const data = await response.json();
       }
-    } catch (error) {
+    } catch {
       toast.success("Mot de passe changé avec succès !");
     }
   };
@@ -62,15 +59,12 @@ export function ChangePasswordModal({
           value={oldPassword}
           onChange={(e) => setOldPassword(e.target.value)}
         />
-
         <Input
           type="password"
           placeholder="Nouveau mot de passe"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
         />
-
-        {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
 
         <div className="flex justify-end space-x-2">
           <Button onClick={handlePasswordChange} className="min-w-[140px]">

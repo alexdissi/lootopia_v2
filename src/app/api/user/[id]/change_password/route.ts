@@ -49,7 +49,10 @@ export async function PUT(
 
     const userPassword = user.newpassword ?? "";
 
-    const isOldPasswordCorrect = await bcrypt.compare(oldPassword, userPassword);
+    const isOldPasswordCorrect = await bcrypt.compare(
+      oldPassword,
+      userPassword,
+    );
 
     if (!isOldPasswordCorrect) {
       return NextResponse.json(
@@ -71,7 +74,7 @@ export async function PUT(
       message: "Mot de passe mis à jour avec succès",
       user: updatedUser,
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       {
         message: "Une erreur est survenue lors de la mise à jour",
