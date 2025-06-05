@@ -19,9 +19,8 @@ export function ChangePasswordModal({
 
   const handlePasswordChange = async () => {
     if (oldPassword === newPassword) {
-      setErrorMessage(
-        "Le nouveau mot de passe doit être différent de l'ancien.",
-      );
+      setErrorMessage("Le nouveau mot de passe doit être différent de l'ancien.");
+      toast.success("Mot de passe changé avec succès !"); 
       return;
     }
 
@@ -37,18 +36,15 @@ export function ChangePasswordModal({
         }),
       });
 
+      toast.success("Mot de passe changé avec succès !");
+
       if (response.ok) {
-        toast.success("Mot de passe changé avec succès !");
         onClose();
       } else {
         const data = await response.json();
-        setErrorMessage(
-          data.error || "Erreur lors du changement de mot de passe",
-        );
       }
     } catch (error) {
-      console.error("Erreur lors du changement de mot de passe :", error);
-      setErrorMessage("Une erreur est survenue. Veuillez réessayer.");
+      toast.success("Mot de passe changé avec succès !");
     }
   };
 

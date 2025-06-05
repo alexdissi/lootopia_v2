@@ -13,7 +13,7 @@ export async function PUT(
 
     if (!session?.user) {
       return NextResponse.json(
-        { error: "Authentification requise" },
+        { message: "Authentification requise" },
         { status: 401 },
       );
     }
@@ -22,7 +22,7 @@ export async function PUT(
 
     if (session.user.id !== id) {
       return NextResponse.json(
-        { error: "Vous n'êtes pas autorisé à mettre à jour ce compte" },
+        { message: "Accès non autorisé" },
         { status: 403 },
       );
     }
@@ -31,7 +31,7 @@ export async function PUT(
 
     if (!oldPassword || !newpassword) {
       return NextResponse.json(
-        { error: "Veuillez fournir l'ancien et le nouveau mot de passe" },
+        { message: "Ancien et nouveau mot de passe requis" },
         { status: 400 },
       );
     }
@@ -42,7 +42,7 @@ export async function PUT(
 
     if (!user) {
       return NextResponse.json(
-        { error: "Utilisateur non trouvé" },
+        { message: "Utilisateur non trouvé" },
         { status: 404 },
       );
     }
@@ -53,7 +53,7 @@ export async function PUT(
 
     if (!isOldPasswordCorrect) {
       return NextResponse.json(
-        { error: "L'ancien mot de passe est incorrect" },
+        { message: "Mot de passe incorrect" },
         { status: 400 },
       );
     }
@@ -63,7 +63,7 @@ export async function PUT(
     const updatedUser = await prisma.user.update({
       where: { id },
       data: {
-        newpassword: hashedPassword,  
+        newpassword: hashedPassword,
       },
     });
 
@@ -74,7 +74,7 @@ export async function PUT(
   } catch (error) {
     return NextResponse.json(
       {
-        error: "Une erreur est survenue lors de la mise à jour du mot de passe",
+        message: "Une erreur est survenue lors de la mise à jour",
       },
       { status: 500 },
     );
