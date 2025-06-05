@@ -33,6 +33,8 @@ model User {
   sessions           Session[]
   twoFactor          TwoFactor[]
   stepProgress       StepProgress[]
+  newpassword        String?
+
 
   @@map("user")
 }
